@@ -1,4 +1,5 @@
-// import { Button } from '@/components/custom/button'
+import { Button } from "@/components/ui/button";
+
 
 export default function MaintenanceError() {
   return (
@@ -11,7 +12,7 @@ export default function MaintenanceError() {
           We'll be back online shortly.
         </p>
         <div className='mt-6 flex gap-4'>
-          {/* <Button variant='outline'>Learn more</Button> */}
+          <Button variant='outline'>Learn more</Button>
         </div>
       </div>
     </div>

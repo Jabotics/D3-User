@@ -1,13 +1,16 @@
-import { Outlet } from "react-router-dom"
-import Navbar from "./shared/Navbar"
+import { Outlet } from "react-router-dom";
 
-const AppLayout = () => {
+import { Navbar } from "./shared/Navbar";
+import { ModeToggle } from "./mode-toggle";
+
+const AppShell = () => {
   return (
     <div className="overflow-x-hidden">
-      <Navbar />
+      <ModeToggle />
       <Outlet />
+      <Navbar />
     </div>
-  )
-}
+  );
+};
 
-export default AppLayout
+export default AppShell;
