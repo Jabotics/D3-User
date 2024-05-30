@@ -1,11 +1,12 @@
-import { UserRound, Phone,Mail } from 'lucide-react';
+import { UserRound, Phone, Mail } from 'lucide-react';
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import loginBanner from '../../../public/images/login-bg.webp';
+// import loginBanner from '../../../public/images/login-bg.webp';
+import loginBanner from '/images/login-bg.webp';
 
 const RegisterPage = () => {
 
@@ -65,7 +66,7 @@ const RegisterPage = () => {
             </div>
           </div>
         </div>
-        <p>Copyright © 2023<a href='#'> D3 Sports Arena</a> All Rights Reserved.</p>  
+        <p>Copyright © 2023<a href='#'> D3 Sports Arena</a> All Rights Reserved.</p>
       </div>
       <div className="right-panel col-span-6 pl-0 pr-24 ">
         <Carousel responsive={responsive}>
@@ -74,14 +75,14 @@ const RegisterPage = () => {
               <h1>Your Nearest Sports Community.</h1>
               <p>Welcome to our D3 Sports Arena registration page! Are you ready to join with sports community.</p>
             </div>
-            <img src={loginBanner} alt='login-banner'/>
+            <img src={loginBanner} alt='login-banner' />
           </div>
           <div className="car-image relative">
             <div className="car-caption absolute bottom-0 left-0 w-full z-10 p-8">
               <h1>Your Nearest Sports Community.</h1>
               <p>Welcome to our D3 Sports Arena registration page! Are you ready to join with sports community.</p>
             </div>
-            <img src={loginBanner} alt='login-banner' className=''/>
+            <img src={loginBanner} alt='login-banner' className='' />
           </div>
         </Carousel>
       </div>
