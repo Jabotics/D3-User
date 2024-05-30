@@ -5,7 +5,7 @@ import router from './router'
 import LoadingSpinner from "./components/loading-spiner.tsx";
 function App() {
   return (
-    <div className="w-full h-screen flex justify-center">
+    <div className="w-full h-screen flex justify-center pt-11">
       <ThemeProvider>
         <Suspense fallback={<LoadingSpinner />}  >
       <RouterProvider router={router} />
