@@ -7,9 +7,21 @@ import "react-multi-carousel/lib/styles.css";
 
 // import loginBanner from '../../../public/images/login-bg.webp';
 import loginBanner from '/images/login-bg.webp';
+import { z } from "zod";
+import { useNavigate } from "react-router-dom";
+import { usePostRequestMutation } from "@/store/RequestHandler";
+import { useAppDispatch } from "@/store/hooks";
 
+const formSchema = z.object({
+  otp: z.string().regex(/^\d{4}$/, {
+    message: "Invalid OTP format. The OTP must be exactly 4 digits.",
+  }),
+});
 
 const OtpPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [postRequest] = usePostRequestMutation();
 
   const responsive = {
     superLargeDesktop: {
@@ -41,7 +53,7 @@ const OtpPage = () => {
             {/* <div className="otp flex justify-content-center gap-3">
                 <InputOtp value={token} onChange={(e) => setTokens(e.value)} integerOnly/>
             </div> */}
-            <InputOTP maxLength={6} className="otp flex justify-content-center gap-3">
+            <InputOTP maxLength={4} className="otp flex justify-content-center gap-3">
               <InputOTPSlot index={0} />
               <InputOTPSlot index={1} />
               <InputOTPSlot index={2} />

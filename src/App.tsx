@@ -1,16 +1,13 @@
 import { Suspense } from "react";
-import { ThemeProvider } from "./components/theme-provider.tsx";
 import { RouterProvider } from "react-router-dom";
-import router from './router'
-import LoadingSpinner from "./components/loading-spiner.tsx";
+import router from "./router";
+import LoadingSpinner from "./components/loading-spiner";
 function App() {
   return (
     <div className="w-full h-screen flex justify-center pt-11">
-      <ThemeProvider>
-        <Suspense fallback={<LoadingSpinner />}  >
-      <RouterProvider router={router} />
-    </Suspense>
-      </ThemeProvider>
+      <Suspense fallback={<LoadingSpinner />}>
+        <RouterProvider router={router} />
+      </Suspense>
     </div>
   );
 }
