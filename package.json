@@ -21,6 +21,7 @@
     "input-otp": "^1.2.4",
     "lucide-react": "^0.379.0",
     "react": "^18.2.0",
+    "react-countdown-circle-timer": "^3.2.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.5",
     "react-multi-carousel": "^2.8.5",

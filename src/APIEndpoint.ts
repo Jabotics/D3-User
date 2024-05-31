@@ -3,4 +3,5 @@ export const APIEndPoints = {
 
   // CUSTOMER
   customer_login: '/api/customer-login',
+  validate_otp: '/api/validate-otp',
 }

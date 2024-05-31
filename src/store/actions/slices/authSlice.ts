@@ -5,6 +5,7 @@ const initialState: IAuth = {
   status: false,
   userData: null,
   token: null,
+  hasToken: false,
 };
 
 export const authSlice = createSlice({
@@ -20,6 +21,7 @@ export const authSlice = createSlice({
       }
       if (action.payload.token !== undefined) {
         state.token = action.payload.token;
+        state.hasToken = true
       }
     },
     setAuth: (state, action: PayloadAction<Partial<IAuth>>) => {
@@ -32,6 +34,7 @@ export const authSlice = createSlice({
       state.status = false;
       state.userData = null;
       state.token = null;
+      state.hasToken = false;
     },
   },
 });

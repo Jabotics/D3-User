@@ -46,9 +46,9 @@ export const RequestHandler = createApi({
         };
       },
       transformResponse: (Response, meta) => {
-        meta?.response?.headers.get('authorization')
-          ? localStorage.setItem('token', String(meta?.response?.headers.get('authorization')))
-          : '';
+        // meta?.response?.headers.get('authorization')
+        //   ? localStorage.setItem('token', String(meta?.response?.headers.get('authorization')))
+        //   : '';
         return { Response, meta };
       },
     }),

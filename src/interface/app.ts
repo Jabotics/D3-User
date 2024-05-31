@@ -24,4 +24,5 @@ export interface IAuth {
     city?: { _id: string; name: string }
   } | null
   token: string | null;
+  hasToken: boolean
 }

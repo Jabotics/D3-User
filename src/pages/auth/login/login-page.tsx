@@ -10,13 +10,15 @@ import loginBanner from "/images/login-bg.webp";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { usePostRequestMutation } from "@/store/RequestHandler";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { APIEndPoints } from "@/APIEndpoint";
 import { setAuth } from "@/store/actions/slices/authSlice";
 import { toast } from "sonner";
+import { setRemainingTime, setStartTimer } from "@/store/actions/slices/otpSlice";
+import { RootState } from "@/store";
 
 const formSchema = z.object({
   number: z.string().regex(/^[6-9]\d{9}$/, {
@@ -30,6 +32,7 @@ export default function LoginPage() {
   const dispatch = useAppDispatch();
   const [postRequest] = usePostRequestMutation();
 
+  const { hasToken } = useAppSelector((state: RootState) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -46,23 +49,31 @@ export default function LoginPage() {
         mobile: data.number,
         url: APIEndPoints.customer_login,
       }).unwrap();
-      console.log(res)
+      console.log(res);
 
-      dispatch(setAuth({
-        userData: {
-          id: res?.data?.id
-        }
-      }))
-      navigate('/otp')
+      dispatch(
+        setAuth({
+          userData: {
+            id: res?.Response?.data?.id,
+            mobile: data.number,
+          },
+        })
+      );
       form.reset();
-      toast(res?.message);
+      console.log(res?.Response?.message);
+      toast(res?.Response?.message);
+
+      dispatch(setRemainingTime({ time: 30 }))
+      dispatch(setStartTimer(true))
+
+      navigate("/otp");
     } catch (error: any) {
       toast(error?.data?.message);
-      return void({})
+      return void {};
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -91,6 +102,12 @@ export default function LoginPage() {
       items: 1,
     },
   };
+  
+  useLayoutEffect(() => {
+    if (hasToken) {
+      navigate("/");
+    }
+  }, [])
 
   return (
     <>
@@ -161,4 +178,4 @@ export default function LoginPage() {
       )}
     </>
   );
-};
+}

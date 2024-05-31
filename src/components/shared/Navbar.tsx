@@ -14,8 +14,11 @@ import { LogIn } from 'lucide-react';
 import { ModeToggle } from "../mode-toggle";
 // import logo from "../../../public/images/Logo.svg"
 import logo from '/images/Logo.svg'
+import { logout } from "@/store/actions/slices/authSlice";
+import { useAppDispatch } from "@/store/hooks";
 
 export const Navbar = () => {
+  const dispatch = useAppDispatch();
   return (
     <div className=" fixed top-0 left-0 w-full border-b border-slate-200 border-solid bg-white">
       <div className='container'>
@@ -46,7 +49,10 @@ export const Navbar = () => {
               menu
             </div>
             <div className="cta">
-              <Button onClick={() => window.open('/login', '_self')}>
+              <Button onClick={() => {
+                dispatch(logout())
+                window.open('/login', '_self')
+              }}>
                 <LogIn />
                 Login
               </Button>
