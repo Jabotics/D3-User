@@ -11,6 +11,7 @@ import { persistStore } from "redux-persist";
 
 import { socketMiddleware } from "./middleware/socketMiddleware";
 import { rootReducer } from "./rootReducer";
+import { RequestHandler } from "./RequestHandler";
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -24,6 +25,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         serializableCheck: false,
       }).concat(
         socketMiddleware,
+        RequestHandler.middleware
       );
 
       const middlewareTuple = middleware as Middleware<

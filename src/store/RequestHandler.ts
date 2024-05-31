@@ -45,12 +45,12 @@ export const RequestHandler = createApi({
           body: rest,
         };
       },
-      // transformResponse: (Response, meta) => {
-      //   meta?.response?.headers.get('authorization')
-      //     ? localStorage.setItem('token', String(meta?.response?.headers.get('authorization')))
-      //     : '';
-      //   return { Response, meta };
-      // },
+      transformResponse: (Response, meta) => {
+        meta?.response?.headers.get('authorization')
+          ? localStorage.setItem('token', String(meta?.response?.headers.get('authorization')))
+          : '';
+        return { Response, meta };
+      },
     }),
     imagePostRequest: builder.mutation({
       query: (body) => {
