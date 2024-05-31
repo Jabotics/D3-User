@@ -25,7 +25,7 @@ const formSchema = z.object({
   }),
 });
 
-const loginPage = () => {
+export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [postRequest] = usePostRequestMutation();
@@ -39,7 +39,7 @@ const loginPage = () => {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
       const res: any = await postRequest({
@@ -162,5 +162,3 @@ const loginPage = () => {
     </>
   );
 };
-
-export default loginPage;

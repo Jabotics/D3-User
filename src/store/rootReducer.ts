@@ -20,6 +20,7 @@ const authPersistedReducer = persistReducer(persistConfig, authSlice)
 
 export const rootReducer = combineReducers({
   auth: authPersistedReducer,
+  
   [RequestHandler.reducerPath]: RequestHandler.reducer,
   
 })

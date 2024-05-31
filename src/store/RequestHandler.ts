@@ -5,16 +5,16 @@ export const RequestHandler = createApi({
   reducerPath: 'RequestHandler',
   baseQuery: fetchBaseQuery({
     baseUrl: APIEndPoints.BackendURL,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
-      headers.set('type', 'employee');
-      if (token) {
-        headers.set('authorization', token);
-        return headers;
-      }
-    },
+    // prepareHeaders: (headers) => {
+    //   const token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
+    //   headers.set('type', 'employee');
+    //   if (token) {
+    //     headers.set('authorization', token);
+    //     return headers;
+    //   }
+    // },
   }),
-  tagTypes: ['Permissions'],
+  // tagTypes: ['Permissions'],
   endpoints: (builder) => ({
     getRequest: builder.query({
       query: (body) => {
@@ -45,12 +45,12 @@ export const RequestHandler = createApi({
           body: rest,
         };
       },
-      // transformResponse: (Response, meta) => {
-      //   meta?.response?.headers.get('authorization')
-      //     ? localStorage.setItem('token', String(meta?.response?.headers.get('authorization')))
-      //     : '';
-      //   return { Response, meta };
-      // },
+      transformResponse: (Response, meta) => {
+        meta?.response?.headers.get('authorization')
+          ? localStorage.setItem('token', String(meta?.response?.headers.get('authorization')))
+          : '';
+        return { Response, meta };
+      },
     }),
     imagePostRequest: builder.mutation({
       query: (body) => {

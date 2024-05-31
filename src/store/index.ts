@@ -9,7 +9,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { persistStore } from "redux-persist";
 
-import { socketMiddleware } from "./middleware/socketMiddleware";
+// import { socketMiddleware } from "./middleware/socketMiddleware";
 import { rootReducer } from "./rootReducer";
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -23,7 +23,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
       const middleware = getDefaultMiddleware({
         serializableCheck: false,
       }).concat(
-        socketMiddleware,
+        // socketMiddleware,
       );
 
       const middlewareTuple = middleware as Middleware<
