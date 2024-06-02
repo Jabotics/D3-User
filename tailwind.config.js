@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'sm': '640px',
+        'sm': '767px',
         // => @media (min-width: 640px) { ... }
   
         'md': '992px',
@@ -36,6 +36,7 @@ module.exports = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
+        background2: "hsl(var(--background2))",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -65,6 +66,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        lightGreen:"hsl(var(--light-green))",
       },
       borderRadius: {
         lg: "var(--radius)",

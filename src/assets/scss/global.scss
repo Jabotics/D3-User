@@ -1,0 +1,38 @@
+.main-slider{
+    .car-image{
+        height: 550px;
+        .car-caption{
+            width: 100%;max-width: 600px;margin: 0px auto; top: 0; left: 0;right: 0; bottom: 0;
+            display: flex;flex-direction: column;text-align: center;justify-content: center;
+        }
+        img{width: 100%; height: 100%; object-fit: cover; object-position: center;}
+    }
+}
+
+.categori-slider{
+    padding: 0px 5%;
+    .category-box{
+        text-align: center;
+        .category-icon{
+            width: 100px;height: 105px;margin: 0px auto; display: flex; align-items: center; justify-content: center;
+            .cat-icon{width: 60px; height: 60px;object-fit: cover;object-position: center;}
+        }
+    }
+}
+
+.how-it-works{}
+
+.event-sec{
+    .left-col {
+        .left-content{width: 95%;max-width: 589px; margin: 0px auto;}
+    }
+}
+
+.academy-sec{
+    .academy-left-col{
+        video{width: 100%; object-fit: cover; object-position: center;}
+    }
+    .academy-right-col{
+        .right-content{width: 95%;max-width: 589px; margin: 0px auto;z-index: 1;}
+    }
+}

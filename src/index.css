@@ -5,7 +5,8 @@
   @layer base {
     :root {
       --background: 0 0% 100%;
-      --foreground: 240 10% 3.9%;
+      --background2: 0 0% 100%;
+      --foreground: 0, 0%, 9%;
 
       --card: 0 0% 100%;
       --card-foreground: 240 10% 3.9%;
@@ -33,11 +34,14 @@
       --ring: 240 10% 3.9%;
 
       --radius: 0.5rem;
+
+      --light-green:108, 100%, 96%;
     }
 
     .dark {
-      --background: 240 10% 3.9%;
-      --foreground: 0 0% 98%;
+      --background: 0, 0%, 9%;
+      --background2: 0, 0%, 15%;
+      --foreground: 0 0% 100%;
 
       --card: 240 10% 3.9%;
       --card-foreground: 0 0% 98%;
@@ -63,6 +67,8 @@
       --border: 240 3.7% 15.9%;
       --input: 240 3.7% 15.9%;
       --ring: 240 4.9% 83.9%;
+
+      --light-green:0, 0%, 15%;
     }
   }
 
@@ -72,5 +78,11 @@
     }
     body {
       @apply bg-background text-foreground;
+      padding-top:79px!important;
     }
   }
+
+  .previous{left:10%;z-index: 11;}
+  .next{right:10%;z-index: 11;}
+
+  
