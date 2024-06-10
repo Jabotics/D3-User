@@ -1,16 +1,20 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import { Navbar } from "./shared/Navbar";
 import { Footer } from "./shared/footer";
 
-
 const AppShell = () => {
+  const location = useLocation();
+
+  const hiddenRoutes = ["/login", "/register", "/otp"];
+  const shouldHideNavbarFooter = hiddenRoutes.includes(location.pathname);
+
   return (
-    <>
-      <Navbar />
+    <div className="flex flex-col gap-0">
+      {!shouldHideNavbarFooter && <Navbar />}
       <Outlet />
-      <Footer/>
-    </>
+      {!shouldHideNavbarFooter && <Footer />}
+    </div>
   );
 };
 
