@@ -10,7 +10,7 @@ function App() {
   const { hasToken } = useAppSelector((state: RootState) => state.auth);
 
   useEffect(() => {
-    const isNewUser = !hasToken; 
+    const isNewUser = !hasToken;
 
     if (isNewUser) {
       const setVideoPlayer = setTimeout(() => {
@@ -22,9 +22,15 @@ function App() {
   }, [hasToken]);
 
   useEffect(() => {
-    document.body.style.overflow = toPlayVideo ? "auto" : "hidden";
-    document.body.style.margin = "0";
-    document.body.style.padding = "0";
+    if (toPlayVideo) {
+      document.body.style.overflow = "hidden";
+      document.body.style.margin = "0";
+      document.body.style.padding = "0";
+    } else {
+      document.body.style.overflow = ""; 
+      document.body.style.margin = "";
+      document.body.style.padding = "";
+    }
 
     return () => {
       document.body.style.overflow = "";
