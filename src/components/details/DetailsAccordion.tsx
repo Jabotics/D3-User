@@ -19,7 +19,7 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
     };
 
     return (
-        <div className="w-[18rem] md:w-[1435px] flex flex-col gap-6">
+        <div className="w-[19rem] xs:w-[21rem] sm:w-[36rem] md:w-[44rem] lg:w-[56rem] xl:w-[1435px] flex flex-col gap-6">
             {items.map((item, index) => (
                 <div key={index} className="border rounded-xl">
                     <button

@@ -9,7 +9,7 @@ const AppShell = () => {
     <>
       {/* <Navbar /> */}
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
