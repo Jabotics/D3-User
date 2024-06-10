@@ -1,7 +1,7 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 // import icon from "../../../public/images/category-icon1.svg";
-import iconBg from "../../../public/images/icon-bg.svg";
+// import iconBg from "../../../public/images/icon-bg.svg";
 import { useEffect, useState } from "react";
 
 // const categorydata = [
