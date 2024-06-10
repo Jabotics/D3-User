@@ -20,7 +20,7 @@ import { useAppDispatch } from "@/store/hooks";
 export const Navbar = () => {
   const dispatch = useAppDispatch();
   return (
-    <div className=" fixed top-0 left-0 w-full border-b border-slate-200 border-solid bg-white">
+    <div className=" fixed top-0 left-0 w-full border-b border-slate-200 border-solid bg-white py-4 z-20">
       <div className='container'>
         <div className='grid-container grid grid-cols-12 gap-7 items-center'>
           <div className="col-span-12 lg:col-span-2 gap-4">
@@ -46,7 +46,11 @@ export const Navbar = () => {
           </div>
           <div className="col-span-4 sm:col-span-8 lg:col-span-7 gap-4 flex flex-row justify-end  items-center custome-break">
             <div className="navigation">
-              menu
+              <ul className='flex flex-row gap-4'>
+                  <li><a href="#">Pay & Play</a></li>
+                  <li><a href="#">Academy</a></li>
+                  <li><a href="#"> Membership</a></li>
+              </ul>
             </div>
             <div className="cta">
               <Button onClick={() => {
