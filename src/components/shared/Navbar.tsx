@@ -86,19 +86,17 @@ export const Navbar = () => {
                 </Button>
               </div>
               <div className="cta flex items-center gap-2">
-                {!hasToken && (
-                  <Button
-                    variant={"outline"}
-                    className="w-21 text-xs h-8 rounded-xl"
-                    onClick={() => {
-                      dispatch(logout());
-                      window.open("/login", "_self");
-                    }}
-                  >
-                    <LogIn className="mr-2 text-green-500" size={14} />
-                    {isLarge && "Login"}
-                  </Button>
-                )}
+                <Button
+                  variant={"outline"}
+                  className="w-21 text-xs h-8 rounded-xl"
+                  onClick={() => {
+                    dispatch(logout());
+                    window.open("/login", "_self");
+                  }}
+                >
+                  <LogIn className="mr-2 text-green-500" size={14} />
+                  {hasToken ? isLarge && "Logout" : isLarge && "Login"}
+                </Button>
 
                 <Button
                   variant={"theme"}
