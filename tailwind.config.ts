@@ -11,19 +11,20 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'sm': '767px',
+        'xs': { 'min': '375px', 'max': '425px' },
+        'sm': '640px',
         // => @media (min-width: 640px) { ... }
-  
-        'md': '992px',
+
+        'md': '768px',
         // => @media (min-width: 768px) { ... }
-  
+
         'lg': '1024px',
         // => @media (min-width: 1024px) { ... }
-  
+
         'xl': '1280px',
         // => @media (min-width: 1280px) { ... }
-  
-        '2xl': '1366px',
+
+        '2xl': '1536px',
         // => @media (min-width: 1536px) { ... }
       },
 
@@ -70,7 +71,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        lightGreen:"hsl(var(--light-green))",
+        lightGreen: "hsl(var(--light-green))",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -34,6 +34,12 @@ const router = createBrowserRouter([
           Component: (await import("./pages/auth/otp")).default,
         }),
       },
+      {
+        path: "/details",
+        lazy: async () => ({
+          Component: (await import("./pages/details/Details")).default,
+        }),
+      },
     ],
   },
 ]);
