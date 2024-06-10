@@ -20,13 +20,13 @@ export const socket: Socket = io(APIEndPoints.BackendURL, {
   transports: ['websocket', 'polling', 'flashsocket'],
 })
 
-export const socketMiddleware: Middleware = (store) => {
+export const socketMiddleware: Middleware = (_store) => {
   socket.on('connect', () => {
     socket.emit('client_ready', { message: 'client is ready for connection' })
   })
 
   // Listen for any event
-  socket.onAny((event, ...args) => {
+  socket.onAny((event, ..._args) => {
     switch (event) {
       case 'getUserData':
         {
