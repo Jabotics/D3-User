@@ -7,9 +7,9 @@ import { Footer } from "./shared/footer";
 const AppShell = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Outlet />
-      <Footer/>
+      <Footer />
     </>
   );
 };
