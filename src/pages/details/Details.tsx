@@ -24,7 +24,7 @@ const Details = () => {
                         <RightPanel />
                     </div>
                 </div>
-                <div className="flex justify-center flex-col items-center gap-4 mt-44 md:mt-0">
+                <div className="flex justify-center flex-col items-center gap-4 mt-44 md:mt-16 lg:mt-2">
                     <div>
                         <Accordion items={items} />
                     </div>

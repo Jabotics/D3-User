@@ -3,7 +3,7 @@ import { IoIosSend } from "react-icons/io";
 
 const RightPanel = () => {
     return (
-        <div className="w-[19rem] xs:w-[21rem] sm:w-[36rem] md:w-[44rem] lg:w-[28rem] xl:w-[680px] lg:h-[28rem] h-80 md:h-[523px] ml-2">
+        <div className="w-[19rem] xs:w-[21rem] sm:w-[36rem] md:w-[44rem] lg:w-[28rem] xl:w-[680px] lg:h-[28rem] h-80 xl:h-[523px] ml-2">
             <div className="flex justify-between">
                 <span className="text-lg tracking-widest">Box Cricket, Football</span>
                 <div className="flex gap-1">
@@ -34,7 +34,7 @@ const RightPanel = () => {
                 </div>
             </div>
             <span className="text-sm">15, Cambridge Road, Near Sri Sai Mandir, Deena Bandu Nagar, Jeevan Kendra Layout, Ulsoor, Domlur, Bengaluru, Karnataka - 560008</span>
-            <div className="xl:mt-14 lg:mt-6 mr-2 md:mr-0">
+            <div className="xl:mt-14 mt-6 lg:mt-6 mr-2 md:mr-0">
                 <button className="w-full bg-gray-900 p-3 rounded-3xl text-white">Book Now</button>
             </div>
         </div>
