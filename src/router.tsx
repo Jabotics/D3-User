@@ -34,6 +34,12 @@ const router = createBrowserRouter([
           Component: (await import("./pages/auth/otp")).default,
         }),
       },
+      {
+        path: "/pay_play",
+        lazy: async () => ({
+          Component: (await import("./pages/pay_play/PayPlay")).default,
+        }),
+      },
     ],
   },
 ]);

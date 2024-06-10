@@ -3,7 +3,7 @@ import { Phone,Mail,MapPin } from 'lucide-react';
 
 export const Footer = () => {
     return (
-      <div className="footer-sec">
+      <div className="footer-sec bg-[#252525] text-white">
         <div className="container">
             <div className="grid grid-cols-12 items-start">
                 <div className="col-span-12 md:col-span-4">

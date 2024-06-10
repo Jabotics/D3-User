@@ -3,7 +3,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/selectOption";
@@ -69,7 +68,7 @@ export const Navbar = () => {
             <div className="navigation">
               <ul className="flex flex-row gap-4">
                 <li>
-                  <a href="#">Pay & Play</a>
+                  <a href="./pay_play">Pay & Play</a>
                 </li>
                 <li>
                   <a href="#">Academy</a>
