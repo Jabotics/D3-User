@@ -1,10 +1,7 @@
-import HomePage from "@/components/home/Index";
+import HomePage from "@/components/home";
+
 const Home = () => {
-  return (
-
-    <HomePage/>
-
-  );
+  return <HomePage />;
 };
 
 export default Home;
