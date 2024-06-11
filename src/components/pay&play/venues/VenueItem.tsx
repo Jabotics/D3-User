@@ -2,8 +2,12 @@
 import { FaLocationDot } from 'react-icons/fa6'
 import { IoIosHeartEmpty } from 'react-icons/io'
 import venueImg from '../../../assets/venueImg.jpg'
-
+import { useNavigate } from "react-router-dom"
 const VenueItem = () => {
+  const navigate = useNavigate()
+  const handleBooking=()=>{
+        navigate('/booking')
+  }
   return (
     <div className='flex flex-row w-full border rounded-md gap-8 bg-[#FFFFFF] max-h-[240px]'>
          <div className='w-[40%] sm:w-[25%] '>
@@ -18,7 +22,7 @@ const VenueItem = () => {
             <FaLocationDot size={24} color='#D0D0D0'/>
             <p className='p-0 m-0 text-[12px] sm:text-[14px] md:text-[16px]  text-[#676767]'>256, Picnic Garden Rd,Nator Park,Near Bondel Gate Flyover,Siliguri-700039</p>
             </div>
-            <button className='bg-[#252525] text-[12px] sm:text-[14px] md:text-[16px] text-white py-[6px] md:py-[8px] px:[6px] md:px-[12px] w-[80px] sm:w-[120px] border rounded-3xl mt:[0px] sm:mt-[20px]'>Book Now</button>
+            <button className='bg-[#252525] text-[12px] sm:text-[14px] md:text-[16px] text-white py-[6px] md:py-[8px] px:[6px] md:px-[12px] w-[80px] sm:w-[120px] border rounded-3xl mt:[0px] sm:mt-[20px]' onClick={handleBooking}>Book Now</button>
           </div>
           <div className='h-[28px] w-[28px] p-1  bg-[#54a63fb3] rounded-lg flex items-center justify-center'>
              <IoIosHeartEmpty className='font-bold ' size={22} color='white'/>

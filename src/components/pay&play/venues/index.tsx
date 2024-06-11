@@ -13,12 +13,12 @@ const Venues=()=>{
             <VenueItem/>
             <VenueItem/>
             <VenueItem/>
-            <div className="self-end flex flex-row gap-2">
-                 <span className="inline-block text-[14px] font-semibold">Page :</span>
-                 <span className="inline-block text-[14px] font-semibold">1</span>
-                 <span className="inline-block text-[14px] font-semibold">2</span>
-                 <span className="inline-block text-[14px] font-semibold">3</span>
-                 <span className="inline-block text-[14px] font-semibold">4</span>
+            <div className="self-end flex flex-row gap-4">
+                 <span className="inline-block text-[14px] font-semibold cursor-pointer">Page :</span>
+                 <button className="inline-block text-[12px] w-[20px] h-[20px] font-semibold cursor-pointer bg-[#53A53F] text-white rounded-md">1</button>
+                 <button className="inline-block text-[12px]  w-[20px] h-[20px] font-semibold cursor-pointer bg-[#53A53F] text-white rounded-md">2</button>
+                 <button className="inline-block text-[12px]  w-[20px] h-[20px] font-semibold cursor-pointer bg-[#53A53F] text-white rounded-md">3</button>
+                 <button className="inline-block text-[12px]  w-[20px] h-[20px] font-semibold cursor-pointer bg-[#53A53F] text-white rounded-md">4</button>
             </div>
         </div>
     )

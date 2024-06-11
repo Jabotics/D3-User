@@ -40,6 +40,12 @@ const router = createBrowserRouter([
           Component: (await import("./pages/pay_play/PayPlay")).default,
         }),
       },
+      {
+        path: "/booking",
+        lazy: async () => ({
+          Component: (await import("./pages/booking/Booking")).default,
+        }),
+      },
     ],
   },
 ]);
