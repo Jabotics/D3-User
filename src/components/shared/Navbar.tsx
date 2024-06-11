@@ -13,19 +13,20 @@ import { LogIn } from "lucide-react";
 import logo from "/images/Logo.svg";
 import { logout } from "@/store/actions/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-
+import { useNavigate } from "react-router-dom"
 import { SlLocationPin } from "react-icons/sl";
 import { ToggleOptions } from "../toggle-options";
-import { FaCircle, FaUnlock } from "react-icons/fa";
-import { Separator } from "../ui/separator";
+import {  FaUnlock } from "react-icons/fa";
+
 import { RootState } from "@/store";
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
 
   const isLarge = window.innerWidth > 1024;
-  const isSix20 = window.innerWidth > 620;
 
+  const navigate = useNavigate();
+ 
   const { hasToken } = useAppSelector((state: RootState) => state.auth);
 
   return (
@@ -69,6 +70,7 @@ export const Navbar = () => {
                 <Button
                   variant={"outline"}
                   className="w-20 text-xs h-8 rounded-xl"
+                  onClick={()=>  navigate('/pay_play')}
                 >
                   Pay & Play
                 </Button>
@@ -122,50 +124,6 @@ export const Navbar = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="  bg-white w-full">
-        <div className="container text-gray-400 pb-2 pt-1 flex items-center justify-between">
-          <div className="flex items-center text-xs font-normal">
-            {[
-              { title: isSix20 ? "About Us" : "About" },
-              { title: isSix20 ? "My Account" : "Account" },
-              { title: "Favourites" },
-              { title: "Contact" },
-            ].map((item, index) => {
-              return (
-                <div
-                  className={`flex h-3 items-center justify-center ${
-                    isSix20 ? "space-x-2" : "space-x-0"
-                  }`}
-                  key={index}
-                >
-                  <Button
-                    variant={"ghost"}
-                    className={`${isSix20 ? "ml-2" : "ml-0"} w-[4rem] h-2 ${
-                      isSix20 ? "text-[12px]" : "text-[11px]"
-                    } ${isSix20 ? "tracking-tight" : "tracking-tighter"}`}
-                  >
-                    {item.title}
-                  </Button>
-                  {item.title !== "Contact" && (
-                    <Separator orientation="vertical" />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {isSix20 ? (
-            <div className="flex items-center text-xs">
-              Need help? Call Us &nbsp;
-              <FaCircle size={6} />
-              &nbsp;
-              <span className="font-semibold text-theme">1800 900 567</span>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
-          ) : null}
         </div>
       </div>
     </div>
