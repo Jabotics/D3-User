@@ -65,26 +65,28 @@ export const Navbar = () => {
 
             {/* BUTTONS */}
             <div className="col-span-4 sm:col-span-5 max-[290px]:col-span-4  max-[350px]:col-span-5 lg:col-span-6 gap-4 flex flex-row justify-end  items-center custome-break sm:mr-2">
-              <div className="max-lg:hidden flex items-center gap-2">
-                <Button
-                  variant={"outline"}
-                  className="w-20 text-xs h-8 rounded-xl"
-                >
-                  Pay & Play
-                </Button>
-                <Button
-                  variant={"outline"}
-                  className="w-20 text-xs h-8 rounded-xl"
-                >
-                  Academy
-                </Button>
-                <Button
-                  variant={"outline"}
-                  className="w-20 text-xs h-8 rounded-xl"
-                >
-                  Membership
-                </Button>
-              </div>
+              {isLarge && (
+                <div className="max-lg:hidden flex items-center gap-2">
+                  <Button
+                    variant={"outline"}
+                    className="w-20 text-xs h-8 rounded-xl"
+                  >
+                    Pay & Play
+                  </Button>
+                  <Button
+                    variant={"outline"}
+                    className="w-20 text-xs h-8 rounded-xl"
+                  >
+                    Academy
+                  </Button>
+                  <Button
+                    variant={"outline"}
+                    className="w-20 text-xs h-8 rounded-xl"
+                  >
+                    Membership
+                  </Button>
+                </div>
+              )}
               <div className="cta flex items-center gap-2">
                 <Button
                   variant={"outline"}

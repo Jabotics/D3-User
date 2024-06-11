@@ -190,6 +190,8 @@ export default function LoginPage() {
     dispatch(setRemainingTime({ time: 0 }));
   };
 
+  const isLarge = window.innerWidth > 1024
+
   useLayoutEffect(() => {
     if (hasToken || token) {
       navigate("/");
@@ -199,7 +201,7 @@ export default function LoginPage() {
   return (
     <>
       <div className="fixed top-0 left-0 w-full h-screen overflow-hidden grid grid-cols-12 gap-4 items-center">
-        <div className="absolute top-0 right-0 h-full w-[25vw] bg-theme max-lg:hidden" />
+        {isLarge && <div className="absolute top-0 right-0 h-full w-[25vw] bg-theme max-lg:hidden" />}
         <div className="left-panel relative col-span-12 lg:col-span-6 flex items-start  justify-around flex-col h-screen px-10 sm:px-40 lg:pl-52 lg:pr-10 xl:pr-40 min-[1500]:pr-60">
           <div className="absolute top-6 left-12">
             <img src={logo} alt="logo" className="max-lg:h-8 h-10" />

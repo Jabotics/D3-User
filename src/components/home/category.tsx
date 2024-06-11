@@ -56,9 +56,9 @@ export const Category = () => {
     return (
       <div className="category-section py-14">
         <div className="container">
-          <div className=" mb-12 text-center">
-            <h2>Book A Sports Venue Near You</h2>
-            <p>Join the community of 2+ million users - find games, book with a few taps, and be a part of the amateur sports revolution! </p>
+          <div className=" mb-12 w-full flex flex-col items-center justify-center">
+            <h2 className="text-2xl font-semibold mb-5">Book A Sports Venue Near You</h2>
+            <p className="text-xs w-[35rem] text-center">Join the community of 2+ million users - find games, book with a few taps, and be a part of the amateur sports revolution! </p>
           </div>
           <div className="categori-slider">
             <Carousel 

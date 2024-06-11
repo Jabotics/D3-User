@@ -10,7 +10,6 @@ export const Slots = () => {
       breakpoint: { max: 4000, min: 3000 },
       items: 3,
       partialVisibilityGutter: 30,
-
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -26,46 +25,45 @@ export const Slots = () => {
       breakpoint: { max: 464, min: 0 },
       items: 1,
       partialVisibilityGutter: 30,
-    }
+    },
   };
-    return (
-      <div className="avilable-slot">
-        <div className="container">
-            <div className="slot-header flex flex-row align-center justify-start gap-8 mb-12">
-                <div className="heading">
-                    <h2>Available Slots</h2>
-                </div>
-                <div className="btn-grup flex gap-4">
-                    <Button>Popular</Button>
-                    <Button>New</Button>
-                </div>
-            </div>
-            <div className="slot-slider">
-                <Carousel 
-                  responsive={responsive}
-                  swipeable={true}
-                  draggable={true}
-                  showDots={false}
-                  infinite={true}
-                  autoPlay={false}
-                  containerClass="carousel-container"
-                  itemClass="carousel-item-padding-40-px"
-                  partialVisible={true}
-                >
-                  <SlotCard/>
-                  <SlotCard/>
-                  <SlotCard/>
-                  <SlotCard/>
-                  <SlotCard/>
-                  <SlotCard/>
-                  <SlotCard/>
-                  <SlotCard/>
-                  <SlotCard/>
-                </Carousel>
-              </div>
+  return (
+    <div className="mt-20">
+      <div className="container">
+        <div className="slot-header flex flex-row align-center justify-start gap-8 mb-12">
+          <div className="heading">
+            <h2>Available Slots</h2>
+          </div>
+          <div className="btn-grup flex gap-4">
+            <Button>Popular</Button>
+            <Button>New</Button>
+          </div>
+        </div>
+        <div className="slot-slider">
+          <Carousel
+            responsive={responsive}
+            swipeable={true}
+            draggable={true}
+            showDots={false}
+            infinite={true}
+            autoPlay={false}
+            containerClass="carousel-container"
+            itemClass="carousel-item-padding-40-px"
+            partialVisible={true}
+          >
+            <SlotCard />
+            <SlotCard />
+            <SlotCard />
+            <SlotCard />
+            <SlotCard />
+            <SlotCard />
+            <SlotCard />
+            <SlotCard />
+            <SlotCard />
+          </Carousel>
         </div>
       </div>
-    )
-  
-  };
-export default Slots;  
+    </div>
+  );
+};
+export default Slots;

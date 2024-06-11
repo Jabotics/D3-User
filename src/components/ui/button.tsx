@@ -10,7 +10,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90",
-        theme: "bg-theme text-zinc-50 hover:theme dark:bg-zinc-50 dark:text-theme dark:hover:bg-zinc-50/90",
+        theme: "bg-theme text-zinc-50 hover:bg-theme dark:bg-zinc-50 dark:text-theme dark:hover:bg-zinc-50/90",
+        lowTheme: "bg-[#8FE979] text-zinc-700 hover:bg-[#8FE979] dark:bg-zinc-50 dark:text-[#8FE979] dark:hover:bg-zinc-50/90",
         destructive:
           "bg-red-500 text-zinc-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-zinc-50 dark:hover:bg-red-900/90",
         outline:
@@ -24,6 +25,7 @@ const buttonVariants = cva(
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
+        lowTheme: "h-9 px-8",
         icon: "h-10 w-10",
       },
     },
