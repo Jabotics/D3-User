@@ -1,9 +1,8 @@
-import Accordion from "@/components/details/DetailsAccordion";
-import GroundCard from "@/components/details/GroundCard";
-import LeftPanel from "@/components/details/LeftPanel"
-import RelatedGrounds from "@/components/details/RelatedGrounds";
-import RightPanel from "@/components/details/RightPanel";
 import "react-multi-carousel/lib/styles.css";
+import LeftPanel from "@/components/details/LeftPanel"
+import RightPanel from "@/components/details/RightPanel";
+import Accordion from "@/components/details/DetailsAccordion";
+import RelatedGrounds from "@/components/details/RelatedGrounds";
 
 const items = [
     {
@@ -42,7 +41,9 @@ const Details = () => {
                     </div>
                 </div>
                 <hr />
-                <RelatedGrounds />
+                <div className="mb-10">
+                    <RelatedGrounds />
+                </div>
             </div>
         </div>
     )
