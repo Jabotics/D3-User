@@ -13,19 +13,20 @@ import { LogIn } from "lucide-react";
 import logo from "/images/Logo.svg";
 import { logout } from "@/store/actions/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-
+import { useNavigate } from "react-router-dom"
 import { SlLocationPin } from "react-icons/sl";
 import { ToggleOptions } from "../toggle-options";
-import { FaCircle, FaUnlock } from "react-icons/fa";
-import { Separator } from "../ui/separator";
+import {  FaUnlock } from "react-icons/fa";
+
 import { RootState } from "@/store";
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
 
   const isLarge = window.innerWidth > 1024;
-  const isSix20 = window.innerWidth > 620;
 
+  const navigate = useNavigate();
+ 
   const { hasToken } = useAppSelector((state: RootState) => state.auth);
 
   return (
@@ -69,6 +70,7 @@ export const Navbar = () => {
                 <Button
                   variant={"outline"}
                   className="w-20 text-xs h-8 rounded-xl"
+                  onClick={()=>  navigate('/pay_play')}
                 >
                   Pay & Play
                 </Button>

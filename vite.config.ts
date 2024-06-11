@@ -6,14 +6,6 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
   server: {
     host: '0.0.0.0',
-  },
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  server: {
     proxy: {
       "/uploads": {
         target: "http://192.168.29.16:5050",
@@ -22,4 +14,12 @@ export default defineConfig({
       },
     },
   },
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+
+
 });
