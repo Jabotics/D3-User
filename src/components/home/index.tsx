@@ -1,4 +1,3 @@
-import React from "react";
 
 // COMPONENTS
 import SliderSection from "./Slider";
@@ -9,10 +8,11 @@ import Academy from "./academy";
 import Testimonials from "./testimonial";
 import Events from "./event";
 import Faqs from "./faq";
+import Chat from "./chat";
 
 export const HomePage = () => {
   return (
-    <React.Fragment>
+    <div className="relative">
       <SliderSection />
       <Category />
       <HowitWorks />
@@ -21,7 +21,9 @@ export const HomePage = () => {
       <Testimonials />
       <Events />
       <Faqs />
-    </React.Fragment>
+
+      <Chat />
+    </div>
   );
 };
 export default HomePage;
