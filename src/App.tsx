@@ -14,7 +14,6 @@ function App() {
 
   useEffect(() => {
     const isNewUser = !hasToken;
-    console.log(isNewUser)
 
     if (isNewUser && shouldPlayAtRoute) {
       const setVideoPlayer = setTimeout(() => {

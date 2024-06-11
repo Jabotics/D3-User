@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         }),
       },
       {
-        path: "/login",
+        path: "login",
         lazy: async () => ({
           Component: (await import("./pages/auth/login")).default,
         }),
@@ -35,13 +35,13 @@ const router = createBrowserRouter([
       //   }),
       // },
       {
-        path: "/details",
+        path: "details",
         lazy: async () => ({
           Component: (await import("./pages/details/Details")).default,
         }),
       },
       {
-        path: "/profile",
+        path: "profile",
         lazy: async () => ({
           Component: (await import("./pages/profile/Profile")).default,
         }),

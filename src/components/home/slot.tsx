@@ -30,16 +30,36 @@ export const Slots = () => {
   return (
     <div className="mt-20">
       <div className="container">
-        <div className="slot-header flex flex-row align-center justify-start gap-8 mb-12">
-          <div className="heading">
-            <h2>Available Slots</h2>
+        <div className="flex items-start justify-between">
+          <div className="slot-header flex flex-row align-center justify-start gap-8 mb-12">
+            <div className="heading">
+              <h2 className="text-2xl font-medium ml-4">Available Slots</h2>
+            </div>
+            <div className="btn-grup flex gap-2 items-center justify-center">
+              <Button
+                variant={"default"}
+                className="rounded-full h-7 px-4 text-xs bg-amber-600 hover:bg-amber-100 hover:text-zinc-900"
+              >
+                Popular
+              </Button>
+              <Button
+                variant={"default"}
+                className="rounded-full h-7 px-4 text-xs bg-amber-50 text-zinc-900 border border-zinc-400 hover:bg-amber-600 hover:text-amber-50"
+              >
+                New
+              </Button>
+            </div>
           </div>
-          <div className="btn-grup flex gap-4">
-            <Button>Popular</Button>
-            <Button>New</Button>
+          <div>
+            <Button
+              variant={"link"}
+              className="tracking-tight font-semibold underline decoration-gray-300 hover:decoration-gray-950"
+            >
+              VIEW ALL
+            </Button>
           </div>
         </div>
-        <div className="slot-slider">
+        <div className="-mt-5">
           <Carousel
             responsive={responsive}
             swipeable={true}
@@ -47,6 +67,7 @@ export const Slots = () => {
             showDots={false}
             infinite={true}
             autoPlay={false}
+            arrows={false}
             containerClass="carousel-container"
             itemClass="carousel-item-padding-40-px"
             partialVisible={true}

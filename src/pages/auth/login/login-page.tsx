@@ -82,7 +82,6 @@ export default function LoginPage() {
         mobile: data.number,
         url: APIEndPoints.customer_login,
       }).unwrap();
-      console.log(res);
 
       dispatch(
         setAuth({
@@ -147,6 +146,7 @@ export default function LoginPage() {
       });
     } finally {
       setIsLoading(false);
+      otpForm.setValue("otp", "")
     }
   }
 
@@ -181,7 +181,7 @@ export default function LoginPage() {
     } catch (error: any) {
       toast(error?.data?.message);
       navigate("/login");
-    }
+    } 
   }
 
   const handleComplete = () => {
@@ -220,6 +220,7 @@ export default function LoginPage() {
                 <InputOTP
                   maxLength={4}
                   className="otp flex justify-content-center gap-3"
+                  value={otpForm.watch("otp")}
                   onChange={(e) => {
                     otpForm.setValue("otp", e);
                   }}

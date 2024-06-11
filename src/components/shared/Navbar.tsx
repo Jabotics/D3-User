@@ -19,9 +19,11 @@ import { ToggleOptions } from "../toggle-options";
 import { FaCircle, FaUnlock } from "react-icons/fa";
 import { Separator } from "../ui/separator";
 import { RootState } from "@/store";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const isLarge = window.innerWidth > 1024;
   const isSix20 = window.innerWidth > 620;
@@ -36,7 +38,7 @@ export const Navbar = () => {
             {/* LOGO */}
             <div className="col-span-12 lg:col-span-2 gap-4">
               <div className="logo text-center flex items-center justify-center">
-                <img src={logo} alt="logo" className="max-lg:h-8 h-10" />
+                <img src={logo} alt="logo" className="max-lg:h-8 h-10 cursor-pointer" onClick={() => navigate('/')} />
               </div>
             </div>
 
@@ -148,6 +150,11 @@ export const Navbar = () => {
                     className={`${isSix20 ? "ml-2" : "ml-0"} w-[4rem] h-2 ${
                       isSix20 ? "text-[12px]" : "text-[11px]"
                     } ${isSix20 ? "tracking-tight" : "tracking-tighter"}`}
+                     onClick={() => {
+                      if (item.title === 'My Account') {
+                        navigate('/profile')
+                      }
+                     }}
                   >
                     {item.title}
                   </Button>
