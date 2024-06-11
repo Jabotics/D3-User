@@ -1,15 +1,7 @@
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/selectOption";
+
 import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 
-// import { ModeToggle } from "../mode-toggle";
 import logo from "/images/Logo.svg";
 import { logout } from "@/store/actions/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -20,6 +12,16 @@ import { FaCircle, FaUnlock } from "react-icons/fa";
 import { Separator } from "../ui/separator";
 import { RootState } from "@/store";
 import { useNavigate } from "react-router-dom";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -38,31 +40,48 @@ export const Navbar = () => {
             {/* LOGO */}
             <div className="col-span-12 lg:col-span-2 gap-4">
               <div className="logo text-center flex items-center justify-center">
-                <img src={logo} alt="logo" className="max-lg:h-8 h-10 cursor-pointer" onClick={() => navigate('/')} />
+                <img
+                  src={logo}
+                  alt="logo"
+                  className="max-lg:h-8 h-10 cursor-pointer"
+                  onClick={() => navigate("/")}
+                />
               </div>
             </div>
 
             {/* LOCATION */}
             <div className="ml-2 lg:ml-0 max-[290px]:col-span-5 max-[350px]:col-span-4 col-span-6 sm:col-span-6 lg:col-span-4 gap-4 custome-break max-[390px]:text-xs">
-              <Select>
-                <SelectTrigger className="w-full h-8 border border-gray-200 text-gray-400 focus:border-transparent focus:ring-0 hover:border-transparent active:border-transparent">
-                  <SelectValue
-                    placeholder={
-                      <span className="flex items-center">
-                        <SlLocationPin className="mr-2 text-green-500" /> Select
-                        Location
-                      </span>
-                    }
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="location1">Location 1</SelectItem>
-                    <SelectItem value="location2">Location 2</SelectItem>
-                    <SelectItem value="location3">Location 3</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+
+              <Dialog>
+                <DialogTrigger asChild className="">
+                  <Button
+                    variant="outline"
+                    className="w-full flex items-center justify-start"
+                  >
+                    <span className="flex items-center justify-start">
+                      <SlLocationPin className="mr-2 text-green-500" /> Select
+                      Location
+                    </span>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Search your location</DialogTitle>
+                    <DialogDescription>
+                      Type few letters to see the location in active.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4 h-[45vh]">
+                    <div className="grid grid-cols-4 items-center h-4 gap-4">
+                      <Input
+                        id="name"
+                        defaultValue="Gulmohar"
+                        className="col-span-4"
+                      />
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
 
             {/* BUTTONS */}
@@ -150,11 +169,11 @@ export const Navbar = () => {
                     className={`${isSix20 ? "ml-2" : "ml-0"} w-[4rem] h-2 ${
                       isSix20 ? "text-[12px]" : "text-[11px]"
                     } ${isSix20 ? "tracking-tight" : "tracking-tighter"}`}
-                     onClick={() => {
-                      if (item.title === 'My Account') {
-                        navigate('/profile')
+                    onClick={() => {
+                      if (item.title === "My Account") {
+                        navigate("/profile");
                       }
-                     }}
+                    }}
                   >
                     {item.title}
                   </Button>

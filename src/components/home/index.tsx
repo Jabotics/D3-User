@@ -13,7 +13,7 @@ import Chat from "./chat";
 export const HomePage = () => {
   return (
     <div className="relative">
-      <SliderSection />
+      <div className="w-full h-[65vh] overflow-hidden"><SliderSection /></div>
       <Category />
       <HowitWorks />
       <Slots />
