@@ -10,66 +10,49 @@ const router = createBrowserRouter([
     },
     errorElement: <></>,
     children: [
+
       {
         index: true,
         lazy: async () => ({
           Component: (await import("./pages/home/Home")).default,
         }),
       },
+
       {
         path: "login",
         lazy: async () => ({
-          Component: (await import("./pages/auth/login")).default,
+          Component: (await import("./pages/login")).default,
         }),
       },
-      // {
-      //   path: "/register",
-      //   lazy: async () => ({
-      //     Component: (await import("./pages/auth/register")).default,
-      //   }),
-      // },
-      // {
-      //   path: "/otp",
-      //   lazy: async () => ({
-      //     Component: (await import("./pages/auth/otp")).default,
-      //   }),
-      // },
-      // {
-      //   path: "/register",
-      //   lazy: async () => ({
-      //     Component: (await import("./pages/auth/register")).default,
-      //   }),
-      // },
-      // {
-      //   path: "/otp",
-      //   lazy: async () => ({
-      //     Component: (await import("./pages/auth/otp")).default,
-      //   }),
-      // },
+
       {
         path: "/pay_play",
         lazy: async () => ({
           Component: (await import("./pages/pay_play/PayPlay")).default,
         }),
       },
+
       {
         path: "/booking",
         lazy: async () => ({
           Component: (await import("./pages/booking/Booking")).default,
         })
       },
+
       {
         path: "/details",
         lazy: async () => ({
           Component: (await import("./pages/details/Details")).default,
         }),
       },
+
       {
         path: "profile",
         lazy: async () => ({
           Component: (await import("./pages/profile/Profile")).default,
         }),
       },
+      
     ],
   },
 ]);
