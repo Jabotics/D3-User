@@ -66,14 +66,14 @@ const SliderSection = () => {
                 inView={slidesInView.indexOf(index) > -1}
               />
               <div className="embla_container--content">
-                <h4 className="font-medium">PLAY SPORTS</h4>
-                <h1 className="text-4xl font-bold">
+                <h4 className="text-xs md:text-[16px] font-medium">PLAY SPORTS</h4>
+                <h1 className=" text-2xl md:text-4xl font-bold">
                   World's Biggest Sports Community
                 </h1>
-                <Button variant={"lowTheme"} size={'lowTheme'} className="mt-5 rounded-full">
+                <Button variant={"lowTheme"} size={'lowTheme'} className="mt-5 h-7 md:h-10 rounded-full">
                   Book Now
                 </Button>
-                <p className="text-xs mt-2">No credit card required</p>
+                <p className="text-[8px] md:text-xs mt-2">No credit card required</p>
               </div>
             </div>
           ))}

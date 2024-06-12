@@ -17,7 +17,7 @@ export const Testimonials = () => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 3,
+      items: 1,
       partialVisibilityGutter: 30,
     },
     mobile: {
@@ -30,8 +30,8 @@ export const Testimonials = () => {
   return (
     <div className="-mt-12 py-24 text-center ">
       <div className="container">
-        <h2 className="text-3xl font-medium tracking-wide">Our Happy Customers</h2>
-        <p className="mt-4 tracking-wide font-normal text-sm">What customers are saying about our safety standards</p>
+        <h2 className="text-xl md:text-3xl font-medium tracking-wide">Our Happy Customers</h2>
+        <p className="mt-4 tracking-wide font-normal text-xs md:text-sm">What customers are saying about our safety standards</p>
 
         <div
           className="hiw-slider mt-10"

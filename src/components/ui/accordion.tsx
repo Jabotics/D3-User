@@ -30,6 +30,7 @@ const AccordionTrigger = React.forwardRef<
   AccordionTriggerProps
 >(({ className, children, state, ...props }, ref) => {
   const isOpen = state === "open";
+  const isSm = window.innerWidth > 400
   return (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
@@ -44,9 +45,9 @@ const AccordionTrigger = React.forwardRef<
           <FaCircle size={7} /> &nbsp;{children}
         </span>
         {isOpen ? (
-          <FaMinus className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
+          <FaMinus className={`${isSm ? 'h-4 w-4' : 'h-2 w-2'} shrink-0 text-muted-foreground transition-transform duration-200`} />
         ) : (
-          <FaPlus className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
+          <FaPlus className={`${isSm ? 'h-4 w-4' : 'h-2 w-2'} shrink-0 text-muted-foreground transition-transform duration-200`} />
         )}
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>

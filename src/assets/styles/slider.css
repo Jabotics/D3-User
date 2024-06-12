@@ -45,6 +45,12 @@
   width: 30rem;
 }
 
+@media (max-width: 768px) {
+  .embla_container--content {
+    width: 20rem;
+  }
+}
+
 .embla__controls {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -98,6 +104,12 @@
   bottom: 7.5rem;
   left: 50%;
   transform: translateX(-50%);
+}
+
+@media (max-width: 768px) {
+  .embla__dots {
+    bottom: 5.5rem;
+  }
 }
 
 .embla__dot {
@@ -195,6 +207,16 @@
 
 .embla__button--next {
   right: 15%;
+}
+
+@media (max-width: 768px) {
+  .embla__button--prev {
+    left: 5%;
+  }
+  
+  .embla__button--next {
+    right: 5%;
+  }
 }
 
 @keyframes loading {

@@ -35,7 +35,7 @@ export const Slots = () => {
             <div className="heading">
               <h2 className="text-2xl font-medium ml-4">Available Slots</h2>
             </div>
-            <div className="btn-grup flex gap-2 items-center justify-center">
+            <div className="btn-grup hidden lg:flex gap-2 items-center justify-center">
               <Button
                 variant={"default"}
                 className="rounded-full h-7 px-4 text-xs bg-amber-600 hover:bg-amber-100 hover:text-zinc-900"
@@ -50,10 +50,34 @@ export const Slots = () => {
               </Button>
             </div>
           </div>
-          <div>
+          <div className="hidden lg:block">
             <Button
               variant={"link"}
               className="tracking-tight font-semibold underline decoration-gray-300 hover:decoration-gray-950"
+            >
+              VIEW ALL
+            </Button>
+          </div>
+        </div>
+        <div className="flex lg:hidden items-center justify-between mb-12 -mt-10 px-4">
+          <div className="btn-grup flex lg:hidden gap-2 items-center justify-center">
+            <Button
+              variant={"default"}
+              className="rounded-full h-5 px-4 text-xs bg-amber-600 hover:bg-amber-100 hover:text-zinc-900"
+            >
+              Popular
+            </Button>
+            <Button
+              variant={"default"}
+              className="rounded-full h-5 px-4 text-xs bg-amber-50 text-zinc-900 border border-zinc-400 hover:bg-amber-600 hover:text-amber-50"
+            >
+              New
+            </Button>
+          </div>
+          <div className="lg:hidden flex items-center">
+            <Button
+              variant={"link"}
+              className="tracking-tight h-5 text-xs font-semibold underline decoration-gray-300 hover:decoration-gray-950"
             >
               VIEW ALL
             </Button>

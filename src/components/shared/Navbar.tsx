@@ -1,14 +1,17 @@
-
 import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 
 import logo from "/images/Logo.svg";
 import { logout } from "@/store/actions/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { SlLocationPin } from "react-icons/sl";
 import { ToggleOptions } from "../toggle-options";
-import {  FaCircle, FaUnlock } from "react-icons/fa";
+import { FaCircle, FaUnlock } from "react-icons/fa";
+
+import {
+  IconHeadset
+} from '@tabler/icons-react'
 
 import { RootState } from "@/store";
 
@@ -39,26 +42,29 @@ export const Navbar = () => {
           <div className="grid-container grid grid-cols-12 gap-7 items-center">
             {/* LOGO */}
             <div className="col-span-12 lg:col-span-2 gap-4">
-              <div className="logo text-center flex items-center justify-center">
+              <div className="logo text-center flex items-center justify-between px-4">
                 <img
                   src={logo}
                   alt="logo"
-                  className="max-lg:h-8 h-10 cursor-pointer"
+                  className="h-7 sm:h-8 lg:h-10 cursor-pointer"
                   onClick={() => navigate("/")}
                 />
+                <div className="flex items-center gap-1 lg:hidden">
+                  <IconHeadset size={18} />
+                  <span className="text-[14px] font-[900] tracking-tighter text-green-700">9987 878 878</span>
+                </div>
               </div>
             </div>
 
             {/* LOCATION */}
             <div className="ml-2 lg:ml-0 max-[290px]:col-span-5 max-[350px]:col-span-4 col-span-6 sm:col-span-6 lg:col-span-4 gap-4 custome-break max-[390px]:text-xs">
-
               <Dialog>
                 <DialogTrigger asChild className="">
                   <Button
                     variant="outline"
-                    className="w-full flex items-center justify-start"
+                    className="w-full flex items-center justify-start h-6 lg:h-9"
                   >
-                    <span className="flex items-center justify-start">
+                    <span className="flex items-center justify-start text-[11px] md:text-[14px]">
                       <SlLocationPin className="mr-2 text-green-500" /> Select
                       Location
                     </span>
@@ -92,7 +98,7 @@ export const Navbar = () => {
                     variant={"outline"}
                     className="w-20 text-xs h-8 rounded-xl"
                     onClick={() => {
-                      navigate('/pay_play')
+                      navigate("/pay_play");
                     }}
                   >
                     Pay & Play
@@ -114,7 +120,7 @@ export const Navbar = () => {
               <div className="cta flex items-center gap-2">
                 <Button
                   variant={"outline"}
-                  className="w-21 text-xs h-8 rounded-xl"
+                  className="w-21 text-xs h-6 lg:h-8 rounded-xl"
                   onClick={() => {
                     dispatch(logout());
                     window.open("/login", "_self");
@@ -126,7 +132,7 @@ export const Navbar = () => {
 
                 <Button
                   variant={"theme"}
-                  className="w-21 text-xs h-8 rounded-xl"
+                  className="w-21 text-xs h-6 lg:h-8 rounded-xl"
                   onClick={() => window.open("/", "_self")}
                 >
                   {!isLarge ? (
@@ -173,7 +179,7 @@ export const Navbar = () => {
                       isSix20 ? "text-[12px]" : "text-[11px]"
                     } ${isSix20 ? "tracking-tight" : "tracking-tighter"}`}
                     onClick={() => {
-                      if (item.title === "My Account") {
+                      if (item.title === "My Account" || "Account") {
                         navigate("/profile");
                       }
                     }}

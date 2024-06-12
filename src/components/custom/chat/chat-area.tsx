@@ -18,14 +18,14 @@ const ChatArea = ({
 
   return (
     <div
-      className={`fixed bottom-8 right-8 w-[20vw] ${
+      className={`fixed bottom-8 right-8 w-[85vw] xs:w-[65vw] sm:w-[50vw] md:w-[40vw] lg:w-[30vw] xl:w-[25vw] 2xl:w-[20vw] ${
         hasAcceptedTerms ? "h-[85vh]" : "h-[55vh]"
-      } bg-lime-50 shadow-lg transition-transform transform rounded-3xl z-50`}
+      } bg-lime-50 shadow-lg transition-transform transform rounded-3xl z-50 overflow-hidden`}
       // style={{ backgroundImage: `url('/images/chat.png')` }}
     >
-      <div className="flex items-center justify-between p-4">
+      <div className="flex items-center justify-between px-4 py-2 sm:p-4">
         <div>
-          <img src={logo} alt="logo" className="max-lg:h-8 h-10 " />
+          <img src={logo} alt="logo" className="h-6 lg:h-10 " />
         </div>
         <button
           onClick={() => {
@@ -39,10 +39,10 @@ const ChatArea = ({
       </div>
       <div
         className={`mx-2 rounded-3xl border-t-2 border-lime-200 bg-[#ffffff] ${
-          hasAcceptedTerms ? "h-[75vh]" : "h-96"
+          hasAcceptedTerms ? "h-[75vh]" : "h-[21rem] xs:h-[27rem] sm:h-96"
         } flex flex-col items-center justify-center`}
       >
-        <p className="border-b border-gray-200 h-9 w-full flex items-center justify-center text-xs font-medium tracking-wide text-gray-500">
+        <p className="border-b border-gray-200 h-5 sm:h-9 w-full flex items-center justify-center text-[8px] sm:text-[10px] md:text-[12px] font-medium tracking-wide text-gray-500">
           By using D3, you agree to our &nbsp;
           <span className="text-blue-800 underline">Priavcy Policy</span>
         </p>
@@ -51,7 +51,7 @@ const ChatArea = ({
             <div className="flex-1 flex items-center justify-center">
               Welcome to D3 Chatbox!
             </div>
-            <div className="h-36 border-t border-t-gray-200 bg-gray-50 w-full text-sm p-4 flex flex-col items-center rounded-b-3xl border-b-lime-200 border-b">
+            <div className="h-24 xs:h-28 sm:h-36 border-t border-t-gray-200 bg-gray-50 w-full text-[8px] sm:text-[10px] md:text-[12px] p-4 flex flex-col items-center rounded-b-3xl border-b-lime-200 border-b">
               <span>
                 I agree to the &nbsp;
                 <span className="text-blue-800 underline">
@@ -63,7 +63,7 @@ const ChatArea = ({
               </span>
               <Button
                 variant={"theme"}
-                className="mt-2 w-fit text-center h-8"
+                className="mt-2 w-fit text-center h-6 xs:h-6 sm:h-7 lg:h-8 text-xs sm:text-[12px] lg:text-[16px] lg:mt-4"
                 onClick={() => setHasAcceptedTerms(true)}
               >
                 Agree & Continue
