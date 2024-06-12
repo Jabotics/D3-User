@@ -34,8 +34,32 @@ const router = createBrowserRouter([
       //     Component: (await import("./pages/auth/otp")).default,
       //   }),
       // },
+      // {
+      //   path: "/register",
+      //   lazy: async () => ({
+      //     Component: (await import("./pages/auth/register")).default,
+      //   }),
+      // },
+      // {
+      //   path: "/otp",
+      //   lazy: async () => ({
+      //     Component: (await import("./pages/auth/otp")).default,
+      //   }),
+      // },
       {
-        path: "details",
+        path: "/pay_play",
+        lazy: async () => ({
+          Component: (await import("./pages/pay_play/PayPlay")).default,
+        }),
+      },
+      {
+        path: "/booking",
+        lazy: async () => ({
+          Component: (await import("./pages/booking/Booking")).default,
+        })
+      },
+      {
+        path: "/details",
         lazy: async () => ({
           Component: (await import("./pages/details/Details")).default,
         }),
