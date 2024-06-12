@@ -2,16 +2,13 @@ import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 
 import logo from "/images/Logo.svg";
-import { logout } from "@/store/actions/slices/authSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/store/hooks";
 import { useNavigate } from "react-router-dom";
 import { SlLocationPin } from "react-icons/sl";
 import { ToggleOptions } from "../toggle-options";
 import { FaCircle, FaUnlock } from "react-icons/fa";
 
-import {
-  IconHeadset
-} from '@tabler/icons-react'
+import { IconHeadset } from "@tabler/icons-react";
 
 import { RootState } from "@/store";
 
@@ -27,7 +24,6 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "../ui/separator";
 
 export const Navbar = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const isLarge = window.innerWidth > 1024;
@@ -51,7 +47,9 @@ export const Navbar = () => {
                 />
                 <div className="flex items-center gap-1 lg:hidden">
                   <IconHeadset size={18} />
-                  <span className="text-[14px] font-[900] tracking-tighter text-green-700">9987 878 878</span>
+                  <span className="text-[14px] font-[900] tracking-tighter text-green-700">
+                    9987 878 878
+                  </span>
                 </div>
               </div>
             </div>
@@ -118,17 +116,35 @@ export const Navbar = () => {
                 </div>
               )}
               <div className="cta flex items-center gap-2">
-                <Button
-                  variant={"outline"}
-                  className="w-21 text-xs h-6 lg:h-8 rounded-xl"
-                  onClick={() => {
-                    dispatch(logout());
-                    window.open("/login", "_self");
-                  }}
-                >
-                  <LogIn className="mr-2 text-green-500" size={14} />
-                  {hasToken ? isLarge && "Logout" : isLarge && "Login"}
-                </Button>
+                <>
+                  {hasToken ? (
+                    <div className="w-full flex items-center justify-center">
+                      <div
+                        className="w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto border-[1px] border-gray-300"
+                        style={{
+                          backgroundImage: "url('/images/viewers.webp')",
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                        onClick={() => {
+                          navigate("/profile");
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <Button
+                      variant={"outline"}
+                      className="w-21 text-xs h-6 lg:h-8 rounded-xl"
+                      onClick={() => {
+                        // window.open("/login", "_self");
+                        navigate("/login");
+                      }}
+                    >
+                      <LogIn className="mr-2 text-green-500" size={14} />
+                      {isLarge && "Login"}
+                    </Button>
+                  )}
+                </>
 
                 <Button
                   variant={"theme"}

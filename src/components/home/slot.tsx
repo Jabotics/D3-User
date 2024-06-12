@@ -1,12 +1,28 @@
 import SlotCard from "../slot-card/card";
 import { Button } from "../ui/button";
+import { useRef } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-export const Slots = () => {
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+
+const Slots = () => {
+  const carouselRef = useRef<Carousel>(null);
+
+  const handleNext = () => {
+    if (carouselRef.current) {
+      carouselRef.current.next(1);
+    } 
+  };
+
+  const handlePrev = () => {
+    if (carouselRef.current) {
+      carouselRef.current.previous(1);
+    }
+  };
+
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 3,
       partialVisibilityGutter: 30,
@@ -27,6 +43,7 @@ export const Slots = () => {
       partialVisibilityGutter: 30,
     },
   };
+
   return (
     <div className="w-screen overflow-hidden mt-20">
       <div className="container">
@@ -50,13 +67,15 @@ export const Slots = () => {
               </Button>
             </div>
           </div>
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center">
             <Button
               variant={"link"}
               className="tracking-tight font-semibold underline decoration-gray-300 hover:decoration-gray-950"
             >
               VIEW ALL
             </Button>
+            <IoIosArrowBack onClick={handlePrev} className="cursor-pointer" />
+            <IoIosArrowForward onClick={handleNext} className="cursor-pointer" />
           </div>
         </div>
         <div className="flex lg:hidden items-center justify-between mb-12 -mt-10 px-4">
@@ -81,10 +100,13 @@ export const Slots = () => {
             >
               VIEW ALL
             </Button>
+            <IoIosArrowBack onClick={handlePrev} className="cursor-pointer" />
+            <IoIosArrowForward onClick={handleNext} className="cursor-pointer" />
           </div>
         </div>
         <div className="-mt-5">
           <Carousel
+            ref={carouselRef}
             responsive={responsive}
             swipeable={true}
             draggable={true}
@@ -111,4 +133,5 @@ export const Slots = () => {
     </div>
   );
 };
+
 export default Slots;

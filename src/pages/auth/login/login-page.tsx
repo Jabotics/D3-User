@@ -48,6 +48,8 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const duration = 30;
 
+  const isSM = window.innerWidth > 400;
+
   const { userData, hasToken, token } = useAppSelector(
     (state: RootState) => state.auth
   );
@@ -92,7 +94,6 @@ export default function LoginPage() {
         })
       );
       form.reset();
-      console.log(res?.Response?.message);
       toast(res?.Response?.message);
 
       dispatch(setRemainingTime({ time: 30 }));
@@ -236,7 +237,7 @@ export default function LoginPage() {
                     <Phone size={20} />
                   </div>
                   <Input
-                    type="text"
+                    type="number"
                     placeholder="Mobile"
                     className="w-full p-2 rounded-3xl pl-10 border "
                     value={form.watch("number")}
@@ -287,7 +288,7 @@ export default function LoginPage() {
           </p>
 
           {toSendOtp && (
-            <div className="flex items-center justify-center w-full h-28 absolute bottom-52 left-0">
+            <div className="flex items-center justify-center w-full h-28 absolute bottom-36 sm:bottom-52 left-0">
               {startTimer && (
                 <CountdownCircleTimer
                   isPlaying
@@ -299,7 +300,7 @@ export default function LoginPage() {
                     dispatch(setRemainingTime({ time }));
                   }}
                   onComplete={handleComplete}
-                  size={80}
+                  size={!isSM ? 50 : 80}
                   strokeWidth={5}
                 >
                   {({ remainingTime }) => remainingTime}

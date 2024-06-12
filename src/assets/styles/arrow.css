@@ -20,5 +20,12 @@
 .custom-arrow svg {
   width: 30px;
   height: 30px;
-  color: #333; /* Change to your preferred color */
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .custom-arrow svg {
+    width: 15px;
+    height: 15px;
+  }
 }
