@@ -28,7 +28,7 @@ export const Slots = () => {
     },
   };
   return (
-    <div className="mt-20">
+    <div className="w-screen overflow-hidden mt-20">
       <div className="container">
         <div className="flex items-start justify-between">
           <div className="slot-header flex flex-row align-center justify-start gap-8 mb-12">

@@ -27,7 +27,7 @@ const hiwdata = [
 
 export const HowitWorks = () => {
   return (
-    <div className="how-it-works py-24 text-center bg-lightGreen">
+    <div className="w-screen overflow-hidden py-24 text-center bg-lightGreen">
       <div className="container">
         <h2 className="text-3xl font-medium">How It Works</h2>
         <div className="flex items-center gap-2 justify-center mt-10">
