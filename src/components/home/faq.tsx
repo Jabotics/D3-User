@@ -1,41 +1,68 @@
+import { useState } from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
- 
+} from "@/components/ui/accordion";
+
 export const Faqs = () => {
-    return (
-      <div className="faq-section text-center py-12 sm:py-24">
-           <div className="container">
-              <h2>Frequently asked questions</h2>
-              <div className="acordien-sec text-left">
-                <Accordion type="single" collapsible className="w-full" defaultValue="item-1">
-                  <AccordionItem value="item-1">
-                    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                    <AccordionContent>
-                      Yes. It adheres to the WAI-ARIA design pattern.
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="item-2">
-                    <AccordionTrigger>Is it styled?</AccordionTrigger>
-                    <AccordionContent>
-                      Yes. It comes with default styles that matches the other
-                      components&apos; aesthetic.
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="item-3">
-                    <AccordionTrigger>Is it animated?</AccordionTrigger>
-                    <AccordionContent>
-                      Yes. It's animated by default, but you can disable it if you prefer.
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </div>
-           </div>
-      </div>
-    )
-  
+
+  const faqData = [
+    {
+      id: "item-1",
+      question: "Is it accessible?",
+      answer: "Yes. It adheres to the WAI-ARIA design pattern.",
+    },
+    {
+      id: "item-2",
+      question: "Is it styled?",
+      answer:
+        "Yes. It comes with default styles that matches the other components' aesthetic.",
+    },
+    {
+      id: "item-3",
+      question: "Is it animated?",
+      answer:
+        "Yes. It's animated by default, but you can disable it if you prefer.",
+    },
+  ];
+
+  const [openItems, setOpenItems] = useState<string[]>([]);
+
+  const toggleItem = (itemId: string) => {
+    setOpenItems((prevOpenItems) => {
+      if (prevOpenItems.includes(itemId)) {
+        return prevOpenItems.filter((id) => id !== itemId);
+      } else {
+        return [...prevOpenItems, itemId];
+      }
+    });
   };
-export default Faqs;  
+
+  return (
+    <div className="faq-section text-center py-12 sm:py-24 px-8 sm:px-0">
+      <div className="container">
+        <h2 className="sm:text-lg md:text-2xl font-medium tracking-normal">
+          Frequently Asked Questions
+        </h2>
+        <div className="accordion-section text-left ">
+          <Accordion type="single" collapsible className="w-full">
+            {faqData.map((faq) => (
+              <AccordionItem key={faq.id} value={faq.id} className={`${openItems.includes(faq.id) ? "border-none" : "border-b"} text-xs sm:text-[16px]`}>
+                <AccordionTrigger
+                  state={openItems.includes(faq.id) ? "open" : "closed"}
+                  onClick={() => toggleItem(faq.id)}
+                >
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent>{faq.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default Faqs;

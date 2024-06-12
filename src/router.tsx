@@ -17,23 +17,35 @@ const router = createBrowserRouter([
         }),
       },
       {
-        path: "/login",
+        path: "login",
         lazy: async () => ({
           Component: (await import("./pages/auth/login")).default,
         }),
       },
-      {
-        path: "/register",
-        lazy: async () => ({
-          Component: (await import("./pages/auth/register")).default,
-        }),
-      },
-      {
-        path: "/otp",
-        lazy: async () => ({
-          Component: (await import("./pages/auth/otp")).default,
-        }),
-      },
+      // {
+      //   path: "/register",
+      //   lazy: async () => ({
+      //     Component: (await import("./pages/auth/register")).default,
+      //   }),
+      // },
+      // {
+      //   path: "/otp",
+      //   lazy: async () => ({
+      //     Component: (await import("./pages/auth/otp")).default,
+      //   }),
+      // },
+      // {
+      //   path: "/register",
+      //   lazy: async () => ({
+      //     Component: (await import("./pages/auth/register")).default,
+      //   }),
+      // },
+      // {
+      //   path: "/otp",
+      //   lazy: async () => ({
+      //     Component: (await import("./pages/auth/otp")).default,
+      //   }),
+      // },
       {
         path: "/pay_play",
         lazy: async () => ({
@@ -53,7 +65,7 @@ const router = createBrowserRouter([
         }),
       },
       {
-        path: "/profile",
+        path: "profile",
         lazy: async () => ({
           Component: (await import("./pages/profile/Profile")).default,
         }),

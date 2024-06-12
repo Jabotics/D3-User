@@ -6,7 +6,7 @@ import { Footer } from "./shared/footer";
 const AppShell = () => {
   const location = useLocation();
 
-  const hiddenRoutes = ["/login", "/register", "/otp"];
+  const hiddenRoutes = ["/login"];
   const shouldHideNavbarFooter = hiddenRoutes.includes(location.pathname);
 
   return (
