@@ -195,8 +195,16 @@ export const Navbar = () => {
                       isSix20 ? "text-[12px]" : "text-[11px]"
                     } ${isSix20 ? "tracking-tight" : "tracking-tighter"}`}
                     onClick={() => {
-                      if (item.title === "My Account" || "Account") {
-                        navigate("/profile");
+                      switch (item.title) {
+                        case ("My Account" || "Account"): {
+                          navigate("/profile");
+                        }
+                        break;
+
+                        case ("Contact"): {
+                          navigate('/contact');
+                        }
+                        break;
                       }
                     }}
                   >
