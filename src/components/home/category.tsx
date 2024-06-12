@@ -81,7 +81,7 @@ export const Category = () => {
           <h2>Book A Sports Venue Near You</h2>
           <p>
             Join the community of 2+ million users - find games, book with a few
-            taps, and be a part of the amateur sports revolution! 
+            taps, and be a part of the amateur sports revolution!
           </p>
         </div>
         <div className="categori-slider">

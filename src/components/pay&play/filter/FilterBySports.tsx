@@ -17,23 +17,23 @@ const FilterBySports = () => {
         <AccordionContent className="flex flex-col gap-2">
         <RadioGroup defaultValue="" className="flex flex-col gap-4 ">
       <div className="flex items-center space-x-2">
-        <RadioGroupItem value="default" id="r1" />
-        <Label htmlFor="r1">Box Cticket</Label>
+        <RadioGroupItem value="Box Cricket" id="r1" />
+        <Label htmlFor="r1">Box Cricket</Label>
       </div>
       <div className="flex items-center space-x-2">
-        <RadioGroupItem value="comfortable" id="r2" />
+        <RadioGroupItem value="Swmming" id="r2" />
         <Label htmlFor="r2">Swmming</Label>
       </div>
       <div className="flex items-center space-x-2">
-        <RadioGroupItem value="compact" id="r3" />
+        <RadioGroupItem value="Badminton" id="r3" />
         <Label htmlFor="r3">Badminton</Label>
       </div>
       <div className="flex items-center space-x-2">
-        <RadioGroupItem value="compact" id="r3" />
+        <RadioGroupItem value="Football" id="r4" />
         <Label htmlFor="r3">Football</Label>
       </div>
       <div className="flex items-center space-x-2">
-        <RadioGroupItem value="compact" id="r3" />
+        <RadioGroupItem value="Basketball" id="r5" />
         <Label htmlFor="r3">Basketball</Label>
       </div>
     </RadioGroup>
