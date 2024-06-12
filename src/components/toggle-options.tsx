@@ -13,11 +13,11 @@ import { useState } from "react";
 
 export function ToggleOptions() {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClick = (path: string) => {
-    navigate(path); 
-    setIsOpen(false); 
+    navigate(path);
+    setIsOpen(false);
   };
 
   return (
@@ -29,7 +29,7 @@ export function ToggleOptions() {
             variant="outline"
             size="icon"
             className="mx-1 h-6 lg:h-8 flex items-center justify-center"
-            onClick={() => setIsOpen(!isOpen)} 
+            onClick={() => setIsOpen(!isOpen)}
           >
             <GiHamburgerMenu className="h-8 w-[1.2rem] transition-all text-gray-500" />
             <span className="sr-only">Toggle theme</span>
@@ -38,7 +38,7 @@ export function ToggleOptions() {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel
             className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer"
-            onClick={() => handleOptionClick("/pay_play")} 
+            onClick={() => handleOptionClick("/pay_play")}
           >
             Pay & Play
           </DropdownMenuLabel>
@@ -53,6 +53,18 @@ export function ToggleOptions() {
           </span>
           <DropdownMenuLabel className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer">
             Membership
+          </DropdownMenuLabel>
+          <span className="flex w-full items-center justify-center">
+            <DropdownMenuSeparator className="w-[90%]" />
+          </span>
+          <DropdownMenuLabel className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer">
+            Terms Of Use
+          </DropdownMenuLabel>
+          <span className="flex w-full items-center justify-center">
+            <DropdownMenuSeparator className="w-[90%]" />
+          </span>
+          <DropdownMenuLabel className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer">
+            Privacy Policy
           </DropdownMenuLabel>
         </DropdownMenuContent>
       </DropdownMenu>

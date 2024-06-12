@@ -146,7 +146,7 @@ export const Navbar = () => {
                   )}
                 </>
 
-                <Button
+                {/* <Button
                   variant={"theme"}
                   className="w-21 text-xs h-6 lg:h-8 rounded-xl"
                   onClick={() => window.open("/", "_self")}
@@ -158,7 +158,7 @@ export const Navbar = () => {
                   ) : (
                     "Book Now"
                   )}
-                </Button>
+                </Button> */}
               </div>
             </div>
 
@@ -177,49 +177,55 @@ export const Navbar = () => {
         <div className="container text-gray-400 pb-2 pt-1 flex items-center justify-between">
           <div className="flex items-center text-xs font-normal">
             {[
-              { title: isSix20 ? "About Us" : "About" },
-              { title: isSix20 ? "My Account" : "Account" },
+              { title: isLarge ? "About Us" : "About" },
+              { title: isLarge ? "My Account" : "Account" },
               { title: "Favourites" },
+              { title: isLarge ? "Terms Of Use" : "Terms" },
+              { title: isLarge ? "Privacy Policy" : "Privacy" },
               { title: "Contact" },
             ].map((item, index) => {
-              return (
-                <div
-                  className={`flex h-3 items-center justify-center ${
-                    isSix20 ? "space-x-2" : "space-x-0"
-                  }`}
-                  key={index}
-                >
-                  <Button
-                    variant={"ghost"}
-                    className={`${isSix20 ? "ml-2" : "ml-0"} w-[4rem] h-2 ${
-                      isSix20 ? "text-[12px]" : "text-[11px]"
-                    } ${isSix20 ? "tracking-tight" : "tracking-tighter"}`}
-                    onClick={() => {
-                      switch (item.title) {
-                        case ("My Account" || "Account"): {
-                          navigate("/profile");
-                        }
-                        break;
-
-                        case ("Contact"): {
-                          navigate('/contact');
-                        }
-                        break;
-                      }
-                    }}
+              if (!(item.title === "Terms" || item.title === "Privacy")) {
+                return (
+                  <div
+                    className={`flex h-3 items-center justify-center ${
+                      isSix20 ? "space-x-2" : "space-x-0"
+                    }`}
+                    key={index}
                   >
-                    {item.title}
-                  </Button>
-                  {item.title !== "Contact" && (
-                    <Separator orientation="vertical" />
-                  )}
-                </div>
-              );
+                    <Button
+                      variant={"ghost"}
+                      className={`${isSix20 ? "ml-2" : "ml-0"} w-fit h-2 ${
+                        isSix20 ? "text-[12px]" : "text-[11px]"
+                      } ${isSix20 ? "tracking-tight" : "tracking-tighter"}`}
+                      onClick={() => {
+                        switch (item.title) {
+                          case "My Account" || "Account":
+                            {
+                              navigate("/profile");
+                            }
+                            break;
+
+                          case "Contact":
+                            {
+                              navigate("/contact");
+                            }
+                            break;
+                        }
+                      }}
+                    >
+                      {item.title}
+                    </Button>
+                    {item.title !== "Contact" && (
+                      <Separator orientation="vertical" />
+                    )}
+                  </div>
+                );
+              }
             })}
           </div>
 
           {isSix20 ? (
-            <div className="flex items-center text-xs">
+            <div className="flex items-center text-xs gap-2">
               Need help? Call Us &nbsp;
               <FaCircle size={6} />
               &nbsp;
