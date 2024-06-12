@@ -2,12 +2,11 @@
 import { IGround } from "@/interface/data";
 import { CiHeart, CiShare2 } from "react-icons/ci";
 import { IoIosSend } from "react-icons/io";
-
-
-
+import { useNavigate } from "react-router-dom"
 
 const RightPanel = ({groundDetails}:{groundDetails:IGround}) => {
-console.log(groundDetails);
+    const navigate = useNavigate()
+
     return (
         <div className="w-[19rem] xs:w-[21rem] sm:w-[36rem] md:w-[44rem] lg:w-[28rem] xl:w-[680px] lg:h-[28rem] h-80 xl:h-[523px] ml-2">
             <div className="flex justify-between">
@@ -41,7 +40,7 @@ console.log(groundDetails);
             </div>
             <span className="text-sm">{groundDetails?.venue?.address}</span>
             <div className="xl:mt-14 mt-6 lg:mt-6 mr-2 md:mr-0">
-                <button className="w-full bg-gray-900 p-3 rounded-3xl text-white">Book Now</button>
+                <button className="w-full bg-gray-900 p-3 rounded-3xl text-white" onClick={()=>  navigate('/booking')}>Book Now</button>
             </div>
         </div>
     )
