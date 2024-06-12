@@ -48,6 +48,8 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const duration = 30;
 
+  const isSM = window.innerWidth > 400;
+
   const { userData, hasToken, token } = useAppSelector(
     (state: RootState) => state.auth
   );
@@ -82,7 +84,6 @@ export default function LoginPage() {
         mobile: data.number,
         url: APIEndPoints.customer_login,
       }).unwrap();
-      console.log(res);
 
       dispatch(
         setAuth({
@@ -93,7 +94,6 @@ export default function LoginPage() {
         })
       );
       form.reset();
-      console.log(res?.Response?.message);
       toast(res?.Response?.message);
 
       dispatch(setRemainingTime({ time: 30 }));
@@ -147,6 +147,7 @@ export default function LoginPage() {
       });
     } finally {
       setIsLoading(false);
+      otpForm.setValue("otp", "")
     }
   }
 
@@ -181,7 +182,7 @@ export default function LoginPage() {
     } catch (error: any) {
       toast(error?.data?.message);
       navigate("/login");
-    }
+    } 
   }
 
   const handleComplete = () => {
@@ -189,6 +190,8 @@ export default function LoginPage() {
     dispatch(setRequestTime({ time: null }));
     dispatch(setRemainingTime({ time: 0 }));
   };
+
+  const isLarge = window.innerWidth > 1024
 
   useLayoutEffect(() => {
     if (hasToken || token) {
@@ -199,7 +202,7 @@ export default function LoginPage() {
   return (
     <>
       <div className="fixed top-0 left-0 w-full h-screen overflow-hidden grid grid-cols-12 gap-4 items-center">
-        <div className="absolute top-0 right-0 h-full w-[25vw] bg-theme max-lg:hidden" />
+        {isLarge && <div className="absolute top-0 right-0 h-full w-[25vw] bg-theme max-lg:hidden" />}
         <div className="left-panel relative col-span-12 lg:col-span-6 flex items-start  justify-around flex-col h-screen px-10 sm:px-40 lg:pl-52 lg:pr-10 xl:pr-40 min-[1500]:pr-60">
           <div className="absolute top-6 left-12">
             <img src={logo} alt="logo" className="max-lg:h-8 h-10" />
@@ -218,6 +221,7 @@ export default function LoginPage() {
                 <InputOTP
                   maxLength={4}
                   className="otp flex justify-content-center gap-3"
+                  value={otpForm.watch("otp")}
                   onChange={(e) => {
                     otpForm.setValue("otp", e);
                   }}
@@ -233,7 +237,7 @@ export default function LoginPage() {
                     <Phone size={20} />
                   </div>
                   <Input
-                    type="text"
+                    type="number"
                     placeholder="Mobile"
                     className="w-full p-2 rounded-3xl pl-10 border "
                     value={form.watch("number")}
@@ -284,7 +288,7 @@ export default function LoginPage() {
           </p>
 
           {toSendOtp && (
-            <div className="flex items-center justify-center w-full h-28 absolute bottom-52 left-0">
+            <div className="flex items-center justify-center w-full h-28 absolute bottom-36 sm:bottom-52 left-0">
               {startTimer && (
                 <CountdownCircleTimer
                   isPlaying
@@ -296,7 +300,7 @@ export default function LoginPage() {
                     dispatch(setRemainingTime({ time }));
                   }}
                   onComplete={handleComplete}
-                  size={80}
+                  size={!isSM ? 50 : 80}
                   strokeWidth={5}
                 >
                   {({ remainingTime }) => remainingTime}

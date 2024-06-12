@@ -17,48 +17,51 @@ export const Testimonials = () => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 3,
+      items: 1,
       partialVisibilityGutter: 30,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
       partialVisibilityGutter: 30,
-      infinite:true,
-    }
+      infinite: true,
+    },
   };
-    return (
-      <div className="how-it-works py-24 text-center ">
-          <div className="container">
-              <h2>Our Happy Customers</h2>
-              <p>What customers are saying about our safety standards</p>
+  return (
+    <div className="-mt-12 py-24 text-center ">
+      <div className="container">
+        <h2 className="text-xl md:text-3xl font-medium tracking-wide">Our Happy Customers</h2>
+        <p className="mt-4 tracking-wide font-normal text-xs md:text-sm">What customers are saying about our safety standards</p>
 
-              <div className="hiw-slider mt-10">
-                <Carousel 
-                  responsive={responsive}
-                  swipeable={true}
-                  draggable={true}
-                  showDots={false}
-                  infinite={true}
-                  autoPlay={false}
-                  containerClass="carousel-container"
-                  itemClass="carousel-item-padding-40-px py-10"
-                  partialVisible={true}
-                >
-                  <TestimonialCard/>
-                  <TestimonialCard/>
-                  <TestimonialCard/>
-                  <TestimonialCard/>
-                  <TestimonialCard/>
-
-                </Carousel>
-              </div>
-              
-          </div>
-            
-            
+        <div
+          className="hiw-slider mt-10"
+          style={{
+            background:
+              "linear-gradient(to top, transparent, rgba(0, 0, 0, 0.1), transparent, transparent",
+          }}
+        >
+          <Carousel
+            responsive={responsive}
+            swipeable={true}
+            draggable={true}
+            arrows={false}
+            showDots={true}
+            infinite={true}
+            autoPlay={false}
+            containerClass="carousel-testimonial-container"
+            itemClass="carousel-item-padding-40-px py-10"
+            dotListClass="carousel-testimonial-dots"
+            partialVisible={true}
+          >
+            <TestimonialCard />
+            <TestimonialCard />
+            <TestimonialCard />
+            <TestimonialCard />
+            <TestimonialCard />
+          </Carousel>
+        </div>
       </div>
-    )
-  
-  };
-export default Testimonials;  
+    </div>
+  );
+};
+export default Testimonials;

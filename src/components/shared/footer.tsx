@@ -4,7 +4,7 @@ import { Separator } from "../ui/separator";
 
 export const Footer = () => {
   return (
-    <footer className="bg-stone-800 py-8">
+    <footer className="bg-stone-800 py-8 px-5 md:px-0 w-screen overflow-hidden">
       <div className="container mb-8">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-4">
@@ -19,7 +19,7 @@ export const Footer = () => {
           <div className="col-span-12 md:col-span-5 flex flex-wrap">
             <div className="quick-link w-1/2">
               <h5 className="text-white mb-4">Quick Link</h5>
-              <ul className="flex flex-col gap-2 text-[11px] text-gray-400">
+              <ul className="flex flex-col gap-0 md:gap-2 text-[11px] text-gray-400">
                 <li>
                   <a href="#">Pay & Play</a>
                 </li>
@@ -62,8 +62,8 @@ export const Footer = () => {
             </div>
           </div>
           <div className="col-span-12 md:col-span-3">
-            <h5 className="text-white mb-4">Contact</h5>
-            <ul className="contact flex flex-col gap-2 text-[11px] text-gray-400">
+            <h5 className="text-white mb-2 md:mb-4">Contact</h5>
+            <ul className="contact flex flex-col gap-0 md:gap-2 text-[11px] text-gray-400">
               <li>
                 <a href="tel:+4733378901" className="flex items-center">
                   <Phone className="mr-2" size={10} />
