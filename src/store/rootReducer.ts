@@ -4,6 +4,13 @@ import {
   // AUTHENTICATION
   authSlice,
   otpSlice,
+
+  settingSlice,
+
+  citySlice,
+  citiesApi,
+  slotsSlice,
+  slotsApi,
  
 } from '@/store/actions'
 import { RequestHandler } from './RequestHandler'
@@ -23,13 +30,32 @@ const otpPersistConfig = {
   version: 1,
 }
 
+const appPersistConfig = {
+  key: 'd3-app',
+  storage,
+  version: 1,
+}
+
 const authPersistedReducer = persistReducer(persistConfig, authSlice)
 const otpPersistReducer = persistReducer(otpPersistConfig, otpSlice)
+
+const cityPersistReducer = persistReducer(appPersistConfig, citySlice)
 
 export const rootReducer = combineReducers({
   auth: authPersistedReducer,
   otp: otpPersistReducer,
+
+  setting: settingSlice,
+  
+  city: cityPersistReducer,
+  slots: slotsSlice,
   
   [RequestHandler.reducerPath]: RequestHandler.reducer,
+
+  // CITY
+  [citiesApi.reducerPath]: citiesApi.reducer,
+
+  // SLOTS
+  [slotsApi.reducerPath]: slotsApi.reducer,
   
 })

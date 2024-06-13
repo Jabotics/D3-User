@@ -4,4 +4,11 @@ export const APIEndPoints = {
   // CUSTOMER
   customer_login: '/api/customer-login',
   validate_otp: '/api/validate-otp',
+
+  // CITY
+  fetch_cities: '/api/fetch-cities',
+
+  // SLOTS
+  get_slot: '/api/get-available-booking-slots',
+  add_slot: '/add-slot-booking',
 }

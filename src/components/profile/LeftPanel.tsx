@@ -1,6 +1,6 @@
 import { FaRegHeart } from "react-icons/fa";
 import { IconType } from "react-icons/lib";
-import { LiaExpeditedssl } from "react-icons/lia";
+// import { LiaExpeditedssl } from "react-icons/lia";
 import { IoLogOutOutline } from "react-icons/io5";
 import { RiEditCircleFill } from "react-icons/ri";
 import { AiOutlineFileDone } from "react-icons/ai";
@@ -66,10 +66,10 @@ const sideMenu: SideMenu[] = [
         title: 'Favorite',
         icon: FaRegHeart
     },
-    {
-        title: 'Terms & Conditions',
-        icon: LiaExpeditedssl
-    },
+    // {
+    //     title: 'Terms & Conditions',
+    //     icon: LiaExpeditedssl
+    // },
     {
         title: 'Logout',
         icon: IoLogOutOutline
