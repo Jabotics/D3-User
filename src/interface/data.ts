@@ -31,4 +31,11 @@ export interface IGround {
     images: string[]
 
 }
-
+export interface ISport{
+    id: string,
+    name: string
+  }
+  export interface IVenue  {
+    id: string,
+    name: string
+}

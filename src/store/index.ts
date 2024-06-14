@@ -1,3 +1,4 @@
+
 import type {
   Action,
   Dispatch,
@@ -13,6 +14,12 @@ import { socketMiddleware } from "./middleware/socketMiddleware";
 import { rootReducer } from "./rootReducer";
 import { RequestHandler } from "./RequestHandler";
 
+import {
+groundApi,
+sportApi,
+venueApi
+} from '@/store/actions';
+
 export type RootState = ReturnType<typeof rootReducer>;
 
 export const makeStore = (preloadedState?: Partial<RootState>) => {
@@ -25,7 +32,10 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         serializableCheck: false,
       }).concat(
         socketMiddleware,
-        RequestHandler.middleware
+        RequestHandler.middleware,
+        groundApi.middleware,
+        sportApi.middleware,
+        venueApi.middleware,
       );
 
       const middlewareTuple = middleware as Middleware<

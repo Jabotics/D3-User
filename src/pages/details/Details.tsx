@@ -29,7 +29,7 @@ const Details = () => {
                 throw new Error("Failed to fetch cities");
             }
             const data = await response.json();
-            setGroundDetails(data.data[0]);
+            setGroundDetails(data.data.grounds[0]);
         } catch (error) {
             console.error("Error fetching data:", error);
         }

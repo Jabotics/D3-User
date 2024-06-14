@@ -4,4 +4,13 @@ export const APIEndPoints = {
   // CUSTOMER
   customer_login: '/api/customer-login',
   validate_otp: '/api/validate-otp',
+
+  // Fetch Ground
+  fetch_ground: '/api/grounds',
+
+  // fetch Sports
+  fetch_sport: '/api/sports',
+
+  // fetch venue
+  fetch_venue: '/api/venues'
 }
