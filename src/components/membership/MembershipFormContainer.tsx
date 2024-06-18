@@ -28,6 +28,15 @@ const formSchema = z.object({
     phone: z.string().min(2, {
         message: "Username must be at least 2 characters.",
     }),
+    address: z.string().min(2, {
+        message: "Username must be at least 2 characters.",
+    }),
+    guardian_name: z.string().min(2, {
+        message: "Username must be at least 2 characters.",
+    }),
+    guardian_phone: z.string().min(2, {
+        message: "Username must be at least 2 characters.",
+    }),
     gender: z
         .string({
             required_error: "Please select an gender to display.",
@@ -121,12 +130,12 @@ const MembershipFormContainer = () => {
                     />
                     <FormField
                         control={form.control}
-                        name="email"
+                        name="emergency_number"
                         render={({ field }) => (
                             <FormItem className="relative w-[45%]">
                                 <Mail className="absolute top-3.5 left-2 h-4 w-4 opacity-50" />
                                 <FormControl>
-                                    <Input placeholder="email" {...field} className="pl-8" />
+                                    <Input placeholder="emergency contact number" {...field} className="pl-8" />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

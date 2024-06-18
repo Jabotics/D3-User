@@ -15,10 +15,15 @@ import { rootReducer } from "./rootReducer";
 import { RequestHandler } from "./RequestHandler";
 
 import {
+  bookingApi,
 groundApi,
 sportApi,
 venueApi
 } from '@/store/actions';
+import { 
+  citiesApi,
+  slotsApi,
+} from "./actions";
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -36,6 +41,10 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         groundApi.middleware,
         sportApi.middleware,
         venueApi.middleware,
+
+        citiesApi.middleware,
+        slotsApi.middleware,
+        bookingApi.middleware,
       );
 
       const middlewareTuple = middleware as Middleware<
@@ -52,15 +61,15 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
   return store;
 };
 
-export const store = makeStore()
+export const store = makeStore();
 
-export type AppStore = typeof store
+export type AppStore = typeof store;
 
-export const persistor = persistStore(store)
-export type AppDispatch = AppStore['dispatch']
+export const persistor = persistStore(store);
+export type AppDispatch = AppStore["dispatch"];
 export type AppThunk<ThunkReturnType = void> = ThunkAction<
   ThunkReturnType,
   RootState,
   unknown,
   Action
->
+>;

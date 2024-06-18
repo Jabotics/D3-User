@@ -1,6 +1,6 @@
-import { APIEndPoints } from '@/APIEndpoint';
-import { IGround } from '@/interface/data';
-import { responsive } from '@/lib/utils';
+import { APIEndPoints } from "@/APIEndpoint";
+import { IGround } from "@/interface/data";
+import { responsive } from "@/lib/utils";
 
 import Carousel from "react-multi-carousel";
 import venueImg from '../../assets/venueImg.jpg'

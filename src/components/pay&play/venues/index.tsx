@@ -74,4 +74,7 @@ const Venues = () => {
   )
 }
 
-export default Venues
+
+
+
+export default Venues;

@@ -12,5 +12,14 @@ export const APIEndPoints = {
   fetch_sport: '/api/sports',
 
   // fetch venue
-  fetch_venue: '/api/venues'
+  fetch_venue: '/api/venues',
+  // CITY
+  fetch_cities: '/api/fetch-cities',
+
+  // SLOTS
+  get_slot: '/api/get-available-booking-slots',
+  add_slot: '/api/add-slot-booking',
+
+  // Booking
+  get_booking : '/api/get-slot-bookings'
 }
