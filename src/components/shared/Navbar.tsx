@@ -110,6 +110,9 @@ export const Navbar = () => {
                   <Button
                     variant={"outline"}
                     className="w-20 text-xs h-8 rounded-xl"
+                    onClick={() => {
+                      navigate("/membership");
+                    }}
                   >
                     Membership
                   </Button>
@@ -184,16 +187,14 @@ export const Navbar = () => {
             ].map((item, index) => {
               return (
                 <div
-                  className={`flex h-3 items-center justify-center ${
-                    isSix20 ? "space-x-2" : "space-x-0"
-                  }`}
+                  className={`flex h-3 items-center justify-center ${isSix20 ? "space-x-2" : "space-x-0"
+                    }`}
                   key={index}
                 >
                   <Button
                     variant={"ghost"}
-                    className={`${isSix20 ? "ml-2" : "ml-0"} w-[4rem] h-2 ${
-                      isSix20 ? "text-[12px]" : "text-[11px]"
-                    } ${isSix20 ? "tracking-tight" : "tracking-tighter"}`}
+                    className={`${isSix20 ? "ml-2" : "ml-0"} w-[4rem] h-2 ${isSix20 ? "text-[12px]" : "text-[11px]"
+                      } ${isSix20 ? "tracking-tight" : "tracking-tighter"}`}
                     onClick={() => {
                       if (item.title === "My Account" || "Account") {
                         navigate("/profile");

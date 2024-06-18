@@ -52,7 +52,12 @@ const router = createBrowserRouter([
           Component: (await import("./pages/profile/Profile")).default,
         }),
       },
-      
+      {
+        path: "/membership",
+        lazy: async () => ({
+          Component: (await import("./pages/membership/Membership")).default,
+        }),
+      },
     ],
   },
 ]);
