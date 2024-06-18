@@ -1,4 +1,4 @@
-import React,{MouseEvent} from 'react';
+import { MouseEvent } from 'react';
 import { FaLocationDot } from 'react-icons/fa6'
 import { IoIosHeartEmpty } from 'react-icons/io'
 import { useNavigate } from "react-router-dom"
@@ -7,7 +7,7 @@ import venueImg from '../../../assets/venueImg.jpg'
 
 const VenueItem = ({ item }: { item: IGround }) => {
   const navigate = useNavigate()
-  const handleBooking = (e:  MouseEvent<HTMLButtonElement>) => {
+  const handleBooking = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     navigate('/booking');
   };
@@ -29,7 +29,7 @@ const VenueItem = ({ item }: { item: IGround }) => {
             <FaLocationDot size={24} color='#D0D0D0' />
             <p className='p-0 m-0 text-[12px] sm:text-[14px] md:text-[16px]  text-[#676767]'>{item?.venue?.name}, {item?.venue?.address}</p>
           </div>
-          <button className='bg-[#252525] text-[12px] sm:text-[14px] md:text-[16px] text-white py-[6px] md:py-[8px] px:[6px] md:px-[12px] w-[80px] sm:w-[120px] border rounded-3xl mt:[0px] sm:mt-[20px]' onClick={(e:MouseEvent<HTMLButtonElement>)=>handleBooking(e)}>Book Now</button>
+          <button className='bg-[#252525] text-[12px] sm:text-[14px] md:text-[16px] text-white py-[6px] md:py-[8px] px:[6px] md:px-[12px] w-[80px] sm:w-[120px] border rounded-3xl mt:[0px] sm:mt-[20px]' onClick={(e: MouseEvent<HTMLButtonElement>) => handleBooking(e)}>Book Now</button>
         </div>
         <div className='h-[22px] w-[22px] p-1  bg-[#54a63fb3] rounded-lg flex items-center justify-center'>
           <IoIosHeartEmpty className='font-bold ' size={20} color='white' />

@@ -130,7 +130,7 @@ const MembershipFormContainer = () => {
                     />
                     <FormField
                         control={form.control}
-                        name="emergency_number"
+                        name="guardian_phone"
                         render={({ field }) => (
                             <FormItem className="relative w-[45%]">
                                 <Mail className="absolute top-3.5 left-2 h-4 w-4 opacity-50" />
