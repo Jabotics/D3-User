@@ -9,8 +9,8 @@ const SlotBooking = ({ handleBook }: { handleBook: () => void }) => {
   };
 
   return (
-    <div className="flex flex-col gap-3 -ml-10">
-      <div className="flex flex-col gap-4 w-full h-24 border rounded-lg bg-[#FFFFFF]">
+    <div className="flex flex-col gap-3 sm:-ml-10">
+      <div className="flex flex-col gap-4 w-full h-16 sm:h-24 mt-10 sm:mt-0 border rounded-lg bg-[#FFFFFF]">
         <img src="/images/check.jpeg" alt="" className="w-full h-full object-cover rounded-lg" />
       </div>
       <div className="flex flex-col gap-4 w-full h-40 border rounded-lg bg-[#FFFFFF]">
@@ -28,7 +28,7 @@ const SlotBooking = ({ handleBook }: { handleBook: () => void }) => {
         </div>
       </div>
       <Button
-        className="sm:hidden w-[90%] self-center bg-[#53A53F] h-7 text-[16px] font-bold"
+        className="sm:hidden w-[90%] self-center bg-[#53A53F] h-7 text-[16px] mt-5 -mb-8 font-bold"
         onClick={handleClick}
       >
         Next

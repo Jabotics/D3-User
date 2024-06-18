@@ -60,7 +60,7 @@ const SelectBookingDate: React.FC = () => {
   }, [GroundId]);
 
   return (
-    <div className="flex flex-col p-4 gap-4 w-full">
+    <div className="flex flex-col p-4 gap-4 w-[300px] sm:w-full">
       <span className="inline-block text-sm font-semibold">
         Select Booking Date
       </span>
@@ -70,30 +70,30 @@ const SelectBookingDate: React.FC = () => {
             return (
               <CarouselItem
                 key={index}
-                className="pl-1 basis-[120px] lg:basis-[75px] cursor-pointer"
+                className="pl-1 basis-[60px] lg:basis-[75px] cursor-pointer"
                 onClick={() => {
                   setSelectedDate(dateInfo.isoString);
                   dispatch(resetSlots())
                 }}
               >
                 <div
-                  className={`p-1 h-20 flex flex-col items-center justify-center border rounded-md gap-1 hover:bg-[#53A53F] text-[#A4A3A3] hover:text-white group ${
+                  className={`p-1 h-16 sm:h-20 flex flex-col items-center justify-center border rounded-md gap-1 hover:bg-[#53A53F] text-[#A4A3A3] hover:text-white group ${
                     dateInfo.isoString.split(":")[0] ===
                     selectedDate.split(":")[0]
                       ? "text-white bg-[#53A53F]"
                       : ""
                   }`}
                 >
-                  <span className="inline-block font-semibold text-xs">
+                  <span className="inline-block font-light sm:font-semibold text-xs">
                     {dateInfo.dayOfWeek}
                   </span>
                   <span
-                    className={`inline-block text-lg font-light ${
+                    className={`inline-block text-sm font-semibold sm:text-lg sm:font-light ${
                       dateInfo.isoString.split(":")[0] ===
                       selectedDate.split(":")[0]
                         ? "text-gray-200"
                         : "text-gray-500 "
-                    } -mt-2 group-hover:text-gray-200`}
+                    } -mt-2 group-hover:text-gray-200 whitespace-nowrap`}
                   >
                     {dateInfo.date}
                   </span>
