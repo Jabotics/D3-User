@@ -91,10 +91,10 @@ const AcademyPage = () => {
       <div className="h-fit lg:h-[125vh] w-full flex flex-col gap-2 mb-20">
         <div className="flex items-center justify-center w-full h-32">
           <div className="w-1/2 h-full bg-[#53A53F] rounded-l-xl hidden md:flex flex-col items-start justify-center pl-5 lg:pl-20">
-            <div className="text-xl font-semibold text-gray-200">
+            <div className="text-xl font-semibold text-gray-50">
               Host Your Events
             </div>
-            <div className="w-[340px] text-sm text-gray-300">
+            <div className="w-[340px] text-sm text-gray-50">
               Engage with the Largest Sports Community and Network
             </div>
             <Button variant={"default"} className="rounded-full mt-2 h-8">
@@ -127,7 +127,7 @@ const AcademyPage = () => {
           </div>
         </div>
 
-        <div className="flex-1 bg-[#83ca711e] rounded-3xl flex flex-col items-center gap-3 lg:gap-0 justify-center">
+        <div className="flex-1 bg-[#83ca711e] rounded-3xl flex flex-col items-center gap-3 lg:gap-0 justify-center border-2 border-[#53A53F]">
           <div className="w-full h-16 flex items-center lg:items-end text-center text-sm lg:text-lg justify-center font-semibold tracking-wide text-[#53A53F]">
             Fill in the form to join this academy.
           </div>
