@@ -47,7 +47,7 @@ function App() {
   return (
     <Suspense fallback={<LoadingSpinner />}>
       {shouldPlayAtRoute && toPlayVideo ? (
-        <div className="absolute inset-0 overflow-hidden w-full h-full">
+        <div className="absolute inset-0 overflow-hidden w-screen h-screen">
           <div
             className="absolute top-10 right-10 z-50 bg-stone-600 opacity-55 hover:opacity-100 cursor-pointer text-white w-12 h-12 text-4xl flex items-center justify-center rotate-45 rounded-lg"
             onClick={() => setToPlayVideo(false)}
