@@ -9,12 +9,12 @@ export const Footer = () => {
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-4">
             <img src={footerLogo} alt="footer logo" className=" w-36" />
-            <p className="text-[13px] text-gray-400 mt-4">
+            <p className="text-[13px] text-gray-400 mt-4 w-60 sm:w-full mb-2 sm:mb-0">
               We are a one-stop platform to help sports enthusiasts meet
               playpals, discover venues, skill-up their game, manage their
               activities seamlessly and buy gear.
             </p>
-            <a href="/about" className="text-gray-50 text-[16px] underline">Read More</a>
+            <a href="/about" className="text-gray-50 text-[14px] underline">Read More</a>
           </div>
           <div className="col-span-12 md:col-span-5 flex flex-wrap">
             <div className="quick-link w-1/2">

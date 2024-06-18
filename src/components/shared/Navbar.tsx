@@ -44,39 +44,16 @@ export const Navbar = () => {
   );
   useGetCitiesQuery(
     {
-      // search,
+      search,
     },
     {
-      // skip: search.length === 0,
+      refetchOnMountOrArgChange: true,
     }
   );
   const selectedCityName = cities.find((i) => i.id === selectedCity)?.name;
 
-  const usePathName = (title: string) => {
-    let convertedString;
-
-    switch (title) {
-      case "About Us":
-        {
-          convertedString = "about";
-        }
-        break;
-
-      case "Pay & Play":
-        {
-          convertedString = "pay_play";
-        }
-        break;
-
-      case "Contact": {
-        convertedString = "contact";
-      }
-    }
-
-    return convertedString;
-  };
-
   const handleCitySelect = (cityId: string) => {
+    setSearch("");
     dispatch(setSelectedCity(cityId));
     setOpen(false);
   };
@@ -92,7 +69,7 @@ export const Navbar = () => {
                 <img
                   src={logo}
                   alt="logo"
-                  className="h-7 sm:h-8 lg:h-10 cursor-pointer"
+                  className="h-8 md:h-9 cursor-pointer"
                   onClick={() => navigate("/")}
                 />
                 <div className="flex items-center gap-1 lg:hidden">
@@ -105,12 +82,12 @@ export const Navbar = () => {
             </div>
 
             {/* BUTTONS */}
-            <div className="col-span-8 sm:col-span-5 max-[290px]:col-span-4  max-[350px]:col-span-5 lg:col-span-7 gap-4 flex justify-end  items-center custome-break sm:mr-2">
+            <div className="col-span-4 sm:col-span-5 max-[290px]:col-span-4  max-[350px]:col-span-5 lg:col-span-7 gap-4 flex justify-end  items-center custome-break sm:mr-2">
               {isLarge && (
                 <div className="max-lg:hidden flex items-center justify-start gap-2">
                   <Button
                     variant={"outline"}
-                    className={` px-12 text-xs h-7 rounded-3xl ${
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
                       pathName.pathname === "/about"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
@@ -121,7 +98,7 @@ export const Navbar = () => {
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={` px-12 text-xs h-7 rounded-3xl ${
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
                       pathName.pathname === "/pay_play"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
@@ -134,17 +111,20 @@ export const Navbar = () => {
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={` px-12 text-xs h-7 rounded-3xl ${
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
                       pathName.pathname === "/academy"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
                     }`}
+                    onClick={() => {
+                      navigate("/academy");
+                    }}
                   >
                     Academy
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={` px-12 text-xs h-7 rounded-3xl ${
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
                       pathName.pathname === "/membership"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
@@ -154,7 +134,7 @@ export const Navbar = () => {
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={` px-12 text-xs h-7 rounded-3xl ${
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
                       pathName.pathname === "/contact"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
@@ -171,7 +151,7 @@ export const Navbar = () => {
             </div>
 
             {/* LOCATION */}
-            <div className="ml-2 lg:ml-0 max-[290px]:col-span-5 max-[350px]:col-span-4 col-span-6 sm:col-span-6 lg:col-span-3 gap-4 flex items-center max-[390px]:text-xs">
+            <div className="ml-2 lg:ml-0 max-[290px]:col-span-5 max-[350px]:col-span-4 col-span-6 sm:col-span-6 lg:col-span-3 gap-4 flex items-center justify-end max-[390px]:text-xs">
               <Dialog open={open} onOpenChange={() => setOpen(!open)}>
                 <DialogTrigger
                   asChild
@@ -270,14 +250,14 @@ export const Navbar = () => {
                   )}
                 </>
               </div>
-              <span className="font-medium text-[15px] flex items-end w-full justify-start gap-2 tracking-tighter whitespace-nowrap">
+              <span className="font-medium hidden lg:inline-flex text-[15px] items-end w-full justify-start gap-2 tracking-tighter whitespace-nowrap mr-4">
                 <MdCall size={20} className="text-[#53A53F]" />
-                <span className="-mb-[3px] -ml-[3px]">+91 9874 475 988</span>
+                <span className="-mb-[3px] -ml-[3px]">9874 475 988</span>
               </span>
             </div>
 
             {/* THEME */}
-            <div className="col-span-2 sm:col-span-1 lg:hidden flex flex-row  items-center justify-end  gap-4 custome-break mr-2 lg:mr-0">
+            <div className="col-span-2 sm:col-span-1 lg:hidden flex flex-row items-center justify-end  gap-4 custome-break mr-2 lg:mr-0">
               <div className="block lg:hidden">
                 <ToggleOptions />
               </div>
