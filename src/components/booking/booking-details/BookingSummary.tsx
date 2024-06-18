@@ -1,6 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { RootState } from "@/store";
+import { useGetGroundQuery } from "@/store/actions/slices/groundSlice";
+import { useAddSlotsMutation } from "@/store/actions/slices/slotsSlice";
 import { useAppSelector } from "@/store/hooks";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 const BookingSummary = () => {
   const {
@@ -8,7 +12,39 @@ const BookingSummary = () => {
     selectedSlots,
     totalPrice: TOTAL_PRICE,
     listOfPrices,
+    selectedGroundId,
   } = useAppSelector((state: RootState) => state.slots);
+  const { userData } = useAppSelector(
+    (state: RootState) => state.auth
+  );
+  const getGround = useGetGroundQuery({ id: selectedGroundId })
+  const groundDetails = useAppSelector((state: RootState) => state.ground.grounds)
+  const { selectedDate } = useAppSelector(
+    (state: RootState) => state.slots
+  );
+  console.log(groundDetails);
+  useEffect(() => {
+    getGround.refetch()
+  }, [selectedGroundId]);
+
+  const [add] = useAddSlotsMutation()
+  const handleSlotBooking = async () => {
+    try {
+      const res: any = await add({
+        city: groundDetails[0].city?._id,
+        ground: groundDetails[0].id,
+        slots: selectedSlots,
+        date: selectedDate,
+        venue: groundDetails[0].venue?._id,
+        customer: userData?.id
+      }).unwrap()
+      console.log(res);
+    }
+    catch (error) {
+      toast.error((error as { data: { message: string } })?.data?.message)
+    }
+  }
+
   return (
     <div className="flex flex-col bg-[#FFFFFF] border rounded-lg p-4 gap-4">
       <span className="inline-block text-[16px] font-semibold">
@@ -80,7 +116,7 @@ const BookingSummary = () => {
         </div>
       )}
       {selectedSlots.length !== 0 && (
-        <Button className="bg-[#252525]">Proceed INR {TOTAL_PRICE}</Button>
+        <Button className="bg-[#252525]" onClick={handleSlotBooking}>Proceed INR {TOTAL_PRICE}</Button>
       )}
     </div>
   );

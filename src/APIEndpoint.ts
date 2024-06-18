@@ -5,10 +5,21 @@ export const APIEndPoints = {
   customer_login: '/api/customer-login',
   validate_otp: '/api/validate-otp',
 
+  // Fetch Ground
+  fetch_ground: '/api/grounds',
+
+  // fetch Sports
+  fetch_sport: '/api/sports',
+
+  // fetch venue
+  fetch_venue: '/api/venues',
   // CITY
   fetch_cities: '/api/fetch-cities',
 
   // SLOTS
   get_slot: '/api/get-available-booking-slots',
-  add_slot: '/add-slot-booking',
+  add_slot: '/api/add-slot-booking',
+
+  // Booking
+  get_booking : '/api/get-slot-bookings'
 }

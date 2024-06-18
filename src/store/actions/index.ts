@@ -1,3 +1,7 @@
+import BookingSlice, { bookingApi } from './slices/bookingSlice';
+import VenueSlice, { venueApi } from './slices/venueSlice';
+import SportSlice, { sportApi } from './slices/sportSlice';
+import GroundSlice, { groundApi } from './slices/groundSlice';
 import authSlice from "./slices/authSlice";
 import otpSlice from "./slices/otpSlice";
 
@@ -9,6 +13,12 @@ import slotsSlice, { slotsApi } from "./slices/slotsSlice";
 export {
   authSlice,
   otpSlice,
+  GroundSlice,
+  groundApi,
+  SportSlice,
+  sportApi,
+  VenueSlice,
+  venueApi,
 
   settingSlice,
 
@@ -16,5 +26,6 @@ export {
   citySlice,
   slotsSlice,
   slotsApi,
-  
+  bookingApi,
+  BookingSlice
 }

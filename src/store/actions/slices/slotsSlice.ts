@@ -1,7 +1,7 @@
 import { APIEndPoints } from "@/APIEndpoint";
 import { ISlot } from "@/interface/data";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery, FetchBaseQueryMeta, } from "@reduxjs/toolkit/query/react";
 
 interface IncomingData {
   data: {
@@ -45,6 +45,28 @@ export const slotsApi = createApi({
         };
       },
     }),
+    addSlots: builder.mutation<IncomingData, object>({
+      query: (body) => {
+        const { ...rest } = body
+        return {
+          url: APIEndPoints.add_slot,
+          method: 'POST',
+          body: rest,
+        }
+      },
+      transformResponse(
+        Response: unknown,
+        meta: FetchBaseQueryMeta | undefined
+      ): IncomingData | Promise<IncomingData> {
+        if (meta?.response?.headers.get('authorization')) {
+          localStorage.setItem(
+            'token',
+            String(meta?.response?.headers.get('authorization'))
+          )
+        }
+        return Response as IncomingData
+      },
+    }),
   }),
 });
 
@@ -55,7 +77,7 @@ interface InitialState {
   error: string | undefined;
   selectedGroundId: string;
   selectedSlots: string[];
-
+  selectedDate: string,
   listOfPrices: {
     id: string;
     value: number;
@@ -72,7 +94,7 @@ const initialState: InitialState = {
   error: undefined,
   selectedGroundId: "",
   selectedSlots: [],
-
+  selectedDate: "",
   listOfPrices: [],
   totalPrice: 0,
 
@@ -83,8 +105,12 @@ export const SlotsSlice = createSlice({
   name: "SlotsSlice",
   initialState,
   reducers: {
+
     setSelectedGroundId: (state, action: PayloadAction<string>) => {
       state.selectedGroundId = action.payload;
+    },
+    setSelectedDate: (state, action: PayloadAction<string>) => {
+      state.selectedDate = action.payload;
     },
     setSelectedSlots: (state, action: PayloadAction<string>) => {
       const slotPrice = state.allSlots.find(
@@ -149,6 +175,6 @@ export const SlotsSlice = createSlice({
   },
 });
 
-export const { useGetAllSlotsQuery } = slotsApi;
-export const { setSelectedGroundId, setSelectedSlots, resetSlots } = SlotsSlice.actions;
+export const { useGetAllSlotsQuery, useAddSlotsMutation } = slotsApi;
+export const { setSelectedDate, setSelectedGroundId, setSelectedSlots, resetSlots } = SlotsSlice.actions;
 export default SlotsSlice.reducer;

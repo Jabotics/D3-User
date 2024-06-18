@@ -1,9 +1,16 @@
+
 import storage from 'redux-persist/lib/storage'
 
 import {
+  GroundSlice,
   // AUTHENTICATION
   authSlice,
   otpSlice,
+  groundApi,
+  SportSlice,
+  sportApi,
+  VenueSlice,
+  venueApi,
 
   settingSlice,
 
@@ -11,12 +18,16 @@ import {
   citiesApi,
   slotsSlice,
   slotsApi,
- 
+  bookingApi,
+  BookingSlice,
+
 } from '@/store/actions'
 import { RequestHandler } from './RequestHandler'
 
 import { persistReducer } from 'redux-persist'
 import { combineReducers } from '@reduxjs/toolkit'
+
+
 
 const persistConfig = {
   key: 'd3-root',
@@ -42,14 +53,22 @@ const otpPersistReducer = persistReducer(otpPersistConfig, otpSlice)
 const cityPersistReducer = persistReducer(appPersistConfig, citySlice)
 
 export const rootReducer = combineReducers({
+
   auth: authPersistedReducer,
   otp: otpPersistReducer,
-
+  ground: GroundSlice,
+  [groundApi.reducerPath]: groundApi.reducer,
+  sport: SportSlice,
+  [sportApi.reducerPath]: sportApi.reducer,
+  venue: VenueSlice,
+  [venueApi.reducerPath]: venueApi.reducer,
+  booking: BookingSlice,
+  [bookingApi.reducerPath]: bookingApi.reducer,
   setting: settingSlice,
-  
+
   city: cityPersistReducer,
   slots: slotsSlice,
-  
+
   [RequestHandler.reducerPath]: RequestHandler.reducer,
 
   // CITY
@@ -57,5 +76,5 @@ export const rootReducer = combineReducers({
 
   // SLOTS
   [slotsApi.reducerPath]: slotsApi.reducer,
-  
+
 })

@@ -77,6 +77,12 @@ const router = createBrowserRouter([
         }),
       },
       
+      {
+        path: "/membership",
+        lazy: async () => ({
+          Component: (await import("./pages/membership/Membership")).default,
+        }),
+      },
     ],
   },
 

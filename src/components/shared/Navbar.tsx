@@ -104,7 +104,7 @@ export const Navbar = () => {
                       pathName.pathname === "/pay_play"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                    }`}
+                      }`}
                     onClick={() => {
                       navigate("/pay_play");
                     }}
@@ -130,7 +130,7 @@ export const Navbar = () => {
                       pathName.pathname === "/membership"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                    }`}
+                      }`}
                   >
                     Membership
                   </Button>
@@ -140,7 +140,7 @@ export const Navbar = () => {
                       pathName.pathname === "/contact"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                    }`}
+                      }`}
                     onClick={() => {
                       navigate("/contact");
                     }}
@@ -162,15 +162,13 @@ export const Navbar = () => {
                 >
                   <Button
                     variant="outline"
-                    className={`${
-                      selectedCityName ? "w-16" : "w-32 "
-                    } h-6 lg:h-7 rounded-3xl`}
+                    className={`${selectedCityName ? "w-16" : "w-32 "
+                      } h-6 lg:h-7 rounded-3xl`}
                     onClick={() => setOpen(true)}
                   >
                     <span
-                      className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${
-                        selectedCityName && "tracking-tighter"
-                      }`}
+                      className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${selectedCityName && "tracking-tighter"
+                        }`}
                     >
                       {selectedCityName ? (
                         selectedCityName

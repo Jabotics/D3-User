@@ -10,7 +10,7 @@ const FilterBySize = () => {
     <div className='w-[100%] bg-white rounded-lg'>
  <Accordion type="single" collapsible className="w-full border rounded-md px-6">
       <AccordionItem value="item-1" className='border-b-0 p-0'>
-        <AccordionTrigger className='no-underline text-[#53A53F] text-[16px]' >Size</AccordionTrigger>
+        <AccordionTrigger className='no-underline text-[#53A53F] text-[16px]' state={"open"}>Size</AccordionTrigger>
         <AccordionContent>
           PrferedTime
         </AccordionContent>

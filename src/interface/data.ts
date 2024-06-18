@@ -28,6 +28,14 @@ export interface IGround {
   };
   images: string[];
 }
+export interface ISport {
+  id: string,
+  name: string
+}
+export interface IVenue {
+  id: string,
+  name: string
+}
 
 export interface ISlot {
   id: string;
@@ -39,4 +47,44 @@ export interface ISlot {
 export interface ICity {
   id: string;
   name: string;
+}
+
+export interface IBooking {
+  id: string
+  customer: {
+    _id: string
+    name: string
+    mobile: string
+  },
+  city: {
+    _id: string
+    name: string
+  },
+  venue: {
+    _id: string
+    name: string
+    address: string
+  },
+  ground: {
+    _id: string
+    name: string
+    supported_sports: [
+      {
+        _id: string
+        name: string
+      },
+      {
+        _id: string
+        name: string
+      }
+    ]
+  },
+  booking_status: string
+  date: string
+  slots: [
+    {
+      _id: string
+      slot: string
+    }
+  ]
 }
