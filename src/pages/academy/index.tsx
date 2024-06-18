@@ -67,7 +67,7 @@ const AcademyPage = () => {
   };
 
   return (
-    <div className="flex flex-col px-40">
+    <div className="flex flex-col px-5 lg:px-40 mt-8 lg:mt-0">
       <span className="h-8 flex items-center my-4 gap-1 text-sm">
         {["Home", "Academy"].map((item, index) => (
           <div key={index}>
@@ -87,9 +87,10 @@ const AcademyPage = () => {
           </div>
         ))}
       </span>
-      <div className="h-[125vh] w-full flex flex-col gap-2 mb-20">
+
+      <div className="h-fit lg:h-[125vh] w-full flex flex-col gap-2 mb-20">
         <div className="flex items-center justify-center w-full h-32">
-          <div className="w-1/2 h-full bg-[#53A53F] rounded-l-xl flex flex-col items-start justify-center pl-20">
+          <div className="w-1/2 h-full bg-[#53A53F] rounded-l-xl hidden md:flex flex-col items-start justify-center pl-5 lg:pl-20">
             <div className="text-xl font-semibold text-gray-200">
               Host Your Events
             </div>
@@ -100,29 +101,39 @@ const AcademyPage = () => {
               Get In Touch
             </Button>
           </div>
-          <div className="w-1/2 h-full rounded-r-xl">
+          <div className={`w-full md:w-1/2 h-full rounded-r-xl overflow-hidden relative`}>
             <img
               src="/images/academy.jpeg"
               alt="academy"
-              className="w-full h-full object-cover object-top rounded-r-xl"
+              className="w-full h-full object-cover object-top "
             />
+
+            <div className="absolute top-4 left-4 md:hidden text-xl font-semibold text-gray-200 bg-gray-500/25">
+              Host Your Events
+            </div>
+            <div className="absolute top-12 left-4 md:hidden max-w-[340px] text-xs text-gray-100 bg-gray-500/25">
+              Engage with the Largest Sports Community and Network
+            </div>
+            <Button variant={"default"} className="absolute bottom-4 left-4 md:hidden rounded-md mt-3 h-5 text-xs">
+              Get In Touch
+            </Button>
           </div>
         </div>
 
-        <div className="flex items-center justify-center w-full h-24 mt-4">
-          <div className="text-xl w-[45%] text-center font-medium tracking-wider">
+        <div className="flex items-center justify-center w-full h-24 mt-0 lg:mt-4">
+          <div className="text-xs xs:text-sm sm:text-lg md:text-xl w-full lg:w-[45%] text-center font-medium tracking-wider">
             Step into the World of Sports and Fitness at the Comfort of your
             Home.
           </div>
         </div>
 
-        <div className="flex-1 bg-[#83ca711e] rounded-3xl flex flex-col items-center justify-center">
-          <div className="w-full h-16 flex items-end justify-center font-semibold tracking-wide text-[#53A53F]">
+        <div className="flex-1 bg-[#83ca711e] rounded-3xl flex flex-col items-center gap-3 lg:gap-0 justify-center">
+          <div className="w-full h-16 flex items-center lg:items-end text-center text-sm lg:text-lg justify-center font-semibold tracking-wide text-[#53A53F]">
             Fill in the form to join this academy.
           </div>
           <div className="flex-1 w-full">
-            <div className="w-full h-full flex flex-col items-center justify-evenly">
-              <div className="h-1/4 flex items-end justify-center">
+            <div className="w-full h-full flex flex-col gap-5 lg:gap-0 items-center justify-evenly">
+              <div className="h-1/4 flex items-center lg:items-end justify-center">
                 <div
                   className="w-24 h-24 bg-green-100 border border-green-300 rounded-md cursor-pointer flex items-center justify-center"
                   onClick={handleDivClick}
@@ -146,8 +157,8 @@ const AcademyPage = () => {
                 </div>
               </div>
 
-              <div className="w-full h-1/2 grid grid-cols-2 gap-3 px-24">
-                <div className="col-span-1 flex flex-col w-full items-center justify-center gap-5">
+              <div className="w-full h-1/2 grid grid-cols-2 gap-3 px-4 lg:px-24">
+                <div className="col-span-2 lg:col-span-1 flex flex-col w-full items-center justify-center gap-5">
                   <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-stone-200 px-2">
                     <RxAvatar size={24} />
                     <Input
@@ -173,7 +184,7 @@ const AcademyPage = () => {
                     />
                   </div>
                 </div>
-                <div className="col-span-1 flex flex-col w-full items-center justify-center gap-5">
+                <div className="col-span-2 lg:col-span-1 flex flex-col w-full items-center justify-center gap-5">
                   <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-stone-200 px-2">
                     <MdOutlineEmail size={24} />
                     <Input
@@ -195,31 +206,31 @@ const AcademyPage = () => {
                     <Input
                       className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-gray-300"
                       placeholder="Guardian Phone"
-                      style={{ outline: 'none', boxShadow: 'none' }}
+                      style={{ outline: "none", boxShadow: "none" }}
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="h-1/4 w-full px-24 flex flex-col">
+              <div className="h-1/4 w-full px-5 mt-5 lg:mt-0 lg:px-24 flex flex-col">
                 <div className="text-sm font-medium tracking-wide">
                   Upload File
                 </div>
                 <div className="text-xs text-gray-400">
                   (Max file size: 5MB and upload only .jpg / .png / .pneg file)
                 </div>
-                <div className="w-full h-full mt-3 flex items-center justify-center">
+                <div className="w-full h-full mt-3 flex flex-col lg:flex-row items-center justify-center">
                   <div
-                    className="w-1/2 h-full flex items-center justify-center"
+                    className="w-full lg:w-1/2 h-full flex items-center justify-center"
                     onClick={handleIdDivClick}
                   >
-                    <div className="w-full h-full border border-dashed border-green-500 rounded-xl bg-[#53a53f3f] flex items-center gap-12 justify-center cursor-pointer">
+                    <div className="w-full h-32 lg:h-full border border-dashed border-green-500 rounded-xl bg-[#53a53f3f] flex items-center gap-12 justify-center cursor-pointer">
                       <div className="w-40 h-full flex flex-col items-center justify-center">
                         <IoCloudUploadOutline
-                          size={32}
+                          size={window.innerWidth >= 1024 ? 32 : 16}
                           className="text-[#53A53F]"
                         />
-                        <div className="text-xs">
+                        <div className="text-[10px] whitespace-nowrap lg:whitespace-normal lg:text-xs">
                           Drag & Drop file to upload
                         </div>
                       </div>
@@ -238,9 +249,9 @@ const AcademyPage = () => {
                       />
                     </div>
                   </div>
-                  <div className="w-1/2 h-full flex flex-col items-start ml-5 justify-start">
+                  <div className="w-full lg:w-1/2 mt-5 lg:mt-0 h-full flex flex-col items-start ml-5 justify-start">
                     <div className="text-sm">File Uploading...</div>
-                    <div className="h-2/3 w-full flex items-end justify-center">
+                    <div className="h-2/3 w-full flex items-end justify-center mt-5 lg:mt-0">
                       <div className="w-[95%] h-[80%] bg-white rounded-md flex items-center justify-start gap-3 px-2 relative">
                         <CiImageOn size={30} className="text-[#53A53F]" />
                         <div className="w-[85%] h-1/2 flex flex-col items-start justify-center">
@@ -275,7 +286,7 @@ const AcademyPage = () => {
             </div>
           </div>
           <div className="h-20 w-full flex items-center justify-center mt-6">
-            <Button variant={"default"} className="w-[35%] rounded-full">
+            <Button variant={"default"} className="w-full mx-4 lg:mx-0 lg:w-[35%] rounded-md lg:rounded-full">
               Join Academy
             </Button>
           </div>

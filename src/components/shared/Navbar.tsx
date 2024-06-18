@@ -92,7 +92,9 @@ export const Navbar = () => {
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
                     }`}
-                    onClick={() => {}}
+                    onClick={() => {
+                      navigate('/about')
+                    }}
                   >
                     About Us
                   </Button>

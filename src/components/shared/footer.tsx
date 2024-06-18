@@ -1,6 +1,7 @@
 import footerLogo from "../../../public/images/logo-footer.svg";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { Separator } from "../ui/separator";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -21,25 +22,25 @@ export const Footer = () => {
               <h5 className="text-white mb-4">Quick Link</h5>
               <ul className="flex flex-col gap-0 md:gap-2 text-[11px] text-gray-400">
                 <li>
-                  <a href="#">Pay & Play</a>
+                  <Link to={"/pay_play"}>Pay & Play</Link>
                 </li>
                 <li>
-                  <a href="#">Event</a>
+                  <Link to={"/#"}>Event</Link>
                 </li>
                 <li>
-                  <a href="#">About Us</a>
+                  <Link to={"/about"}>About Us</Link>
                 </li>
                 <li>
-                  <a href="#">Contact Us </a>
+                  <Link to={"/contact"}>Contact Us </Link>
                 </li>
                 <li>
-                  <a href="#">Academy</a>
+                  <Link to={"/academy"}>Academy</Link>
                 </li>
                 <li>
-                  <a href="#">Blog</a>
+                  <Link to={"/#"}>Blog</Link>
                 </li>
                 <li>
-                  <a href="#">Membership</a>
+                  <Link to={"/membership"}>Membership</Link>
                 </li>
               </ul>
             </div>
@@ -47,7 +48,7 @@ export const Footer = () => {
               <h5 className="text-white mb-4">Legal</h5>
               <ul className="flex flex-col gap-2 text-[11px] text-gray-400">
                 <li>
-                  <a href="#">Contact Us </a>
+                  <Link to={"/about"}>About Us </Link>
                 </li>
                 <li>
                   <a href="#">Privacy Policy</a>
@@ -55,9 +56,9 @@ export const Footer = () => {
                 <li>
                   <a href="#"> Terms Of Use</a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#">Cookies Policy</a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
@@ -67,7 +68,7 @@ export const Footer = () => {
               <li>
                 <a href="tel:+4733378901" className="flex items-center">
                   <Phone className="mr-2" size={10} />
-                  <span>Contact Us</span>
+                  <span>9874 475 988</span>
                 </a>
               </li>
               <li>
