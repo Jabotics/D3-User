@@ -13,7 +13,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="h-fit w-screen overflow-hidden">
+    <div className="h-fit min-w-screen overflow-hidden">
       <div
         className="h-[65vh] w-full flex items-center justify-start relative"
         style={{
