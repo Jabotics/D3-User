@@ -88,3 +88,7 @@ export interface IBooking {
     }
   ]
 }
+
+export interface IAcademy {
+  
+}

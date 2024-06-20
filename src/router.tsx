@@ -29,23 +29,30 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/pay_play",
+        path: "pay_play",
         lazy: async () => ({
           Component: (await import("./pages/pay_play")).default,
         }),
       },
 
       {
-        path: "/booking",
+        path: "booking",
         lazy: async () => ({
           Component: (await import("./pages/booking")).default,
         })
       },
 
       {
-        path: "/details",
+        path: "academy",
         lazy: async () => ({
-          Component: (await import("./pages/details")).default,
+          Component: (await import("./pages/academy")).default,
+        }),
+      },
+
+      {
+        path: "contact",
+        lazy: async () => ({
+          Component: (await import("./pages/contact")).default,
         }),
       },
 
@@ -62,6 +69,14 @@ const router = createBrowserRouter([
           Component: (await import("./pages/contact")).default,
         }),
       },
+
+      {
+        path: "about",
+        lazy: async () => ({
+          Component: (await import("./pages/about")).default,
+        }),
+      },
+      
       {
         path: "/membership",
         lazy: async () => ({

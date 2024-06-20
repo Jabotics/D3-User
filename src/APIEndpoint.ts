@@ -21,5 +21,8 @@ export const APIEndPoints = {
   add_slot: '/api/add-slot-booking',
 
   // Booking
-  get_booking : '/api/get-slot-bookings'
+  get_booking : '/api/get-slot-bookings',
+
+  // GROUNDS
+  fetch_grounds: '/api/fetch-grounds',
 }
