@@ -30,8 +30,6 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const pathName = useLocation();
 
-  const [open, setOpen] = useState(false);
-
   const isLarge = window.innerWidth >= 1024;
   // const isSix20 = window.innerWidth >= 620;
 
@@ -42,6 +40,8 @@ export const Navbar = () => {
   const { cities, selectedCity } = useAppSelector(
     (state: RootState) => state.city
   );
+  const [open, setOpen] = useState(selectedCity ? false : true);
+
   useGetCitiesQuery(
     {
       search,
@@ -93,7 +93,7 @@ export const Navbar = () => {
                         : ""
                     }`}
                     onClick={() => {
-                      navigate('/about')
+                      navigate("/about");
                     }}
                   >
                     About Us
@@ -104,7 +104,7 @@ export const Navbar = () => {
                       pathName.pathname === "/pay_play"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                      }`}
+                    }`}
                     onClick={() => {
                       navigate("/pay_play");
                     }}
@@ -130,7 +130,7 @@ export const Navbar = () => {
                       pathName.pathname === "/membership"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                      }`}
+                    }`}
                   >
                     Membership
                   </Button>
@@ -140,7 +140,7 @@ export const Navbar = () => {
                       pathName.pathname === "/contact"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                      }`}
+                    }`}
                     onClick={() => {
                       navigate("/contact");
                     }}
@@ -154,7 +154,14 @@ export const Navbar = () => {
 
             {/* LOCATION */}
             <div className="ml-2 lg:ml-0 max-[290px]:col-span-5 max-[350px]:col-span-4 col-span-6 sm:col-span-6 lg:col-span-3 gap-4 flex items-center justify-end max-[390px]:text-xs">
-              <Dialog open={open} onOpenChange={() => setOpen(!open)}>
+              <Dialog
+                open={open}
+                onOpenChange={() => {
+                  if (selectedCity) {
+                    setOpen(!open);
+                  }
+                }}
+              >
                 <DialogTrigger
                   asChild
                   className=""
@@ -162,13 +169,15 @@ export const Navbar = () => {
                 >
                   <Button
                     variant="outline"
-                    className={`${selectedCityName ? "w-16" : "w-32 "
-                      } h-6 lg:h-7 rounded-3xl`}
+                    className={`${
+                      selectedCityName ? "w-16" : "w-32 "
+                    } h-6 lg:h-7 rounded-3xl`}
                     onClick={() => setOpen(true)}
                   >
                     <span
-                      className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${selectedCityName && "tracking-tighter"
-                        }`}
+                      className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${
+                        selectedCityName && "tracking-tighter"
+                      }`}
                     >
                       {selectedCityName ? (
                         selectedCityName

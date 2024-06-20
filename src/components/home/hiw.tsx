@@ -27,19 +27,27 @@ const hiwdata = [
 
 export const HowitWorks = () => {
   return (
-    <div className="w-screen overflow-hidden py-24 text-center bg-lightGreen">
-      <div className="container">
-        <h2 className="text-3xl font-medium">How It Works</h2>
-        <div className="flex items-center gap-2 justify-center mt-10">
-          {hiwdata.map((hiwdata, index) => (
-            <HowitworksCard
-              key={index}
-              count={hiwdata.count}
-              title={hiwdata.title}
-              icon={hiwdata.icon}
-              description={hiwdata.description}
-            />
-          ))}
+    <div className="relative">
+      <img
+        src="/images/icons-bg/basketthrow.svg"
+        alt=""
+        className="absolute z-10 -top-5 left-12 h-52 w-52"
+      />
+      <img src="/images/icons-bg/basketnet.svg" alt="" className="absolute z-10 -bottom-5 right-24 h-24 w-24" />
+      <div className="w-screen overflow-hidden py-24 text-center bg-lightGreen ">
+        <div className="container">
+          <h2 className="text-3xl font-medium">How It Works</h2>
+          <div className="flex items-center gap-2 justify-center mt-10">
+            {hiwdata.map((hiwdata, index) => (
+              <HowitworksCard
+                key={index}
+                count={hiwdata.count}
+                title={hiwdata.title}
+                icon={hiwdata.icon}
+                description={hiwdata.description}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

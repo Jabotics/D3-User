@@ -13,11 +13,11 @@ import Chat from "./chat";
 export const HomePage = () => {
   return (
     <div className="relative">
-      <div className="w-full h-[65vh] overflow-hidden"><SliderSection /></div>
+      <div className="w-[100vw] h-[65vh] overflow-hidden"><SliderSection /></div>
       <Category />
-      <img src="/images/icons-bg/basketthrow.svg" alt="" className="absolute z-10 top-[105vh] left-12 h-52 w-52" />
+      {/* <img src="/images/icons-bg/basketthrow.svg" alt="" className="absolute z-10 top-[105vh] left-12 h-52 w-52" /> */}
       <HowitWorks />
-      <img src="/images/icons-bg/basketnet.svg" alt="" className="absolute z-10 top-[155vh] right-52 h-24 w-24" />
+      {/* <img src="/images/icons-bg/basketnet.svg" alt="" className="absolute z-10 top-[155vh] right-52 h-24 w-24" /> */}
       <Slots />
       {/* <img src="/images/icons-bg/sub.gif" alt="" className="absolute z-10 top-[215vh] left-20 h-56 w-72" />
       <img src="/images/icons-bg/click.gif" alt="" className="absolute z-10 top-[230vh] left-10 h-20 w-20" /> */}
