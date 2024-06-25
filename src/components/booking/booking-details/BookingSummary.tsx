@@ -42,7 +42,7 @@ const BookingSummary = () => {
         customer: userData?.id,
         amount: totalAmount
       }).unwrap()
-
+      console.log(res)
     }
     catch (error) {
       toast.error((error as { data: { message: string } })?.data?.message)

@@ -31,7 +31,7 @@ const Coupan = () => {
 
   useEffect(() => {
     getPromo.refetch();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroundId]);
 
 
@@ -40,7 +40,8 @@ const Coupan = () => {
     dispatch(setSelectedPromo({ promo: promo }));
     applyPromo({ id: promo.id, ground: selectedGroundId, amount: totalPrice })
       .then(response => {
-        dispatch(setNewPrice({ data: response.data?.data }))
+        const newData: any = response.data?.data
+        dispatch(setNewPrice({ data: newData }))
       })
       .catch(error => {
         console.error("Failed to apply promo", error);

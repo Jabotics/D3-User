@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AcademyList from "./components/academy-list";
 import AcademyRegistration from "./components/academy-registration";
 
 const AcademyPage = () => {
