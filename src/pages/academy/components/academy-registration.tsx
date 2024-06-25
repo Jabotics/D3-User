@@ -9,7 +9,7 @@ import { RxAvatar, RxCross2 } from "react-icons/rx";
 import { MdMyLocation, MdOutlineEmail } from "react-icons/md";
 import { MdModeEdit } from "react-icons/md";
 
-const AcademyPage = () => {
+const AcademyRegistration = () => {
   const [progress, setProgress] = React.useState(0);
   const [fileName, setFileName] = React.useState<string | null>(null);
 
@@ -260,4 +260,4 @@ const AcademyPage = () => {
   );
 };
 
-export default AcademyPage;
+export default AcademyRegistration;

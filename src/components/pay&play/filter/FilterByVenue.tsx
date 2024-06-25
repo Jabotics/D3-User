@@ -10,23 +10,28 @@ import { RootState } from "@/store"
 import { setParams } from "@/store/actions/slices/groundSlice"
 import { setSelectedVenue, useGetVenueQuery } from "@/store/actions/slices/venueSlice"
 import { useAppSelector } from "@/store/hooks"
+import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 
 const FilterByVenue = () => {
-   
+
     const dispatch = useDispatch()
-    useGetVenueQuery({})
+    const selectedCity = useAppSelector((state: RootState) => state.city.selectedCity)
+    const getVenueQuery = useGetVenueQuery({ city: selectedCity })
     const venue = useAppSelector((state: RootState) => state.venue.venues)
     const selectedVenue = useAppSelector((state: RootState) => state.venue.selectedVenue);
     const handleCheckboxChange = (venueId: string) => {
-      dispatch(setSelectedVenue({ venueId: venueId }));
-  
-      const updatedIds = selectedVenue.includes(venueId)
-        ? selectedVenue.filter((id) => id !== venueId)
-        : [...selectedVenue, venueId];
-      dispatch(setParams({ key: 'venue', data: updatedIds }));
+        dispatch(setSelectedVenue({ venueId: venueId }));
+
+        const updatedIds = selectedVenue.includes(venueId)
+            ? selectedVenue.filter((id) => id !== venueId)
+            : [...selectedVenue, venueId];
+        dispatch(setParams({ key: 'venue', data: updatedIds }));
     };
-  
+    useEffect(() => {
+        getVenueQuery.refetch()
+    }, [selectedCity])
+
     return (
         <div className='w-[100%] bg-white rounded-lg'>
             <Accordion type="single" collapsible className="w-full border rounded-md px-6" defaultValue="item-1">

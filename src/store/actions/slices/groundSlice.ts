@@ -86,7 +86,6 @@ export const GroundSlice = createSlice({
                 state.params[action.payload.key] = action.payload.data
             }
             else if (action.payload.data.length == 0 && Object.keys(state.params).length > 1) {
-                console.log(action.payload.key);
                 delete state.params[action.payload.key];
             }
             else {

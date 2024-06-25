@@ -14,7 +14,7 @@ const RightPanel = () => {
         getBookings.refetch()
     }, [])
 
-    console.log(bookings);
+  
     return (
         <>
             <div className=" hidden flex-col gap-4 w-[75%] h-[500px] sm:flex">

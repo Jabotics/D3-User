@@ -87,11 +87,10 @@ export const Navbar = () => {
                 <div className="max-lg:hidden flex items-center justify-start gap-2">
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/about"
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/about"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                    }`}
+                      }`}
                     onClick={() => {
                       navigate("/about");
                     }}
@@ -100,11 +99,10 @@ export const Navbar = () => {
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/pay_play"
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/pay_play"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                    }`}
+                      }`}
                     onClick={() => {
                       navigate("/pay_play");
                     }}
@@ -113,11 +111,10 @@ export const Navbar = () => {
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/academy"
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/academy"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                    }`}
+                      }`}
                     onClick={() => {
                       navigate("/academy");
                     }}
@@ -126,21 +123,22 @@ export const Navbar = () => {
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/membership"
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/membership"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                    }`}
+                      }`}
+                    onClick={() => {
+                      navigate("/membership");
+                    }}
                   >
                     Membership
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/contact"
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/contact"
                         ? "bg-green-500 text-gray-50 hover:bg-green-400"
                         : ""
-                    }`}
+                      }`}
                     onClick={() => {
                       navigate("/contact");
                     }}
@@ -169,15 +167,13 @@ export const Navbar = () => {
                 >
                   <Button
                     variant="outline"
-                    className={`${
-                      selectedCityName ? "w-16" : "w-32 "
-                    } h-6 lg:h-7 rounded-3xl`}
+                    className={`${selectedCityName ? "w-16" : "w-32 "
+                      } h-6 lg:h-7 rounded-3xl`}
                     onClick={() => setOpen(true)}
                   >
                     <span
-                      className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${
-                        selectedCityName && "tracking-tighter"
-                      }`}
+                      className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${selectedCityName && "tracking-tighter"
+                        }`}
                     >
                       {selectedCityName ? (
                         selectedCityName

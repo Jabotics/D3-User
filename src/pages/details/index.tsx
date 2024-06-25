@@ -22,13 +22,14 @@ const Details = () => {
   // const [searchParams, setSearchParams] = useSearchParams();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id")
-
-  const getGround = useGetGroundQuery({ id: id })
+  console.log(id);
+  const selectedCity = useAppSelector((state: RootState) => state.city.selectedCity)
+  const getGround = useGetGroundQuery({ id: id, city: selectedCity })
   const groundDetails = useAppSelector((state: RootState) => state.ground.grounds)
-  console.log(groundDetails);
+  
   useEffect(() => {
     getGround.refetch()
-  }, [id]);
+  }, [id, selectedCity]);
   return (
     <div>
       <div className="flex flex-col mt-20 gap-16">

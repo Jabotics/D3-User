@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AcademyList from "./components/academy-list";
+import AcademyRegistration from "./components/academy-registration";
 
 const AcademyPage = () => {
   const navigate = useNavigate();
@@ -24,11 +25,10 @@ const AcademyPage = () => {
           {locationArr.map((item, index) => (
             <div key={index}>
               <span
-                className={`${
-                  item === "Home"
-                    ? "text-gray-900 cursor-pointer hover:underline"
-                    : "text-gray-500"
-                }`}
+                className={`${item === "Home"
+                  ? "text-gray-900 cursor-pointer hover:underline"
+                  : "text-gray-500"
+                  }`}
                 onClick={() => navigate("/")}
               >
                 {item}
@@ -78,7 +78,7 @@ const AcademyPage = () => {
           </div>
 
           <div>
-            <AcademyList />
+            <AcademyRegistration />
           </div>
         </div>
       </div>
