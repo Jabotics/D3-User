@@ -95,7 +95,7 @@ const Coupan = () => {
                   <GiTicket color='#53A53F' size={24} />
                   <div className="flex flex-col me-auto">
                     <span className="inline-block text-[16px] text-[#53A53F] font-semibold">{item.code}</span>
-                    <span className="inline-block text-xs text-gray-400"> valid till {item.valid_upto}</span>
+                    <span className="inline-block text-xs text-gray-400"> Get discount upto ₹{item.discount_amount}</span>
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
