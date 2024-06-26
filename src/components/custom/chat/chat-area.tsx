@@ -25,7 +25,7 @@ const ChatArea = ({
     >
       <div className="flex items-center justify-between px-4 py-2 sm:p-4">
         <div>
-          <img src={logo} alt="logo" className="h-6 lg:h-10 " />
+          <img src={logo} alt="logo" className="h-6 lg:h-8 " />
         </div>
         <button
           onClick={() => {
@@ -34,15 +34,15 @@ const ChatArea = ({
           }}
           className="text-lime-600 hover:text-gray-700 mr-2"
         >
-          <FaMinus size={24} className="text-lime-800" />
+          <FaMinus size={16} className="text-lime-800" />
         </button>
       </div>
       <div
         className={`mx-2 rounded-3xl border-t-2 border-lime-200 bg-[#ffffff] ${
-          hasAcceptedTerms ? "h-[75vh]" : "h-[21rem] xs:h-[27rem] sm:h-96"
+          hasAcceptedTerms ? "h-[75vh]" : "h-[21rem] xs:h-[27rem] sm:h-[22rem]"
         } flex flex-col items-center justify-center`}
       >
-        <p className="border-b border-gray-200 h-5 sm:h-9 w-full flex items-center justify-center text-[8px] sm:text-[10px] md:text-[12px] font-medium tracking-wide text-gray-500">
+        <p className="border-b border-gray-200 h-5 sm:h-7 w-full flex items-center justify-center text-[8px] sm:text-[10px] font-medium tracking-wide text-gray-500">
           By using D3, you agree to our &nbsp;
           <span className="text-blue-800 underline">Priavcy Policy</span>
         </p>
@@ -63,7 +63,7 @@ const ChatArea = ({
               </span>
               <Button
                 variant={"theme"}
-                className="mt-2 w-fit text-center h-6 xs:h-6 sm:h-7 lg:h-8 text-xs sm:text-[12px] lg:text-[16px] lg:mt-4"
+                className="mt-2 w-fit text-center h-6 xs:h-6 sm:h-7 lg:h-7 text-xs sm:text-[12px] lg:text-[14px] lg:mt-4"
                 onClick={() => setHasAcceptedTerms(true)}
               >
                 Agree & Continue

@@ -20,6 +20,8 @@ import {
   slotsApi,
   bookingApi,
   BookingSlice,
+  promoCodeApi,
+  PromoSlice,
 
 } from '@/store/actions'
 import { RequestHandler } from './RequestHandler'
@@ -65,6 +67,8 @@ export const rootReducer = combineReducers({
   booking: BookingSlice,
   [bookingApi.reducerPath]: bookingApi.reducer,
   setting: settingSlice,
+  [promoCodeApi.reducerPath]: promoCodeApi.reducer,
+  promocode: PromoSlice,
 
   city: cityPersistReducer,
   slots: slotsSlice,

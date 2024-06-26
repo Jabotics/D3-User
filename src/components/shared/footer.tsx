@@ -1,6 +1,7 @@
 import footerLogo from "../../../public/images/logo-footer.svg";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { Separator } from "../ui/separator";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -9,37 +10,37 @@ export const Footer = () => {
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-4">
             <img src={footerLogo} alt="footer logo" className=" w-36" />
-            <p className="text-[13px] text-gray-400 mt-4">
+            <p className="text-[13px] text-gray-400 mt-4 w-60 sm:w-full mb-2 sm:mb-0">
               We are a one-stop platform to help sports enthusiasts meet
               playpals, discover venues, skill-up their game, manage their
               activities seamlessly and buy gear.
             </p>
-            <a href="/about" className="text-gray-50 text-[16px] underline">Read More</a>
+            <a href="/about" className="text-gray-50 text-[14px] underline">Read More</a>
           </div>
           <div className="col-span-12 md:col-span-5 flex flex-wrap">
             <div className="quick-link w-1/2">
               <h5 className="text-white mb-4">Quick Link</h5>
               <ul className="flex flex-col gap-0 md:gap-2 text-[11px] text-gray-400">
                 <li>
-                  <a href="#">Pay & Play</a>
+                  <Link to={"/pay_play"}>Pay & Play</Link>
                 </li>
                 <li>
-                  <a href="#">Event</a>
+                  <Link to={"/#"}>Event</Link>
                 </li>
                 <li>
-                  <a href="#">About Us</a>
+                  <Link to={"/about"}>About Us</Link>
                 </li>
                 <li>
-                  <a href="#">Contact Us </a>
+                  <Link to={"/contact"}>Contact Us </Link>
                 </li>
                 <li>
-                  <a href="#">Academy</a>
+                  <Link to={"/academy"}>Academy</Link>
                 </li>
                 <li>
-                  <a href="#">Blog</a>
+                  <Link to={"/#"}>Blog</Link>
                 </li>
                 <li>
-                  <a href="#">Membership</a>
+                  <Link to={"/membership"}>Membership</Link>
                 </li>
               </ul>
             </div>
@@ -47,7 +48,7 @@ export const Footer = () => {
               <h5 className="text-white mb-4">Legal</h5>
               <ul className="flex flex-col gap-2 text-[11px] text-gray-400">
                 <li>
-                  <a href="#">Contact Us </a>
+                  <Link to={"/about"}>About Us </Link>
                 </li>
                 <li>
                   <a href="#">Privacy Policy</a>
@@ -55,9 +56,9 @@ export const Footer = () => {
                 <li>
                   <a href="#"> Terms Of Use</a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#">Cookies Policy</a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
@@ -67,7 +68,7 @@ export const Footer = () => {
               <li>
                 <a href="tel:+4733378901" className="flex items-center">
                   <Phone className="mr-2" size={10} />
-                  <span>Contact Us</span>
+                  <span>9874 475 988</span>
                 </a>
               </li>
               <li>

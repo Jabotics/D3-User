@@ -1,5 +1,6 @@
 import { APIEndPoints } from "@/APIEndpoint";
 import { ISlot } from "@/interface/data";
+import { RootState } from "@/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery, FetchBaseQueryMeta, } from "@reduxjs/toolkit/query/react";
 
@@ -11,17 +12,18 @@ interface IncomingData {
   status: boolean;
 }
 
+
 export const slotsApi = createApi({
   reducerPath: "SlotsApi",
   baseQuery: fetchBaseQuery({
     baseUrl: APIEndPoints.BackendURL,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("token") || "";
+    prepareHeaders: (headers, { getState }) => {
+      const state = getState() as RootState;
+      const token = state.auth.token || localStorage.getItem("token") || "";
       if (token) {
-        headers.set("authorization", token);
-        headers.set("type", "admin");
-        return headers;
+        headers.set("authorization", `Bearer ${token}`);
       }
+      return headers;
     },
   }),
   endpoints: (builder) => ({
@@ -49,7 +51,7 @@ export const slotsApi = createApi({
       query: (body) => {
         const { ...rest } = body
         return {
-          url: APIEndPoints.add_slot,
+          url: APIEndPoints.book_slot,
           method: 'POST',
           body: rest,
         }
@@ -116,14 +118,15 @@ export const SlotsSlice = createSlice({
       const slotPrice = state.allSlots.find(
         (i) => i.id === action.payload
       )?.price;
-
       if (state.selectedSlots.includes(action.payload)) {
         state.selectedSlots = state.selectedSlots.filter(
           (slot) => slot !== action.payload
         );
 
         state.listOfPrices = state.listOfPrices.filter(
-          (price) => price.id !== action.payload
+          (price) => {
+            return price.id !== action.payload
+          }
         );
 
         if (slotPrice) {

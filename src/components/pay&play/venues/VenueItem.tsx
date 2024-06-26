@@ -1,39 +1,50 @@
-import { MouseEvent } from 'react';
+
 import { FaLocationDot } from 'react-icons/fa6'
 import { IoIosHeartEmpty } from 'react-icons/io'
 import { useNavigate } from "react-router-dom"
 import { IGround } from '@/interface/data'
 import venueImg from '../../../assets/venueImg.jpg'
+import { useAppDispatch } from '@/store/hooks'
+import { setSelectedGroundId } from '@/store/actions/slices/slotsSlice'
 
 const VenueItem = ({ item }: { item: IGround }) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate()
-  const handleBooking = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    navigate('/booking');
-  };
+
 
   const openDetailsPage = (id: string) => {
     navigate(`/details/?id=${id}`)
   }
 
   return (
-    <div className='flex flex-col sm:flex-row w-full border rounded-md gap-2 sm:gap-4 bg-[#FFFFFF] max-h-[480px] cursor-pointer' onClick={() => openDetailsPage(item?.id)}>
+    <div className='flex flex-col sm:flex-row w-full border rounded-md gap-2 sm:gap-4 bg-[#FFFFFF] max-h-[480px] ' >
       <div className='w-[100%] sm:w-[40%] '>
         <img src={item?.images.length > 0 ? `http://192.168.29.16:5050/${item?.images[0]}` : `${venueImg}`} alt='venueImg' className='h-[160px] sm:h-[240px]   w-full rounded-md' />
       </div>
       <div className='w-[100%] sm:w-[60%]  flex flex-row gap-4 border-r-2 border-[#E0E2E4] py-2 sm:py-2 px-4 sm:px-2'>
         <div className='flex flex-col gap-2 w-[100%] sm:w-[70%] md:w-[80%] lg:w-[90%]'>
-          <span className='inline-block text-[14px] sm:text-[16px] md:text-[20px] font-bold'>{item?.name}</span>
+          <div className='flex flex-row w-full gap-2 justify-between items-center'>
+            <span className='inline-block w-[40%] text-[14px] sm:text-[16px] md:text-[20px] font-bold'>{item?.name}</span>
+            <button className='bg-[#252525] w-[40%] md:w-[30%] ms-auto h-[30px]  text-[12px] flex items-center justify-center text-white p-2 border rounded-lg' onClick={() => openDetailsPage(item?.id)}>View Details</button>
+            <div className='h-[22px] w-[22px] p-1  bg-[#54a63fb3] rounded-lg flex items-center justify-center '>
+              <IoIosHeartEmpty className='font-bold ' size={20} color='white' />
+            </div>
+          </div>
+
           <span className='inline-block text-[12px] sm:text-[14px] md:text-[16px] font-semibold text-[#676767]'>{item?.supported_sports[0]?.name},{item?.supported_sports[1]?.name}</span>
           <div className='flex flex-row items-center gap-2 self-start'>
             <FaLocationDot size={24} color='#D0D0D0' />
             <p className='p-0 m-0 text-[12px] sm:text-[14px] md:text-[16px]  text-[#676767]'>{item?.venue?.name}, {item?.venue?.address}</p>
           </div>
-          <button className='bg-[#252525] text-[12px] sm:text-[14px] md:text-[16px] text-white py-[6px] md:py-[8px] px:[6px] md:px-[12px] w-[80px] sm:w-[120px] border rounded-3xl mt:[0px] sm:mt-[20px]' onClick={(e: MouseEvent<HTMLButtonElement>) => handleBooking(e)}>Book Now</button>
+
+          <button className='bg-[#252525] text-[12px] sm:text-[14px] md:text-[12px] text-white py-[4px] md:py-[6px] px:[4px] md:px-[4px] w-[120px] md:w-[140px] border rounded-2xl mt:[0px] sm:mt-[20px]' onClick={() => {
+            dispatch(setSelectedGroundId(item.id))
+            navigate('/booking');
+          }}>Book Now</button>
+
+
         </div>
-        <div className='h-[22px] w-[22px] p-1  bg-[#54a63fb3] rounded-lg flex items-center justify-center'>
-          <IoIosHeartEmpty className='font-bold ' size={20} color='white' />
-        </div>
+
       </div>
       {/* <div className='w-[35%] sm:w-[33%]  flex flex-col justify-center items-center gap-2'>
            <div className='flex flex-row gap-1'>

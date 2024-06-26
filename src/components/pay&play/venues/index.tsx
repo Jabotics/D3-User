@@ -17,20 +17,21 @@ const Venues = () => {
   const params: {
     [key: string]: string[];
   } = useAppSelector((state: RootState) => state.ground.params)
-
+  const selectedCity = useAppSelector((state: RootState) => state.city.selectedCity)
   const getGround = useGetGroundQuery({
     'supported_sports': JSON.stringify(params['supported_sports']),
     'venue': JSON.stringify(params['venue']),
     'ground_type': JSON.stringify(params['ground_type']),
     offset: pagination.pageIndex * pagination.pageSize,
     limit: pagination.pageSize,
+    city: selectedCity
   },
   )
   const groundData = useAppSelector((state: RootState) => state.ground.grounds)
-
+ 
   useEffect(() => {
     getGround.refetch()
-  }, [params, pagination.pageIndex, pageCount])
+  }, [params, pagination.pageIndex, pageCount, selectedCity])
 
   const showPagination = () => {
     const buttons: number[] = [];
