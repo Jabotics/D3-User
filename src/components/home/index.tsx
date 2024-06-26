@@ -23,8 +23,8 @@ export const HomePage = () => {
       <img src="/images/icons-bg/click.gif" alt="" className="absolute z-10 top-[230vh] left-10 h-20 w-20" /> */}
       <Academy />
       <Testimonials />
-      <img src="/images/icons-bg/batter.svg" alt="" className="absolute top-[300.7vh] left-[25.58%] h-40 w-40" />
-      <img src="/images/icons-bg/baller.svg" alt="" className="absolute top-[300.7vh] right-[25.58%] h-40 w-40" />
+      {/* <img src="/images/icons-bg/batter.svg" alt="" className="absolute top-[300.7vh] left-[25.58%] h-40 w-40" />
+      <img src="/images/icons-bg/baller.svg" alt="" className="absolute top-[300.7vh] right-[25.58%] h-40 w-40" /> */}
       <Events />
       {/* <img src="/images/icons-bg/track.svg" alt="" className="absolute top-[370.7vh] left-[34.58%] h-72 w-72" /> */}
       <Faqs />

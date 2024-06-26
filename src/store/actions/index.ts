@@ -9,6 +9,8 @@ import settingSlice from "./slices/settingSlice";
 
 import citySlice, { citiesApi } from "./slices/citySlice";
 import slotsSlice, { slotsApi } from "./slices/slotsSlice";
+import eventsSlice, { eventsApi } from "./slices/eventSlice";
+import academiesSlice, { academiesApi } from "./slices/academySlice";
 
 export {
   authSlice,
@@ -27,5 +29,11 @@ export {
   slotsSlice,
   slotsApi,
   bookingApi,
-  BookingSlice
+  BookingSlice,
+
+  academiesSlice,
+  academiesApi,
+
+  eventsSlice,
+  eventsApi,
 }

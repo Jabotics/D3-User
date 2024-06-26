@@ -8,8 +8,12 @@ import Facilities from "./components/facilities";
 import Services from "./components/services";
 import Commitment from "./components/commitment";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
-const Index = () => {
+const AboutPage = () => {
+
+  const navigate = useNavigate()
+
   const controls1 = useAnimation();
   const controls2 = useAnimation();
   const [isScrollable, setIsScrollable] = useState(false);
@@ -123,10 +127,31 @@ const Index = () => {
         </div>
 
         <div className="h-20 mb-4 flex items-center justify-center">
-          <div className="flex items-center justify-around w-full">
-            <div>Pay & Play</div>
-            <div>Academy</div>
-            <div>Membership</div>
+          <div className="flex items-center justify-around w-full gap-2">
+            <div
+              className="w-1/3 rounded-full border border-[#53A53F45] text-sm flex items-center justify-center py-2 cursor-pointer"
+              onClick={() => {
+                navigate("/pay_play");
+              }}
+            >
+              Pay & Play
+            </div>
+            <div
+              className="w-1/3 rounded-full border border-[#53A53F45] text-sm flex items-center justify-center py-2 cursor-pointer"
+              onClick={() => {
+                navigate("/academy");
+              }}
+            >
+              Academy
+            </div>
+            <div
+              className="w-1/3 rounded-full border border-[#53A53F45] text-sm flex items-center justify-center py-2 cursor-pointer"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Membership
+            </div>
           </div>
         </div>
       </div>
@@ -134,4 +159,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default AboutPage;

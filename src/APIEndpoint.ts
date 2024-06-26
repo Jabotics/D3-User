@@ -25,4 +25,10 @@ export const APIEndPoints = {
 
   // GROUNDS
   fetch_grounds: '/api/fetch-grounds',
+
+  // ACADEMIES
+  fetch_academies: '/api/fetch-academies',
+
+  // EVENTS
+  fetch_events: '/api/fetch-events',
 }
