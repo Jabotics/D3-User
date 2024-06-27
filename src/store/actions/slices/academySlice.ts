@@ -73,8 +73,8 @@ interface InitialState {
     city: string
     venue: string
     academy_fee: number
-    subscription_type?: 'Monthly' | 'Quarterly' | 'Half_Yearly' | 'Yearly'
-    admission_fee?: number
+    subscription_type?: 'Monthly' | 'Quarterly' | 'Half_Yearly' | 'Yearly' | null
+    admission_fee: number
     profile?: File | null
     doc?: File | null
     mobile: string
@@ -112,7 +112,7 @@ const initialState: InitialState = {
     last_name: '',
     slot: '',
     sport: '',
-    subscription_type: 'Monthly',
+    subscription_type: null,
     venue: '',
     academy_fee: 0,
     admission_fee: 0,
@@ -175,8 +175,15 @@ export const AcademiesSlice = createSlice({
     },
 
     setRegistrationAcademy: (state, action: PayloadAction<InitialState['registrationFormDetails']>) => {
-      state.registrationFormDetails = action.payload;
-    }
+      state.registrationFormDetails = {...state.registrationFormDetails, ...action.payload};
+    },
+
+    setSubscriptionType: (state, action: PayloadAction<{ type: 'Monthly' | 'Quarterly' | 'Half_Yearly' | 'Yearly', fee: number }>) => {
+      console.log(action.payload)
+      const { type, fee } = action.payload
+      state.registrationFormDetails.subscription_type = type
+      state.registrationFormDetails.academy_fee = fee
+    },
   },
   extraReducers: (builder) => {
     // Handle the asynchronous fetchItems action
@@ -203,5 +210,5 @@ export const AcademiesSlice = createSlice({
 })
 
 export const { useFetchAcademiesQuery } = academiesApi
-export const { setSelectedSportsStore, setSortByText, resetFilters, setSelectedVenue, setSelectedGroundType, setPagination, setLocationArr, resetLocationArr, setSelectedSlots, setRegistrationAcademy } = AcademiesSlice.actions
+export const { setSelectedSportsStore, setSubscriptionType, setSortByText, resetFilters, setSelectedVenue, setSelectedGroundType, setPagination, setLocationArr, resetLocationArr, setSelectedSlots, setRegistrationAcademy } = AcademiesSlice.actions
 export default AcademiesSlice.reducer

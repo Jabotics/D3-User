@@ -63,7 +63,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
   });
   const { userData } = useAppSelector((state: RootState) => state.auth);
   const { selectedCity } = useAppSelector((state: RootState) => state.city);
-  const { academies } = useAppSelector((state: RootState) => state.academy);
+  const { academies, registrationFormDetails } = useAppSelector((state: RootState) => state.academy);
 
   const [progress, setProgress] = React.useState(0);
   const [fileName, setFileName] = React.useState<string | null>(null);
@@ -161,9 +161,12 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
         throw new Error("Something went wrong! Can't find User");
       }
 
+      const admission_fee = selectedAcademy.admission_fees
+
       dispatch(
         setRegistrationAcademy({
           academy_fee: 0,
+          admission_fee,
           address,
           email,
           first_name: first_name.trim(),

@@ -27,7 +27,7 @@ export const APIEndPoints = {
   fetch_grounds: '/api/fetch-grounds',
 
   // ACADEMIES
-  fetch_academies: '/api/fetch-academies',
+  fetch_academies: '/api/academies',
 
   // EVENTS
   fetch_events: '/api/fetch-events',

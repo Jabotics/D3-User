@@ -1,5 +1,5 @@
-import BookingDetail from "@/components/booking/booking-details";
-import BookingSummary from "@/components/booking/booking-details/BookingSummary";
+import AcademyCheckoutDetails from "@/components/academy/academy-checkout-details";
+import AcademyCheckoutSummary from "@/components/academy/academy-checkout-summary";
 import CacelationPolicy from "@/components/booking/booking-details/CacelationPolicy";
 import Coupan from "@/components/booking/booking-details/Coupan";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ const AcademyCheckout = () => {
   const { registrationFormDetails } = useAppSelector(
     (state: RootState) => state.academy
   );
-  console.log(registrationFormDetails);
+
   const [isHidden, setIsHidden] = useState(true);
   const handleResize = () => {
     if (window.innerWidth > 640) {
@@ -25,9 +25,9 @@ const AcademyCheckout = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  const handleBook = () => {
-    setIsHidden(false);
-  };
+  // const handleBook = () => {
+  //   setIsHidden(false);
+  // };
   return (
     <div className="flex px-2 sm:px-40 pt-8 border-t-[1px] gap-4 pb-12 w-full h-screen">
       <div className="w-full sm:w-4/5">
@@ -41,11 +41,14 @@ const AcademyCheckout = () => {
               />
             </div>
 
-            <div className="flex-1"></div>
+            <div className="flex-1">
+              <AcademyCheckoutDetails
+                registrationFormDetails={registrationFormDetails}
+              />
+            </div>
 
             <div className="flex flex-col gap-4 w-full border rounded-lg bg-[#FFFFFF]">
-              {/* <SelectSport /> */}
-              <div className="flex flex-row justify-center items-center self-center mt-auto w-full px-2 border-t border-t-[#53a53f56]">
+              <div className="flex flex-row justify-center items-center self-center mt-auto w-full px-2 ">
                 <p className="p-0 m-0 text-[#53a53f9d] text-[10px] ">
                   Offer 10% additional discount for 3 hours booking on weekdays
                   only
@@ -73,13 +76,17 @@ const AcademyCheckout = () => {
               <span className="text-gray-600 mt-[4px]">Go Back</span>
             </div>
             <Coupan />
-            <BookingSummary />
+            <AcademyCheckoutSummary />
             <CacelationPolicy />
           </div>
         )}
       </div>
       <div className="hidden sm:block w-1/5">
-        <BookingDetail />
+        <div className="w-0 sm:w-full flex flex-col gap-3">
+          <Coupan />
+          <AcademyCheckoutSummary />
+          <CacelationPolicy />
+        </div>
       </div>
     </div>
   );

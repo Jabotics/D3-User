@@ -22,7 +22,7 @@ const BookingSummary = () => {
   const { selectedDate } = useAppSelector(
     (state: RootState) => state.slots
   );
-  console.log(groundDetails);
+
   useEffect(() => {
     getGround.refetch()
   }, [selectedGroundId]);
