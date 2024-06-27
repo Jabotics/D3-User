@@ -1,21 +1,33 @@
 import { APIEndPoints } from "@/APIEndpoint";
-import { IAcademy } from "@/interface/data"
+import { IAcademy } from "@/interface/data";
+import { RootState } from "@/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  createApi,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 
 interface IncomingData {
   data: {
-    academies: IAcademy[]
-    count: number | null
-  }
+    academies: IAcademy[];
+    count: number | null;
+  };
   message: string;
   status: boolean;
 }
 
 export const academiesApi = createApi({
-  reducerPath: 'AcademiesApi',
+  reducerPath: "AcademiesApi",
   baseQuery: fetchBaseQuery({
     baseUrl: APIEndPoints.BackendURL,
+    prepareHeaders: (headers, { getState }) => {
+      const state = getState() as RootState;
+      const token = state.auth.token || localStorage.getItem("token") || "";
+      if (token) {
+          headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+  },
   }),
   endpoints: (builder) => ({
     fetchAcademies: builder.query<IncomingData, object>({
@@ -37,9 +49,32 @@ export const academiesApi = createApi({
           params: customParams,
         };
       },
-    })
-  })
-})
+    }),
+    joinAcademy: builder.mutation<IncomingData, { formData: FormData }>({
+      query: (body) => {
+        const { formData } = body;
+        return {
+          url: APIEndPoints.join_academy,
+          method: "POST",
+          body: formData,
+          formData: true,
+        };
+      },
+      // transformResponse(
+      //   Response: unknown,
+      //   meta: FetchBaseQueryMeta | undefined
+      // ): IncomingData | Promise<IncomingData> {
+      //   if (meta?.response?.headers.get('authorization')) {
+      //     localStorage.setItem(
+      //       'token',
+      //       String(meta?.response?.headers.get('authorization'))
+      //     )
+      //   }
+      //   return Response as IncomingData
+      // },
+    }),
+  }),
+});
 
 interface InitialState {
   academies: IAcademy[];
@@ -52,33 +87,38 @@ interface InitialState {
 
   locationArr: string[];
 
-  selectedSportsStore: string | null
-  sortByText: string[]
-  selectedVenue: string[]
-  selectedGroundType: string[]
-  selectedSlot: string | null
+  selectedSportsStore: string | null;
+  sortByText: string[];
+  selectedVenue: string[];
+  selectedGroundType: string[];
+  selectedSlot: string | null;
 
   registrationFormDetails: {
-    first_name: string
-    last_name: string
-    guardian_name: string
-    guardian_mobile: string
-    email: string
-    address: string
-    academy: string
-    sport: string
-    slot?: string
-    customer: string
-    ground: string
-    city: string
-    venue: string
-    academy_fee: number
-    subscription_type?: 'Monthly' | 'Quarterly' | 'Half_Yearly' | 'Yearly' | null
-    admission_fee: number
-    profile?: File | null
-    doc?: File | null
-    mobile: string
-  }
+    first_name: string;
+    last_name: string;
+    guardian_name: string;
+    guardian_mobile: string;
+    email: string;
+    address: string;
+    academy: string;
+    sport: string;
+    slot?: string;
+    customer: string;
+    ground: string;
+    city: string;
+    venue: string;
+    academy_fee: number;
+    subscription_type?:
+      | "Monthly"
+      | "Quarterly"
+      | "Half_Yearly"
+      | "Yearly"
+      | null;
+    admission_fee: number;
+    profile?: File | null;
+    doc?: File | null;
+    mobile: string;
+  };
 }
 
 const initialState: InitialState = {
@@ -98,99 +138,122 @@ const initialState: InitialState = {
   selectedGroundType: [],
 
   selectedSlot: null,
-  
+
   registrationFormDetails: {
-    guardian_mobile: '',
-    guardian_name: '',
-    address: '',
-    academy: '',
-    city: '',
-    customer: '',
-    email: '',
-    first_name: '',
-    ground: '',
-    last_name: '',
-    slot: '',
-    sport: '',
+    guardian_mobile: "",
+    guardian_name: "",
+    address: "",
+    academy: "",
+    city: "",
+    customer: "",
+    email: "",
+    first_name: "",
+    ground: "",
+    last_name: "",
+    slot: "",
+    sport: "",
     subscription_type: null,
-    venue: '',
+    venue: "",
     academy_fee: 0,
     admission_fee: 0,
     profile: null,
     doc: null,
-    mobile: '',
-  }
-}
+    mobile: "",
+  },
+};
 
 export const AcademiesSlice = createSlice({
   name: "AcademiesSlice",
   initialState,
   reducers: {
     setSelectedSportsStore: (state, action: PayloadAction<string | null>) => {
-      state.selectedSportsStore = action.payload
+      state.selectedSportsStore = action.payload;
     },
     setSelectedGroundType: (state, action: PayloadAction<string>) => {
       if (state.selectedGroundType.includes(action.payload)) {
-        state.selectedGroundType = state.selectedGroundType.filter(item => item !== action.payload);
+        state.selectedGroundType = state.selectedGroundType.filter(
+          (item) => item !== action.payload
+        );
       } else {
         state.selectedGroundType.push(action.payload);
       }
     },
     setSortByText: (state, action: PayloadAction<string>) => {
       if (state.sortByText.includes(action.payload)) {
-        state.sortByText = state.sortByText.filter(item => item !== action.payload);
+        state.sortByText = state.sortByText.filter(
+          (item) => item !== action.payload
+        );
       } else {
         state.sortByText.push(action.payload);
       }
     },
     resetFilters: (state) => {
-      state.selectedSportsStore = null
-      state.sortByText = []
-      state.selectedVenue = []
+      state.selectedSportsStore = null;
+      state.sortByText = [];
+      state.selectedVenue = [];
     },
     setSelectedVenue: (state, action: PayloadAction<string>) => {
       if (state.selectedVenue.includes(action.payload)) {
-        state.selectedVenue = state.selectedVenue.filter(item => item !== action.payload);
+        state.selectedVenue = state.selectedVenue.filter(
+          (item) => item !== action.payload
+        );
       } else {
         state.selectedVenue.push(action.payload);
       }
     },
-    setPagination: (state, action: PayloadAction<{ limit: number, offset: number }>) => {
-      const { limit, offset } = action.payload
-      
-      state.limit = limit
-      state.offset = offset
+    setPagination: (
+      state,
+      action: PayloadAction<{ limit: number; offset: number }>
+    ) => {
+      const { limit, offset } = action.payload;
+
+      state.limit = limit;
+      state.offset = offset;
     },
     setLocationArr: (state, action: PayloadAction<string>) => {
-      state.locationArr.push(action.payload)
+      state.locationArr.push(action.payload);
     },
     resetLocationArr: (state) => {
       state.locationArr = ["Home", "Academy"];
     },
     setSelectedSlots: (state, action: PayloadAction<string | null>) => {
-      state.selectedSlot = action.payload
+      state.selectedSlot = action.payload;
       if (action.payload) {
-        state.registrationFormDetails.slot = action.payload
+        state.registrationFormDetails.slot = action.payload;
       }
     },
 
-    setRegistrationAcademy: (state, action: PayloadAction<InitialState['registrationFormDetails']>) => {
-      state.registrationFormDetails = {...state.registrationFormDetails, ...action.payload};
+    setRegistrationAcademy: (
+      state,
+      action: PayloadAction<InitialState["registrationFormDetails"]>
+    ) => {
+      state.registrationFormDetails = {
+        ...state.registrationFormDetails,
+        ...action.payload,
+      };
     },
 
-    setSubscriptionType: (state, action: PayloadAction<{ type: 'Monthly' | 'Quarterly' | 'Half_Yearly' | 'Yearly', fee: number }>) => {
-      console.log(action.payload)
-      const { type, fee } = action.payload
-      state.registrationFormDetails.subscription_type = type
-      state.registrationFormDetails.academy_fee = fee
+    setSubscriptionType: (
+      state,
+      action: PayloadAction<{
+        type: "Monthly" | "Quarterly" | "Half_Yearly" | "Yearly";
+        fee: number;
+      }>
+    ) => {
+      const { type, fee } = action.payload;
+      state.registrationFormDetails.subscription_type = type;
+      state.registrationFormDetails.academy_fee = fee;
     },
   },
   extraReducers: (builder) => {
     // Handle the asynchronous fetchItems action
     builder
-      .addMatcher(academiesApi.endpoints.fetchAcademies.matchPending, (state) => {
-        state.status = "loading";
-      })
+      .addMatcher(
+        academiesApi.endpoints.fetchAcademies.matchPending,
+        (state) => {
+          state.status = "loading";
+        }
+      )
       .addMatcher(
         academiesApi.endpoints.fetchAcademies.matchFulfilled,
         (state, action) => {
@@ -207,8 +270,20 @@ export const AcademiesSlice = createSlice({
         }
       );
   },
-})
+});
 
-export const { useFetchAcademiesQuery } = academiesApi
-export const { setSelectedSportsStore, setSubscriptionType, setSortByText, resetFilters, setSelectedVenue, setSelectedGroundType, setPagination, setLocationArr, resetLocationArr, setSelectedSlots, setRegistrationAcademy } = AcademiesSlice.actions
-export default AcademiesSlice.reducer
+export const { useFetchAcademiesQuery, useJoinAcademyMutation } = academiesApi;
+export const {
+  setSelectedSportsStore,
+  setSubscriptionType,
+  setSortByText,
+  resetFilters,
+  setSelectedVenue,
+  setSelectedGroundType,
+  setPagination,
+  setLocationArr,
+  resetLocationArr,
+  setSelectedSlots,
+  setRegistrationAcademy,
+} = AcademiesSlice.actions;
+export default AcademiesSlice.reducer;

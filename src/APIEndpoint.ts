@@ -28,6 +28,7 @@ export const APIEndPoints = {
 
   // ACADEMIES
   fetch_academies: '/api/academies',
+  join_academy: '/api/join-academy',
 
   // EVENTS
   fetch_events: '/api/fetch-events',

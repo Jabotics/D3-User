@@ -86,7 +86,7 @@ const AcademyList = () => {
 
   return (
     <>
-      <AcademySportsSelect />
+      {/* <AcademySportsSelect /> */}
       <div className="w-full h-full flex items-start gap-2">
         {/*  */}
         <div className="w-80 h-full ">

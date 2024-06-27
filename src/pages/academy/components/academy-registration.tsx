@@ -63,7 +63,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
   });
   const { userData } = useAppSelector((state: RootState) => state.auth);
   const { selectedCity } = useAppSelector((state: RootState) => state.city);
-  const { academies, registrationFormDetails } = useAppSelector((state: RootState) => state.academy);
+  const { academies } = useAppSelector((state: RootState) => state.academy);
 
   const [progress, setProgress] = React.useState(0);
   const [fileName, setFileName] = React.useState<string | null>(null);
@@ -96,7 +96,9 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
       reader.onloadend = () => {
         if (reader.result) {
           const blob = new Blob([reader.result]);
-          const newFile = new File([blob], file.name, {
+          const extension = file.name.split('.').pop();
+          const newFileName = `profile.${extension}`;
+          const newFile = new File([blob], newFileName, {
             type: file.type,
             lastModified: file.lastModified,
           });
@@ -123,7 +125,9 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
       reader.onloadend = () => {
         if (reader.result) {
           const blob = new Blob([reader.result]);
-          const newFile = new File([blob], file.name, {
+          const extension = file.name.split('.').pop();
+          const newFileName = `doc.${extension}`;
+          const newFile = new File([blob], newFileName, {
             type: file.type,
             lastModified: file.lastModified,
           });

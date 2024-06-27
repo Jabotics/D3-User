@@ -13,6 +13,7 @@ import { RootState } from "@/store";
 import AcademyDetails from "./components/academy-details";
 import AcademyRegistrationPage from "./components/academy-registration";
 import AcademyCheckout from "./components/academy-checkout";
+import posterImg from '../../assets/posterImg.jpg'
 
 const AcademyPage = () => {
   const navigate = useNavigate();
@@ -132,9 +133,9 @@ const AcademyPage = () => {
                       className={`w-full md:w-1/2 h-full rounded-r-xl overflow-hidden relative`}
                     >
                       <img
-                        src="/images/academy.jpeg"
+                        src={posterImg}
                         alt="academy"
-                        className="w-full h-full object-cover object-top "
+                        className="w-full h-full object-cover object-center "
                       />
 
                       <div className="absolute top-4 left-4 md:hidden text-xl font-semibold text-gray-200 bg-gray-500/25">
