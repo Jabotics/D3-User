@@ -40,6 +40,10 @@ const formSchema = z.object({
     gender: z
         .string({
             required_error: "Please select an gender to display.",
+        }),
+    membership_type: z
+        .string({
+            required_error: "Please select an membership type to display.",
         })
 })
 
@@ -50,7 +54,11 @@ const MembershipFormContainer = () => {
             name: "",
             email: "",
             phone: "",
+            address: "",
+            guardian_name: "",
+            guardian_phone: "",
             gender: "",
+            membership_type: ""
         },
     })
     function onSubmit(values: z.infer<typeof formSchema>) {
@@ -62,13 +70,13 @@ const MembershipFormContainer = () => {
     return (
         <div className="flex w-[80%] h-[900px] bg-[#e4fbdd] rounded-md justify-center items-center">
             <Form {...form} >
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row w-[90%] flex-wrap gap-2 ">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row w-[80%] flex-wrap gap-2 justify-center">
                     <FormField
                         control={form.control}
                         name="name"
                         render={({ field }) => (
                             <FormItem className="relative w-[45%]">
-                                <UserRound className="absolute top-3.5 left-2 h-4 w-4 opacity-50" />
+                                <UserRound className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
                                 <FormControl>
                                     <Input placeholder="name" {...field} className="pl-8" />
                                 </FormControl>
@@ -81,7 +89,7 @@ const MembershipFormContainer = () => {
                         name="email"
                         render={({ field }) => (
                             <FormItem className="relative w-[45%]">
-                                <Mail className="absolute top-3.5 left-2 h-4 w-4 opacity-50" />
+                                <Mail className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
                                 <FormControl>
                                     <Input placeholder="email" {...field} className="pl-8" />
                                 </FormControl>
@@ -94,7 +102,7 @@ const MembershipFormContainer = () => {
                         name="phone"
                         render={({ field }) => (
                             <FormItem className="relative w-[45%] flex">
-                                <Phone className="absolute top-3.5 left-2 h-4 w-4 opacity-50" />
+                                <Phone className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
                                 <FormControl>
                                     <Input placeholder="phone" {...field} className="pl-8" />
                                 </FormControl>
@@ -104,12 +112,12 @@ const MembershipFormContainer = () => {
                     />
                     <FormField
                         control={form.control}
-                        name="email"
+                        name="address"
                         render={({ field }) => (
                             <FormItem className="relative w-[45%]">
-                                <Mail className="absolute top-3.5 left-2 h-4 w-4 opacity-50" />
+                                <Mail className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
                                 <FormControl>
-                                    <Input placeholder="email" {...field} className="pl-8" />
+                                    <Input placeholder="address" {...field} className="pl-8" />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -117,12 +125,12 @@ const MembershipFormContainer = () => {
                     />
                     <FormField
                         control={form.control}
-                        name="email"
+                        name="guardian_name"
                         render={({ field }) => (
                             <FormItem className="relative w-[45%]">
-                                <Mail className="absolute top-3.5 left-2 h-4 w-4 opacity-50" />
+                                <UserRound className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
                                 <FormControl>
-                                    <Input placeholder="email" {...field} className="pl-8" />
+                                    <Input placeholder="guardian_name" {...field} className="pl-8" />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -133,7 +141,7 @@ const MembershipFormContainer = () => {
                         name="guardian_phone"
                         render={({ field }) => (
                             <FormItem className="relative w-[45%]">
-                                <Mail className="absolute top-3.5 left-2 h-4 w-4 opacity-50" />
+                                <Phone className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
                                 <FormControl>
                                     <Input placeholder="emergency contact number" {...field} className="pl-8" />
                                 </FormControl>
@@ -162,7 +170,29 @@ const MembershipFormContainer = () => {
                             </FormItem>
                         )}
                     />
-                    <Button className="w-[80%]" type="submit">Submit</Button>
+                    <FormField
+                        control={form.control}
+                        name="membership_type"
+                        render={({ field }) => (
+                            <FormItem className="w-[45%] ">
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select Membership Type" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        <SelectItem value="Monthly">Monthly</SelectItem>
+                                        <SelectItem value="Quarterly">Quarterly</SelectItem>
+                                        <SelectItem value="Half Yearly">Half Yearly</SelectItem>
+                                        <SelectItem value="Yearly">Yearly</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button className="w-[160px] mt-6" type="submit">Submit</Button>
                 </form>
             </Form>
         </div>

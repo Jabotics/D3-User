@@ -138,3 +138,14 @@ export interface IEvent {
   }[]
   sports: string[]
 }
+
+export interface IPromo {
+  id: string
+  code: string
+  minimum_amount: number
+  discount_amount: number
+  discount_percentage: number
+  max_use_limit: string,
+  valid_upto: string
+  terms_and_conditions: string[]
+}

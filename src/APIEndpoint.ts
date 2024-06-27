@@ -18,10 +18,10 @@ export const APIEndPoints = {
 
   // SLOTS
   get_slot: '/api/get-available-booking-slots',
-  add_slot: '/api/add-slot-booking',
+  book_slot: '/api/book-slot',
 
   // Booking
-  get_booking : '/api/get-slot-bookings',
+  get_booking: '/api/get-slot-bookings',
 
   // GROUNDS
   fetch_grounds: '/api/fetch-grounds',
@@ -32,4 +32,8 @@ export const APIEndPoints = {
 
   // EVENTS
   fetch_events: '/api/fetch-events',
+  
+  // Promocode
+  fetch_promo: '/api/promo-codes',
+  apply_promo: '/api/apply-promo'
 }

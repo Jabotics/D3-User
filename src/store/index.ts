@@ -16,6 +16,7 @@ import { RequestHandler } from "./RequestHandler";
 import {
   bookingApi,
   groundApi,
+  promoCodeApi,
   sportApi,
   venueApi,
   citiesApi,
@@ -46,6 +47,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         bookingApi.middleware,
         academiesApi.middleware,
         eventsApi.middleware,
+        promoCodeApi.middleware
       );
 
       const middlewareTuple = middleware as Middleware<

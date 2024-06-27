@@ -20,6 +20,8 @@ import {
   slotsApi,
   bookingApi,
   BookingSlice,
+  promoCodeApi,
+  PromoSlice,
 
   academiesApi,
   academiesSlice,
@@ -75,18 +77,19 @@ export const rootReducer = combineReducers({
   sport: SportSlice,
   venue: VenueSlice,
   booking: BookingSlice,
+  [bookingApi.reducerPath]: bookingApi.reducer,
+  setting: settingSlice,
+  [promoCodeApi.reducerPath]: promoCodeApi.reducer,
+  promocode: PromoSlice,
 
   event: eventsSlice,
 
-  setting: settingSlice,
-  
   slots: slotsSlice,
   
   [RequestHandler.reducerPath]: RequestHandler.reducer,
   [groundApi.reducerPath]: groundApi.reducer,
   [sportApi.reducerPath]: sportApi.reducer,
   [venueApi.reducerPath]: venueApi.reducer,
-  [bookingApi.reducerPath]: bookingApi.reducer,
   
   // CITY
   [citiesApi.reducerPath]: citiesApi.reducer,

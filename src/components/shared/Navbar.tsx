@@ -25,7 +25,7 @@ import {
 } from "@/store/actions/slices/citySlice";
 import { useState } from "react";
 
-import { TbSparkles } from "react-icons/tb";
+// import { TbSparkles } from "react-icons/tb";
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -137,6 +137,9 @@ export const Navbar = () => {
                         ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
                         : ""
                     }`}
+                    onClick={() => {
+                      navigate("/membership");
+                    }}
                   >
                     Membership
                     {/* <span className="absolute -top-2.5 -right-2 bg-amber-500 text-white text-[8px] rounded-full flex items-center gap-1 justify-center border-[1px] border-gray-200 px-1">

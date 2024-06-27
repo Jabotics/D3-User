@@ -124,7 +124,7 @@ const LeftPanel = () => {
   }
 
   return (
-    <div className='w-full sm:w-[318px] mt-20 sm:h-[554px]'>
+    <div className='w-full sm:w-[25%] mt-20 sm:h-[554px]'>
       <div className='flex justify-between'>
         <div className="flex gap-2">
           <div className="w-9 h-9">
@@ -260,7 +260,7 @@ const LeftPanel = () => {
                 </div> */}
       </div>
 
-      <div className=" hidden sm:block w-[318px] h-[400px] bg-white mt-4 rounded-md">
+      <div className=" hidden sm:block w-[100%] h-[400px] bg-white mt-4 rounded-md">
         <div className="pt-6 cursor">
           {
             sideMenu.map((menu, index) => {

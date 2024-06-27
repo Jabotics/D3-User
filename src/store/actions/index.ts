@@ -1,3 +1,4 @@
+import  PromoSlice , { promoCodeApi} from './slices/promoSlice';
 import BookingSlice, { bookingApi } from './slices/bookingSlice';
 import VenueSlice, { venueApi } from './slices/venueSlice';
 import SportSlice, { sportApi } from './slices/sportSlice';
@@ -36,4 +37,6 @@ export {
 
   eventsSlice,
   eventsApi,
+  promoCodeApi,
+  PromoSlice,
 }
