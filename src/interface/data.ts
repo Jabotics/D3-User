@@ -93,6 +93,7 @@ export interface IBooking {
 export interface IAcademy {
   id: string
   name: string
+  description: string
   admission_fees: number
   monthly_fee: number
   quarterly_fee: number
@@ -115,6 +116,9 @@ export interface IAcademy {
     slot: string
   }[]
   is_active: boolean
+  images?: string[]
+  video: string
+  active_days: string[]
 }
 
 export interface IEvent {

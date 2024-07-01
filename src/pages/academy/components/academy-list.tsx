@@ -8,7 +8,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 import { AcademyPagination } from "./academy-pagination";
-import { AcademySportsSelect } from "./academy-drawer";
+// import { AcademySportsSelect } from "./academy-drawer";
 import AcademyFilter from "./academy-filter";
 
 import { RxCross2 } from "react-icons/rx";
@@ -22,6 +22,23 @@ import {
 } from "@/store/actions/slices/academySlice";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const AcademyList = () => {
   const navigate = useNavigate();
@@ -89,14 +106,18 @@ const AcademyList = () => {
       {/* <AcademySportsSelect /> */}
       <div className="w-full h-full flex items-start gap-2">
         {/*  */}
-        <div className="w-80 h-full ">
+        <div className="w-60 xl:w-80 h-full hidden lg:block">
           <div className="w-full h-12">
             <div className="w-full flex items-center h-full">
-              <RiFilterLine size={20} color="black" className="mr-2" />
-              <span className="inline-block text-sm font-medium">
+              <RiFilterLine
+                size={window.innerWidth > 1280 ? 20 : 18}
+                color="black"
+                className="mr-2"
+              />
+              <span className="inline-block text-xs xl:text-sm font-medium">
                 Filter by Category
               </span>
-              <Button className="ms-auto bg-[#53A53F] hover:bg-[#53A53F] text-xs w-[100px] border rounded-3xl flex flex-row justify-center h-5 items-center gap-2 px-2 text-white">
+              <Button className="ms-auto bg-[#53A53F] hover:bg-[#53A53F] text-[10px] xl:text-xs w-[100px] border rounded-3xl flex flex-row justify-center h-5 items-center gap-2 px-1 xl:px-2 text-white">
                 Reset <GrPowerReset />
               </Button>
             </div>
@@ -215,7 +236,7 @@ const AcademyList = () => {
               </>
             ) : (
               <>
-                <div className="ml-5 mt-5 text-2xl font-medium tracking-wide">
+                <div className="ml-5 mt-5 text-lg xl:text-2xl font-medium tracking-wide">
                   All Academies
                 </div>
                 <Separator className="w-[90%] ml-5" />
@@ -223,10 +244,79 @@ const AcademyList = () => {
             )}
           </>
 
+          {/*  */}
+          <div className="flex items-center justify-between lg:hidden w-full h-10 px-3 mt-3">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="px-2 h-6 flex items-center"
+                >
+                  <RiFilterLine
+                    size={window.innerWidth > 1280 ? 20 : 18}
+                    color="black"
+                    className="mr-2"
+                  />{" "}
+                  Filter by
+                </Button>
+              </SheetTrigger>
+              <SheetContent side={"left"}>
+                <SheetHeader>
+                  <SheetTitle className="text-[#53A53F]">Filter by Category</SheetTitle>
+                  <SheetDescription>
+                    Filter your search based on given categories.
+                  </SheetDescription>
+                </SheetHeader>
+                <AcademyFilter />
+              </SheetContent>
+            </Sheet>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="px-2 h-6">
+                  <HiOutlineSortDescending
+                    size={20}
+                    color="black"
+                    className="mr-2"
+                  />{" "}
+                  Sort by
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuGroup className="flex flex-col gap-1">
+                  {[
+                    "Nearest",
+                    "Newest Arrivals",
+                    // "Price: Low to High",
+                    // "Price: High to Low",
+                    "Customer Reviews",
+                  ].map((item, index) => {
+                    return (
+                      <DropdownMenuItem
+                        key={index}
+                        onClick={() => {
+                          dispatch(setSortByText(item));
+                        }}
+                        className={`${
+                          filtersArr.sortBy?.includes(item)
+                            ? "bg-gray-700 text-gray-50 border-gray-100"
+                            : "border-gray-400"
+                        }`}
+                      >
+                        <span>{item}</span>
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {/*  */}
           <div
             className={`max-w-full ${
               hasAppliedFilters ? "h-[23rem]" : "h-[26.25rem]"
-            } ml-5 flex flex-col gap-5 scroll-nobg pr-3 mt-8 overflow-x-hidden overflow-y-auto mb-5`}
+            } ml-0 lg:ml-5 flex flex-col gap-5 scroll-nobg pr-3 mt-3 lg:mt-8 overflow-x-hidden overflow-y-auto mb-5`}
           >
             {academies && academies.length > 0 ? (
               <>
@@ -234,13 +324,13 @@ const AcademyList = () => {
                   return (
                     <div
                       key={index}
-                      className="w-full h-20 bg-gray-100 rounded-lg flex items-center justify-between px-5 cursor-pointer"
+                      className="w-full h-16 sm:h-20 bg-gray-100 rounded-lg flex items-center justify-between px-5 cursor-pointer"
                       onClick={() => {
                         navigate(`/academy?id=${item.id}`);
                       }}
                     >
                       <div className="flex items-center gap-5">
-                        <div className="w-16 h-16 rounded-md overflow-hidden">
+                        <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-md overflow-hidden">
                           <img
                             src="https://res.cloudinary.com/purnesh/image/upload/w_1080,f_auto/west-delhi-cricket-academy0.jpg"
                             alt=""
@@ -248,12 +338,12 @@ const AcademyList = () => {
                           />
                         </div>
                         <div className="flex flex-col">
-                          <div className="text-2xl font-light">{item.name}</div>
+                          <div className="text-sm sm:text-2xl font-light">{item.name}</div>
                           <div className="flex items-center gap-1">
-                            <div className="text-sm font-medium">
+                            <div className="text-[8px] sm:text-sm font-medium">
                               {item.ground.name}
                             </div>
-                            <div className="text-sm text-gray-500">
+                            <div className="text-[8px] sm:text-sm  text-gray-500">
                               ({item.ground.venue.name})
                             </div>
                           </div>
@@ -287,7 +377,7 @@ const AcademyList = () => {
         </div>
 
         {/*  */}
-        <div className="w-60 h-full ">
+        <div className="w-40 xl:w-60 h-full hidden lg:block">
           <div className="w-full h-12">
             <div className="w-full flex flex-wrap items-center h-full border-[1px] border-gray-100 p-2 rounded-md">
               <HiOutlineSortDescending
@@ -295,7 +385,9 @@ const AcademyList = () => {
                 color="black"
                 className="mr-2"
               />
-              <span className="inline-block text-sm font-medium">Sort by</span>
+              <span className="inline-block text-xs xl:text-sm font-medium">
+                Sort by
+              </span>
             </div>
             {academies && academies.length > 0 ? (
               <div className="flex flex-wrap w-full gap-2 mt-5">
@@ -313,7 +405,7 @@ const AcademyList = () => {
                         filtersArr.sortBy?.includes(item)
                           ? "bg-gray-700 text-gray-50 border-gray-100"
                           : "border-gray-400"
-                      } px-2 text-sm`}
+                      } px-2 text-xs xl:text-sm`}
                       onClick={() => {
                         dispatch(setSortByText(item));
                       }}

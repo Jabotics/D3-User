@@ -56,11 +56,11 @@ const AcademyFilter = () => {
   };
 
   return (
-    <div className="h-[30rem] overflow-x-hidden overflow-y-auto scroll-nobg-l">
+    <div className="h-full lg:h-[30rem] overflow-x-hidden overflow-y-auto scroll-nobg-l">
       {/* SPORTS */}
       {sports && sports.length > 0 ? (
-        <div className="h-60 w-full bg-white mt-5 border border-gray-100 rounded-md flex flex-col items-start gap-4 py-2 ">
-          <div className="px-5 text-sm font-medium text-[#53A53F] h-12 mt-2 w-full">
+        <div className="h-52 xl:h-60 w-full bg-white mt-5 border border-gray-100 rounded-md flex flex-col items-start gap-4 py-2 ">
+          <div className="px-5 text-xs xl:text-sm font-medium text-[#53A53F] h-12 mt-2 w-full">
             <span>Sports</span>
             <Separator className="mt-5 " />
           </div>
@@ -83,7 +83,7 @@ const AcademyFilter = () => {
                       />
                       <label
                         htmlFor="terms"
-                        className="text-sm font-light text-gray-600 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        className="text-sm lg:text-xs xl:text-sm font-light text-gray-600 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
                         {item.name}
                       </label>
@@ -92,7 +92,7 @@ const AcademyFilter = () => {
                 );
               })}
               <div
-                className="text-sm font-medium text-[#53A53F] cursor-pointer w-full mt-3 flex items-center justify-between"
+                className="text-xs xl:text-sm font-medium text-[#53A53F] cursor-pointer w-full mt-3 flex items-center justify-between"
                 onClick={() => {
                   setShowMoreSports(!showMoreSports);
                 }}
@@ -130,7 +130,7 @@ const AcademyFilter = () => {
           </div>
         </div>
       ) : (
-        <div className="h-60 w-full bg-gray-100 mt-5 border border-gray-100 rounded-md flex flex-col items-start gap-4 py-2 "></div>
+        <div className="h-52 xl:h-60 w-full bg-gray-100 mt-5 border border-gray-100 rounded-md flex flex-col items-start gap-4 py-2 "></div>
       )}
 
       {/* VENUE */}
@@ -144,7 +144,7 @@ const AcademyFilter = () => {
           >
             <AccordionItem value="item-1" className="border-b-0 p-0">
               <AccordionTrigger
-                className="no-underline text-[#53A53F] text-sm"
+                className="no-underline text-[#53A53F] text-xs xl:text-sm"
                 state={"open"}
               >
                 Select Venue
@@ -169,7 +169,7 @@ const AcademyFilter = () => {
                         />
                         <label
                           htmlFor={item.id}
-                          className="text-sm font-light leading-none"
+                          className="text-sm lg:text-xs xl:text-sm font-light leading-none"
                         >
                           {item?.name}
                         </label>
@@ -195,7 +195,7 @@ const AcademyFilter = () => {
         >
           <AccordionItem value="item-1" className="border-b-0 p-0">
             <AccordionTrigger
-              className="no-underline text-[#53A53F] text-[16px]"
+              className="no-underline text-[#53A53F]  text-xs xl:text-sm"
               state={"open"}
             >
               Ground Type
@@ -213,7 +213,7 @@ const AcademyFilter = () => {
                     />
                     <label
                       htmlFor="ground_Type"
-                      className="text-sm font-light leading-none"
+                      className="text-sm lg:text-xs xl:text-sm font-light leading-none"
                     >
                       {item}
                     </label>

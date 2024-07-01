@@ -13,13 +13,13 @@ import { useAppSelector, useAppDispatch } from "@/store/hooks";
 
 export function AcademyPagination() {
   const dispatch = useAppDispatch();
-  const { count, limit, offset } = useAppSelector(
-    (state: RootState) => state.academy
-  );
+  const { count, limit, offset } = useAppSelector((state: RootState) => state.academy);
   // const count = 24; // Example count, replace with actual count from state if available
 
   const totalPages = count ? Math.ceil(count / limit) : 1;
   const currentPage = Math.floor(offset / limit) + 1;
+
+  const isSm = window.innerWidth > 768;
 
   const handlePrevious = () => {
     if (offset > 0) {
@@ -44,7 +44,10 @@ export function AcademyPagination() {
     for (let i = startPage; i <= endPage; i++) {
       const isActive = currentPage === i;
       pageLinks.push(
-        <PaginationItem key={i} className="h-8 w-8 overflow-hidden">
+        <PaginationItem
+          key={i}
+          className="h-6 w-6 sm:h-8 sm:w-8 overflow-hidden"
+        >
           <PaginationLink
             href="#"
             isActive={isActive}
@@ -67,26 +70,34 @@ export function AcademyPagination() {
   return (
     <>
       {count && count > 0 ? (
-        <Pagination className="flex items-center justify-end">
+        <Pagination className="w-64 flex items-center justify-end overflow-y-hidden overflow-x-auto">
           <PaginationContent className="h-5">
             {totalPages > 1 && (
               <PaginationItem>
-                <PaginationPrevious href="#" onClick={handlePrevious} />
+                <PaginationPrevious
+                  href="#"
+                  onClick={handlePrevious}
+                  className=" text-xs sm:text-base"
+                />
               </PaginationItem>
             )}
 
-            {currentPage > 2 && (
+            {isSm && currentPage > 2 && (
               <PaginationItem>
                 <PaginationEllipsis />
               </PaginationItem>
             )}
 
-            <span className="flex items-center gap-2">
-              {totalPages === 1 && <span>Page: </span>}
-              {renderPageLinks()}
-            </span>
+            {isSm && (
+              <span className="flex items-center gap-2">
+                {totalPages === 1 && (
+                  <span className="text-xs sm:text-base">Page: </span>
+                )}
+                {renderPageLinks()}
+              </span>
+            )}
 
-            {currentPage < totalPages - 1 && (
+            {isSm && currentPage < totalPages - 1 && (
               <PaginationItem>
                 <PaginationEllipsis />
               </PaginationItem>
@@ -96,7 +107,7 @@ export function AcademyPagination() {
               <PaginationItem>
                 <PaginationNext
                   href="#"
-                  className="h-full"
+                  className="h-full text-xs sm:text-base"
                   onClick={handleNext}
                 />
               </PaginationItem>
