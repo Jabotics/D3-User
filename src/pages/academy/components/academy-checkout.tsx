@@ -15,7 +15,7 @@ const AcademyCheckout = () => {
 
   const [isHidden, setIsHidden] = useState(true);
   const handleResize = () => {
-    if (window.innerWidth > 640) {
+    if (window.innerWidth > 1024) {
       setIsHidden(true);
     }
   };
@@ -25,15 +25,15 @@ const AcademyCheckout = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  // const handleBook = () => {
-  //   setIsHidden(false);
-  // };
+  const handleBook = () => {
+    setIsHidden(false);
+  };
   return (
-    <div className="flex px-2 sm:px-40 pt-8 border-t-[1px] gap-4 pb-12 w-full h-screen">
-      <div className="w-full sm:w-4/5">
+    <div className="flex px-4 md:px-12 lg:px-16 xl:px-20 2xl:px-40 pt-8 border-t-[1px] gap-4 pb-12 w-full lg:h-screen">
+      <div className="w-full md:w-4/5">
         {isHidden ? (
-          <div className="flex flex-col gap-3 sm:-ml-10 h-[90%]">
-            <div className="flex flex-col gap-4 w-full h-16 sm:h-24 mt-10 sm:mt-0 border rounded-lg bg-[#FFFFFF]">
+          <div className="flex flex-col gap-3 lg:-ml-10 lg:h-[90%]">
+            <div className="flex flex-col gap-4 w-full h-16 lg:h-24 mt-10 lg:mt-0 border rounded-lg bg-[#FFFFFF]">
               <img
                 src="/images/check.jpeg"
                 alt=""
@@ -57,12 +57,12 @@ const AcademyCheckout = () => {
             </div>
 
             <Button
-              className="sm:hidden w-[90%] self-center bg-[#53A53F] h-7 text-[16px] mt-5 -mb-8 font-bold"
-              onClick={() => {}}
+              className="lg:hidden w-[90%] self-center bg-[#53A53F] h-7 text-[16px] mt-5 font-bold"
+              onClick={handleBook}
             >
               Next
             </Button>
-            <div className="sm:hidden h-1"></div>
+            <div className="lg:hidden h-1"></div>
           </div>
         ) : (
           <div className="mt-10 flex flex-col gap-4">
@@ -81,8 +81,8 @@ const AcademyCheckout = () => {
           </div>
         )}
       </div>
-      <div className="hidden sm:block w-1/5">
-        <div className="w-0 sm:w-full flex flex-col gap-3">
+      <div className="hidden lg:block w-1/5">
+        <div className="w-0 lg:w-full flex flex-col gap-3">
           <Coupan />
           <AcademyCheckoutSummary />
           <CacelationPolicy />

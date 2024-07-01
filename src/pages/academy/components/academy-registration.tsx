@@ -224,7 +224,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex-1 bg-[#83ca711e] rounded-3xl flex flex-col items-center gap-3 lg:gap-0 justify-center border-2 border-[#53A53F] relative">
+          <div className="flex-1 bg-[#83ca711e] rounded-3xl flex flex-col items-center gap-3 lg:gap-0 justify-center border-2 border-[#53A53F] relative mb-10 lg:mb-0">
             {errorMessage && (
               <motion.div
                 initial={{
@@ -437,20 +437,20 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                       className="w-full lg:w-1/2 h-full flex items-center justify-center"
                       onClick={handleIdDivClick}
                     >
-                      <div className="w-full h-32 lg:h-full border border-dashed border-green-500 rounded-xl bg-[#53a53f3f] flex items-center gap-12 justify-center cursor-pointer">
+                      <div className="w-full h-32 lg:h-full border border-dashed border-green-500 rounded-xl bg-[#53a53f3f] flex items-center gap-4 lg:gap-12 justify-center cursor-pointer">
                         <div className="w-40 h-full flex flex-col items-center justify-center">
                           <IoCloudUploadOutline
-                            size={window.innerWidth >= 1024 ? 32 : 16}
+                            size={window.innerWidth >= 1024 ? 25 : 20}
                             className="text-[#53A53F]"
                           />
-                          <div className="text-[10px] whitespace-nowrap lg:whitespace-normal lg:text-xs">
+                          <div className="text-[10px] lg:text-xs w-20 text-center lg:w-fit">
                             Drag & Drop file to upload
                           </div>
                         </div>
                         <div className="w-8 h-8 bg-gray-50 rounded-full p-2 flex items-center justify-center">
                           Or
                         </div>
-                        <div className="text-xs underline font-semibold">
+                        <div className="text-[10px] whitespace-nowrap lg:whitespace-normal lg:text-xs underline font-semibold mr-5 lg:mr-0">
                           Browse File
                         </div>
                         <Input
