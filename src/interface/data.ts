@@ -30,7 +30,8 @@ export interface IGround {
 }
 export interface ISport {
   id: string,
-  name: string
+  name: string,
+  icon?: string
 }
 export interface IVenue {
   id: string,
@@ -87,6 +88,59 @@ export interface IBooking {
       slot: string
     }
   ]
+}
+
+export interface IAcademy {
+  id: string
+  name: string
+  description: string
+  admission_fees: number
+  monthly_fee: number
+  quarterly_fee: number
+  half_yearly_fee: number
+  yearly_fee: number
+  ground: {
+    _id: string
+    venue: {
+      _id: string
+      name: string
+    }
+    name: string
+  }
+  sport: {
+    _id: string
+    name: string
+  }
+  slotTimes: {
+    _id: string
+    slot: string
+  }[]
+  is_active: boolean
+  images?: string[]
+  video: string
+  active_days: string[]
+}
+
+export interface IEvent {
+  id: string
+  name: string
+  description: string
+  duration: string
+  start_date: string
+  end_date: string
+  image?: string | Blob
+  registration_status: 'Open' | 'Closed'
+  event_status: 'Upcoming' | 'Completed'
+  is_active: boolean
+  grounds: {
+    _id: string
+    venue: {
+      _id?: string
+      name: string
+    }
+    name: string
+  }[]
+  sports: string[]
 }
 
 export interface IPromo {

@@ -1,4 +1,3 @@
-
 import type {
   Action,
   Dispatch,
@@ -16,15 +15,15 @@ import { RequestHandler } from "./RequestHandler";
 
 import {
   bookingApi,
-groundApi,
-promoCodeApi,
-sportApi,
-venueApi
-} from '@/store/actions';
-import { 
+  groundApi,
+  promoCodeApi,
+  sportApi,
+  venueApi,
   citiesApi,
   slotsApi,
-} from "./actions";
+  academiesApi,
+  eventsApi,
+} from "@/store/actions";
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -46,6 +45,8 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         citiesApi.middleware,
         slotsApi.middleware,
         bookingApi.middleware,
+        academiesApi.middleware,
+        eventsApi.middleware,
         promoCodeApi.middleware
       );
 

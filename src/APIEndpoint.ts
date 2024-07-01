@@ -26,6 +26,13 @@ export const APIEndPoints = {
   // GROUNDS
   fetch_grounds: '/api/fetch-grounds',
 
+  // ACADEMIES
+  fetch_academies: '/api/academies',
+  join_academy: '/api/join-academy',
+
+  // EVENTS
+  fetch_events: '/api/fetch-events',
+  
   // Promocode
   fetch_promo: '/api/promo-codes',
   apply_promo: '/api/apply-promo'

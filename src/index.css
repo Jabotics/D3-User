@@ -133,3 +133,66 @@ html::-webkit-scrollbar-thumb:hover {
 .booked-slot::-webkit-scrollbar-thumb:hover {
   background: #53a53f;
 }
+
+/* width */
+.scroll-nobg::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+.scroll-nobg::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+/* Handle */
+.scroll-nobg::-webkit-scrollbar-thumb {
+  background: #d4d1d1;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.scroll-nobg::-webkit-scrollbar-thumb:hover {
+  background: #d4d1d1;
+}
+
+/* width */
+.scroll-nobg-l::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+.scroll-nobg-l::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+/* Handle */
+.scroll-nobg-l::-webkit-scrollbar-thumb {
+  background: #d4d1d1;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.scroll-nobg-l::-webkit-scrollbar-thumb:hover {
+  background: #d4d1d1;
+}
+
+.filter-sc::-webkit-scrollbar {
+  width: 4px;
+  background: transparent;
+}
+
+.filter-sc:hover::-webkit-scrollbar {
+  position: absolute;
+  right: 0;
+  width: 4px;
+}
+
+.filter-sc::-webkit-scrollbar-thumb {
+  background: #8888887c;
+  border-radius: 4px;
+}
+
+.filter-sc::-webkit-scrollbar-thumb:hover {
+  background: #53a53f;
+}

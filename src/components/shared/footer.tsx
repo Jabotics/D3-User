@@ -15,7 +15,7 @@ export const Footer = () => {
               playpals, discover venues, skill-up their game, manage their
               activities seamlessly and buy gear.
             </p>
-            <a href="/about" className="text-gray-50 text-[14px] underline">Read More</a>
+            <Link to={"/about"} className="text-gray-50 text-[14px] underline">Read More</Link>
           </div>
           <div className="col-span-12 md:col-span-5 flex flex-wrap">
             <div className="quick-link w-1/2">
