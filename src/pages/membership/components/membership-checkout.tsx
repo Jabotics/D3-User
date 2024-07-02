@@ -1,5 +1,5 @@
-import AcademyCheckoutDetails from "@/components/academy-checkout/academy-checkout-details";
-import AcademyCheckoutSummary from "@/components/academy-checkout/academy-checkout-summary";
+import MembershipCheckoutDetails from "@/components/membership-checkout/membership-checkout-details";
+import MembershipCheckoutSummary from "@/components/membership-checkout/membership-checkout-summary";
 import CacelationPolicy from "@/components/booking/booking-details/CacelationPolicy";
 import Coupan from "@/components/booking/booking-details/Coupan";
 import { Button } from "@/components/ui/button";
@@ -8,9 +8,9 @@ import { useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 
-const AcademyCheckout = () => {
+const MembershipCheckout = () => {
   const { registrationFormDetails } = useAppSelector(
-    (state: RootState) => state.academy
+    (state: RootState) => state.membership
   );
 
   const [isHidden, setIsHidden] = useState(true);
@@ -42,7 +42,7 @@ const AcademyCheckout = () => {
             </div>
 
             <div className="flex-1">
-              <AcademyCheckoutDetails
+              <MembershipCheckoutDetails
                 registrationFormDetails={registrationFormDetails}
               />
             </div>
@@ -76,7 +76,7 @@ const AcademyCheckout = () => {
               <span className="text-gray-600 mt-[4px]">Go Back</span>
             </div>
             <Coupan />
-            <AcademyCheckoutSummary />
+            <MembershipCheckoutSummary />
             <CacelationPolicy />
           </div>
         )}
@@ -84,7 +84,7 @@ const AcademyCheckout = () => {
       <div className="hidden lg:block w-1/5">
         <div className="w-0 lg:w-full flex flex-col gap-3">
           <Coupan />
-          <AcademyCheckoutSummary />
+          <MembershipCheckoutSummary />
           <CacelationPolicy />
         </div>
       </div>
@@ -92,4 +92,4 @@ const AcademyCheckout = () => {
   );
 };
 
-export default AcademyCheckout;
+export default MembershipCheckout;

@@ -12,6 +12,7 @@ import citySlice, { citiesApi } from "./slices/citySlice";
 import slotsSlice, { slotsApi } from "./slices/slotsSlice";
 import eventsSlice, { eventsApi } from "./slices/eventSlice";
 import academiesSlice, { academiesApi } from "./slices/academySlice";
+import membershipsSlice, { membershipsApi } from "./slices/membershipSlice";
 
 export {
   authSlice,
@@ -34,6 +35,9 @@ export {
 
   academiesSlice,
   academiesApi,
+
+  membershipsSlice,
+  membershipsApi,
 
   eventsSlice,
   eventsApi,
