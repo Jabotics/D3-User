@@ -3,6 +3,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
+// import MembershipFormContainer from "@/components/membership/MembershipFormContainer"
+// import PosterContainer from "@/components/membership/PosterContainer"
+
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -23,14 +26,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setRegistrationAcademy } from "@/store/actions/slices/academySlice";
+import { setRegistrationMembership } from "@/store/actions/slices/membershipSlice";
 
 import { motion } from "framer-motion";
 import { RootState } from "@/store";
 import { logout } from "@/store/actions/slices/authSlice";
 
-interface AcademyDetailsProps {
-  academyId: string;
+interface MembershipDetailsProps {
+  membershipId: string;
 }
 
 const formSchema = z.object({
@@ -44,8 +47,8 @@ const formSchema = z.object({
     .min(1, { message: "Please enter a guardian mobile" }),
 });
 
-const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
-  academyId,
+const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
+  membershipId,
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -63,7 +66,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
   });
   const { userData } = useAppSelector((state: RootState) => state.auth);
   const { selectedCity } = useAppSelector((state: RootState) => state.city);
-  const { academies } = useAppSelector((state: RootState) => state.academy);
+  const { memberships } = useAppSelector((state: RootState) => state.membership);
 
   const [progress, setProgress] = React.useState(0);
   const [fileName, setFileName] = React.useState<string | null>(null);
@@ -96,7 +99,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
       reader.onloadend = () => {
         if (reader.result) {
           const blob = new Blob([reader.result]);
-          const extension = file.name.split('.').pop();
+          const extension = file.name.split(".").pop();
           const newFileName = `profile.${extension}`;
           const newFile = new File([blob], newFileName, {
             type: file.type,
@@ -125,7 +128,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
       reader.onloadend = () => {
         if (reader.result) {
           const blob = new Blob([reader.result]);
-          const extension = file.name.split('.').pop();
+          const extension = file.name.split(".").pop();
           const newFileName = `doc.${extension}`;
           const newFile = new File([blob], newFileName, {
             type: file.type,
@@ -141,7 +144,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
   };
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    const selectedAcademy = academies.find((i) => i.id === academyId);
+    const selectedMembership = memberships.find((i) => i.id === membershipId);
     try {
       const { address, email, guardian_mobile, guardian_name, mobile, name } =
         data;
@@ -158,19 +161,19 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
       if (!!!idProofFile) {
         throw new Error("Please upload an ID Proof");
       }
-      if (!!!selectedAcademy) {
+      if (!!!selectedMembership) {
         throw new Error("Something went wrong!");
       }
       if (!!!userData?.id) {
         throw new Error("Something went wrong! Can't find User");
       }
 
-      const admission_fee = selectedAcademy.admission_fees
+      const admission_fee = selectedMembership.admission_fee;
 
       dispatch(
-        setRegistrationAcademy({
-          academy_fee: 0,
-          admission_fee,
+        setRegistrationMembership({
+          membership_fee: 0,
+          joining_fee: admission_fee,
           address,
           email,
           first_name: first_name.trim(),
@@ -180,16 +183,18 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
           mobile,
           profile: imgFile,
           doc: idProofFile,
-          academy: academyId,
-          venue: selectedAcademy.ground.venue._id,
-          sport: selectedAcademy.sport._id,
+          membership: membershipId,
+          venue: selectedMembership.ground.venue._id,
+          sport: selectedMembership.sport._id,
           customer: userData?.id,
           city: selectedCity,
-          ground: selectedAcademy.ground._id,
+          ground: selectedMembership.ground._id,
         })
       );
 
-      navigate(`/academy?id=${academyId}&join=1&city=${selectedCity}&payment=true`);
+      navigate(
+        `/membership?id=${membershipId}&join=1&city=${selectedCity}&payment=true`
+      );
     } catch (error: any) {
       setErrorMessage(error.message);
       if (error.message === "Something went wrong! Can't find User") {
@@ -211,7 +216,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
         <div
           className="bg-[#53A53F] p-1 rounded-lg text-gray-100 cursor-pointer"
           onClick={() => {
-            navigate(`/academy?id=${academyId}`);
+            navigate(`/membership?id=${membershipId}`);
           }}
         >
           <HiOutlineArrowLongLeft size={30} />
@@ -250,7 +255,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
               </motion.div>
             )}
             <div className="w-full h-16 flex items-center lg:items-end text-center text-sm lg:text-lg justify-center font-semibold tracking-wide text-[#53A53F]">
-              Fill in the form to join this academy.
+              Fill in the form to join this membership.
             </div>
             <div className="flex-1 w-full mt-3">
               <div className="w-full h-full flex flex-col gap-5 lg:gap-3 items-center justify-evenly">
@@ -472,7 +477,6 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                           <div className="w-[85%] h-1/2 flex flex-col items-start justify-center">
                             <div className="text-xs text-gray-500 font-medium tracking-wider">
                               {fileName || "No file selected"}{" "}
-                              {/* Display the file name here */}
                             </div>
                             {fileName && (
                               <div className="w-full h-4">
@@ -506,14 +510,24 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                 className="w-full mx-4 lg:mx-0 lg:w-[35%] rounded-md lg:rounded-full"
                 type="submit"
               >
-                Join Academy
+                Subscribe
               </Button>
             </div>
           </div>
         </form>
       </Form>
+      {/* <div className="flex flex-col items-center w-full p-8 gap-4">
+        <PosterContainer />
+        <div className="flex flex-row justify-center items-center">
+          <p className="text-[20px] font-bold">
+            Step into the World of Sports and Fitness at the Comfort of your
+            Home.
+          </p>
+        </div>
+        <MembershipFormContainer />
+      </div> */}
     </>
   );
 };
 
-export default AcademyRegistrationPage;
+export default MembershipRegistrationPage;

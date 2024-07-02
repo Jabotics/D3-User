@@ -21,12 +21,17 @@ export interface IGround {
       name: string;
     }
   ];
-  rules: [];
+  rules: {
+    allowed: string[];
+    not_allowed: string[];
+  };
   city: {
     _id: string;
     name: string;
   };
   images: string[];
+  video: string;
+  amenities: string[];
 }
 export interface ISport {
   id: string,
@@ -119,6 +124,37 @@ export interface IAcademy {
   images?: string[]
   video: string
   active_days: string[]
+}
+
+export interface IMembership {
+  id: string
+  is_active: boolean
+  ground: {
+    _id: string
+    venue: {
+      _id: string
+      name: string
+    }
+    name: string
+  }
+  venue?: {
+    _id: string
+    name: string
+  }
+  sport: {
+    _id: string
+    name: string
+  }
+  slotTimes: {
+    _id: string
+    slot: string
+    booked?: boolean
+  }[]
+  admission_fee: number
+  monthly_fee: number
+  quarterly_fee: number
+  half_yearly_fee: number
+  yearly_fee: number
 }
 
 export interface IEvent {

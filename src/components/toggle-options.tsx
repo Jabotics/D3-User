@@ -54,7 +54,10 @@ export function ToggleOptions() {
           <span className="flex w-full items-center justify-center">
             <DropdownMenuSeparator className="w-[90%]" />
           </span>
-          <DropdownMenuLabel className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer">
+          <DropdownMenuLabel
+            className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer"
+            onClick={() => handleOptionClick("/membership")}
+          >
             Membership
           </DropdownMenuLabel>
           <span className="flex w-full items-center justify-center">

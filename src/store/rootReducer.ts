@@ -26,6 +26,9 @@ import {
   academiesApi,
   academiesSlice,
 
+  membershipsApi,
+  membershipsSlice,
+
   eventsApi,
   eventsSlice
 
@@ -60,11 +63,19 @@ const academyPersistConfig = {
   blacklist: ['academies', 'status', 'error', 'count', 'limit', 'offset', 'locationArr', 'selectedSlot']
 }
 
+const membershipPersistConfig = {
+  key: 'd3-memberships',
+  storage,
+  version: 1,
+  blacklist: ['memberships', 'status', 'error', 'count', 'limit', 'offset', 'locationArr', 'selectedSlot']
+}
+
 const authPersistedReducer = persistReducer(persistConfig, authSlice)
 const otpPersistReducer = persistReducer(otpPersistConfig, otpSlice)
 
 const cityPersistReducer = persistReducer(appPersistConfig, citySlice)
 const academyPersistReducer = persistReducer(academyPersistConfig, academiesSlice)
+const membershipPersistReducer = persistReducer(membershipPersistConfig, membershipsSlice)
 
 export const rootReducer = combineReducers({
 
@@ -72,24 +83,25 @@ export const rootReducer = combineReducers({
   city: cityPersistReducer,
   otp: otpPersistReducer,
   academy: academyPersistReducer,
+  membership: membershipPersistReducer,
 
   ground: GroundSlice,
   sport: SportSlice,
   venue: VenueSlice,
   booking: BookingSlice,
-  [bookingApi.reducerPath]: bookingApi.reducer,
   setting: settingSlice,
-  [promoCodeApi.reducerPath]: promoCodeApi.reducer,
   promocode: PromoSlice,
-
+  
   event: eventsSlice,
-
+  
   slots: slotsSlice,
   
   [RequestHandler.reducerPath]: RequestHandler.reducer,
   [groundApi.reducerPath]: groundApi.reducer,
   [sportApi.reducerPath]: sportApi.reducer,
   [venueApi.reducerPath]: venueApi.reducer,
+  [bookingApi.reducerPath]: bookingApi.reducer,
+  [promoCodeApi.reducerPath]: promoCodeApi.reducer,
   
   // CITY
   [citiesApi.reducerPath]: citiesApi.reducer,
@@ -99,6 +111,9 @@ export const rootReducer = combineReducers({
 
   // ACADEMIES
   [academiesApi.reducerPath]: academiesApi.reducer,
+
+  // MEMBERSHIPS
+  [membershipsApi.reducerPath]: membershipsApi.reducer,
 
   // EVENTS
   [eventsApi.reducerPath]: eventsApi.reducer,

@@ -96,7 +96,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
       <div className="h-full flex-1">
         {!!selectedAcademy ? (
           <div className="w-full h-full overflow-hidden flex flex-col">
-            <div className="w-80 sm:w-full h-20 flex items-center justify-between">
+            <div className="w-full sm:w-full h-20 flex items-center justify-between">
               <span className="text-base font-semibold md:font-normal text-gray-800 md:text-gray-950 tracking-wider md:tracking-normal md:text-lg lg:text-3xl ">
                 {selectedAcademy.name}
               </span>
@@ -166,8 +166,8 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
             <div className="lg:flex-1 w-full flex gap-5">
               {/* IMAGE */}
               <div className="flex-1 h-full flex items-center justify-start rounded-md">
-                <div className="mt-4 w-full overflow-hidden flex flex-col-reverse lg:flex-row items-start justify-center gap-2">
-                  <div className="w-80 lg:w-12 h-12 lg:h-full pb-0 lg:pb-5 overflow-x-auto lg:overflow-x-hidden filter-sc overflow-y-hidden lg:overflow-y-auto flex flex-row lg:flex-col items-center gap-2 mt-2 rounded-md overflow-hidden">
+                <div className="mt-4 w-full overflow-hidden flex flex-col-reverse sm:flex-row items-start justify-center gap-2">
+                  <div className="w-80 sm:w-12 h-12 sm:h-full pb-0 sm:pb-5 overflow-x-auto sm:overflow-x-hidden filter-sc overflow-y-hidden sm:overflow-y-auto flex flex-row sm:flex-col items-center gap-2 mt-2 rounded-md overflow-hidden">
                     {selectedAcademy.images
                       ? selectedAcademy.images.slice(0, 2).map((url, index) => {
                           return (
@@ -245,7 +245,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                         })}
                   </div>
                   <div
-                    className="w-80 lg:flex-1 h-[34vh] rounded-md overflow-hidden"
+                    className="w-80 sm:flex-1 h-[34vh] rounded-md overflow-hidden"
                     style={{
                       backgroundImage: `url(${APIEndPoints.BackendURL}/${selectedImg})`,
                       backgroundSize: "cover",
@@ -267,89 +267,93 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
               </div>
             </div>
 
-            {/* ACTIVE DAYS */}
-            <div className="block lg:hidden w-full h-fit mt-5">
-              <h1 className="text-sm font-semibold tracking-wide h-10">
-                Active Days
-              </h1>
-              <div className="flex-1 flex flex-wrap gap-2 pr-5">
-                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
-                  (item, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className={`${
-                          selectedAcademy.active_days.includes(
-                            item.toLowerCase()
-                          )
-                            ? "bg-[#53a53f] text-gray-200"
-                            : "bg-gray-300"
-                        } flex items-center justify-center px-2 py-1 rounded-lg text-xs`}
-                      >
-                        {item}
-                      </div>
-                    );
-                  }
-                )}
-              </div>
-            </div>
-
-            {/* SLOTS */}
-            <div className="lg:hidden min-h-20 max-h-32 w-80 flex items-center justify-center mt-5">
-              <span className="w-full h-full bg-gray-100 rounded-md py-2 px-5 flex flex-col gap-3 border border-[#53a53f3d]">
-                <h2 className="font-medium tracking-wider text-sm">
-                  Practice Timings
-                </h2>
-                <Separator className="bg-gray-300" />
-                {/* <span className="flex-1 w-full flex items-start"> */}
-                <span className="h-fit w-full flex flex-wrap gap-2">
-                  {selectedAcademy.slotTimes.map((item, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className="text-[10px] h-fit whitespace-nowrap border-[1px] bg-[#53a53f] text-gray-50 border-gray-300 px-2 py-1 rounded-xl"
-                      >
-                        {item.slot}
-                      </div>
-                    );
-                  })}
-                </span>
-                {/* </span> */}
-              </span>
-            </div>
-
-            {/* DESCRIPTION */}
-            <section className="w-80 lg:w-full my-5 flex flex-col">
-              <div className="flex-1 flex items-start gap-3">
-                <div className="flex flex-col flex-1 h-full">
-                  <h1 className="text-sm lg:text-base font-semibold tracking-wide h-10">
-                    About Academy
+            <div className="flex flex-col sm:flex-row-reverse sm:gap-5 w-full">
+              <div className="flex flex-col sm:w-1/2 lg:hidden">
+                {/* ACTIVE DAYS */}
+                <div className="block lg:hidden w-full  h-fit mt-5">
+                  <h1 className="text-sm font-semibold tracking-wide h-10">
+                    Active Days
                   </h1>
-                  <div className="h-8 w-full flex items-center justify-start gap-3">
-                    <span className="italic text-[10px] lg:text-sm text-gray-400 font-medium">
-                      (&nbsp;{`@${selectedAcademy.name}`}&nbsp;)
-                    </span>
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1 text-[10px] lg:text-sm">
-                        <span className="text-gray-600">Venue:</span>
-                        <span className="font-semibold tracking-wider">
-                          {selectedAcademy.ground.venue.name}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1 text-[10px] lg:text-sm">
-                        <span className="text-gray-600">Ground:</span>
-                        <span className="font-semibold tracking-wider">
-                          {selectedAcademy.ground.name}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex-1 w-full mt-3 text-xs">
-                    {selectedAcademy.description}
+                  <div className="flex-1 flex flex-wrap gap-2 pr-5">
+                    {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
+                      (item, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className={`${
+                              selectedAcademy.active_days.includes(
+                                item.toLowerCase()
+                              )
+                                ? "bg-[#53a53f] text-gray-200"
+                                : "bg-gray-300"
+                            } flex items-center justify-center px-2 py-1 rounded-lg text-xs`}
+                          >
+                            {item}
+                          </div>
+                        );
+                      }
+                    )}
                   </div>
                 </div>
+
+                {/* SLOTS */}
+                <div className="lg:hidden min-h-20 max-h-32 w-80 sm:w-full flex items-center justify-center mt-5">
+                  <span className="w-full h-full bg-gray-100 rounded-md py-2 px-5 flex flex-col gap-3 border border-[#53a53f3d]">
+                    <h2 className="font-medium tracking-wider text-sm">
+                      Practice Timings
+                    </h2>
+                    <Separator className="bg-gray-300" />
+                    {/* <span className="flex-1 w-full flex items-start"> */}
+                    <span className="h-fit w-full flex flex-wrap gap-2">
+                      {selectedAcademy.slotTimes.map((item, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className="text-[10px] h-fit whitespace-nowrap border-[1px] bg-[#53a53f] text-gray-50 border-gray-300 px-2 py-1 rounded-xl"
+                          >
+                            {item.slot}
+                          </div>
+                        );
+                      })}
+                    </span>
+                    {/* </span> */}
+                  </span>
+                </div>
               </div>
-            </section>
+
+              {/* DESCRIPTION */}
+              <section className="w-80 sm:w-1/2 lg:w-full my-5 flex flex-col">
+                <div className="flex-1 flex items-start gap-3">
+                  <div className="flex flex-col flex-1 h-full">
+                    <h1 className="text-sm lg:text-base font-semibold tracking-wide h-10">
+                      About Academy
+                    </h1>
+                    <div className="h-8 w-full flex items-center justify-start gap-3">
+                      <span className="italic text-[10px] lg:text-sm text-gray-400 font-medium">
+                        (&nbsp;{`@${selectedAcademy.name}`}&nbsp;)
+                      </span>
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1 text-[10px] lg:text-sm">
+                          <span className="text-gray-600">Venue:</span>
+                          <span className="font-semibold tracking-wider">
+                            {selectedAcademy.ground.venue.name}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1 text-[10px] lg:text-sm">
+                          <span className="text-gray-600">Ground:</span>
+                          <span className="font-semibold tracking-wider">
+                            {selectedAcademy.ground.name}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex-1 w-full mt-3 text-xs">
+                      {selectedAcademy.description}
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
 
             {/* FEES */}
             <Dialog>
@@ -357,10 +361,11 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                 <div className="h-[75%] w-full bg-gray-900 rounded-xl py-3 px-5 flex gap-1 text-gray-100">
                   <div className="flex-1 flex flex-col gap-1 items-start justify-center">
                     <div className="flex items-center gap-1">
-                      <RiMoneyRupeeCircleLine className="text-gray-300" size={20} />
-                      <p className="text-base font-light tracking-wide">
-                        Fees
-                      </p>
+                      <RiMoneyRupeeCircleLine
+                        className="text-gray-300"
+                        size={20}
+                      />
+                      <p className="text-base font-light tracking-wide">Fees</p>
                     </div>
                     <p className="text-[10px] text-gray-50 whitespace-nowrap">
                       Click to view the fees of the academy.
@@ -480,9 +485,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
             <div className="w-full h-full flex flex-col">
               {/* ACTIVE DAYS */}
               <div className="w-full h-fit mt-5">
-                <h1 className="font-medium tracking-wide h-10">
-                  Active Days
-                </h1>
+                <h1 className="font-medium tracking-wide h-10">Active Days</h1>
                 <div className="flex-1 flex flex-wrap gap-2 pr-5">
                   {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
                     (item, index) => {
@@ -506,14 +509,14 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
               </div>
 
               {/* SLOTS */}
-              <div className="h-3/5 w-full flex items-center justify-center mt-5">
-                <span className="w-full h-4/5 bg-gray-100 rounded-md py-2 px-5 flex flex-col gap-3 border border-[#53a53f]">
+              <div className="w-full flex items-center justify-center mt-5">
+                <span className="w-full bg-gray-100 rounded-md py-2 px-5 flex flex-col gap-3 border border-[#53a53f]">
                   <h2 className="font-medium tracking-wider">
                     Practice Timings
                   </h2>
                   <Separator className="bg-gray-300" />
                   <span className="flex-1 w-full flex items-start">
-                    <span className="min-h-fit max-h-full w-full flex flex-wrap gap-2">
+                    <span className="h-20 w-full flex flex-wrap gap-2">
                       {selectedAcademy.slotTimes.map((item, index) => {
                         return (
                           <div
@@ -531,7 +534,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
 
               {/* FEES */}
               <Dialog>
-                <DialogTrigger className="h-2/5 w-full flex items-start justify-center">
+                <DialogTrigger className="h-20 mt-5 w-full flex items-start justify-center">
                   <div className="h-[75%] w-full bg-gray-900 rounded-xl py-3 px-5 flex gap-1 text-gray-100">
                     <div className="flex-1 flex flex-col gap-1 items-start justify-center">
                       <div className="flex items-center gap-1">

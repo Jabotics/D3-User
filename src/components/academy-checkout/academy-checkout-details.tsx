@@ -58,10 +58,10 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
   const [hasSlotChanged, setHasSlotChanged] = useState(false);
 
   return (
-    <section className="w-full h-full flex flex-col gap-2">
-      <div className="w-full h-40 flex gap-5">
+    <section className="w-full h-fit lg:h-full flex flex-col gap-2">
+      <div className="w-full lg:h-40 flex flex-col lg:flex-row gap-5">
         {/* Subscription type */}
-        <div className="w-1/2 h-full rounded-md flex flex-col gap-1">
+        <div className="w-full lg:w-1/2 h-full rounded-md flex flex-col gap-1">
           <div className="h-1/6 w-full font-medium tracking-wide">
             <span>Tenure</span>
             <Separator />
@@ -78,12 +78,10 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
                     id="r1"
                     onClick={() => {
                       const fee = Number(selectedAcademy?.monthly_fee);
-                      // if (fee) {
                       dispatch(setSubscriptionType({ type: "Monthly", fee }));
-                      // }
                     }}
                   />
-                  <Label className="text-lg cursor-pointer" htmlFor="r1">
+                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r1">
                     Monthly
                   </Label>
                 </div>
@@ -95,12 +93,10 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
                     id="r2"
                     onClick={() => {
                       const fee = selectedAcademy?.quarterly_fee;
-                      // if (fee) {
                       dispatch(setSubscriptionType({ type: "Quarterly", fee }));
-                      // }
                     }}
                   />
-                  <Label className="text-lg cursor-pointer" htmlFor="r2">
+                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r2">
                     Quarterly
                   </Label>
                 </div>
@@ -112,14 +108,12 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
                     id="r3"
                     onClick={() => {
                       const fee = selectedAcademy?.half_yearly_fee;
-                      // if (fee) {
                       dispatch(
                         setSubscriptionType({ type: "Half_Yearly", fee })
                       );
-                      // }
                     }}
                   />
-                  <Label className="text-lg cursor-pointer" htmlFor="r3">
+                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r3">
                     Half Yearly
                   </Label>
                 </div>
@@ -131,12 +125,10 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
                     id="r4"
                     onClick={() => {
                       const fee = selectedAcademy?.yearly_fee;
-                      // if (fee) {
                       dispatch(setSubscriptionType({ type: "Yearly", fee }));
-                      // }
                     }}
                   />
-                  <Label className="text-lg cursor-pointer" htmlFor="r4">
+                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r4">
                     Yearly
                   </Label>
                 </div>
@@ -146,7 +138,7 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
         </div>
 
         {/* Slots */}
-        <div className="w-1/2 h-full rounded-md flex flex-col gap-1">
+        <div className="w-full lg:w-1/2 h-full rounded-md flex flex-col gap-1">
           <div className="h-1/6 w-full font-medium tracking-wide">
             <span>Selected Slot</span>
             <Separator />
@@ -235,29 +227,29 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
           {/* <Separator /> */}
         </div>
         <div className="flex-1 w-full border border-[#53a53f44] rounded-md flex flex-col items-start py-5 px-5">
-          <div className="h-10 w-full mb-2">
+          <div className="h-6 lg:h-10 w-full mb-2">
             <div className="h-full w-full ">
               {selectedAcademy && (
-                <span className="text-xl">{selectedAcademy.name}</span>
+                <span className="text-base lg:text-xl">{selectedAcademy.name}</span>
               )}
               <Separator />
             </div>
           </div>
           <div className="h-8 w-full flex items-center gap-3 text-sm">
-            <div className="flex items-center gap-3">
-              <span>First Name: </span>
+            <div className="flex items-center gap-3 w-1/2 lg:w-fit">
+              <span>First <span className="hidden lg:inline-block">Name</span>: </span>
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.first_name}
               </span>
             </div>
-            <div className="flex items-center gap-3">
-              <span>Last Name: </span>
+            <div className="flex items-center gap-3 w-1/2 lg:w-fit">
+              <span>Last <span className="hidden lg:inline-block">Name</span>: </span>
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.last_name}
               </span>
             </div>
           </div>
-          <div className="h-8 w-full flex items-center gap-5 text-sm">
+          <div className="lg:h-8 w-full flex flex-col lg:flex-row items-start lg:items-center gap-3 text-sm mb-3 lg:mb-0">
             <div className="flex items-center gap-3">
               <span>Mobile: </span>
               <span className="font-semibold tracking-wide">
@@ -271,7 +263,7 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
               </span>
             </div>
           </div>
-          <div className="h-8 w-full flex items-center gap-5 text-sm">
+          <div className="lg:h-8 w-full flex flex-col lg:flex-row items-start lg:items-center gap-3 text-sm mb-3 lg:mb-0">
             <div className="flex items-center gap-3">
               <span>Guardian's Name: </span>
               <span className="font-semibold tracking-wide">
@@ -285,7 +277,7 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
               </span>
             </div>
           </div>
-          <div className="h-8 w-full flex items-center gap-5 text-sm my-5">
+          <div className="lg:h-8 w-full flex flex-col lg:flex-row items-start lg:items-center gap-3 text-sm mb-3 lg:my-5">
             <div className="flex items-center gap-5">
               <span>Slot: </span>
               <span className="font-semibold tracking-wide px-3 py-1 rounded-full bg-[#53a53f] text-gray-100">
@@ -293,7 +285,7 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
               </span>
             </div>
           </div>
-          <div className="h-8 w-full flex items-center gap-5 text-sm my-1">
+          <div className="lg:h-8 w-full flex flex-col lg:flex-row items-start lg:items-center gap-3 text-sm mb-3 lg:my-1">
             <div className="flex items-center gap-3">
               <span>Subscription Type: </span>
               <span className="font-semibold tracking-wide">
