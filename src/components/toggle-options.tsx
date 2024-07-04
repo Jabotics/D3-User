@@ -38,7 +38,7 @@ export function ToggleOptions() {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel
             className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer"
-            onClick={() => handleOptionClick("/pay_play")}
+            onClick={() => handleOptionClick("/play")}
           >
             Pay & Play
           </DropdownMenuLabel>

@@ -14,6 +14,8 @@ import eventsSlice, { eventsApi } from "./slices/eventSlice";
 import academiesSlice, { academiesApi } from "./slices/academySlice";
 import membershipsSlice, { membershipsApi } from "./slices/membershipSlice";
 
+import profileSlice from './slices/profileSlice';
+
 export {
   authSlice,
   otpSlice,
@@ -43,4 +45,6 @@ export {
   eventsApi,
   promoCodeApi,
   PromoSlice,
+
+  profileSlice,
 }

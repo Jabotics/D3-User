@@ -7,7 +7,7 @@ const AppShell = () => {
   const location = useLocation();
 
   const hiddenRoutesNav = ["/login"];
-  const hiddenRoutesFooter = ["/login", "/academy", "/pay_play", "/membership"];
+  const hiddenRoutesFooter = ["/login", "/academy", "/play", "/membership", "/scoreboard"];
 
   const shouldHideNavbarNavbar = hiddenRoutesNav.includes(location.pathname);
   const shouldHideNavbarFooter = hiddenRoutesFooter.includes(location.pathname);

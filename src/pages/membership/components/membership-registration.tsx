@@ -189,6 +189,7 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
           customer: userData?.id,
           city: selectedCity,
           ground: selectedMembership.ground._id,
+          subscription_type: null,
         })
       );
 

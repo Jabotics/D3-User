@@ -186,6 +186,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
           customer: userData?.id,
           city: selectedCity,
           ground: selectedAcademy.ground._id,
+          subscription_type: null,
         })
       );
 

@@ -22,7 +22,7 @@ export const Footer = () => {
               <h5 className="text-white mb-4">Quick Link</h5>
               <ul className="flex flex-col gap-0 md:gap-2 text-[11px] text-gray-400">
                 <li>
-                  <Link to={"/pay_play"}>Pay & Play</Link>
+                  <Link to={"/play"}>Pay & Play</Link>
                 </li>
                 <li>
                   <Link to={"/#"}>Event</Link>

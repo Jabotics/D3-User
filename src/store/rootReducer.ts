@@ -30,7 +30,8 @@ import {
   membershipsSlice,
 
   eventsApi,
-  eventsSlice
+  eventsSlice,
+  profileSlice,
 
 } from '@/store/actions'
 import { RequestHandler } from './RequestHandler'
@@ -56,6 +57,12 @@ const appPersistConfig = {
   version: 1,
 }
 
+const profilePersistConfig = {
+  key: 'd3-profile',
+  storage,
+  version: 1,
+}
+
 const academyPersistConfig = {
   key: 'd3-academies',
   storage,
@@ -74,6 +81,7 @@ const authPersistedReducer = persistReducer(persistConfig, authSlice)
 const otpPersistReducer = persistReducer(otpPersistConfig, otpSlice)
 
 const cityPersistReducer = persistReducer(appPersistConfig, citySlice)
+const profilePersistReducer = persistReducer(profilePersistConfig, profileSlice)
 const academyPersistReducer = persistReducer(academyPersistConfig, academiesSlice)
 const membershipPersistReducer = persistReducer(membershipPersistConfig, membershipsSlice)
 
@@ -95,6 +103,7 @@ export const rootReducer = combineReducers({
   event: eventsSlice,
   
   slots: slotsSlice,
+  profile: profilePersistReducer,
   
   [RequestHandler.reducerPath]: RequestHandler.reducer,
   [groundApi.reducerPath]: groundApi.reducer,

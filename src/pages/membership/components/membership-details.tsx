@@ -78,7 +78,9 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
     (state: RootState) => state.membership
   );
 
-  const { hasToken } = useAppSelector((state: RootState) => state.auth);
+  const { hasToken, userData } = useAppSelector(
+    (state: RootState) => state.auth
+  );
 
   const [selectedGround, setSelectedGround] = useState<IGround | null>(null);
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
@@ -420,61 +422,70 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
           </div>
           <div className="w-[15vw] h-full flex items-start justify-center">
             <div className="h-12 w-full flex items-end justify-end">
-              <Dialog>
-                <DialogTrigger
-                  className="w-full h-10 flex items-center justify-between rounded-xl px-5 bg-[#53a53f] text-[#e8fce2] hover:text-gray-50 cursor-pointer hover:bg-[#53a53fd2]"
-                  onClick={() => {
-                    if (hasToken) {
-                      if (selectedSlot) {
-                        navigate(`/membership?id=${membershipId}&join=1`);
-                      }
-                    } else {
-                      navigate("/login");
-                    }
-                  }}
-                >
-                  <span>Subscribe</span>
-                  <HiOutlineArrowLongRight size={20} />
-                </DialogTrigger>
-                <DialogContent aria-describedby="academy slots">
-                  <div className="flex h-[30vh] flex-col items-center">
-                    <DialogTitle className="mt-5 text-xl text-[#53a53f] font-semibold tracking-wide">
-                      Selected Slot
-                    </DialogTitle>
-                    <Separator className="bg-[#53a53f] mt-3 mb-5" />
-                    <div className="w-full text-sm tracking-widest flex flex-col gap-1">
-                      {selectedMembership &&
-                        selectedMembership.slotTimes.map((item, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className={`text-xs h-fit whitespace-nowrap border-[1px] ${
-                                selectedSlot && selectedSlot === item.slot
-                                  ? "bg-[#53a53f] text-gray-50"
-                                  : "text-[#53a53f] border border-[#53a53f] bg-gray-100"
-                              } border-gray-300 px-2 py-1 rounded-xl cursor-pointer`}
-                              onClick={() => {
-                                dispatch(setSelectedSlots(item.slot));
-                              }}
-                            >
-                              {item.slot}
-                            </div>
-                          );
-                        })}
-                    </div>
-                  </div>
-                  <DialogClose
-                    className="h-8 rounded-md bg-[#53a53f] text-xs text-gray-100 "
+              {!userData?.joined_academies?.includes(membershipId) ? (
+                <Dialog>
+                  <DialogTrigger
+                    className="w-full h-10 flex items-center justify-between rounded-xl px-5 bg-[#53a53f] text-[#e8fce2] hover:text-gray-50 cursor-pointer hover:bg-[#53a53fd2]"
                     onClick={() => {
-                      if (selectedSlot) {
-                        navigate(`/membership?id=${membershipId}&join=1`);
+                      if (hasToken) {
+                        if (selectedSlot) {
+                          navigate(`/membership?id=${membershipId}&join=1`);
+                        }
+                      } else {
+                        navigate("/login");
                       }
                     }}
                   >
-                    {selectedSlot ? "Continue" : "Close"}
-                  </DialogClose>
-                </DialogContent>
-              </Dialog>
+                    <span>Subscribe</span>
+                    <HiOutlineArrowLongRight size={20} />
+                  </DialogTrigger>
+                  <DialogContent aria-describedby="academy slots">
+                    <div className="flex h-[30vh] flex-col items-center">
+                      <DialogTitle className="mt-5 text-xl text-[#53a53f] font-semibold tracking-wide">
+                        Selected Slot
+                      </DialogTitle>
+                      <Separator className="bg-[#53a53f] mt-3 mb-5" />
+                      <div className="w-full text-sm tracking-widest flex flex-col gap-1">
+                        {selectedMembership &&
+                          selectedMembership.slotTimes.map((item, index) => {
+                            return (
+                              <div
+                                key={index}
+                                className={`text-xs h-fit whitespace-nowrap border-[1px] ${
+                                  selectedSlot && selectedSlot === item.slot
+                                    ? "bg-[#53a53f] text-gray-50"
+                                    : "text-[#53a53f] border border-[#53a53f] bg-gray-100"
+                                } border-gray-300 px-2 py-1 rounded-xl cursor-pointer`}
+                                onClick={() => {
+                                  dispatch(setSelectedSlots(item.slot));
+                                }}
+                              >
+                                {item.slot}
+                              </div>
+                            );
+                          })}
+                      </div>
+                    </div>
+                    <DialogClose
+                      className="h-8 rounded-md bg-[#53a53f] text-xs text-gray-100 "
+                      onClick={() => {
+                        if (selectedSlot) {
+                          navigate(`/membership?id=${membershipId}&join=1`);
+                        }
+                      }}
+                    >
+                      {selectedSlot ? "Continue" : "Close"}
+                    </DialogClose>
+                  </DialogContent>
+                </Dialog>
+              ) : (
+                <span className="text-sm bg-[#3fa583] flex items-center gap-2 px-5 py-2 rounded-full font-medium text-gray-50 ">
+                  <p>
+                    <MdCardMembership size={20} />
+                  </p>
+                  <p>Subscribed</p>
+                </span>
+              )}
             </div>
           </div>
         </div>

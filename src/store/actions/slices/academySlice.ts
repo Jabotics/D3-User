@@ -1,17 +1,20 @@
 import { APIEndPoints } from "@/APIEndpoint";
-import { IAcademy } from "@/interface/data";
+import { IAcademy, IJoinedAcademy } from "@/interface/data";
 import { RootState } from "@/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  createApi,
-  fetchBaseQuery,
-} from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface IncomingData {
   data: {
     academies: IAcademy[];
     count: number | null;
   };
+  message: string;
+  status: boolean;
+}
+
+interface JoinedAcademiesIncomingData {
+  data: IJoinedAcademy[];
   message: string;
   status: boolean;
 }
@@ -24,10 +27,10 @@ export const academiesApi = createApi({
       const state = getState() as RootState;
       const token = state.auth.token || localStorage.getItem("token") || "";
       if (token) {
-          headers.set("authorization", `Bearer ${token}`);
+        headers.set("authorization", `Bearer ${token}`);
       }
       return headers;
-  },
+    },
   }),
   endpoints: (builder) => ({
     fetchAcademies: builder.query<IncomingData, object>({
@@ -60,18 +63,26 @@ export const academiesApi = createApi({
           formData: true,
         };
       },
-      // transformResponse(
-      //   Response: unknown,
-      //   meta: FetchBaseQueryMeta | undefined
-      // ): IncomingData | Promise<IncomingData> {
-      //   if (meta?.response?.headers.get('authorization')) {
-      //     localStorage.setItem(
-      //       'token',
-      //       String(meta?.response?.headers.get('authorization'))
-      //     )
-      //   }
-      //   return Response as IncomingData
-      // },
+    }),
+    myAcademies: builder.query<JoinedAcademiesIncomingData, object>({
+      query: (params) => {
+        const customParams = { ...params };
+        Object.keys(customParams).forEach((key) => {
+          if (
+            customParams[key as keyof object] === null ||
+            customParams[key as keyof object] === undefined ||
+            customParams[key as keyof object] === "" ||
+            customParams[key as keyof object] === "[]"
+          ) {
+            delete customParams[key as keyof object];
+          }
+        });
+        return {
+          url: APIEndPoints.my_academy,
+          method: "GET",
+          params: customParams,
+        };
+      },
     }),
   }),
 });
@@ -119,6 +130,8 @@ interface InitialState {
     doc?: File | null;
     mobile: string;
   };
+
+  joinedAcademies: IJoinedAcademy[];
 }
 
 const initialState: InitialState = {
@@ -160,6 +173,8 @@ const initialState: InitialState = {
     doc: null,
     mobile: "",
   },
+
+  joinedAcademies: [],
 };
 
 export const AcademiesSlice = createSlice({
@@ -268,11 +283,17 @@ export const AcademiesSlice = createSlice({
           state.status = "failed";
           state.error = action.error.message;
         }
+      )
+      .addMatcher(
+        academiesApi.endpoints.myAcademies.matchFulfilled,
+        (state, action) => {
+          state.joinedAcademies = action.payload.data;
+        }
       );
   },
 });
 
-export const { useFetchAcademiesQuery, useJoinAcademyMutation } = academiesApi;
+export const { useFetchAcademiesQuery, useJoinAcademyMutation, useMyAcademiesQuery } = academiesApi;
 export const {
   setSelectedSportsStore,
   setSubscriptionType,
