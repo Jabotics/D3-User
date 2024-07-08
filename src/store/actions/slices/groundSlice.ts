@@ -94,7 +94,7 @@ export const GroundSlice = createSlice({
       } else {
         state.params = {};
       }
-      // console.log(JSON.parse(JSON.stringify(state.params)));
+  
     },
 
     setSortByText: (state, action: PayloadAction<string>) => {

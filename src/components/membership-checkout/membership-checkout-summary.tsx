@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { useJoinMembershipMutation } from "@/store/actions/slices/membershipSlice";
 
 const MembershipCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<React.SetStateAction<boolean>> }) => {
-  
+
   const searchParams = useSearchParams();
   const academyId = searchParams[0].get("id");
 
@@ -14,7 +14,8 @@ const MembershipCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<Re
   const { memberships, registrationFormDetails } = useAppSelector(
     (state: RootState) => state.membership
   );
-
+  const selectedPromo = useAppSelector((state: RootState) => state.promocode.selectedPromo)
+  const { newPrice } = useAppSelector((state: RootState) => state.promocode);
   const selectedMembership = memberships.find((i) => i.id === academyId);
   const handleSubmitRegistration = async () => {
     try {
@@ -118,8 +119,10 @@ const MembershipCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<Re
       {registrationFormDetails.subscription_type && (
         <Button className="bg-[#252525]" onClick={handleSubmitRegistration}>
           Proceed INR{" "}
-          {registrationFormDetails.membership_fee +
-            registrationFormDetails.joining_fee}
+          {(newPrice.discount > 0 && selectedPromo !== null) ? (registrationFormDetails.membership_fee +
+            registrationFormDetails.joining_fee - newPrice.discount) : (registrationFormDetails.membership_fee +
+              registrationFormDetails.joining_fee)}
+
         </Button>
       )}
     </div>

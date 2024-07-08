@@ -1,7 +1,7 @@
 import { useAppSelector } from "@/store/hooks";
 import { Button } from "../ui/button";
 import { RootState } from "@/store";
-import {  useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useJoinAcademyMutation } from "@/store/actions/slices/academySlice";
 import React from "react";
 
@@ -15,8 +15,9 @@ const AcademyCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<React
   const { academies, registrationFormDetails } = useAppSelector(
     (state: RootState) => state.academy
   );
-
+  const { newPrice } = useAppSelector((state: RootState) => state.promocode);
   const selectedAcademy = academies.find((i) => i.id === academyId);
+  const selectedPromo = useAppSelector((state: RootState) => state.promocode.selectedPromo)
   const handleSubmitRegistration = async () => {
 
     try {
@@ -57,9 +58,9 @@ const AcademyCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<React
       joinAcademy({
         formData
       })
-      
+
       hasSubmit(true)
-      
+
     } catch (error) {
       console.log(error)
     }
@@ -120,8 +121,10 @@ const AcademyCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<React
       {registrationFormDetails.subscription_type && (
         <Button className="bg-[#252525]" onClick={handleSubmitRegistration}>
           Proceed INR{" "}
-          {registrationFormDetails.academy_fee +
-            registrationFormDetails.admission_fee}
+          {(newPrice.discount > 0 && selectedPromo !== null) ? (registrationFormDetails.academy_fee +
+            registrationFormDetails.admission_fee - newPrice.discount) : (registrationFormDetails.academy_fee +
+              registrationFormDetails.admission_fee)}
+
         </Button>
       )}
     </div>

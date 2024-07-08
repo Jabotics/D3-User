@@ -122,7 +122,6 @@ export const SlotsSlice = createSlice({
       const slotPrice = state.allSlots.find(
         (i) => i.id === action.payload
       )?.price[state.selectedDay as DayOfWeek];
-      console.log(action.payload);
       if (state.selectedSlots.includes(action.payload)) {
         state.selectedSlots = state.selectedSlots.filter(
           (slot) => { return slot !== action.payload }
@@ -130,7 +129,6 @@ export const SlotsSlice = createSlice({
 
         state.listOfPrices = state.listOfPrices.filter(
           (price) => {
-            console.log(price);
             return price.id !== action.payload
           }
         );
@@ -147,14 +145,12 @@ export const SlotsSlice = createSlice({
           id: action.payload,
           value: slotPrice || 0,
         });
-        console.log(JSON.parse(JSON.stringify(state.listOfPrices)));
         if (slotPrice) {
           state.totalPrice =
             state.totalPrice !== null
               ? state.totalPrice + slotPrice
               : slotPrice;
         }
-        console.log(JSON.parse(JSON.stringify(state.totalPrice)));
       }
     },
     resetSlots: (state) => {

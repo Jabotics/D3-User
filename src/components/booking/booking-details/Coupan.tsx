@@ -25,6 +25,7 @@ import { BsPatchCheckFill } from "react-icons/bs";
 const Coupan = () => {
   const dispatch = useAppDispatch()
   const { totalPrice, selectedGroundId, selectedSlots } = useAppSelector((state: RootState) => state.slots);
+  const { subscription_type, ground, academy_fee, admission_fee } = useAppSelector((state: RootState) => state.academy.registrationFormDetails)
   const getPromo = useGetPromoQuery({ ground: selectedGroundId });
   const [applyPromo] = useApplyPromoMutation(); // Initialize the mutation hook
   const selectedPromo = useAppSelector((state: RootState) => state.promocode.selectedPromo)
@@ -36,7 +37,7 @@ const Coupan = () => {
 
   const handleApply = (promo: IPromo) => {
     dispatch(setSelectedPromo({ promo: promo }));
-    applyPromo({ id: promo.id, ground: selectedGroundId, amount: totalPrice })
+    applyPromo({ id: promo.id, ground: selectedGroundId || ground, amount: totalPrice || (academy_fee + admission_fee) })
       .then(response => {
         const newData: any = response.data?.data
         dispatch(setNewPrice({ data: newData }))
@@ -50,7 +51,7 @@ const Coupan = () => {
     dispatch(removeSelectedProomo());
   }
   const handleDisable = (id: string) => {
-    if (selectedSlots.length <= 0) {
+    if (selectedSlots.length <= 0 && subscription_type == null) {
       return true;
     }
     else {
@@ -64,7 +65,6 @@ const Coupan = () => {
 
   }
   const { newPrice } = useAppSelector((state: RootState) => state.promocode);
-  console.log(newPrice);
   return (
 
     <div className='w-[100%] bg-white rounded-lg'>

@@ -100,7 +100,6 @@ export const PromoSlice = createSlice({
     initialState,
     reducers: {
         setNewPrice: (state, action: PayloadAction<{ data: { amount: number, discount: number } }>) => {
-            console.log(action.payload);
             state.newPrice = action.payload.data;
         },
         setSelectedPromo: (state, action: PayloadAction<{ promo: IPromo }>) => {
