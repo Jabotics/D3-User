@@ -18,6 +18,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { Mail, Phone, UserRound } from "lucide-react";
 import { Button } from "../ui/button";
+import { useState, useRef } from "react";
+import { MdModeEdit } from "react-icons/md";
+
 const formSchema = z.object({
     name: z.string().min(2, {
         message: "Username must be at least 2 characters.",
@@ -44,7 +47,8 @@ const formSchema = z.object({
     membership_type: z
         .string({
             required_error: "Please select an membership type to display.",
-        })
+        }),
+    profileImg: z.string()
 })
 
 const MembershipFormContainer = () => {
@@ -58,9 +62,40 @@ const MembershipFormContainer = () => {
             guardian_name: "",
             guardian_phone: "",
             gender: "",
-            membership_type: ""
+            membership_type: "",
+            profileImg: ""
         },
     })
+    const [imageBlobUrl, setImageBlobUrl] = useState<string | null>(null);
+    const [_binaryFileData, setBinaryFileData] =
+        useState<ArrayBuffer | null>(null);
+
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+
+    const handleDivClick = () => {
+        fileInputRef.current?.click();
+    };
+
+
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            const blobUrl = URL.createObjectURL(file);
+            setImageBlobUrl(blobUrl);
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                if (reader.result) {
+                    setBinaryFileData(reader.result as ArrayBuffer);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+    };
+
+
     function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
@@ -70,128 +105,202 @@ const MembershipFormContainer = () => {
     return (
         <div className="flex w-[80%] h-[900px] bg-[#e4fbdd] rounded-md justify-center items-center">
             <Form {...form} >
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row w-[80%] flex-wrap gap-2 justify-center">
-                    <FormField
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-[80%] gap-2 items-center">
+                    {/* <FormField
                         control={form.control}
-                        name="name"
+                        name="profileImg"
                         render={({ field }) => (
-                            <FormItem className="relative w-[45%]">
-                                <UserRound className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
+                            <FormItem className="relative w-[160px]">
                                 <FormControl>
-                                    <Input placeholder="name" {...field} className="pl-8" />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                            <FormItem className="relative w-[45%]">
-                                <Mail className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
-                                <FormControl>
-                                    <Input placeholder="email" {...field} className="pl-8" />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="phone"
-                        render={({ field }) => (
-                            <FormItem className="relative w-[45%] flex">
-                                <Phone className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
-                                <FormControl>
-                                    <Input placeholder="phone" {...field} className="pl-8" />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="address"
-                        render={({ field }) => (
-                            <FormItem className="relative w-[45%]">
-                                <Mail className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
-                                <FormControl>
-                                    <Input placeholder="address" {...field} className="pl-8" />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="guardian_name"
-                        render={({ field }) => (
-                            <FormItem className="relative w-[45%]">
-                                <UserRound className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
-                                <FormControl>
-                                    <Input placeholder="guardian_name" {...field} className="pl-8" />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="guardian_phone"
-                        render={({ field }) => (
-                            <FormItem className="relative w-[45%]">
-                                <Phone className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
-                                <FormControl>
-                                    <Input placeholder="emergency contact number" {...field} className="pl-8" />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="gender"
-                        render={({ field }) => (
-                            <FormItem className="w-[45%] ">
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Gender" />
-                                        </SelectTrigger>
+                                        <Input
+                                            type="file"
+                                            id="profileImg"
+                                            placeholder="Select Image"
+                                            {...field}
+                                            onChange={(e) => {
+                                                handleImageChange(e);
+                                                field.onChange(e); // Update the form field
+                                            }}
+                                            className="pl-8 h-[80px] text-center"
+                                        />
+                                        {selectedImage && (
+                                            <div className="absolute inset-0 flex justify-center items-center">
+                                                <img
+                                                    src={selectedImage}
+                                                    alt="Selected"
+                                                    className="max-h-full max-w-full object-cover"
+                                                />
+                                            </div>
+                                        )}
                                     </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="Male">Male</SelectItem>
-                                        <SelectItem value="Female">Female</SelectItem>
-                                        <SelectItem value="Others">Others</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="membership_type"
-                        render={({ field }) => (
-                            <FormItem className="w-[45%] ">
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    /> */}
+                    <div className="h-1/4 flex items-center lg:items-end justify-center ">
+                        <div
+                            className={`w-24 h-24 bg-green-50 border-2 border-[#53a53f] rounded-md flex items-center justify-center relative ${imageBlobUrl ? "" : "cursor-pointer"
+                                }`}
+                            onClick={handleDivClick}
+                        >
+                            <input
+                                ref={fileInputRef}
+                                className="hidden"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                                disabled={Boolean(imageBlobUrl)}
+                            />
+                            {imageBlobUrl && (
+                                <div>
+                                    <img
+                                        src={imageBlobUrl}
+                                        alt="Selected"
+                                        className="w-24 h-24 object-content rounded-md"
+                                    />
+                                </div>
+                            )}
+                            {imageBlobUrl && (
+                                <div className="absolute -bottom-2 -right-2 bg-[#53a53f] w-7 h-7 rounded-full flex items-center justify-center">
+                                    <div
+                                        className="flex items-center justify-center border-2 border-gray-50 rounded-full h-5 w-5 cursor-pointer"
+                                        onClick={() => {
+                                            setImageBlobUrl(null);
+                                            setBinaryFileData(null);
+                                        }}
+                                    >
+                                        <MdModeEdit size={10} className="text-gray-50" />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="flex flex-row w-[80%] flex-wrap gap-2 justify-center">
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem className="relative w-[45%]">
+                                    <UserRound className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
                                     <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select Membership Type" />
-                                        </SelectTrigger>
+                                        <Input placeholder="name" {...field} className="pl-8" />
                                     </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="Monthly">Monthly</SelectItem>
-                                        <SelectItem value="Quarterly">Quarterly</SelectItem>
-                                        <SelectItem value="Half Yearly">Half Yearly</SelectItem>
-                                        <SelectItem value="Yearly">Yearly</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem className="relative w-[45%]">
+                                    <Mail className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
+                                    <FormControl>
+                                        <Input placeholder="email" {...field} className="pl-8" />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="phone"
+                            render={({ field }) => (
+                                <FormItem className="relative w-[45%] flex">
+                                    <Phone className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
+                                    <FormControl>
+                                        <Input placeholder="phone" {...field} className="pl-8" />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="address"
+                            render={({ field }) => (
+                                <FormItem className="relative w-[45%]">
+                                    <Mail className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
+                                    <FormControl>
+                                        <Input placeholder="address" {...field} className="pl-8" />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="guardian_name"
+                            render={({ field }) => (
+                                <FormItem className="relative w-[45%]">
+                                    <UserRound className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
+                                    <FormControl>
+                                        <Input placeholder="guardian_name" {...field} className="pl-8" />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="guardian_phone"
+                            render={({ field }) => (
+                                <FormItem className="relative w-[45%]">
+                                    <Phone className="absolute top-[1.3rem] left-2 h-4 w-4 opacity-50" />
+                                    <FormControl>
+                                        <Input placeholder="emergency contact number" {...field} className="pl-8" />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="gender"
+                            render={({ field }) => (
+                                <FormItem className="w-[45%] ">
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Gender" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="Male">Male</SelectItem>
+                                            <SelectItem value="Female">Female</SelectItem>
+                                            <SelectItem value="Others">Others</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="membership_type"
+                            render={({ field }) => (
+                                <FormItem className="w-[45%] ">
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select Membership Type" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="Monthly">Monthly</SelectItem>
+                                            <SelectItem value="Quarterly">Quarterly</SelectItem>
+                                            <SelectItem value="Half Yearly">Half Yearly</SelectItem>
+                                            <SelectItem value="Yearly">Yearly</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+
                     <Button className="w-[160px] mt-6" type="submit">Submit</Button>
                 </form>
             </Form>

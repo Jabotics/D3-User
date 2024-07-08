@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { format, addDays } from "date-fns";
-import { resetSlots, setSelectedDate, useGetAllSlotsQuery } from "@/store/actions/slices/slotsSlice";
+import { resetSlots, setSelectedDate, setSelectedDay, useGetAllSlotsQuery } from "@/store/actions/slices/slotsSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 import { useNavigate } from "react-router-dom";
@@ -75,14 +75,15 @@ const SelectBookingDate: React.FC = () => {
                 className="pl-1 basis-[60px] lg:basis-[75px] cursor-pointer"
                 onClick={() => {
                   dispatch(setSelectedDate(dateInfo.isoString));
+                  dispatch(setSelectedDay(dateInfo.dayOfWeek.toLowerCase()))
                   dispatch(resetSlots())
                 }}
               >
                 <div
                   className={`p-1 h-16 sm:h-20 flex flex-col items-center justify-center border rounded-md gap-1 hover:bg-[#53A53F] text-[#A4A3A3] hover:text-white group ${dateInfo.isoString.split(":")[0] ===
-                      selectedDate.split(":")[0]
-                      ? "text-white bg-[#53A53F]"
-                      : ""
+                    selectedDate.split(":")[0]
+                    ? "text-white bg-[#53A53F]"
+                    : ""
                     }`}
                 >
                   <span className="inline-block font-light sm:font-semibold text-xs">
@@ -90,9 +91,9 @@ const SelectBookingDate: React.FC = () => {
                   </span>
                   <span
                     className={`inline-block text-sm font-semibold sm:text-lg sm:font-light ${dateInfo.isoString.split(":")[0] ===
-                        selectedDate.split(":")[0]
-                        ? "text-gray-200"
-                        : "text-gray-500 "
+                      selectedDate.split(":")[0]
+                      ? "text-gray-200"
+                      : "text-gray-500 "
                       } -mt-2 group-hover:text-gray-200 whitespace-nowrap`}
                   >
                     {dateInfo.date}

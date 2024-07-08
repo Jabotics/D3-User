@@ -1,8 +1,9 @@
+import { DayOfWeek } from "@/interface/data";
 import { RootState } from "@/store";
 import { setSelectedSlots } from "@/store/actions/slices/slotsSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import React from "react";
-import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
+import { BiSolidCheckbox } from "react-icons/bi";
 
 const formatTime = (time: string): React.JSX.Element => {
   const reqTime = time.replace(/\s/g, "");
@@ -32,7 +33,7 @@ const formatTime = (time: string): React.JSX.Element => {
 
 const SlotsDetail = () => {
   const dispatch = useAppDispatch();
-  const { allSlots, selectedSlots } = useAppSelector(
+  const { allSlots, selectedSlots, selectedDay } = useAppSelector(
     (state: RootState) => state.slots
   );
 
@@ -46,16 +47,15 @@ const SlotsDetail = () => {
         All Slots Available
       </span>
       <div className="flex flex-row items-center gap-2 py-2">
-        <MdOutlineCheckBoxOutlineBlank size={15} color="gray" />
+        <BiSolidCheckbox size={15} color="gray" />
         <span className="inline-block text-sm mr-4">Booked</span>
-        <MdOutlineCheckBoxOutlineBlank size={15} color="#53A53F" />
+        <BiSolidCheckbox size={15} color="#53A53F" />
         <span className="inline-block text-sm">Available</span>
       </div>
       <div className="w-full max-h-[30vh] overflow-x-hidden overflow-y-auto booked-slot mt-5">
         <div
-          className={`flex flex-row w-full sm:w-[65%] gap-2 flex-wrap justify-start mt-3 ${
-            allSlots.length === 0 && "min-h-[15vh]"
-          }`}
+          className={`flex flex-row w-full sm:w-[65%] gap-2 flex-wrap justify-start mt-3 ${allSlots.length === 0 && "min-h-[15vh]"
+            }`}
         >
           {allSlots.length !== 0 ? (
             allSlots.map((item, index) => {
@@ -65,15 +65,13 @@ const SlotsDetail = () => {
                   className={`flex flex-col items-center justify-center gap-2 w-fit h-20`}
                 >
                   <div
-                    className={`flex items-center justify-center w-full h-10 border-[1px] border-gray-300 ${
-                      item.available
-                        ? "border-[#53A53F] cursor-pointer"
-                        : "text-gray-600 bg-gray-300 cursor-not-allowed"
-                    } ${
-                      selectedSlots.includes(item.id)
+                    className={`flex items-center justify-center w-full h-10 border-[1px] border-gray-300 ${item.available
+                      ? "border-[#53A53F] cursor-pointer"
+                      : "text-gray-600 bg-gray-300 cursor-not-allowed"
+                      } ${selectedSlots.includes(item.id)
                         ? "bg-[#53A53F] text-gray-200"
                         : "bg-[#53a53f1e] text-[#53A53F]"
-                    } rounded-md px-2 whitespace-nowrap text-xs`}
+                      } rounded-md px-2 whitespace-nowrap text-xs`}
                     onClick={() => {
                       if (item.available) {
                         dispatch(setSelectedSlots(item.id));
@@ -84,7 +82,7 @@ const SlotsDetail = () => {
                   </div>
 
                   <div className="font-semibold text-xs tracking-widest text-[#3f862d6b] h-8">
-                    {item.available && `₹${item.price}`}
+                    {item.available && `₹${item.price[selectedDay as DayOfWeek]}`}
                   </div>
                 </div>
               );

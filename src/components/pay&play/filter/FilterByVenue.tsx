@@ -38,7 +38,7 @@ const FilterByVenue = () => {
                 <AccordionItem value="item-1" className='border-b-0 p-0'>
                     <AccordionTrigger className='no-underline text-[#53A53F] text-[16px]' state={"open"}>Select Venue</AccordionTrigger>
                     <AccordionContent className="flex flex-col gap-4">
-                        {venue?.map((item: {
+                        {venue.length > 0 ? venue?.map((item: {
                             id: string,
                             name: string
                         }, index: number) => {
@@ -56,7 +56,7 @@ const FilterByVenue = () => {
                                     </label>
                                 </div>
                             )
-                        })}
+                        }) : <div>No Data Available!!</div>}
 
                     </AccordionContent>
                 </AccordionItem>

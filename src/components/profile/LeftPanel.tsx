@@ -25,6 +25,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form"
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod"
@@ -48,6 +49,7 @@ import { useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 import { useDispatch } from "react-redux";
 import { setTitle } from "@/store/actions/slices/bookingSlice";
+import { logout } from "@/store/actions/slices/authSlice";
 interface SideMenu {
   title: string;
   icon: IconType;
@@ -99,6 +101,7 @@ const formSchema = z.object({
     })
 })
 const LeftPanel = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   const { userData } = useAppSelector(
     (state: RootState) => state.auth
@@ -269,7 +272,13 @@ const LeftPanel = () => {
                 <div className="px-5 mt-4 pb-4 flex justify-between items-center border-b-2" key={index}>
                   <div className="flex items-center text-sm gap-2 cursor-pointer">
                     <IconComponent className="text-[#53A53F] text-xl" />
-                    <span className={`font-light ${menu.title === title && 'text-[#53A53F] font-medium'}`} onClick={() => dispatch(setTitle(menu.title))}>{menu.title}</span>
+                    <span className={`font-light ${menu.title === title && 'text-[#53A53F] font-medium'}`} onClick={() => {
+                      dispatch(setTitle(menu.title))
+                      if (menu.title == 'Logout') {
+                        dispatch(logout())
+                        navigate('/login')
+                      }
+                    }}>{menu.title}</span>
                   </div>
                   <IoIosArrowForward className="text-[#53A53F] cursor-pointer" />
                 </div>

@@ -28,12 +28,10 @@ const Coupan = () => {
   const getPromo = useGetPromoQuery({ ground: selectedGroundId });
   const [applyPromo] = useApplyPromoMutation(); // Initialize the mutation hook
   const selectedPromo = useAppSelector((state: RootState) => state.promocode.selectedPromo)
-
   useEffect(() => {
     getPromo.refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroundId]);
-
 
 
   const handleApply = (promo: IPromo) => {
@@ -66,6 +64,7 @@ const Coupan = () => {
 
   }
   const { newPrice } = useAppSelector((state: RootState) => state.promocode);
+  console.log(newPrice);
   return (
 
     <div className='w-[100%] bg-white rounded-lg'>

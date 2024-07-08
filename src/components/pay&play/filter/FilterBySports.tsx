@@ -34,7 +34,7 @@ const FilterBySports = () => {
         <AccordionItem value="item-1" className='border-b-0 p-0'>
           <AccordionTrigger className='no-underline text-[#53A53F] text-[16px]' state={"open"}>Sports</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-2">
-            {sports?.map((item: {
+            {sports.length > 0 ? sports?.map((item: {
               id: string,
               name: string
             }, index: number) => {
@@ -52,7 +52,7 @@ const FilterBySports = () => {
                   </label>
                 </div>
               )
-            })}
+            }) : <div>No Data Available!!</div>}
           </AccordionContent>
         </AccordionItem>
       </Accordion>

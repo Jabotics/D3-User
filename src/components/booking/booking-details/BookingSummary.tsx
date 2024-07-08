@@ -5,8 +5,9 @@ import { useAddSlotsMutation } from "@/store/actions/slices/slotsSlice";
 import { useAppSelector } from "@/store/hooks";
 import { useEffect } from "react";
 import { toast } from "sonner";
-
+import { useNavigate } from "react-router-dom";
 const BookingSummary = () => {
+  const navigate = useNavigate()
   const {
     allSlots,
     selectedSlots,
@@ -42,6 +43,8 @@ const BookingSummary = () => {
         customer: userData?.id,
         amount: totalAmount
       }).unwrap()
+
+      navigate('/checkout')
       console.log(res)
     }
     catch (error) {
