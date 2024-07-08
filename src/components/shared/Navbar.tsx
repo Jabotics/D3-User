@@ -24,6 +24,9 @@ import {
   useGetCitiesQuery,
 } from "@/store/actions/slices/citySlice";
 import { useState } from "react";
+import { setTitle } from "@/store/actions/slices/profileSlice";
+
+// import { TbSparkles } from "react-icons/tb";
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -87,10 +90,11 @@ export const Navbar = () => {
                 <div className="max-lg:hidden flex items-center justify-start gap-2">
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/about"
-                        ? "bg-green-500 text-gray-50 hover:bg-green-400"
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
+                      pathName.pathname === "/about"
+                        ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
                         : ""
-                      }`}
+                    }`}
                     onClick={() => {
                       navigate("/about");
                     }}
@@ -99,46 +103,58 @@ export const Navbar = () => {
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/pay_play"
-                        ? "bg-green-500 text-gray-50 hover:bg-green-400"
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
+                      pathName.pathname === "/play"
+                        ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
                         : ""
-                      }`}
+                    }`}
                     onClick={() => {
-                      navigate("/pay_play");
+                      navigate("/play");
                     }}
                   >
                     Pay & Play
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/academy"
-                        ? "bg-green-500 text-gray-50 hover:bg-green-400"
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
+                      pathName.pathname === "/academy"
+                        ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
                         : ""
-                      }`}
+                    }`}
                     onClick={() => {
                       navigate("/academy");
                     }}
                   >
                     Academy
+                    {/* <span className="absolute -top-2.5 -right-2 bg-amber-500 text-white text-[8px] rounded-full flex items-center gap-1 justify-center border-[1px] border-gray-200 px-1">
+                      <TbSparkles />
+                      Coming Soon
+                    </span> */}
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/membership"
-                        ? "bg-green-500 text-gray-50 hover:bg-green-400"
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
+                      pathName.pathname === "/membership"
+                        ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
                         : ""
-                      }`}
+                    }`}
                     onClick={() => {
                       navigate("/membership");
                     }}
                   >
                     Membership
+                    {/* <span className="absolute -top-2.5 -right-2 bg-amber-500 text-white text-[8px] rounded-full flex items-center gap-1 justify-center border-[1px] border-gray-200 px-1">
+                      <TbSparkles />
+                      Coming Soon
+                    </span> */}
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/contact"
-                        ? "bg-green-500 text-gray-50 hover:bg-green-400"
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
+                      pathName.pathname === "/contact"
+                        ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
                         : ""
-                      }`}
+                    }`}
                     onClick={() => {
                       navigate("/contact");
                     }}
@@ -167,13 +183,15 @@ export const Navbar = () => {
                 >
                   <Button
                     variant="outline"
-                    className={`${selectedCityName ? "w-16" : "w-32 "
-                      } h-6 lg:h-7 rounded-3xl`}
+                    className={`${
+                      selectedCityName ? "w-16" : "w-32 "
+                    } h-6 lg:h-7 rounded-3xl`}
                     onClick={() => setOpen(true)}
                   >
                     <span
-                      className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${selectedCityName && "tracking-tighter"
-                        }`}
+                      className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${
+                        selectedCityName && "tracking-tighter"
+                      }`}
                     >
                       {selectedCityName ? (
                         selectedCityName
@@ -183,7 +201,7 @@ export const Navbar = () => {
                     </span>
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[725px] h-[320px] slide-in-from-top">
+                <DialogContent className="sm:max-w-[725px] h-[320px] z-[100]">
                   <DialogHeader>
                     <DialogTitle>Search Your Location</DialogTitle>
                     <DialogDescription>
@@ -229,13 +247,14 @@ export const Navbar = () => {
                   {hasToken ? (
                     <div className="w-full flex items-center justify-center">
                       <div
-                        className="w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto border-[1px] border-gray-300"
+                        className={`w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${pathName.pathname === "/profile" ? 'border-4 border-[#53a53fbe]' : 'border-[1px] border-gray-300'}`}
                         style={{
                           backgroundImage: "url('/images/viewers.webp')",
                           backgroundSize: "cover",
                           backgroundPosition: "center",
                         }}
                         onClick={() => {
+                          dispatch(setTitle("My Booking"));
                           navigate("/profile");
                         }}
                       />

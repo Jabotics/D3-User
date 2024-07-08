@@ -24,3 +24,18 @@ export const responsive = {
     items: 1
   }
 };
+
+/**
+ * Checks if the given due date has passed.
+ * @param {string} dueDate - The due date as a string (e.g., "Tue Oct 01 2024").
+ * @returns {boolean} - Returns true if the due date has passed, false otherwise.
+ */
+export function isDueDatePassed(dueDate: string): boolean {
+  const dueDateObj = new Date(dueDate);
+  const currentDate = new Date();
+  
+  dueDateObj.setHours(0, 0, 0, 0);
+  currentDate.setHours(0, 0, 0, 0);
+  
+  return currentDate > dueDateObj;
+}

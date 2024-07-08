@@ -6,6 +6,8 @@ const initialState: IAuth = {
   userData: null,
   token: null,
   hasToken: false,
+
+  info_memberships: [],
 };
 
 export const authSlice = createSlice({
@@ -25,9 +27,18 @@ export const authSlice = createSlice({
       }
     },
     setAuth: (state, action: PayloadAction<Partial<IAuth>>) => {
-      // console.log(action.payload)
       if (action.payload.userData !== undefined) {
         state.userData = action.payload.userData;
+      }
+    },
+    setAuthAcademies: (state, action: PayloadAction<string>) => {
+      if (state.userData && state.userData.joined_academies) {
+        state.userData.joined_academies?.push(action.payload);
+      }
+    },
+    setAuthMemberships: (state, action: PayloadAction<string>) => {
+      if (state.userData && state.userData.joined_memberships) {
+        state.userData.joined_memberships?.push(action.payload);
       }
     },
     logout: (state) => {
@@ -39,5 +50,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { login, setAuth, logout } = authSlice.actions;
+export const { login, setAuth, setAuthAcademies, setAuthMemberships, logout } = authSlice.actions;
 export default authSlice.reducer;

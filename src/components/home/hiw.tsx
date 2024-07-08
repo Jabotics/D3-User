@@ -31,9 +31,13 @@ export const HowitWorks = () => {
       <img
         src="/images/icons-bg/basketthrow.svg"
         alt=""
-        className="absolute z-10 -top-5 left-12 h-52 w-52"
+        className=" -top-5 left-12 hidden sm:block absolute z-10 h-32 w-32 sm:w-40 sm:h-40 lg:h-52 lg:w-52"
       />
-      <img src="/images/icons-bg/basketnet.svg" alt="" className="absolute z-10 -bottom-5 right-24 h-24 w-24" />
+      <img
+        src="/images/icons-bg/basketnet.svg"
+        alt=""
+        className="-bottom-5 right-24  hidden sm:block absolute z-10 h-16 w-16 sm:w-20 sm:h-20 lg:h-24 lg:w-24"
+      />
       <div className="w-screen overflow-hidden py-24 text-center bg-lightGreen ">
         <div className="container">
           <h2 className="text-3xl font-medium">How It Works</h2>

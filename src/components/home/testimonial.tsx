@@ -28,7 +28,9 @@ export const Testimonials = () => {
     },
   };
   return (
-    <div className="-mt-12 py-24 text-center ">
+    <div className="-mt-12 py-24 text-center relative">
+      <img src="/images/icons-bg/batter.svg" alt="" className="absolute hidden sm:block top-8 lg:top-5 left-20 lg:left-40 xl:left-[20rem] 2xl:left-[35rem] h-28 w-28 lg:h-32 lg:w-32 2xl:h-40 2xl:w-40" />
+      <img src="/images/icons-bg/baller.svg" alt="" className="absolute hidden sm:block top-8 lg:top-5 right-20 lg:right-40 xl:right-[20rem] 2xl:right-[35rem] h-28 w-28 lg:h-32 lg:w-32 2xl:h-40 2xl:w-40" />
       <div className="container">
         <h2 className="text-xl md:text-3xl font-medium tracking-wide">Our Happy Customers</h2>
         <p className="mt-4 tracking-wide font-normal text-xs md:text-sm">What customers are saying about our safety standards</p>

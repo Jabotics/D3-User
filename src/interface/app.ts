@@ -1,28 +1,28 @@
 export interface IAuth {
-  status: boolean
+  status: boolean;
   userData: {
-    id?: string
-    address?: string
-    email?: string
-    name?: string
-    first_name?: string
-    last_name?: string
-    menu?: {
-      name: string
-      add: boolean
-      view: boolean
-      delete: boolean
-      update: boolean
-    }[]
-    mobile?: string
-    gender?: string
-    profile_image?: string
-    is_superadmin?: boolean
-    is_subadmin?: boolean
-    is_admin?: boolean
-    added_by?: string
-    city?: { _id: string; name: string }
-  } | null
+    id?: string;
+    email?: string;
+    first_name?: string;
+    last_name?: string;
+    mobile?: string;
+    gender?: string;
+    profile_image?: string;
+    joined_academies?: string[];
+    joined_memberships?: string[];
+  } | null;
   token: string | null;
-  hasToken: boolean
+  hasToken: boolean;
+
+  info_memberships?: {
+    id?: string;
+    your_membership_id?: string;
+    member_uid?: string;
+  }[];
+
+  info_academies?: {
+    id?: string;
+    your_academy_id?: string;
+    student_uid?: string;
+  }[];
 }

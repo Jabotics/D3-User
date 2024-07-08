@@ -38,20 +38,26 @@ export function ToggleOptions() {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel
             className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer"
-            onClick={() => handleOptionClick("/pay_play")}
+            onClick={() => handleOptionClick("/play")}
           >
             Pay & Play
           </DropdownMenuLabel>
           <span className="flex w-full items-center justify-center">
             <DropdownMenuSeparator className="w-[90%]" />
           </span>
-          <DropdownMenuLabel className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer">
-            Academic
+          <DropdownMenuLabel
+            className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer"
+            onClick={() => handleOptionClick("/academy")}
+          >
+            Academy
           </DropdownMenuLabel>
           <span className="flex w-full items-center justify-center">
             <DropdownMenuSeparator className="w-[90%]" />
           </span>
-          <DropdownMenuLabel className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer">
+          <DropdownMenuLabel
+            className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer"
+            onClick={() => handleOptionClick("/membership")}
+          >
             Membership
           </DropdownMenuLabel>
           <span className="flex w-full items-center justify-center">
