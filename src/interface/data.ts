@@ -33,11 +33,13 @@ export interface IGround {
   video: string;
   amenities: string[];
 }
+
 export interface ISport {
   id: string;
   name: string;
   icon?: string;
 }
+
 export interface IVenue {
   id: string;
   name: string;

@@ -6,6 +6,8 @@ const initialState: IAuth = {
   userData: null,
   token: null,
   hasToken: false,
+
+  info_memberships: [],
 };
 
 export const authSlice = createSlice({

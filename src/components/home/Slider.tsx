@@ -12,8 +12,9 @@ import {
   useDotButton,
 } from "../custom/slider-home/EmblaCarouselDotButton";
 import { LazyLoadImage } from "../custom/slider-home/EmblaCarouselLazyLoadImage";
-import "../../assets/styles/slider.css";
 import { Button } from "../ui/button";
+
+import "../../assets/styles/slider.css";
 
 const options: EmblaOptionsType = {};
 const SLIDE_COUNT = 5;
@@ -54,18 +55,18 @@ const SliderSection = () => {
   }, [emblaApi, updateSlidesInView]);
 
   return (
-    <div className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
+    <div className="embla-slider">
+      <div className="embla-slider__viewport" ref={emblaRef}>
+        <div className="embla-slider__container">
           {slides.map((index) => (
-            <div className="embla__slide" key={index}>
+            <div className="embla-slider__slide" key={index}>
               <LazyLoadImage
                 key={index}
                 index={index}
                 imgSrc={slider1}
                 inView={slidesInView.indexOf(index) > -1}
               />
-              <div className="embla_container--content">
+              <div className="embla-slider_container--content">
                 <h4 className="text-xs md:text-[16px] font-medium">PLAY SPORTS</h4>
                 <h1 className=" text-2xl md:text-4xl font-bold">
                   World's Biggest Sports Community
@@ -80,19 +81,19 @@ const SliderSection = () => {
         </div>
       </div>
 
-      <div className="embla__controls">
-        <div className="embla__buttons">
+      <div className="embla-slider__controls">
+        <div className="embla-slider__buttons">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
         </div>
 
-        <div className="embla__dots">
+        <div className="embla-slider__dots">
           {scrollSnaps.map((_, index) => (
             <DotButton
               key={index}
               onClick={() => onDotButtonClick(index)}
-              className={"embla__dot".concat(
-                index === selectedIndex ? " embla__dot--selected" : ""
+              className={"embla-slider__dot".concat(
+                index === selectedIndex ? " embla-slider__dot--selected" : ""
               )}
             />
           ))}

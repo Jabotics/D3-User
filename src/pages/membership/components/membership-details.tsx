@@ -291,79 +291,117 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                   </span>
                 </div>
 
-                <Dialog>
-                  <DialogTrigger className="flex-1 w-full">
-                    <div className="h-[65%] w-full bg-gray-900 rounded-xl py-3 px-5 flex gap-1 text-gray-100">
-                      <div className="flex-1 flex flex-col gap-1 items-start justify-center">
-                        <div className="flex items-center gap-1">
-                          <MdCardMembership
-                            className="text-gray-300"
-                            size={20}
-                          />
-                          <p className="text-base font-light tracking-wide">
-                            Subscriptions
+                {!userData?.joined_memberships?.includes(membershipId) ? (
+                  <Dialog>
+                    <DialogTrigger className="flex-1 w-full">
+                      <div className="h-[65%] w-full bg-gray-900 rounded-xl py-3 px-5 flex gap-1 text-gray-100">
+                        <div className="flex-1 flex flex-col gap-1 items-start justify-center">
+                          <div className="flex items-center gap-1">
+                            <MdCardMembership
+                              className="text-gray-300"
+                              size={20}
+                            />
+                            <p className="text-base font-light tracking-wide">
+                              Subscriptions
+                            </p>
+                          </div>
+                          <p className="text-xs text-gray-500 whitespace-nowrap">
+                            Click to view the fees of the subscription.
                           </p>
                         </div>
-                        <p className="text-xs text-gray-500 whitespace-nowrap">
-                          Click to view the fees of the subscription.
-                        </p>
+                        <div className="h-full w-10 flex items-center justify-center text-gray-100">
+                          <HiOutlineArrowLongRight size={24} />
+                        </div>
                       </div>
-                      <div className="h-full w-10 flex items-center justify-center text-gray-100">
-                        <HiOutlineArrowLongRight size={24} />
-                      </div>
-                    </div>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <div className="flex h-[30vh] flex-col items-center">
-                      <div className="mt-5 text-xl text-gray-800 font-semibold tracking-wide">
-                        Fees
-                      </div>
-                      <Separator className="bg-gray-800 mt-3 mb-5" />
-                      <div className="w-full text-sm tracking-widest">
-                        {[
-                          {
-                            name: "Admission",
-                            fee: selectedMembership.admission_fee,
-                          },
-                          {
-                            name: "Monthly",
-                            fee: selectedMembership.monthly_fee,
-                          },
-                          {
-                            name: "Quarterly",
-                            fee: selectedMembership.quarterly_fee,
-                          },
-                          {
-                            name: "Semi Annual",
-                            fee: selectedMembership.half_yearly_fee,
-                          },
-                          {
-                            name: "Annual",
-                            fee: selectedMembership.yearly_fee,
-                          },
-                        ].map((item, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className="flex h-8 w-full items-center justify-start gap-3"
-                            >
-                              <div className="w-32 text-gray-800">
-                                {item.name}
+                    </DialogTrigger>
+                    <DialogContent>
+                      <div className="flex h-[30vh] flex-col items-center">
+                        <div className="mt-5 text-xl text-gray-800 font-semibold tracking-wide">
+                          Fees
+                        </div>
+                        <Separator className="bg-gray-800 mt-3 mb-5" />
+                        <div className="w-full text-sm tracking-widest">
+                          {[
+                            {
+                              name: "Admission",
+                              fee: selectedMembership.admission_fee,
+                            },
+                            {
+                              name: "Monthly",
+                              fee: selectedMembership.monthly_fee,
+                            },
+                            {
+                              name: "Quarterly",
+                              fee: selectedMembership.quarterly_fee,
+                            },
+                            {
+                              name: "Semi Annual",
+                              fee: selectedMembership.half_yearly_fee,
+                            },
+                            {
+                              name: "Annual",
+                              fee: selectedMembership.yearly_fee,
+                            },
+                          ].map((item, index) => {
+                            return (
+                              <div
+                                key={index}
+                                className="flex h-8 w-full items-center justify-start gap-3"
+                              >
+                                <div className="w-32 text-gray-800">
+                                  {item.name}
+                                </div>
+                                <div className="text-gray-800">
+                                  {" "}
+                                  :&nbsp;&nbsp;&#x20B9;{item.fee}
+                                </div>
                               </div>
-                              <div className="text-gray-800">
-                                {" "}
-                                :&nbsp;&nbsp;&#x20B9;{item.fee}
-                              </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                    <DialogClose className="h-8 rounded-md bg-gray-800 text-xs text-gray-100 ">
-                      Close
-                    </DialogClose>
-                  </DialogContent>
-                </Dialog>
+                      <DialogClose className="h-8 rounded-md bg-gray-800 text-xs text-gray-100 ">
+                        Close
+                      </DialogClose>
+                    </DialogContent>
+                  </Dialog>
+                ) : (
+                  <Dialog>
+                    <DialogTrigger className="flex-1 w-full">
+                      <div className="h-[65%] w-full bg-gray-900 rounded-xl py-3 px-5 flex gap-1 text-gray-100">
+                        <div className="flex-1 flex flex-col gap-1 items-start justify-center">
+                          <div className="flex items-center gap-1">
+                            <MdCardMembership
+                              className="text-gray-300"
+                              size={20}
+                            />
+                            <p className="text-base font-light tracking-wide">
+                              Your Subscription
+                            </p>
+                          </div>
+                          <p className="text-xs text-gray-500 whitespace-nowrap">
+                            Click to view the validity of the current subscription.
+                          </p>
+                        </div>
+                        <div className="h-full w-10 flex items-center justify-center text-gray-100">
+                          <HiOutlineArrowLongRight size={24} />
+                        </div>
+                      </div>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <div className="flex h-[30vh] flex-col items-center">
+                        <div className="mt-5 text-xl text-gray-800 font-semibold tracking-wide">
+                          Current Subscription
+                        </div>
+                        <Separator className="bg-gray-800 mt-3 mb-5" />
+                        <div className="w-full">{}</div>
+                      </div>
+                      {/* <DialogClose className="h-8 rounded-md bg-gray-800 text-xs text-gray-100 ">
+                        Close
+                      </DialogClose> */}
+                    </DialogContent>
+                  </Dialog>
+                )}
                 {/* <div className="flex-1 w-full"></div> */}
               </div>
             </div>
@@ -422,7 +460,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
           </div>
           <div className="w-[15vw] h-full flex items-start justify-center">
             <div className="h-12 w-full flex items-end justify-end">
-              {!userData?.joined_academies?.includes(membershipId) ? (
+              {!userData?.joined_memberships?.includes(membershipId) ? (
                 <Dialog>
                   <DialogTrigger
                     className="w-full h-10 flex items-center justify-between rounded-xl px-5 bg-[#53a53f] text-[#e8fce2] hover:text-gray-50 cursor-pointer hover:bg-[#53a53fd2]"

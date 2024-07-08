@@ -49,9 +49,9 @@ const AcademyPage = () => {
 
   useEffect(() => {
     if (detailsPageId) {
-      const foundAcademy = academies.find((i) => i.id === detailsPageId)?.name;
-      if (foundAcademy) {
-        dispatch(setLocationArr(foundAcademy));
+      const foundAcademyIndex = academies.findIndex((i) => i.id === detailsPageId);
+      if (foundAcademyIndex) {
+        dispatch(setLocationArr(academies[foundAcademyIndex].name));
       }
     } else {
       dispatch(resetLocationArr());

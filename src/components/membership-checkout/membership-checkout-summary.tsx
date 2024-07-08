@@ -17,7 +17,6 @@ const MembershipCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<Re
 
   const selectedMembership = memberships.find((i) => i.id === academyId);
   const handleSubmitRegistration = async () => {
-    console.log(registrationFormDetails)
     try {
       const formData = new FormData()
       const { membership, membership_fee, address, joining_fee, city, customer, email, first_name, ground, guardian_mobile, guardian_name, last_name, sport, venue, doc, profile, slot, subscription_type } = registrationFormDetails;
