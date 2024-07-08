@@ -127,6 +127,11 @@ export default function LoginPage() {
             userData: {
               id: res?.Response?.data?.payload?.id,
               mobile: res?.Response?.data?.payload?.mobile,
+              email: res?.Response?.data?.payload?.email,
+              first_name: res?.Response?.data?.payload?.first_name,
+              last_name: res?.Response?.data?.payload?.last_name,
+              joined_academies: res?.Response?.data?.payload?.joined_academies,
+              joined_memberships: res?.Response?.data?.payload?.joined_memberships,
             },
           })
         );

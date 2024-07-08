@@ -2,7 +2,6 @@ import { FaRegHeart } from "react-icons/fa";
 import { IconType } from "react-icons/lib";
 // import { LiaExpeditedssl } from "react-icons/lia";
 import { IoLogOutOutline } from "react-icons/io5";
-import { RiEditCircleFill } from "react-icons/ri";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { MdCardMembership } from "react-icons/md";
 import { IoIosArrowForward } from "react-icons/io";
@@ -14,71 +13,75 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form"
+} from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod"
+import { z } from "zod";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Calendar } from "@/components/ui/calendar"
-import { CalendarIcon, Mail, Phone, UserRound } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { format } from "date-fns"
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { CalendarIcon, Mail, Phone, UserRound } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import { useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 import { useDispatch } from "react-redux";
-import { setTitle } from "@/store/actions/slices/bookingSlice";
+import { setTitle } from "@/store/actions/slices/profileSlice";
+import { FaEdit } from "react-icons/fa";
+import { logout } from "@/store/actions/slices/authSlice";
+import { useNavigate } from "react-router-dom";
+
 interface SideMenu {
-  title: string;
+  title: "Academy" | "My Booking" | "Memberships" | "Favorite" | "Logout";
   icon: IconType;
 }
 
 const sideMenu: SideMenu[] = [
   {
-    title: 'My Booking',
-    icon: AiOutlineFileDone
+    title: "My Booking",
+    icon: AiOutlineFileDone,
   },
   {
-    title: 'Academy',
-    icon: HiOutlineAcademicCap
+    title: "Academy",
+    icon: HiOutlineAcademicCap,
   },
   {
-    title: 'Memberships',
-    icon: MdCardMembership
+    title: "Memberships",
+    icon: MdCardMembership,
   },
   {
-    title: 'Favorite',
-    icon: FaRegHeart
+    title: "Favorite",
+    icon: FaRegHeart,
   },
   // {
   //     title: 'Terms & Conditions',
   //     icon: LiaExpeditedssl
   // },
   {
-    title: 'Logout',
-    icon: IoLogOutOutline
-  }
-]
+    title: "Logout",
+    icon: IoLogOutOutline,
+  },
+];
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -93,19 +96,16 @@ const formSchema = z.object({
   dob: z.date({
     required_error: "A date of birth is required.",
   }),
-  gender: z
-    .string({
-      required_error: "Please select an gender to display.",
-    })
-})
+  gender: z.string({
+    required_error: "Please select an gender to display.",
+  }),
+});
 const LeftPanel = () => {
-  const dispatch = useDispatch()
-  const { userData } = useAppSelector(
-    (state: RootState) => state.auth
-  )
-  const { title } = useAppSelector(
-    (state: RootState) => state.booking
-  );
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { userData } = useAppSelector((state: RootState) => state.auth);
+  const { title } = useAppSelector((state: RootState) => state.profile);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -114,31 +114,40 @@ const LeftPanel = () => {
       phone: "",
       gender: "",
     },
-  })
+  });
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    console.log(values);
   }
 
   return (
-    <div className='w-full sm:w-[25%] mt-20 sm:h-[554px]'>
-      <div className='flex justify-between'>
+    <div className="w-full h-full ">
+      <div className="flex justify-between">
         <div className="flex gap-2">
-          <div className="w-9 h-9">
+          <div className="w-10 h-10 border-2 border-[#53A53F] rounded-full overflow-hidden">
             <img src="/images/male.png" />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-medium">{userData?.name || 'John Doe'}</span>
-            <span className="text-xs font-light text-[#53A53F]">{userData?.mobile}</span>
+            <span className="text-sm font-medium">
+              {userData && userData.first_name && userData.last_name
+                ? `${userData?.first_name + " " + userData?.last_name}`
+                : "John Doe"}
+            </span>
+            <span className="text-xs tracking-wide font-medium text-[#53A53F]">
+              {userData && userData.mobile ? `+91 ${userData?.mobile}` : ""}
+            </span>
           </div>
         </div>
+        
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="bg-[#53A53F]  text-white "> <span>Edit</span>
-              <RiEditCircleFill /></Button>
+            <Button className="bg-[#53A53F] rounded-xl h-8 text-white flex items-center justify-center gap-2">
+              {" "}
+              <span>Edit</span>
+              <FaEdit size={12} />
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -148,7 +157,10 @@ const LeftPanel = () => {
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8"
+              >
                 <FormField
                   control={form.control}
                   name="name"
@@ -169,7 +181,11 @@ const LeftPanel = () => {
                     <FormItem className="relative">
                       <Mail className="absolute top-3.5 left-2 h-4 w-4 opacity-50" />
                       <FormControl>
-                        <Input placeholder="email" {...field} className="pl-8" />
+                        <Input
+                          placeholder="email"
+                          {...field}
+                          className="pl-8"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -182,7 +198,11 @@ const LeftPanel = () => {
                     <FormItem className="relative">
                       <Phone className="absolute top-3.5 left-2 h-4 w-4 opacity-50" />
                       <FormControl>
-                        <Input placeholder="phone" {...field} className="pl-8" />
+                        <Input
+                          placeholder="phone"
+                          {...field}
+                          className="pl-8"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -233,7 +253,10 @@ const LeftPanel = () => {
                   name="gender"
                   render={({ field }) => (
                     <FormItem>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Gender" />
@@ -249,37 +272,54 @@ const LeftPanel = () => {
                     </FormItem>
                   )}
                 />
-                <Button className="w-full" type="submit">Submit</Button>
+                <Button className="w-full" type="submit">
+                  Submit
+                </Button>
               </form>
             </Form>
           </DialogContent>
         </Dialog>
-        {/* <div className="flex items-center bg-[#53A53F] px-2 rounded text-center gap-1 justify-center text-white text-sm font-light py-1 h-8 cursor-pointer" >
-                    <span>Edit</span>
-                    <RiEditCircleFill />
-                </div> */}
       </div>
 
-      <div className=" hidden sm:block w-[100%] h-[400px] bg-white mt-4 rounded-md">
+      <div className=" hidden sm:block w-[100%] h-1/2 bg-white mt-10 rounded-3xl">
         <div className="pt-6 cursor">
-          {
-            sideMenu.map((menu, index) => {
-              const IconComponent = menu.icon;
-              return (
-                <div className="px-5 mt-4 pb-4 flex justify-between items-center border-b-2" key={index}>
-                  <div className="flex items-center text-sm gap-2 cursor-pointer">
-                    <IconComponent className="text-[#53A53F] text-xl" />
-                    <span className={`font-light ${menu.title === title && 'text-[#53A53F] font-medium'}`} onClick={() => dispatch(setTitle(menu.title))}>{menu.title}</span>
-                  </div>
-                  <IoIosArrowForward className="text-[#53A53F] cursor-pointer" />
+          {sideMenu.map((menu, index) => {
+            const IconComponent = menu.icon;
+            return (
+              <div
+                className={`px-5 mt-4 pb-4 flex justify-between items-center ${
+                  menu.title !== "Logout" && "border-b-2"
+                } cursor-pointer`}
+                key={index}
+                onClick={() => {
+                  if (menu.title === "Logout") {
+                    dispatch(logout());
+                    navigate("/");
+                  } else {
+                    dispatch(setTitle(menu.title));
+                  }
+                }}
+              >
+                <div className="flex items-center text-sm gap-2 ">
+                  <IconComponent className="text-[#53A53F] text-xl" />
+                  <span
+                    className={` ${
+                      menu.title === title && "text-[#53A53F] font-medium"
+                    } ${
+                      menu.title === "Logout" ? "font-medium" : "font-light"
+                    } tracking-wide`}
+                  >
+                    {menu.title === "Logout" ? "Log out" : menu.title}
+                  </span>
                 </div>
-              )
-            })
-          }
+                <IoIosArrowForward className="text-[#53A53F] " />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LeftPanel
+export default LeftPanel;

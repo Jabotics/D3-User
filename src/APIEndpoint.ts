@@ -29,10 +29,12 @@ export const APIEndPoints = {
   // ACADEMIES
   fetch_academies: '/api/academies',
   join_academy: '/api/join-academy',
+  my_academy: '/api/joined-academies',
 
   // MEMBERSIPS
   fetch_memberships: '/api/memberships',
   join_membership: '/api/join-membership',
+  my_memberships: '/api/joined-memberships',
 
   // EVENTS
   fetch_events: '/api/fetch-events',

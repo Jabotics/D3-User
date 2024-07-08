@@ -1,10 +1,12 @@
 import { useAppSelector } from "@/store/hooks";
 import { Button } from "../ui/button";
 import { RootState } from "@/store";
-import { useSearchParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 import { useJoinAcademyMutation } from "@/store/actions/slices/academySlice";
+import React from "react";
 
-const AcademyCheckoutSummary = () => {
+const AcademyCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<React.SetStateAction<boolean>> }) => {
+
   const searchParams = useSearchParams();
   const academyId = searchParams[0].get("id");
 
@@ -16,10 +18,10 @@ const AcademyCheckoutSummary = () => {
 
   const selectedAcademy = academies.find((i) => i.id === academyId);
   const handleSubmitRegistration = async () => {
-    console.log(registrationFormDetails)
+
     try {
       const formData = new FormData()
-      const { academy, academy_fee, address, admission_fee, city, customer, email, first_name, ground, guardian_mobile, guardian_name, last_name, mobile, sport, venue, doc, profile, slot, subscription_type } = registrationFormDetails;
+      const { academy, academy_fee, address, admission_fee, city, customer, email, first_name, ground, guardian_mobile, guardian_name, last_name, sport, venue, doc, profile, slot, subscription_type } = registrationFormDetails;
 
       let slotId;
       if (slot) {
@@ -52,9 +54,12 @@ const AcademyCheckoutSummary = () => {
       }
       formData.append('subscription_type', String(subscription_type))
 
-      const res: any = joinAcademy({
+      joinAcademy({
         formData
       })
+      
+      hasSubmit(true)
+      
     } catch (error) {
       console.log(error)
     }

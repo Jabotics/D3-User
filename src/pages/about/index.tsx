@@ -131,7 +131,7 @@ const AboutPage = () => {
             <div
               className="w-1/3 rounded-full border border-[#53A53F45] text-sm flex items-center justify-center py-2 cursor-pointer"
               onClick={() => {
-                navigate("/pay_play");
+                navigate("/play");
               }}
             >
               Pay & Play

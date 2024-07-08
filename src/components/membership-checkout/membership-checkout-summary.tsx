@@ -4,7 +4,8 @@ import { RootState } from "@/store";
 import { useSearchParams } from "react-router-dom";
 import { useJoinMembershipMutation } from "@/store/actions/slices/membershipSlice";
 
-const MembershipCheckoutSummary = () => {
+const MembershipCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  
   const searchParams = useSearchParams();
   const academyId = searchParams[0].get("id");
 
@@ -16,10 +17,9 @@ const MembershipCheckoutSummary = () => {
 
   const selectedMembership = memberships.find((i) => i.id === academyId);
   const handleSubmitRegistration = async () => {
-    console.log(registrationFormDetails)
     try {
       const formData = new FormData()
-      const { membership, membership_fee, address, joining_fee, city, customer, email, first_name, ground, guardian_mobile, guardian_name, last_name, mobile, sport, venue, doc, profile, slot, subscription_type } = registrationFormDetails;
+      const { membership, membership_fee, address, joining_fee, city, customer, email, first_name, ground, guardian_mobile, guardian_name, last_name, sport, venue, doc, profile, slot, subscription_type } = registrationFormDetails;
 
       let slotId;
       if (slot) {
@@ -52,9 +52,12 @@ const MembershipCheckoutSummary = () => {
       }
       formData.append('subscription_type', String(subscription_type))
 
-      const res: any = joinMembership({
+      joinMembership({
         formData
-      })
+      });
+
+      hasSubmit(true);
+
     } catch (error) {
       console.log(error)
     }

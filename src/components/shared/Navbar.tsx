@@ -24,6 +24,7 @@ import {
   useGetCitiesQuery,
 } from "@/store/actions/slices/citySlice";
 import { useState } from "react";
+import { setTitle } from "@/store/actions/slices/profileSlice";
 
 // import { TbSparkles } from "react-icons/tb";
 
@@ -103,12 +104,12 @@ export const Navbar = () => {
                   <Button
                     variant={"outline"}
                     className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/pay_play"
+                      pathName.pathname === "/play"
                         ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
                         : ""
                     }`}
                     onClick={() => {
-                      navigate("/pay_play");
+                      navigate("/play");
                     }}
                   >
                     Pay & Play
@@ -246,13 +247,14 @@ export const Navbar = () => {
                   {hasToken ? (
                     <div className="w-full flex items-center justify-center">
                       <div
-                        className="w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto border-[1px] border-gray-300"
+                        className={`w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${pathName.pathname === "/profile" ? 'border-4 border-[#53a53fbe]' : 'border-[1px] border-gray-300'}`}
                         style={{
                           backgroundImage: "url('/images/viewers.webp')",
                           backgroundSize: "cover",
                           backgroundPosition: "center",
                         }}
                         onClick={() => {
+                          dispatch(setTitle("My Booking"));
                           navigate("/profile");
                         }}
                       />

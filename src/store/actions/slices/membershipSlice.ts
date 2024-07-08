@@ -1,5 +1,5 @@
 import { APIEndPoints } from "@/APIEndpoint";
-import { IMembership } from "@/interface/data";
+import { IJoinedMemberships, IMembership } from "@/interface/data";
 import { RootState } from "@/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -9,6 +9,12 @@ interface IncomingData {
     count: number;
     memberships: IMembership[];
   };
+  message: string;
+  status: boolean;
+}
+
+interface JoinedMembershipsIncomingData {
+  data: IJoinedMemberships[];
   message: string;
   status: boolean;
 }
@@ -57,18 +63,26 @@ export const membershipsApi = createApi({
           formData: true,
         };
       },
-      // transformResponse(
-      //   Response: unknown,
-      //   meta: FetchBaseQueryMeta | undefined
-      // ): IncomingData | Promise<IncomingData> {
-      //   if (meta?.response?.headers.get('authorization')) {
-      //     localStorage.setItem(
-      //       'token',
-      //       String(meta?.response?.headers.get('authorization'))
-      //     )
-      //   }
-      //   return Response as IncomingData
-      // },
+    }),
+    myMemberships: builder.query<JoinedMembershipsIncomingData, object>({
+      query: (params) => {
+        const customParams = { ...params };
+        Object.keys(customParams).forEach((key) => {
+          if (
+            customParams[key as keyof object] === null ||
+            customParams[key as keyof object] === undefined ||
+            customParams[key as keyof object] === "" ||
+            customParams[key as keyof object] === "[]"
+          ) {
+            delete customParams[key as keyof object];
+          }
+        });
+        return {
+          url: APIEndPoints.my_memberships,
+          method: "GET",
+          params: customParams,
+        };
+      },
     }),
   }),
 });
@@ -116,6 +130,8 @@ interface InitialState {
     doc?: File | null;
     mobile: string;
   };
+
+  joinedMemberships: IJoinedMemberships[];
 }
 
 const initialState: InitialState = {
@@ -157,6 +173,8 @@ const initialState: InitialState = {
     doc: null,
     mobile: "",
   },
+
+  joinedMemberships: [],
 };
 
 export const MembershipsSlice = createSlice({
@@ -266,10 +284,16 @@ export const MembershipsSlice = createSlice({
           state.status = "failed";
           state.error = action.error.message;
         }
+      )
+      .addMatcher(
+        membershipsApi.endpoints.myMemberships.matchFulfilled,
+        (state, action) => {
+          state.joinedMemberships = action.payload.data;
+        },
       );
   },
 });
 
-export const { useFetchMembershipsQuery, useJoinMembershipMutation } = membershipsApi;
+export const { useFetchMembershipsQuery, useJoinMembershipMutation, useMyMembershipsQuery } = membershipsApi;
 export const { resetFilters, resetLocationArr, setLocationArr, setPagination, setSelectedGroundType, setSelectedSportsStore, setSelectedVenue, setSortByText, setSelectedSlots, setRegistrationMembership, setSubscriptionType } = MembershipsSlice.actions;
 export default MembershipsSlice.reducer;

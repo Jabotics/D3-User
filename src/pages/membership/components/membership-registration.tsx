@@ -66,7 +66,9 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
   });
   const { userData } = useAppSelector((state: RootState) => state.auth);
   const { selectedCity } = useAppSelector((state: RootState) => state.city);
-  const { memberships } = useAppSelector((state: RootState) => state.membership);
+  const { memberships } = useAppSelector(
+    (state: RootState) => state.membership
+  );
 
   const [progress, setProgress] = React.useState(0);
   const [fileName, setFileName] = React.useState<string | null>(null);
@@ -189,6 +191,7 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
           customer: userData?.id,
           city: selectedCity,
           ground: selectedMembership.ground._id,
+          subscription_type: null,
         })
       );
 

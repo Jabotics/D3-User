@@ -3,7 +3,7 @@ import { RootState } from "@/store";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
-// import { MdOutlineCardMembership } from "react-icons/md";
+
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -24,6 +24,7 @@ import { FaRegPlayCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { BsPassport } from "react-icons/bs";
 
 const getEmbedUrl = (url: string): string => {
   switch (true) {
@@ -66,7 +67,9 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
     (state: RootState) => state.academy
   );
 
-  const { hasToken } = useAppSelector((state: RootState) => state.auth);
+  const { hasToken, userData } = useAppSelector(
+    (state: RootState) => state.auth
+  );
 
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const selectedAcademy = academies.find((i) => i.id === academyId);
@@ -100,66 +103,71 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
               <span className="text-base font-semibold md:font-normal text-gray-800 md:text-gray-950 tracking-wider md:tracking-normal md:text-lg lg:text-3xl ">
                 {selectedAcademy.name}
               </span>
-              <Dialog>
-                <DialogTrigger
-                  onClick={() => {
-                    if (hasToken) {
-                      if (selectedSlot) {
-                        navigate(`/academy?id=${academyId}&join=1`);
-                      }
-                    } else {
-                      navigate("/login");
-                    }
-                  }}
-                  className="text-xs lg:text-sm bg-[#53a53fd7] flex items-center gap-2 px-5 py-1 md:py-2 rounded-full font-medium text-gray-50 cursor-pointer"
-                >
-                  <p>Join Academy</p>
-                  <p>
-                    <HiOutlineArrowLongRight />
-                  </p>
-                </DialogTrigger>
-                <DialogContent aria-describedby="academy slots">
-                  <div className="flex h-[30vh] flex-col items-center">
-                    <DialogTitle className="mt-5 text-xl text-[#53a53f] font-semibold tracking-wide">
-                      Selected Slot
-                    </DialogTitle>
-                    <Separator className="bg-[#53a53f] mt-3 mb-5" />
-                    <div className="w-full text-sm tracking-widest flex flex-col gap-1">
-                      {selectedAcademy.slotTimes.map((item, index) => {
-                        return (
-                          <div
-                            key={index}
-                            className={`text-xs h-fit whitespace-nowrap border-[1px] ${
-                              selectedSlot && selectedSlot === item.slot
-                                ? "bg-[#53a53f] text-gray-50"
-                                : "text-[#53a53f] border border-[#53a53f] bg-gray-100"
-                            } border-gray-300 px-2 py-1 rounded-xl cursor-pointer`}
-                            onClick={() => {
-                              dispatch(setSelectedSlots(item.slot));
-                            }}
-                          >
-                            {item.slot}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  <DialogClose
-                    className="h-8 rounded-md bg-[#53a53f] text-xs text-gray-100 "
+              {!userData?.joined_academies?.includes(academyId) ? (
+                <Dialog>
+                  <DialogTrigger
                     onClick={() => {
-                      if (selectedSlot) {
-                        navigate(`/academy?id=${academyId}&join=1`);
+                      if (hasToken) {
+                        if (selectedSlot) {
+                          navigate(`/academy?id=${academyId}&join=1`);
+                        }
+                      } else {
+                        navigate("/login");
                       }
                     }}
+                    className="text-xs lg:text-sm bg-[#53a53fd7] flex items-center gap-2 px-5 py-1 md:py-2 rounded-full font-medium text-gray-50 cursor-pointer"
                   >
-                    {selectedSlot ? "Continue" : "Close"}
-                  </DialogClose>
-                </DialogContent>
-              </Dialog>
-              {/* <span className="text-sm bg-[#3fa583] flex items-center gap-2 px-5 py-2 rounded-full font-medium text-gray-50 ">
-                <p><MdOutlineCardMembership /></p>
-                <p>Member</p>
-              </span> */}
+                    <p>Join Academy</p>
+                    <p>
+                      <HiOutlineArrowLongRight />
+                    </p>
+                  </DialogTrigger>
+                  <DialogContent aria-describedby="academy slots">
+                    <div className="flex h-[30vh] flex-col items-center">
+                      <DialogTitle className="mt-5 text-xl text-[#53a53f] font-semibold tracking-wide">
+                        Selected Slot
+                      </DialogTitle>
+                      <Separator className="bg-[#53a53f] mt-3 mb-5" />
+                      <div className="w-full text-sm tracking-widest flex flex-col gap-1">
+                        {selectedAcademy.slotTimes.map((item, index) => {
+                          return (
+                            <div
+                              key={index}
+                              className={`text-xs h-fit whitespace-nowrap border-[1px] ${
+                                selectedSlot && selectedSlot === item.slot
+                                  ? "bg-[#53a53f] text-gray-50"
+                                  : "text-[#53a53f] border border-[#53a53f] bg-gray-100"
+                              } border-gray-300 px-2 py-1 rounded-xl cursor-pointer`}
+                              onClick={() => {
+                                dispatch(setSelectedSlots(item.slot));
+                              }}
+                            >
+                              {item.slot}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <DialogClose
+                      className="h-8 rounded-md bg-[#53a53f] text-xs text-gray-100 "
+                      onClick={() => {
+                        if (selectedSlot) {
+                          navigate(`/academy?id=${academyId}&join=1`);
+                        }
+                      }}
+                    >
+                      {selectedSlot ? "Continue" : "Close"}
+                    </DialogClose>
+                  </DialogContent>
+                </Dialog>
+              ) : (
+                <span className="text-sm bg-[#3fa583] flex items-center gap-2 px-5 py-2 rounded-full font-medium text-gray-50 ">
+                  <p>
+                    <BsPassport size={20} />
+                  </p>
+                  <p>Student</p>
+                </span>
+              )}
             </div>
             <Separator className="-mt-2 mb-1 lg:mb-0 lg:mt-0 w-80 lg:w-full" />
 
