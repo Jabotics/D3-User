@@ -22,7 +22,6 @@ const Details = () => {
   // const [searchParams, setSearchParams] = useSearchParams();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id")
-  console.log(id);
   const selectedCity = useAppSelector((state: RootState) => state.city.selectedCity)
   const getGround = useGetGroundQuery({ id: id, city: selectedCity })
   const groundDetails = useAppSelector((state: RootState) => state.ground.grounds)

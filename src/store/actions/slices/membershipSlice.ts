@@ -182,7 +182,6 @@ export const MembershipsSlice = createSlice({
   initialState,
   reducers: {
     setSelectedSportsStore: (state, action: PayloadAction<string | null>) => {
-      console.log(action.payload)
       state.selectedSportsStore = action.payload;
     },
     setSelectedGroundType: (state, action: PayloadAction<string>) => {

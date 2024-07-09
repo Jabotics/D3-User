@@ -70,12 +70,12 @@ const router = createBrowserRouter([
         }),
       },
 
-      {
-        path: "contact",
-        lazy: async () => ({
-          Component: (await import("./pages/contact")).default,
-        }),
-      },
+      // {
+      //   path: "contact",
+      //   lazy: async () => ({
+      //     Component: (await import("./pages/contact")).default,
+      //   }),
+      // },
 
       {
         path: "about",
@@ -94,6 +94,12 @@ const router = createBrowserRouter([
         path: "/details",
         lazy: async () => ({
           Component: (await import("./pages/details")).default,
+        }),
+      },
+      {
+        path: "/checkout",
+        lazy: async () => ({
+          Component: (await import("./pages/checkout")).default,
         }),
       },
     ],

@@ -52,7 +52,7 @@ const MembershipCheckout = () => {
   const handleBook = () => {
     setIsHidden(false);
   };
-  
+
   return (
     <>
       {hasSubmit ? (
@@ -106,16 +106,16 @@ const MembershipCheckout = () => {
                   <IoIosArrowDropleftCircle size={20} />
                   <span className="text-gray-600 mt-[4px]">Go Back</span>
                 </div>
-                <Coupan />
                 <MembershipCheckoutSummary hasSubmit={setHasSubmit} />
+                <Coupan />
                 <CacelationPolicy />
               </div>
             )}
           </div>
           <div className="hidden lg:block w-1/5">
             <div className="w-0 lg:w-full flex flex-col gap-3">
-              <Coupan />
               <MembershipCheckoutSummary hasSubmit={setHasSubmit} />
+              <Coupan />
               <CacelationPolicy />
             </div>
           </div>

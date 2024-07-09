@@ -143,7 +143,6 @@ export default function LoginPage() {
         dispatch(setStartTimer(true));
       }
     } catch (error: any) {
-      console.log(error);
       setOtpError({
         value: true,
         message: `${error?.data?.message} - ${

@@ -19,7 +19,7 @@ import {
 } from "@/store/actions/slices/sportSlice";
 
 const FilterBySports = () => {
-  
+
   const dispatch = useDispatch();
   useGetSportQuery({});
 
@@ -55,7 +55,7 @@ const FilterBySports = () => {
             Sports
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-2">
-            {sports?.map(
+            {sports.length > 0 && sports?.map(
               (
                 item: {
                   id: string;

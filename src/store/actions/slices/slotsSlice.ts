@@ -1,5 +1,5 @@
 import { APIEndPoints } from "@/APIEndpoint";
-import { ISlot } from "@/interface/data";
+import { DayOfWeek, ISlot } from "@/interface/data";
 import { RootState } from "@/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery, FetchBaseQueryMeta, } from "@reduxjs/toolkit/query/react";
@@ -85,7 +85,7 @@ interface InitialState {
     value: number;
   }[];
   totalPrice: number;
-
+  selectedDay: string,
   prev: ISlot[];
 }
 
@@ -97,6 +97,7 @@ const initialState: InitialState = {
   selectedGroundId: "",
   selectedSlots: [],
   selectedDate: "",
+  selectedDay: "",
   listOfPrices: [],
   totalPrice: 0,
 
@@ -114,13 +115,16 @@ export const SlotsSlice = createSlice({
     setSelectedDate: (state, action: PayloadAction<string>) => {
       state.selectedDate = action.payload;
     },
+    setSelectedDay: (state, action: PayloadAction<string>) => {
+      state.selectedDay = action.payload;
+    },
     setSelectedSlots: (state, action: PayloadAction<string>) => {
       const slotPrice = state.allSlots.find(
         (i) => i.id === action.payload
-      )?.price;
+      )?.price[state.selectedDay as DayOfWeek];
       if (state.selectedSlots.includes(action.payload)) {
         state.selectedSlots = state.selectedSlots.filter(
-          (slot) => slot !== action.payload
+          (slot) => { return slot !== action.payload }
         );
 
         state.listOfPrices = state.listOfPrices.filter(
@@ -179,5 +183,5 @@ export const SlotsSlice = createSlice({
 });
 
 export const { useGetAllSlotsQuery, useAddSlotsMutation } = slotsApi;
-export const { setSelectedDate, setSelectedGroundId, setSelectedSlots, resetSlots } = SlotsSlice.actions;
+export const { setSelectedDate, setSelectedGroundId, setSelectedSlots, resetSlots, setSelectedDay } = SlotsSlice.actions;
 export default SlotsSlice.reducer;
