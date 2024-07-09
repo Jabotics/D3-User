@@ -3,10 +3,12 @@ import { IoIosHeartEmpty } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { IGround } from "@/interface/data";
 import venueImg from "../../../assets/venueImg.jpg";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setSelectedGroundId } from "@/store/actions/slices/slotsSlice";
 import { Button } from "@/components/ui/button";
 import { APIEndPoints } from "@/APIEndpoint";
+import { useSetFavoriteMutation } from "@/store/actions/slices/groundSlice";
+import { RootState } from "@/store";
 
 function generateRandomString(length = 30) {
   const characters =
@@ -27,9 +29,25 @@ const VenueItem = ({ item }: { item: IGround }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const { userData } = useAppSelector((state: RootState) => state.auth)
+  const [updateFavorite] = useSetFavoriteMutation();
+
   const openDetailsPage = (id: string) => {
     navigate(`/details?id=${id}`);
   };
+
+  const handleSetFavorite = async () => {
+    try {
+      const res: any = await updateFavorite({
+        ground_id: item.id,
+        customer_id: userData?.id,
+      })
+
+      console.log(res?.message)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="flex rounded-md overflow-hidden w-[90vw] sm:w-full h-24 sm:h-32 border border-gray-100 sm:border-gray-300 ">
@@ -56,7 +74,7 @@ const VenueItem = ({ item }: { item: IGround }) => {
             >
               View Details
             </button>
-            <div className="h-[22px] w-[22px] p-1  bg-[#54a63fb3] rounded-lg flex items-center justify-center ">
+            <div className="h-[22px] w-[22px] p-1  bg-[#54a63fb3] rounded-lg flex items-center justify-center cursor-pointer" onClick={handleSetFavorite}>
               <IoIosHeartEmpty className="font-bold " size={20} color="white" />
             </div>
           </div>
