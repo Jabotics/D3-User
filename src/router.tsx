@@ -13,7 +13,6 @@ const router = createBrowserRouter([
     },
     errorElement: <GeneralError />,
     children: [
-
       {
         index: true,
         lazy: async () => ({
@@ -46,7 +45,7 @@ const router = createBrowserRouter([
         path: "booking",
         lazy: async () => ({
           Component: (await import("./pages/booking")).default,
-        })
+        }),
       },
 
       {
@@ -70,12 +69,19 @@ const router = createBrowserRouter([
         }),
       },
 
-      // {
-      //   path: "contact",
-      //   lazy: async () => ({
-      //     Component: (await import("./pages/contact")).default,
-      //   }),
-      // },
+      {
+        path: "terms-of-use",
+        lazy: async () => ({
+          Component: (await import("./pages/terms")).default,
+        }),
+      },
+
+      {
+        path: "privacy-policy",
+        lazy: async () => ({
+          Component: (await import("./pages/privacy-policy")).default,
+        }),
+      },
 
       {
         path: "about",
@@ -106,12 +112,12 @@ const router = createBrowserRouter([
   },
 
   // Error routes
-  { path: '/500', Component: GeneralError },
-  { path: '/404', Component: NotFoundError },
-  { path: '/503', Component: MaintenanceError },
+  { path: "/500", Component: GeneralError },
+  { path: "/404", Component: NotFoundError },
+  { path: "/503", Component: MaintenanceError },
 
   // Fallback 404 route
-  { path: '*', Component: NotFoundError },
+  { path: "*", Component: NotFoundError },
 ]);
 
 export default router;
