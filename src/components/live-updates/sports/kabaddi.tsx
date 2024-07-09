@@ -1,6 +1,5 @@
 import { Separator } from "@/components/ui/separator";
 import { FaArrowLeftLong, FaLocationDot } from "react-icons/fa6";
-import { MdOutlineAccessTimeFilled } from "react-icons/md";
 
 const Kabaddi = () => {
   return (
