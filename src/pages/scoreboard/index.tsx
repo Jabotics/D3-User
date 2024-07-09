@@ -1,14 +1,14 @@
 import LiveUpdates from "@/components/live-updates";
 import { Button } from "@/components/ui/button";
-import { RootState } from "@/store";
-import { useAppSelector } from "@/store/hooks";
-import { useSearchParams } from "react-router-dom";
+// import { RootState } from "@/store";
+// import { useAppSelector } from "@/store/hooks";
+// import { useSearchParams } from "react-router-dom";
 
 const ScoreboardPage = () => {
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const currentSports = "Football";
 
-  const { grounds } = useAppSelector((state: RootState) => state.ground);
+  // const { grounds } = useAppSelector((state: RootState) => state.ground);
   return (
     <div className="w-screen h-[125vh] sm:h-[90vh] overflow-hidden relative">
       <div className="w-full h-full flex items-center justify-center">

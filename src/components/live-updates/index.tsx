@@ -3,12 +3,14 @@ import React from "react";
 // SPORTS
 import Cricket from "./sports/cricket";
 import Football from "./sports/football";
-// import Basketball from "./sports/basketball";
+import Basketball from "./sports/basketball";
+import Kabaddi from "./sports/kabaddi";
 
 const componentsMap: { [key: string]: React.ComponentType } = {
   cricket: Cricket,
   football: Football,
-  // basketball: Basketball,
+  basketball: Basketball,
+  kabaddi: Kabaddi,
 };
 
 const LiveUpdates = ({ sports }: { sports: string }) => {
@@ -19,7 +21,7 @@ const LiveUpdates = ({ sports }: { sports: string }) => {
   }
 
   return (
-    <div className="w-5/6 h-5/6 flex flex-col gap-5 mt-16 relative">
+    <div className={`w-5/6 h-5/6 flex flex-col gap-5 mt-16 relative`}>
       <SportsComponent />
     </div>
   );
