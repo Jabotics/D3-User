@@ -93,7 +93,7 @@ const Football = () => {
           </div>
         </div>
 
-        <div className="w-full sm:hidden h-fit flex flex-col">
+        <div className="w-full sm:w-1/2 h-full flex flex-col">
           <span className="w-full h-8 text-center text-gray-600">
             <div className="flex items-center gap-4 justify-center">
               <p className="tracking-wide">Time :</p>
@@ -171,7 +171,7 @@ const Football = () => {
         </div>
       </div>
 
-      <div className="flex-1 w-full hidden sm:flex flex-col">
+      {/* <div className="flex-1 w-full flex sm:hidden flex-col">
         <div className="h-fit w-full flex items-center justify-start gap-2 underline">
           <span className="font-medium text-sm text-gray-400">Timeline</span>{" "}
         </div>
@@ -213,7 +213,7 @@ const Football = () => {
             </span>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
