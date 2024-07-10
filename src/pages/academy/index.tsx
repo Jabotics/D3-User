@@ -43,7 +43,7 @@ const AcademyPage = () => {
     },
     {
       refetchOnMountOrArgChange: true,
-      skip: !!!selectedCity,
+      skip: !selectedCity,
     }
   );
 
@@ -51,7 +51,7 @@ const AcademyPage = () => {
     if (detailsPageId) {
       const foundAcademyIndex = academies.findIndex((i) => i.id === detailsPageId);
       if (foundAcademyIndex) {
-        dispatch(setLocationArr(academies[foundAcademyIndex].name));
+        dispatch(setLocationArr(academies[foundAcademyIndex]?.name));
       }
     } else {
       dispatch(resetLocationArr());
@@ -76,15 +76,14 @@ const AcademyPage = () => {
                 {locationArr.map((item, index) => (
                   <div key={index}>
                     <span
-                      className={`${
-                        (
-                          locationArr.length === 2
-                            ? item === "Home"
-                            : item === "Home" || item === "Academy"
-                        )
-                          ? "text-gray-900 cursor-pointer hover:underline"
-                          : "text-gray-500"
-                      }`}
+                      className={`${(
+                        locationArr.length === 2
+                          ? item === "Home"
+                          : item === "Home" || item === "Academy"
+                      )
+                        ? "text-gray-900 cursor-pointer hover:underline"
+                        : "text-gray-500"
+                        }`}
                       onClick={() => {
                         if (item === "Home") {
                           navigate("/");
@@ -98,13 +97,13 @@ const AcademyPage = () => {
                     {(locationArr.length === 2
                       ? item === "Home"
                       : item === "Home" || item === "Academy") && (
-                      <span className="text-gray-500 ml-1">{"/"}</span>
-                    )}
+                        <span className="text-gray-500 ml-1">{"/"}</span>
+                      )}
                   </div>
                 ))}
               </span>
 
-              {!!detailsPageId ? (
+              {detailsPageId ? (
                 isJoinAcademy ? (
                   <AcademyRegistrationPage academyId={detailsPageId} />
                 ) : (

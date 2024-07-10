@@ -21,12 +21,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { BsPatchCheckFill } from "react-icons/bs";
+import { useLocation } from 'react-router-dom';
 
 const Coupan = () => {
   const dispatch = useAppDispatch()
+  const location = useLocation();
+  const hasAcademyEndpoint = location.pathname.includes('academy');
   const { totalPrice, selectedGroundId, selectedSlots } = useAppSelector((state: RootState) => state.slots);
-  const { subscription_type, ground, academy_fee, admission_fee } = useAppSelector((state: RootState) => state.academy.registrationFormDetails)
-  const getPromo = useGetPromoQuery({ ground: selectedGroundId });
+  const { subscription_type, ground, academy_fee, admission_fee, academy } = useAppSelector((state: RootState) => state.academy.registrationFormDetails)
+  const queryParameters: { ground: string, academy?: string } = { ground: selectedGroundId || ground };
+  if (hasAcademyEndpoint) {
+    queryParameters['academy'] = academy;
+  }
+  console.log(queryParameters);
+  const getPromo = useGetPromoQuery(queryParameters);
   const [applyPromo] = useApplyPromoMutation(); // Initialize the mutation hook
   const selectedPromo = useAppSelector((state: RootState) => state.promocode.selectedPromo)
   useEffect(() => {
@@ -39,8 +47,8 @@ const Coupan = () => {
     dispatch(setSelectedPromo({ promo: promo }));
     applyPromo({ id: promo.id, ground: selectedGroundId || ground, amount: totalPrice || (academy_fee + admission_fee) })
       .then(response => {
-        const newData: any = response.data?.data
-        dispatch(setNewPrice({ data: newData }))
+        const newData: { amount: number, discount: number } | undefined = response.data?.data
+        newData && dispatch(setNewPrice({ data: newData }))
       })
       .catch(error => {
         console.error("Failed to apply promo", error);
