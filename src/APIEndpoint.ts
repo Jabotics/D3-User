@@ -25,6 +25,7 @@ export const APIEndPoints = {
 
   // GROUNDS
   fetch_grounds: '/api/fetch-grounds',
+  favorite_ground: '/api/favorites',
 
   // ACADEMIES
   fetch_academies: '/api/academies',

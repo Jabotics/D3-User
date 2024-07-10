@@ -3,7 +3,7 @@ import { LogIn } from "lucide-react";
 
 import logo from "/images/Logo.svg";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SlLocationPin } from "react-icons/sl";
 import { ToggleOptions } from "../toggle-options";
 import { MdCall } from "react-icons/md";
@@ -88,24 +88,27 @@ export const Navbar = () => {
             <div className="col-span-4 sm:col-span-5 max-[290px]:col-span-4  max-[350px]:col-span-5 lg:col-span-7 gap-4 flex justify-end  items-center custome-break sm:mr-2">
               {isLarge && (
                 <div className="max-lg:hidden flex items-center justify-start gap-2">
-                  <Button
-                    variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/about"
-                        ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
-                        : ""
-                    }`}
-                    onClick={() => {
-                      navigate("/about");
-                    }}
-                  >
-                    About Us
-                  </Button>
+                  <Link to={"/about"} target="_blank" rel="noreferrer noopener">
+                    <Button
+                      variant={"outline"}
+                      className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
+                        pathName.pathname === "/about"
+                          ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
+                          : ""
+                      }`}
+                      // onClick={() => {
+                      //   navigate("/contact");
+                      // }}
+                    >
+                      About Us
+                    </Button>
+                  </Link>
+
                   <Button
                     variant={"outline"}
                     className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
                       pathName.pathname === "/play"
-                        ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
+                        ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
                         : ""
                     }`}
                     onClick={() => {
@@ -118,7 +121,7 @@ export const Navbar = () => {
                     variant={"outline"}
                     className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
                       pathName.pathname === "/academy"
-                        ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
+                        ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
                         : ""
                     }`}
                     onClick={() => {
@@ -135,7 +138,7 @@ export const Navbar = () => {
                     variant={"outline"}
                     className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
                       pathName.pathname === "/membership"
-                        ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
+                        ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
                         : ""
                     }`}
                     onClick={() => {
@@ -148,19 +151,26 @@ export const Navbar = () => {
                       Coming Soon
                     </span> */}
                   </Button>
-                  <Button
-                    variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/contact"
-                        ? "bg-[#53a53f] text-gray-50 hover:bg-green-400"
-                        : ""
-                    }`}
-                    onClick={() => {
-                      navigate("/contact");
-                    }}
+
+                  <Link
+                    to={"/contact"}
+                    target="_blank"
+                    rel="noreferrer noopener"
                   >
-                    Contact
-                  </Button>
+                    <Button
+                      variant={"outline"}
+                      className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
+                        pathName.pathname === "/contact"
+                          ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
+                          : ""
+                      }`}
+                      // onClick={() => {
+                      //   navigate("/contact");
+                      // }}
+                    >
+                      Contact
+                    </Button>
+                  </Link>
                 </div>
               )}
               <div />
@@ -247,7 +257,11 @@ export const Navbar = () => {
                   {hasToken ? (
                     <div className="w-full flex items-center justify-center">
                       <div
-                        className={`w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${pathName.pathname === "/profile" ? 'border-4 border-[#53a53fbe]' : 'border-[1px] border-gray-300'}`}
+                        className={`w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${
+                          pathName.pathname === "/profile"
+                            ? "border-4 border-[#53a53fbe]"
+                            : "border-[1px] border-gray-300"
+                        }`}
                         style={{
                           backgroundImage: "url('/images/viewers.webp')",
                           backgroundSize: "cover",
@@ -262,7 +276,7 @@ export const Navbar = () => {
                   ) : (
                     <Button
                       variant={"default"}
-                      className="w-21 text-sm h-6 lg:h-7 rounded-3xl bg-green-500 text-gray-50 hover:bg-green-400"
+                      className="w-21 text-sm h-6 lg:h-7 rounded-3xl bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb]"
                       onClick={() => {
                         // window.open("/login", "_self");
                         navigate("/login");

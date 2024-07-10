@@ -15,32 +15,60 @@ export const Footer = () => {
               playpals, discover venues, skill-up their game, manage their
               activities seamlessly and buy gear.
             </p>
-            <Link to={"/about"} className="text-gray-50 text-[14px] underline">Read More</Link>
+            <Link to={"/about"} className="text-gray-50 text-[14px] underline">
+              Read More
+            </Link>
           </div>
           <div className="col-span-12 md:col-span-5 flex flex-wrap">
             <div className="quick-link w-1/2">
               <h5 className="text-white mb-4">Quick Link</h5>
               <ul className="flex flex-col gap-0 md:gap-2 text-[11px] text-gray-400">
                 <li>
-                  <Link to={"/play"}>Pay & Play</Link>
+                  <Link target="_blank" rel="noreferrer noopener" to={"/play"}>
+                    Pay & Play
+                  </Link>
                 </li>
                 <li>
-                  <Link to={"/#"}>Event</Link>
+                  <Link target="_blank" rel="noreferrer noopener" to={"/#"}>
+                    Event
+                  </Link>
                 </li>
                 <li>
-                  <Link to={"/about"}>About Us</Link>
+                  <Link target="_blank" rel="noreferrer noopener" to={"/about"}>
+                    About Us
+                  </Link>
                 </li>
                 <li>
-                  <Link to={"/contact"}>Contact Us </Link>
+                  <Link
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    to={"/contact"}
+                  >
+                    Contact Us{" "}
+                  </Link>
                 </li>
                 <li>
-                  <Link to={"/academy"}>Academy</Link>
+                  <Link
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    to={"/academy"}
+                  >
+                    Academy
+                  </Link>
                 </li>
                 <li>
-                  <Link to={"/#"}>Blog</Link>
+                  <Link target="_blank" rel="noreferrer noopener" to={"/#"}>
+                    Blog
+                  </Link>
                 </li>
                 <li>
-                  <Link to={"/membership"}>Membership</Link>
+                  <Link
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    to={"/membership"}
+                  >
+                    Membership
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -48,13 +76,28 @@ export const Footer = () => {
               <h5 className="text-white mb-4">Legal</h5>
               <ul className="flex flex-col gap-2 text-[11px] text-gray-400">
                 <li>
-                  <Link to={"/about"}>About Us </Link>
+                  <Link target="_blank" rel="noreferrer noopener" to={"/about"}>
+                    About Us{" "}
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">Privacy Policy</a>
+                  <Link
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    to={"/privacy-policy"}
+                  >
+                    Privacy Policy
+                  </Link>
                 </li>
                 <li>
-                  <a href="#"> Terms Of Use</a>
+                  <Link
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    to={"/terms-of-use"}
+                  >
+                    {" "}
+                    Terms Of Use
+                  </Link>
                 </li>
                 {/* <li>
                   <a href="#">Cookies Policy</a>
