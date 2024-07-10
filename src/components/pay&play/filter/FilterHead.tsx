@@ -21,13 +21,16 @@ const FilterHead = () => {
     dispatch(setParams({ key: "supported_sports", data: [] }));
     dispatch(setParams({ key: "venue", data: [] }));
   };
-  const { refetch } = useGetGroundQuery({});
+  // const { refetch } = useGetGroundQuery({});
   useEffect(() => {
     if (isReset) {
-      refetch();
+      // refetch();
       setIsReset(false);
     }
-  }, [isReset, refetch]);
+  }, [
+    isReset, 
+    // refetch
+  ]);
   return (
     <div className="hidden sm:block w-full h-12 mb-5">
       <div className="w-full flex items-center h-full">

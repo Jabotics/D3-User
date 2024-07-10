@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { APIEndPoints } from "@/APIEndpoint";
 import { useSetFavoriteMutation } from "@/store/actions/slices/groundSlice";
 import { RootState } from "@/store";
+import { setFavorites } from "@/store/actions/slices/authSlice";
+import { IoIosHeart } from "react-icons/io";
 
 function generateRandomString(length = 30) {
   const characters =
@@ -38,12 +40,12 @@ const VenueItem = ({ item }: { item: IGround }) => {
 
   const handleSetFavorite = async () => {
     try {
-      const res: any = await updateFavorite({
+      await updateFavorite({
         ground_id: item.id,
         customer_id: userData?.id,
       })
 
-      console.log(res?.message)
+      dispatch(setFavorites(item.id))
     } catch (error) {
       console.log(error)
     }
@@ -75,12 +77,12 @@ const VenueItem = ({ item }: { item: IGround }) => {
               View Details
             </button>
             <div className="h-[22px] w-[22px] p-1  bg-[#54a63fb3] rounded-lg flex items-center justify-center cursor-pointer" onClick={handleSetFavorite}>
-              <IoIosHeartEmpty className="font-bold " size={20} color="white" />
+              {userData?.favorites?.includes(item.id) ? <IoIosHeart className="font-bold " size={20} color="white" /> : <IoIosHeartEmpty className="font-bold " size={20} color="white" />}
             </div>
           </div>
 
           <div className="flex items-start gap-2 mt-1">
-            <span className="flex-1 flex flex-wrap text-[12px] sm:text-[14px] md:text-xs font-base text-[#676767]">
+            <span className="flex-1 flex flex-wrap text-[12px] sm:text-[14px] md:text-xs font-base text-[#676767] gap-2">
               {item?.supported_sports &&
                 item.supported_sports.map((item, index) => {
                   return (
@@ -93,10 +95,10 @@ const VenueItem = ({ item }: { item: IGround }) => {
                   );
                 })}
             </span>
-            <div className="w-60 flex flex-row items-center gap-2 self-start">
+            <div className="w-60 flex flex-row items-center gap-2 self-start cursor-pointer hover:underline">
               <FaLocationDot size={12} color="#D0D0D0" />
-              <p className="p-0 m-0 text-[12px] sm:text-[14px] md:text-xs text-[#676767]">
-                {item?.venue?.name}, {item?.venue?.address}
+              <p className="p-0 m-0 text-[12px] sm:text-[14px] md:text-xs text-[#676767] whitespace-nowrap">
+                {`${(item?.venue?.name + ' ' + item?.venue?.address).substring(0, 30)}...`}
               </p>
             </div>
           </div>

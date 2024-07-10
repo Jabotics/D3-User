@@ -23,7 +23,7 @@ export const authSlice = createSlice({
       }
       if (action.payload.token !== undefined) {
         state.token = action.payload.token;
-        state.hasToken = true
+        state.hasToken = true;
       }
     },
     setAuth: (state, action: PayloadAction<Partial<IAuth>>) => {
@@ -41,6 +41,19 @@ export const authSlice = createSlice({
         state.userData.joined_memberships?.push(action.payload);
       }
     },
+    setFavorites: (state, action: PayloadAction<string>) => {
+      if (state.userData && state.userData.favorites === undefined) state.userData.favorites = [];
+      
+      if (state.userData && state.userData.favorites) {
+        if (state.userData.favorites.includes(action.payload)) {
+          state.userData.favorites = state.userData.favorites.filter(
+            (item) => item !== action.payload
+          );
+        } else {
+          state.userData.favorites.push(action.payload);
+        }
+      }
+    },
     logout: (state) => {
       state.status = false;
       state.userData = null;
@@ -50,5 +63,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { login, setAuth, setAuthAcademies, setAuthMemberships, logout } = authSlice.actions;
+export const { login, setAuth, setAuthAcademies, setAuthMemberships, setFavorites, logout } =
+  authSlice.actions;
 export default authSlice.reducer;

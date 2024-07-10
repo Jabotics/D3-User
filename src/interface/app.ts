@@ -10,6 +10,7 @@ export interface IAuth {
     profile_image?: string;
     joined_academies?: string[];
     joined_memberships?: string[];
+    favorites?: string[];
   } | null;
   token: string | null;
   hasToken: boolean;
