@@ -29,7 +29,7 @@ const FilterHead = () => {
     }
   }, [isReset, refetch]);
   return (
-    <div className="w-full h-12 mb-5">
+    <div className="hidden sm:block w-full h-12 mb-5">
       <div className="w-full flex items-center h-full">
         <RiFilterLine
           size={window.innerWidth > 1280 ? 20 : 18}

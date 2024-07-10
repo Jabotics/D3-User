@@ -46,6 +46,16 @@ export const groundApi = createApi({
         };
       },
     }),
+    setFavorite: builder.mutation<IncomingData, object>({
+      query: (body) => {
+        const { ...rest } = body;
+        return {
+          url: APIEndPoints.favorite_ground,
+          method: "POST",
+          body: rest,
+        };
+      },
+    })
   }),
 });
 
@@ -61,6 +71,8 @@ interface IParams {
   sortByText: string[];
   selectedVenue: string[];
   selectedGroundType: string[];
+
+  favorites: string[];
 }
 const initialState: IParams = {
   isFilter: true,
@@ -74,6 +86,8 @@ const initialState: IParams = {
   sortByText: [],
   selectedVenue: [],
   selectedGroundType: [],
+
+  favorites: [],
 };
 
 export const GroundSlice = createSlice({
@@ -141,6 +155,16 @@ export const GroundSlice = createSlice({
         state.selectedSportsStore.push(action.payload);
       }
     },
+
+    setFavorites: (state, action: PayloadAction<string>) => {
+      if (state.favorites.includes(action.payload)) {
+        state.favorites = state.favorites.filter(
+          (item) => item !== action.payload
+        );
+      } else {
+        state.favorites.push(action.payload);
+      }
+    },
   },
   extraReducers: (builder) => {
     // Handle the asynchronous fetchItems action
@@ -166,7 +190,7 @@ export const GroundSlice = createSlice({
   },
 });
 
-export const { useGetGroundQuery } = groundApi;
+export const { useGetGroundQuery, useSetFavoriteMutation } = groundApi;
 export const {
   setParams,
   setSortByText,
@@ -174,5 +198,6 @@ export const {
   setSelectedVenueInGround,
   setSelectedGroundType,
   setSelectedSportsStore,
+  setFavorites,
 } = GroundSlice.actions;
 export default GroundSlice.reducer;
