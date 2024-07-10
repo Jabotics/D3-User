@@ -43,7 +43,7 @@ export const promoCodeApi = createApi({
                 }
             }
         }),
-        applyPromo: builder.mutation<IncomingData, object>({
+        applyPromo: builder.mutation<{status:string,message:string,data:{amount:number,discount:number}}, object>({
             query: (body) => {
                 const { ...rest } = body
                 return {
@@ -55,14 +55,14 @@ export const promoCodeApi = createApi({
             transformResponse(
                 Response: unknown,
                 meta: FetchBaseQueryMeta | undefined
-            ): IncomingData | Promise<IncomingData> {
+            ): {status:string,message:string,data:{amount:number,discount:number}} | Promise<{status:string,message:string,data:{amount:number,discount:number}}> {
                 if (meta?.response?.headers.get('authorization')) {
                     localStorage.setItem(
                         'token',
                         String(meta?.response?.headers.get('authorization'))
                     )
                 }
-                return Response as IncomingData
+                return Response as {status:string,message:string,data:{amount:number,discount:number}}
             },
         }),
     })
