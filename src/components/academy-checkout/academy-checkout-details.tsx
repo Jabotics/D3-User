@@ -20,6 +20,7 @@ import {
   setSubscriptionType,
 } from "@/store/actions/slices/academySlice";
 import { useState } from "react";
+import { WiDirectionLeft } from "react-icons/wi";
 
 interface AcademyCheckoutDetailsProps {
   registrationFormDetails: {
@@ -68,7 +69,15 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
         {/* Subscription type */}
         <div className="w-full lg:w-1/2 h-full rounded-md flex flex-col gap-1">
           <div className="h-1/6 w-full font-medium tracking-wide">
-            <span>Tenure</span>
+            <span className="flex items-center gap-2">
+              <p>Tenure</p>
+              {!registrationFormDetails.subscription_type && (
+                <WiDirectionLeft
+                  size={20}
+                  className="animate-pulse text-[#53A53F]"
+                />
+              )}
+            </span>
             <Separator />
           </div>
           <div className="flex-1 w-full flex items-start py-5 justify-start">
@@ -324,7 +333,9 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
                     registrationFormDetails.subscription_type
                   )
                 ) : (
-                  <div className="font-normal bg-[#d9f7d5] px-3 py-1 rounded-xl text-[#53a53f] animate-fade-in-out">Select Subscription type</div>
+                  <div className="font-normal bg-[#d9f7d5] px-3 py-1 rounded-xl text-[#53a53f] animate-fade-in-out">
+                    Select Subscription type
+                  </div>
                 )}
               </span>
             </div>

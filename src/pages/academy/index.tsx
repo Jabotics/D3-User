@@ -13,7 +13,7 @@ import { RootState } from "@/store";
 import AcademyDetails from "./components/academy-details";
 import AcademyRegistrationPage from "./components/academy-registration";
 import AcademyCheckout from "./components/academy-checkout";
-import posterImg from '../../assets/posterImg.jpg'
+import posterImg from "../../assets/posterImg.jpg";
 
 const AcademyPage = () => {
   const navigate = useNavigate();
@@ -48,15 +48,21 @@ const AcademyPage = () => {
   );
 
   useEffect(() => {
-    if (detailsPageId) {
-      const foundAcademyIndex = academies.findIndex((i) => i.id === detailsPageId);
-      if (foundAcademyIndex) {
-        dispatch(setLocationArr(academies[foundAcademyIndex]?.name));
+    if (detailsPageId && academies.length > 0) {
+      const foundAcademyIndex = academies.findIndex(
+        (academy) => academy.id === detailsPageId
+      );
+      if (foundAcademyIndex !== -1) {
+        const academyName = academies[foundAcademyIndex]?.name;
+
+        dispatch(setLocationArr(academyName));
+      } else {
+        dispatch(resetLocationArr());
       }
     } else {
       dispatch(resetLocationArr());
     }
-  }, [detailsPageId, academies]);
+  }, [detailsPageId, academies, dispatch]);
 
   useEffect(() => {
     if (!isJoinAcademy) {
@@ -76,14 +82,15 @@ const AcademyPage = () => {
                 {locationArr.map((item, index) => (
                   <div key={index}>
                     <span
-                      className={`${(
-                        locationArr.length === 2
-                          ? item === "Home"
-                          : item === "Home" || item === "Academy"
-                      )
-                        ? "text-gray-900 cursor-pointer hover:underline"
-                        : "text-gray-500"
-                        }`}
+                      className={`${
+                        (
+                          locationArr.length === 2
+                            ? item === "Home"
+                            : item === "Home" || item === "Academy"
+                        )
+                          ? "text-gray-900 cursor-pointer hover:underline"
+                          : "text-gray-500"
+                      }`}
                       onClick={() => {
                         if (item === "Home") {
                           navigate("/");
@@ -97,8 +104,8 @@ const AcademyPage = () => {
                     {(locationArr.length === 2
                       ? item === "Home"
                       : item === "Home" || item === "Academy") && (
-                        <span className="text-gray-500 ml-1">{"/"}</span>
-                      )}
+                      <span className="text-gray-500 ml-1">{"/"}</span>
+                    )}
                   </div>
                 ))}
               </span>

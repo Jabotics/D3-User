@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { RiMoneyRupeeCircleLine } from "react-icons/ri";
 import {
-  resetLocationArr,
+  // resetLocationArr,
   setSelectedSlots,
 } from "@/store/actions/slices/academySlice";
 import { APIEndPoints } from "@/APIEndpoint";
@@ -77,9 +77,9 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
   const [hasSelectVideo, setHasSelectVideo] = useState(false);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    dispatch(resetLocationArr());
-  }, [academyId]);
+  // useEffect(() => {
+  //   dispatch(resetLocationArr());
+  // }, [academyId]);
 
   useEffect(() => {
     if (selectedAcademy) {
@@ -171,7 +171,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
             </div>
             <Separator className="-mt-2 mb-1 lg:mb-0 lg:mt-0 w-80 lg:w-full" />
 
-            <div className="lg:flex-1 w-full flex gap-5">
+            <div className="h-fit w-full flex gap-5">
               {/* IMAGE */}
               <div className="flex-1 h-full flex items-center justify-start rounded-md">
                 <div className="mt-4 w-full overflow-hidden flex flex-col-reverse sm:flex-row items-start justify-center gap-2">

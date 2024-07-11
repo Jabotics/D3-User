@@ -15,6 +15,7 @@ import { RxCross2 } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import {
   resetFilters,
+  setLocationArr,
   setSelectedGroundType,
   setSelectedSportsStore,
   setSelectedVenue,
@@ -262,7 +263,9 @@ const AcademyList = () => {
               </SheetTrigger>
               <SheetContent side={"left"}>
                 <SheetHeader>
-                  <SheetTitle className="text-[#53A53F]">Filter by Category</SheetTitle>
+                  <SheetTitle className="text-[#53A53F]">
+                    Filter by Category
+                  </SheetTitle>
                   <SheetDescription>
                     Filter your search based on given categories.
                   </SheetDescription>
@@ -327,6 +330,7 @@ const AcademyList = () => {
                       className="w-full h-16 sm:h-20 bg-gray-100 rounded-lg flex items-center justify-between px-5 cursor-pointer"
                       onClick={() => {
                         navigate(`/academy?id=${item.id}`);
+                        dispatch(setLocationArr(item.name));
                       }}
                     >
                       <div className="flex items-center gap-5">
@@ -338,7 +342,9 @@ const AcademyList = () => {
                           />
                         </div>
                         <div className="flex flex-col">
-                          <div className="text-sm sm:text-2xl font-light">{item.name}</div>
+                          <div className="text-sm sm:text-2xl font-light">
+                            {item.name}
+                          </div>
                           <div className="flex items-center gap-1">
                             <div className="text-[8px] sm:text-sm font-medium">
                               {item.ground.name}

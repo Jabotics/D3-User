@@ -293,9 +293,17 @@ const Venues = ({
       </div>
 
       <div className="flex-1 w-full overflow-x-hidden overflow-y-auto">
-        {groundData.map((item, index) => {
+        {groundData.length > 0 ? groundData.map((item, index) => {
           return <VenueItem key={index} item={item} />;
-        })}
+        }) : (
+          <div className="flex w-full flex-col gap-3">
+            {Array.from({ length: 4 }).map((_, index) => {
+              return (
+                <div key={index} className="w-full h-16 bg-gray-100 rounded-md"></div>
+              )
+            })}
+          </div>
+        )}
       </div>
 
       <div className="h-fit w-full self-end flex items-center justify-end gap-4">

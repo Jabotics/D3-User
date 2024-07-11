@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   setParams,
-  useGetGroundQuery,
+  // useGetGroundQuery,
 } from "@/store/actions/slices/groundSlice";
 import { setSelectedSports } from "@/store/actions/slices/sportSlice";
 import { setSelectedVenue } from "@/store/actions/slices/venueSlice";

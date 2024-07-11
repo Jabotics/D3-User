@@ -262,7 +262,9 @@ const MembershipList = () => {
               </SheetTrigger>
               <SheetContent side={"left"}>
                 <SheetHeader>
-                  <SheetTitle className="text-[#53A53F]">Filter by Category</SheetTitle>
+                  <SheetTitle className="text-[#53A53F]">
+                    Filter by Category
+                  </SheetTitle>
                   <SheetDescription>
                     Filter your search based on given categories.
                   </SheetDescription>
@@ -324,7 +326,7 @@ const MembershipList = () => {
                   return (
                     <div
                       key={index}
-                      className="w-full h-16 sm:h-20 bg-[#53a53ff5] text-gray-100 rounded-lg flex items-center justify-between px-5 cursor-pointer"
+                      className="w-full h-16 sm:h-20 bg-gradient-to-r from-[#7fa177f5] to-[#60a54ef5] text-gray-100 rounded-lg flex items-center justify-between px-5 cursor-pointer"
                       onClick={() => {
                         navigate(`/membership?id=${item.id}`);
                       }}
@@ -338,7 +340,9 @@ const MembershipList = () => {
                           />
                         </div>
                         <div className="flex flex-col">
-                          <div className="text-sm sm:text-2xl font-light">{item.ground.name}</div>
+                          <div className="text-sm sm:text-2xl font-light">
+                            {item.ground.name}
+                          </div>
                           <div className="flex items-center gap-1">
                             <div className="text-[8px] sm:text-sm font-medium">
                               {item.ground.name}
