@@ -5,6 +5,9 @@ import {
   GroundSlice,
   // AUTHENTICATION
   authSlice,
+  authApi,
+  logoutApi,
+
   otpSlice,
   groundApi,
   SportSlice,
@@ -106,6 +109,10 @@ export const rootReducer = combineReducers({
   profile: profilePersistReducer,
   
   [RequestHandler.reducerPath]: RequestHandler.reducer,
+
+  [authApi.reducerPath]: authApi.reducer,
+  [logoutApi.reducerPath]: logoutApi.reducer,
+  
   [groundApi.reducerPath]: groundApi.reducer,
   [sportApi.reducerPath]: sportApi.reducer,
   [venueApi.reducerPath]: venueApi.reducer,

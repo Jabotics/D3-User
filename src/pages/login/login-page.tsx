@@ -132,6 +132,7 @@ export default function LoginPage() {
               last_name: res?.Response?.data?.payload?.last_name,
               joined_academies: res?.Response?.data?.payload?.joined_academies,
               joined_memberships: res?.Response?.data?.payload?.joined_memberships,
+              favorites: res?.Response?.data?.payload?.favorites,
             },
           })
         );

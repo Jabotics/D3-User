@@ -4,6 +4,8 @@ export const APIEndPoints = {
   // CUSTOMER
   customer_login: '/api/customer-login',
   validate_otp: '/api/validate-otp',
+  verify_session: '/api/verify-user-session',
+  logout: '/api/logout',
 
   // Fetch Ground
   fetch_ground: '/api/grounds',

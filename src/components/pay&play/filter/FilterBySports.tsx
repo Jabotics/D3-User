@@ -40,7 +40,6 @@ const FilterBySports = () => {
     dispatch(setSelectedSportsStore(sportId));
   };
 
-  console.log(sports && sports.length > 0);
   return (
     <>
       {sports && sports.length > 0 ? (

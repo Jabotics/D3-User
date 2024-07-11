@@ -50,6 +50,8 @@ import { setTitle } from "@/store/actions/slices/profileSlice";
 import { FaEdit } from "react-icons/fa";
 import { logout } from "@/store/actions/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useLogoutQuery } from "@/store/actions/slices/otpSlice";
 
 interface SideMenu {
   title: "Academy" | "My Booking" | "Memberships" | "Favorite" | "Logout";
@@ -104,6 +106,9 @@ const LeftPanel = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [toLogout, setToLogout] = useState(false);
+  useLogoutQuery({}, { skip: !toLogout });
+
   const { userData } = useAppSelector((state: RootState) => state.auth);
   const { title } = useAppSelector((state: RootState) => state.profile);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -121,6 +126,21 @@ const LeftPanel = () => {
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
+
+  const handleLogout = async () => {
+    try {
+      setToLogout(true);
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      dispatch(logout());
+      navigate("/");
+
+      setToLogout(false);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <div className="w-full h-full ">
@@ -140,7 +160,7 @@ const LeftPanel = () => {
             </span>
           </div>
         </div>
-        
+
         <Dialog>
           <DialogTrigger asChild>
             <Button className="bg-[#53A53F] rounded-xl h-8 text-white flex items-center justify-center gap-2">
@@ -293,8 +313,7 @@ const LeftPanel = () => {
                 key={index}
                 onClick={() => {
                   if (menu.title === "Logout") {
-                    dispatch(logout());
-                    navigate("/");
+                    handleLogout();
                   } else {
                     dispatch(setTitle(menu.title));
                   }

@@ -1,5 +1,6 @@
 import { APIEndPoints } from "@/APIEndpoint";
 import { IGround } from "@/interface/data";
+import { RootState } from "@/store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 interface IncomingData {
@@ -15,14 +16,17 @@ export const groundApi = createApi({
   reducerPath: "GroundApi",
   baseQuery: fetchBaseQuery({
     baseUrl: APIEndPoints.BackendURL,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("token")
-        ? localStorage.getItem("token")
-        : "";
+    prepareHeaders: (headers, { getState }) => {
+      const state = getState() as RootState;
+      // const stateAuth = localStorage.getItem("persist:d3-root")
+      // console.log(Object.keys(JSON.parse(JSON.stringify(stateAuth))))
+      // console.log(state.auth)
+      const token = state.auth.token || localStorage.getItem("token") || "";
+
       if (token) {
-        headers.set("authorization", token);
-        return headers;
+        headers.set("authorization", `Bearer ${token}`);
       }
+      return headers;
     },
   }),
   endpoints: (builder) => ({
@@ -55,7 +59,7 @@ export const groundApi = createApi({
           body: rest,
         };
       },
-    })
+    }),
   }),
 });
 
@@ -108,7 +112,6 @@ export const GroundSlice = createSlice({
       } else {
         state.params = {};
       }
-  
     },
 
     setSortByText: (state, action: PayloadAction<string>) => {

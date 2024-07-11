@@ -2,17 +2,20 @@ import { APIEndPoints } from "@/APIEndpoint";
 import { Button } from "@/components/ui/button";
 import { RootState } from "@/store";
 import { useGetGroundQuery } from "@/store/actions/slices/groundSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/store/hooks";
 import { FaLocationDot } from "react-icons/fa6";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { MdBookmarkRemove } from "react-icons/md";
-import { setFavorites } from "@/store/actions/slices/authSlice";
 import { Separator } from "@/components/ui/separator";
+import { useState } from "react";
+import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 const Favorites = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+
+  const [toRefetchUserData, setToRefetchUserData] = useState(false);
+  useVerifySessionQuery({}, { skip: !toRefetchUserData });
 
   const { userData } = useAppSelector((state: RootState) => state.auth);
   useGetGroundQuery({});
@@ -70,7 +73,7 @@ const Favorites = () => {
                         variant={"outline"}
                         className="flex items-center justify-center gap-4 h-6 bg-[#53a53f] text-[#b7cab2] hover: "
                         onClick={() => {
-                          dispatch(setFavorites(item));
+                          setToRefetchUserData(true);
                         }}
                       >
                         <span>Remove from Favorites</span>
