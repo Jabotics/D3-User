@@ -62,7 +62,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-20">
+    <div className="fixed top-0 left-0 w-full z-20 border-b shadow-2xl border-gray-100 shadow-gray-100">
       <div className="w-full border-slate-200 border-solid bg-white py-4">
         <div className="container">
           <div className="grid-container grid grid-cols-12 gap-7 items-center">

@@ -20,6 +20,7 @@ import {
   setSubscriptionType,
 } from "@/store/actions/slices/academySlice";
 import { useState } from "react";
+import { WiDirectionLeft } from "react-icons/wi";
 
 interface AcademyCheckoutDetailsProps {
   registrationFormDetails: {
@@ -37,7 +38,12 @@ interface AcademyCheckoutDetailsProps {
     city: string;
     venue: string;
     academy_fee: number;
-    subscription_type?: "Monthly" | "Quarterly" | "Half_Yearly" | "Yearly" | null;
+    subscription_type?:
+      | "Monthly"
+      | "Quarterly"
+      | "Half_Yearly"
+      | "Yearly"
+      | null;
     admission_fee?: number;
     profile?: File | null;
     doc?: File | null;
@@ -63,12 +69,24 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
         {/* Subscription type */}
         <div className="w-full lg:w-1/2 h-full rounded-md flex flex-col gap-1">
           <div className="h-1/6 w-full font-medium tracking-wide">
-            <span>Tenure</span>
+            <span className="flex items-center gap-2">
+              <p>Tenure</p>
+              {!registrationFormDetails.subscription_type && (
+                <WiDirectionLeft
+                  size={20}
+                  className="animate-pulse text-[#53A53F]"
+                />
+              )}
+            </span>
             <Separator />
           </div>
           <div className="flex-1 w-full flex items-start py-5 justify-start">
             <RadioGroup
-              value={registrationFormDetails.subscription_type ? registrationFormDetails.subscription_type : undefined}
+              value={
+                registrationFormDetails.subscription_type
+                  ? registrationFormDetails.subscription_type
+                  : undefined
+              }
               className="grid grid-cols-2"
             >
               {selectedAcademy ? (
@@ -81,7 +99,10 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
                       dispatch(setSubscriptionType({ type: "Monthly", fee }));
                     }}
                   />
-                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r1">
+                  <Label
+                    className="text-sm lg:text-base tracking-wider cursor-pointer"
+                    htmlFor="r1"
+                  >
                     Monthly
                   </Label>
                 </div>
@@ -96,7 +117,10 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
                       dispatch(setSubscriptionType({ type: "Quarterly", fee }));
                     }}
                   />
-                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r2">
+                  <Label
+                    className="text-sm lg:text-base tracking-wider cursor-pointer"
+                    htmlFor="r2"
+                  >
                     Quarterly
                   </Label>
                 </div>
@@ -113,7 +137,10 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
                       );
                     }}
                   />
-                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r3">
+                  <Label
+                    className="text-sm lg:text-base tracking-wider cursor-pointer"
+                    htmlFor="r3"
+                  >
                     Half Yearly
                   </Label>
                 </div>
@@ -128,7 +155,10 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
                       dispatch(setSubscriptionType({ type: "Yearly", fee }));
                     }}
                   />
-                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r4">
+                  <Label
+                    className="text-sm lg:text-base tracking-wider cursor-pointer"
+                    htmlFor="r4"
+                  >
                     Yearly
                   </Label>
                 </div>
@@ -145,7 +175,7 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
           </div>
           <div className="flex-1 w-full flex flex-col items-start pt-5">
             <div className="flex items-center gap-2">
-              <span className="border border-[#53A53F] px-3 rounded-full ">
+              <span className="border text-xs border-[#53A53F] px-5 py-1 tracking-wider rounded-full font-medium">
                 {registrationFormDetails.slot}
               </span>
               {selectedAcademy ? (
@@ -209,7 +239,7 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
                       return (
                         <div
                           key={index}
-                          className="px-3 bg-gray-300 rounded-full py-1 text-gray-600"
+                          className="px-3 bg-gray-300 rounded-full py-1 tracking-wide text-gray-600"
                         >
                           {item.slot}
                         </div>
@@ -230,20 +260,26 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
           <div className="h-6 lg:h-10 w-full mb-2">
             <div className="h-full w-full ">
               {selectedAcademy && (
-                <span className="text-base lg:text-xl">{selectedAcademy.name}</span>
+                <span className="text-base font-semibold tracking-wider">
+                  {selectedAcademy.name}
+                </span>
               )}
               <Separator />
             </div>
           </div>
           <div className="h-8 w-full flex items-center gap-3 text-sm">
             <div className="flex items-center gap-3 w-1/2 lg:w-fit">
-              <span>First <span className="hidden lg:inline-block">Name</span>: </span>
+              <span>
+                First <span className="hidden lg:inline-block">Name</span>:{" "}
+              </span>
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.first_name}
               </span>
             </div>
             <div className="flex items-center gap-3 w-1/2 lg:w-fit">
-              <span>Last <span className="hidden lg:inline-block">Name</span>: </span>
+              <span>
+                Last <span className="hidden lg:inline-block">Name</span>:{" "}
+              </span>
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.last_name}
               </span>
@@ -289,9 +325,18 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
             <div className="flex items-center gap-3">
               <span>Subscription Type: </span>
               <span className="font-semibold tracking-wide">
-                {registrationFormDetails.subscription_type === "Half_Yearly"
-                  ? "Half Yearly"
-                  : registrationFormDetails.subscription_type}
+                {registrationFormDetails.subscription_type ? (
+                  registrationFormDetails.subscription_type ===
+                  "Half_Yearly" ? (
+                    "Half Yearly"
+                  ) : (
+                    registrationFormDetails.subscription_type
+                  )
+                ) : (
+                  <div className="font-normal bg-[#d9f7d5] px-3 py-1 rounded-xl text-[#53a53f] animate-fade-in-out">
+                    Select Subscription type
+                  </div>
+                )}
               </span>
             </div>
           </div>

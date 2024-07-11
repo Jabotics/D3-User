@@ -226,7 +226,8 @@ export const MembershipsSlice = createSlice({
       state.offset = offset;
     },
     setLocationArr: (state, action: PayloadAction<string>) => {
-      state.locationArr.push(action.payload);
+      const x = new Set(state.locationArr);
+      state.locationArr = Array.from(x.add(action.payload));
     },
     resetLocationArr: (state) => {
       state.locationArr = ["Home", "Membership"];

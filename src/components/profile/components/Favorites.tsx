@@ -1,117 +1,96 @@
+import { APIEndPoints } from "@/APIEndpoint";
+import { Button } from "@/components/ui/button";
+import { RootState } from "@/store";
+import { useGetGroundQuery } from "@/store/actions/slices/groundSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { FaLocationDot } from "react-icons/fa6";
+import { HiOutlineArrowLongRight } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
+import { MdBookmarkRemove } from "react-icons/md";
+import { setFavorites } from "@/store/actions/slices/authSlice";
+import { Separator } from "@/components/ui/separator";
 
 const Favorites = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const { userData } = useAppSelector((state: RootState) => state.auth);
+  useGetGroundQuery({});
+
+  const { grounds } = useAppSelector((state: RootState) => state.ground);
+
   return (
     <>
       <div className="hidden flex-col gap-4 w-full h-[500px] sm:flex">
         <span className="inline-block text-sm font-base text-gray-500">
           My Favorites
         </span>
-        <div id="bookings" className="w-full flex flex-col gap-4">
-          <div className="bg-white flex flex-row justify-between p-4 rounded-lg">
-            <div className="text-sm w-1/6 flex justify-center font-light tracking-wide">
-              Ground Name
-            </div>
-            <div className="text-sm w-1/6 flex justify-center font-light tracking-wide">
-              Location
-            </div>
-            <div className="text-sm w-1/6 flex justify-center font-light tracking-wide">
-              Booking Date
-            </div>
-            <div className="text-sm w-1/3 flex justify-center font-light tracking-wide">
-              Booking Time
-            </div>
-            <div className="text-sm w-1/6 flex justify-center font-light tracking-wide">
-              Status
-            </div>
-          </div>
-          {/* {bookings.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className="flex flex-row justify-between p-4 bg-white rounded-lg"
-              >
-                <div className="text-[14px] w-[20%] flex justify-center items-center">
-                  {item?.ground?.name}
-                </div>
-                <div className="text-[14px] w-[20%] text-[#676767] flex justify-center items-center gap-2">
-                  <FaLocationDot size={16} color="#D0D0D0" />
-                  <span className="inline-block ">{item?.venue?.address}</span>
-                </div>
-                <div className="text-[14px] w-[20%] flex justify-center items-center gap-2">
-                  <CalendarIcon size={16} />
-                  <span className="inline-block ">
-                    {" "}
-                    {new Date(item?.date).toDateString()}
-                  </span>
-                </div>
-                {item?.slots !== undefined && item?.slots.length > 0 ? (
-                  <div className="text-[14px] w-[25%] flex justify-center items-center">
-                    <span className="inline-block bg-[#E4F6DF] text-[#53A53F] p-2 rounded-md ">
-                      {item?.slots[0]?.slot}
-                    </span>
-                  </div>
-                ) : (
-                  <div className="text-[14px] w-[25%] flex justify-center items-center">
-                    <span className="inline-block bg-[#E4F6DF] text-[#53A53F] p-2 rounded-md ">
-                      NA
-                    </span>
-                  </div>
-                )}
-                <div className="text-[14px] w-[20%] flex justify-center items-center">
-                  <span className="inline-block bg-[#FF2626] text-white p-2 rounded-md ">
-                    {item?.booking_status}
-                  </span>
-                </div>
-              </div>
-            );
-          })} */}
-        </div>
-      </div>
-      <div className="flex flex-col gap-2 w-full h-[45vh] sm:hidden">
-        {/* {bookings.map((item, index) => {
-          return (
-            <div
-              className="flex flex-col w-full bg-white p-4 gap-4 rounded-lg"
-              key={index}
-            >
-              <div className="flex flex-row gap-4">
-                <div className="text-[12px] w-[35%] flex justify-center items-center gap-2">
-                  <CalendarIcon size={16} />
-                  <span className="inline-block ">
-                    {" "}
-                    {new Date(item?.date).toDateString()}
-                  </span>
-                </div>
+        <Separator />
+        <div id="bookings" className="w-full flex flex-col gap-4 mt-5">
+          {userData && userData.favorites
+            ? userData.favorites?.map((item, index) => {
+                const selectedGroundIndex = grounds.findIndex(
+                  (i) => i.id === item
+                );
 
-                {item?.slots !== undefined && item?.slots.length > 0 ? (
-                  <div className="text-[12px] w-[45%] flex justify-center items-center">
-                    <span className="inline-block bg-[#E4F6DF] text-[#53A53F] p-2 rounded-md ">
-                      {item?.slots[0].slot}
-                    </span>
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between gap-5 p-4 bg-gradient-to-r from-[#89b37f] to-[#4a9936d3] rounded-lg"
+                  >
+                    <div className="flex items-center justify-start gap-5">
+                      <div className="w-12 h-12 bg-gray-100 rounded-md overflow-hidden">
+                        {grounds[selectedGroundIndex] ? (
+                          <img
+                            src={`${APIEndPoints.BackendURL}/${grounds[selectedGroundIndex].images[0]}`}
+                            className="object-cover object-center h-full w-full"
+                            alt=""
+                          />
+                        ) : null}
+                      </div>
+                      <div className="flex flex-col items-start justify-start">
+                        <div className="text-base whitespace-nowrap flex justify-center items-center text-gray-50 font-medium tracking-wide">
+                          {grounds[selectedGroundIndex]
+                            ? grounds[selectedGroundIndex].name
+                            : null}
+                        </div>
+                        <div className="text-sm whitespace-nowrap text-[#ffffffbe] flex justify-center items-center gap-1">
+                          <FaLocationDot size={10} className="text-[#ffffff]" />
+                          {grounds[selectedGroundIndex] ? (
+                            <span className="inline-block ">
+                              {grounds[selectedGroundIndex]?.venue?.address}
+                            </span>
+                          ) : null}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <Button
+                        variant={"outline"}
+                        className="flex items-center justify-center gap-4 h-6 bg-[#53a53f] text-[#b7cab2] hover: "
+                        onClick={() => {
+                          dispatch(setFavorites(item));
+                        }}
+                      >
+                        <span>Remove from Favorites</span>
+                        <MdBookmarkRemove />
+                      </Button>
+                      <Button
+                        className="flex items-center justify-center gap-4 h-6 bg-[#b9cab4] text-[#3c792d] hover:bg-[#3c792d] hover:text-[#b9cab4]"
+                        onClick={() => {
+                          navigate(`/details?id=${item}`);
+                        }}
+                      >
+                        <span>View</span>
+                        <HiOutlineArrowLongRight />
+                      </Button>
+                    </div>
                   </div>
-                ) : (
-                  <div className="text-[12px] w-[45%] flex justify-center items-center">
-                    <span className="inline-block bg-[#E4F6DF] text-[#53A53F] p-2 rounded-md ">
-                      NA
-                    </span>
-                  </div>
-                )}
-                <div className="text-[12px] w-[15%] flex justify-center items-center">
-                  <span className="inline-block bg-[#FF2626] text-white p-2 rounded-md ">
-                    {item?.booking_status}
-                  </span>
-                </div>
-              </div>
-              <div className="text-[12px] w-[100%] flex justify-start items-center">
-                {item?.ground?.name}
-              </div>
-              <div className="text-[12px] w-[100%] text-[#676767] flex justify-start items-center gap-2">
-                <FaLocationDot size={16} color="#D0D0D0" />
-                <span className="inline-block ">{item?.venue?.address}</span>
-              </div>
-            </div>
-          );
-        })} */}
+                );
+              })
+            : null}
+        </div>
       </div>
 
       <div className="w-full flex items-center justify-center">

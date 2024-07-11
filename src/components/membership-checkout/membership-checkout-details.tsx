@@ -21,6 +21,8 @@ import {
 } from "@/store/actions/slices/membershipSlice";
 import { useState } from "react";
 
+import { WiDirectionLeft } from "react-icons/wi";
+
 interface MembershipCheckoutDetailsProps {
   registrationFormDetails: {
     first_name: string;
@@ -57,7 +59,9 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
   const searchParams = useSearchParams();
   const detailsPageId = searchParams[0].get("id");
 
-  const { memberships } = useAppSelector((state: RootState) => state.membership);
+  const { memberships } = useAppSelector(
+    (state: RootState) => state.membership
+  );
   const selectedMembership = memberships.find((i) => i.id === detailsPageId);
 
   const [hasSlotChanged, setHasSlotChanged] = useState(false);
@@ -68,12 +72,24 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
         {/* Subscription type */}
         <div className="w-full lg:w-1/2 h-full rounded-md flex flex-col gap-1">
           <div className="h-1/6 w-full font-medium tracking-wide">
-            <span>Subscription</span>
+            <span className="flex items-center gap-2">
+              <p>Subscription</p>
+              {!registrationFormDetails.subscription_type && (
+                <WiDirectionLeft
+                  size={20}
+                  className="animate-pulse text-[#53A53F]"
+                />
+              )}
+            </span>
             <Separator />
           </div>
           <div className="flex-1 w-full flex items-start py-5 justify-start">
             <RadioGroup
-              value={registrationFormDetails.subscription_type ? registrationFormDetails.subscription_type : undefined}
+              value={
+                registrationFormDetails.subscription_type
+                  ? registrationFormDetails.subscription_type
+                  : undefined
+              }
               className="grid grid-cols-2"
             >
               {selectedMembership ? (
@@ -86,7 +102,10 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
                       dispatch(setSubscriptionType({ type: "Monthly", fee }));
                     }}
                   />
-                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r1">
+                  <Label
+                    className="text-sm lg:text-base cursor-pointer"
+                    htmlFor="r1"
+                  >
                     Monthly
                   </Label>
                 </div>
@@ -101,7 +120,10 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
                       dispatch(setSubscriptionType({ type: "Quarterly", fee }));
                     }}
                   />
-                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r2">
+                  <Label
+                    className="text-sm lg:text-base cursor-pointer"
+                    htmlFor="r2"
+                  >
                     Quarterly
                   </Label>
                 </div>
@@ -118,7 +140,10 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
                       );
                     }}
                   />
-                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r3">
+                  <Label
+                    className="text-sm lg:text-base cursor-pointer"
+                    htmlFor="r3"
+                  >
                     Half Yearly
                   </Label>
                 </div>
@@ -133,7 +158,10 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
                       dispatch(setSubscriptionType({ type: "Yearly", fee }));
                     }}
                   />
-                  <Label className="text-sm lg:text-lg cursor-pointer" htmlFor="r4">
+                  <Label
+                    className="text-sm lg:text-base cursor-pointer"
+                    htmlFor="r4"
+                  >
                     Yearly
                   </Label>
                 </div>
@@ -150,7 +178,7 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
           </div>
           <div className="flex-1 w-full flex flex-col items-start pt-5">
             <div className="flex items-center gap-2">
-              <span className="border border-[#53A53F] px-3 rounded-full ">
+              <span className="border text-xs border-[#53A53F] px-5 py-1 tracking-wider rounded-full font-medium">
                 {registrationFormDetails.slot}
               </span>
               {selectedMembership ? (
@@ -214,7 +242,7 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
                       return (
                         <div
                           key={index}
-                          className="px-3 bg-gray-300 rounded-full py-1 text-gray-600"
+                          className="px-3 bg-gray-300 rounded-full py-1 tracking-wide text-gray-600"
                         >
                           {item.slot}
                         </div>
@@ -242,13 +270,17 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
           </div> */}
           <div className="h-8 w-full flex items-center gap-3 text-sm">
             <div className="flex items-center gap-3 w-1/2 lg:w-fit">
-              <span>First <span className="hidden lg:inline-block">Name</span>: </span>
+              <span>
+                First <span className="hidden lg:inline-block">Name</span>:{" "}
+              </span>
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.first_name}
               </span>
             </div>
             <div className="flex items-center gap-3 w-1/2 lg:w-fit">
-              <span>Last <span className="hidden lg:inline-block">Name</span>: </span>
+              <span>
+                Last <span className="hidden lg:inline-block">Name</span>:{" "}
+              </span>
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.last_name}
               </span>
@@ -294,9 +326,18 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
             <div className="flex items-center gap-3">
               <span>Subscription Type: </span>
               <span className="font-semibold tracking-wide">
-                {registrationFormDetails.subscription_type === "Half_Yearly"
-                  ? "Half Yearly"
-                  : registrationFormDetails.subscription_type}
+                {registrationFormDetails.subscription_type ? (
+                  registrationFormDetails.subscription_type ===
+                  "Half_Yearly" ? (
+                    "Half Yearly"
+                  ) : (
+                    registrationFormDetails.subscription_type
+                  )
+                ) : (
+                  <div className="font-normal bg-[#d9f7d5] px-3 py-1 rounded-xl text-[#53a53f] animate-fade-in-out">
+                    Select Subscription type
+                  </div>
+                )}
               </span>
             </div>
           </div>
