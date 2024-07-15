@@ -44,5 +44,13 @@ export const APIEndPoints = {
   
   // Promocode
   fetch_promo: '/api/promo-codes',
-  apply_promo: '/api/apply-promo'
+  apply_promo: '/api/apply-promo',
+
+  // CHAT
+  create_chat: '/api/create-chat',
+  all_chats: '/api/chat',
+  send_message: '/api/send-message',
+
+  // MESSAGE
+  all_messages: '/api/get-messages',
 }

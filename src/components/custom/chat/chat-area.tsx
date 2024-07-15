@@ -5,6 +5,18 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { IoSend } from "react-icons/io5";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
+import Texts from "./texts";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { RootState } from "@/store";
+// import { useSendMessageMutation } from "@/store/actions/slices/messageSlice";
+import {
+  addMessage,
+  setChatId,
+  useAllChatsQuery,
+  useCreateChatMutation,
+  useSendMessageMutation,
+} from "@/store/actions/slices/chatSlice";
+import { createChat, messageSeen, sendMessage } from "@/store/middleware/util";
 
 const ChatArea = ({
   // open,
@@ -13,8 +25,92 @@ const ChatArea = ({
   open: boolean;
   setClose: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const dispatch = useAppDispatch();
+
+  const { userData } = useAppSelector((state: RootState) => state.auth);
+
+  useAllChatsQuery({ user_id: userData?.id }, { skip: !userData?.id });
+
+  const [create] = useCreateChatMutation();
+  const [send] = useSendMessageMutation();
+
+  const [message, setMessage] = useState("");
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+
+  const { chatId, allMessages } = useAppSelector(
+    (state: RootState) => state.chat
+  );
+
+  async function handleAcceptTerms() {
+    if (Array.isArray(allMessages)) {
+
+      setHasAcceptedTerms(true);
+    } else {
+      try {
+        if (userData && userData.id) {
+          const res: any = await create({
+            user_id: userData.id,
+          }).unwrap();
+
+          dispatch(setChatId(res?.data?.id as string));
+
+          dispatch(createChat());
+          setHasAcceptedTerms(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  async function handleSubmit() {
+    const now = new Date();
+    try {
+      if (userData && userData.id) {
+        if (chatId) {
+          // if (userData && userData.id && chatId) {
+          const res: any = await send({
+            text: message,
+            // sender_id: userData.id,
+            chat_id: chatId,
+          }).unwrap();
+
+          dispatch(
+            sendMessage({
+              text: message,
+              chat_id: chatId,
+            })
+          );
+
+          dispatch(
+            addMessage({
+              text: message,
+              id: res?.data?.id,
+              createdAt: now.toISOString(),
+              sender: userData.id,
+              seen: false,
+            })
+          );
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setMessage("");
+    }
+  }
+
+  const handleSeenMessage = () => {
+    if (chatId) {
+      dispatch(
+        messageSeen({
+          // message_id: lastMessageId,
+          chat_id: chatId,
+        })
+      );
+    }
+  };
 
   return (
     <div
@@ -39,7 +135,7 @@ const ChatArea = ({
       </div>
       <div
         className={`mx-2 rounded-3xl border-t-2 border-lime-200 bg-[#ffffff] ${
-          hasAcceptedTerms ? "h-[75vh]" : "h-[21rem] xs:h-[27rem] sm:h-[22rem]"
+          hasAcceptedTerms ? "h-[75vh]" : "h-[21rem] xs:h-[27rem] sm:h-[25rem]"
         } flex flex-col items-center justify-center`}
       >
         <p className="border-b border-gray-200 h-5 sm:h-7 w-full flex items-center justify-center text-[8px] sm:text-[10px] font-medium tracking-wide text-gray-500">
@@ -64,7 +160,7 @@ const ChatArea = ({
               <Button
                 variant={"theme"}
                 className="mt-2 w-fit text-center h-6 xs:h-6 sm:h-7 lg:h-7 text-xs sm:text-[12px] lg:text-[14px] lg:mt-4"
-                onClick={() => setHasAcceptedTerms(true)}
+                onClick={handleAcceptTerms}
               >
                 Agree & Continue
               </Button>
@@ -73,13 +169,11 @@ const ChatArea = ({
         )}
         {hasAcceptedTerms && (
           <>
-            <div className="flex-1 flex items-center justify-center">
-              Welcome to D3 Chatbox!
-            </div>
+            <Texts />
             <div
               className={`${
                 showOptions ? "h-58" : "h-28"
-              } border-t border-t-gray-200 bg-white w-full text-sm p-4 flex flex-col justify-between rounded-b-3xl border-b-lime-200 border-b`}
+              } border-t border-t-gray-200 bg-white w-full text-sm p-4 flex flex-col justify-between rounded-b-3xl border-b-lime-200 border-b mt-5`}
             >
               {showOptions && (
                 <div className="flex-1 flex flex-col items-start justify-start -mt-3 mb-5">
@@ -128,9 +222,20 @@ const ChatArea = ({
                   placeholder="Ask Me Anything..."
                   className="border-none bg-transparent placeholder:text-gray-400 focus:ring-0 focus:outline-none focus:border-none rounded-full"
                   style={{ boxShadow: "none" }}
+                  value={message}
+                  onClick={handleSeenMessage}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSubmit();
+                    }
+                  }}
                 />
                 <div
                   className="rounded-full w-12 h-12 mr-2 flex items-center justify-center cursor-pointer"
+                  onClick={handleSubmit}
                 >
                   <IoSend size={20} className="text-black" />
                 </div>

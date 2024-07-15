@@ -17,7 +17,7 @@ export const logoutApi = createApi({
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
       }
-      console.log(headers.get("authorization"))
+
       return headers;
     },
   }),

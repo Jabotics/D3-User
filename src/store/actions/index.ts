@@ -16,6 +16,8 @@ import membershipsSlice, { membershipsApi } from "./slices/membershipSlice";
 
 import profileSlice from './slices/profileSlice';
 
+import chatSlice, { chatApi } from './slices/chatSlice';
+
 export {
   authSlice,
   authApi,
@@ -50,4 +52,7 @@ export {
   PromoSlice,
 
   profileSlice,
+  
+  chatApi,
+  chatSlice,
 }
