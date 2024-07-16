@@ -10,12 +10,13 @@ import {
   // joinChat,
   // socketListeners,
   sendMessage,
+  solveChat,
   // verifySession,
 } from "./util";
 
 // import { setAuth } from '../actions/slices/authSlice'
 // import { addMessage, setMessage } from '../actions/slices/messageSlice'
-import { addMessage } from "../actions/slices/chatSlice";
+import { addMessage, clearChat, setQueryResponse } from "../actions/slices/chatSlice";
 
 // let socket: Socket
 
@@ -29,39 +30,40 @@ export const socketMiddleware: Middleware = (store) => {
     if (auth) {
       const userData = JSON.parse(auth);
       const userId = JSON.parse(userData?.["userData"])?.["id"];
-      socket.emit("client_ready", {
-        user: userId,
-        socket: socket.id,
-      });
+      if (userId && socket.id) {
+        socket.emit("client_ready", {
+          user: userId,
+          socket: socket.id,
+        });
+      } else {
+        console.warn("userId or socket.id is undefined or null.");
+      }
     }
   });
 
   // Listen for any event
   socket.onAny((event, ...args) => {
     switch (event) {
-      // case 'getUserData':
-      //   {
-      //     // const [data] = args
-      //     // console.log('UPDATE PROFILE: ', data)
-      //     // store.dispatch(setAuth({ userData: data }))
-      //     // store.dispatch(setHasUpdated(true))
-      //   }
-      //   break
 
       case "message":
         {
           const [data] = args;
-          // console.log(data)
+          console.log(data)
           store.dispatch(addMessage(data));
+          if(data.message.text === 'Is Your Query Solved?') {
+            store.dispatch(setQueryResponse(false))
+          }
         }
         break;
 
-      // case 'allMessages':
-      //   {
-      //     const [data] = args
-      //     store.dispatch(setMessage(data))
-      //   }
-      //   break
+      case "chatSolved":
+        {
+          const [data] = args;
+          // console.log(data)
+          store.dispatch(clearChat({ chatId: data }))
+        }
+
+      
     }
   });
 
@@ -87,21 +89,18 @@ export const socketMiddleware: Middleware = (store) => {
 
       case createChat.type:
         {
-          socket.emit("createChat", { socket_id: socket.id })
+          socket.emit("createChat", { socket_id: socket.id });
         }
-        break
+        break;
 
-      // case joinChat.type:
-      //   {
-      //     socket.emit('joinChat', { ...action.payload, socket_id: socket.id })
-      //   }
-      //   break
-
-      // case verifySession.type:
-      //   {
-      //     socket.emit('verifySession', { ...action.payload, socket_id: socket.id })
-      //   }
-      //   break
+      case solveChat.type:
+          {
+            socket.emit('solveChat', {
+              ...action.payload,
+              socket_id: socket.id,
+            })
+          }
+          break
     }
 
     return next(action);

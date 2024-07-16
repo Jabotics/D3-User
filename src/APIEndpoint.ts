@@ -50,7 +50,6 @@ export const APIEndPoints = {
   create_chat: '/api/create-chat',
   all_chats: '/api/chat',
   send_message: '/api/send-message',
-
-  // MESSAGE
+  update_chat: '/api/update-chat',
   all_messages: '/api/get-messages',
 }

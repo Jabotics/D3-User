@@ -98,6 +98,28 @@ export const chatApi = createApi({
         return Response as IncomingData;
       },
     }),
+    updateMessage: builder.mutation<IncomingData, object>({
+      query: (body) => {
+        const { ...rest } = body;
+        return {
+          url: APIEndPoints.update_chat,
+          method: "POST",
+          body: rest,
+        };
+      },
+      transformResponse(
+        Response: unknown,
+        meta: FetchBaseQueryMeta | undefined
+      ): IncomingData | Promise<IncomingData> {
+        if (meta?.response?.headers.get("authorization")) {
+          localStorage.setItem(
+            "token",
+            String(meta?.response?.headers.get("authorization"))
+          );
+        }
+        return Response as IncomingData;
+      },
+    }),
   }),
 });
 
@@ -110,6 +132,8 @@ interface InitialState {
   allMessages: IMessage[];
   chatStatus: "idle" | "loading" | "succeeded" | "failed";
   chatError: string | undefined;
+
+  queryMsgResponse: boolean;
 }
 
 const initialState: InitialState = {
@@ -121,23 +145,42 @@ const initialState: InitialState = {
   allMessages: [],
   chatStatus: "idle",
   chatError: undefined,
+
+  queryMsgResponse: false,
 };
 
 export const ChatSlice = createSlice({
   name: "ChatSlice",
   initialState,
   reducers: {
-    setChatId: (state, action: PayloadAction<string>) => {
+    setChatId: (state, action: PayloadAction<string | null>) => {
       state.chatId = action.payload;
     },
-    addMessage: (state, action: PayloadAction<IMessage>) => {
-      const x = new Set<string>();
-      const y = state.allMessages;
-      y.forEach((i) => x.add(i.sender));
+    addMessage: (
+      state,
+      action: PayloadAction<{ chat_id: string; message: IMessage }>
+    ) => {
+      const x = new Set<string>()
+      const y = state.allMessages
+      y.forEach((i) => x.add(i.sender))
 
-      if (y.length < 2 || x.has(action.payload.sender)) {
-        state.allMessages.push(action.payload);
+      console.log(action.payload)
+      if (action.payload.chat_id == state.chatId) {
+        if (
+          Array.from(new Set(y.map((i) => i.sender))).length < 2 ||
+          x.has(action.payload.message.sender)
+        ) {
+          state.allMessages.push(action.payload.message)
+        }
       }
+    },
+    clearChat: (state, action: PayloadAction<{ chatId: string }>) => {
+      if (state.chatId === action.payload.chatId) {
+        state.allMessages = [];
+      }
+    },
+    setQueryResponse: (state, action: PayloadAction<boolean>) => {
+      state.queryMsgResponse = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -180,6 +223,8 @@ export const {
   useCreateChatMutation,
   useAllChatsQuery,
   useSendMessageMutation,
+  useUpdateMessageMutation,
 } = chatApi;
-export const { setChatId, addMessage } = ChatSlice.actions;
+export const { setChatId, addMessage, clearChat, setQueryResponse } =
+  ChatSlice.actions;
 export default ChatSlice.reducer;

@@ -11,3 +11,8 @@ export const messageSeen = createAction<{
 }>('messageSeen')
 
 export const createChat = createAction('createChat')
+
+export const solveChat = createAction<{
+  chat_id: string
+}>('solveChat')
+

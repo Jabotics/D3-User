@@ -4,17 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 import { messageSeen } from "@/store/middleware/util";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 
 const Chat = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { hasToken } = useAppSelector((state: RootState) => state.auth);
-  const { chatId } = useAppSelector(
-    (state: RootState) => state.chat
-  );
+  const { chatId } = useAppSelector((state: RootState) => state.chat);
 
-  const [openChat, setOpenChat] = useState(false);
+  const [openChat, setOpenChat] = useState<boolean>(false);
+  const [closeChatModalOpen, setCloseChatModalOpen] = useState<boolean>(false);
+
   const handleClick = () => {
     if (hasToken) {
       if (chatId) {
@@ -23,7 +24,7 @@ const Chat = () => {
             // message_id: lastMessageId,
             chat_id: chatId,
           })
-        )
+        );
       }
 
       setOpenChat(true);
@@ -31,11 +32,24 @@ const Chat = () => {
       navigate("/login");
     }
   };
-  
+
   return (
     <React.Fragment>
-      {openChat && <ChatArea open={openChat} setClose={setOpenChat} />}
-      {!openChat && (
+      {closeChatModalOpen && (
+        <Dialog open={closeChatModalOpen} onOpenChange={setCloseChatModalOpen}>
+          <DialogContent>
+            <DialogTitle>hey</DialogTitle>
+          </DialogContent>
+        </Dialog>
+      )}
+      {!closeChatModalOpen && openChat && (
+        <ChatArea
+          open={openChat}
+          setClose={setOpenChat}
+          closeChat={setCloseChatModalOpen}
+        />
+      )}
+      {!closeChatModalOpen && !openChat && (
         <div
           className="w-12 h-12 rounded-2xl fixed bottom-8 right-8 z-50 bg-gradient-to-r from-lime-500 to-green-500 shadow-lg shadow-teal-500/50 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"
           onClick={handleClick}

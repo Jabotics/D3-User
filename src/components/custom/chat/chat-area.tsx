@@ -21,9 +21,11 @@ import { createChat, messageSeen, sendMessage } from "@/store/middleware/util";
 const ChatArea = ({
   // open,
   setClose,
+  closeChat,
 }: {
   open: boolean;
   setClose: React.Dispatch<React.SetStateAction<boolean>>;
+  closeChat: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const dispatch = useAppDispatch();
 
@@ -43,8 +45,7 @@ const ChatArea = ({
   );
 
   async function handleAcceptTerms() {
-    if (Array.isArray(allMessages)) {
-
+    if (Array.isArray(allMessages) && allMessages.length > 0) {
       setHasAcceptedTerms(true);
     } else {
       try {
@@ -85,11 +86,14 @@ const ChatArea = ({
 
           dispatch(
             addMessage({
-              text: message,
-              id: res?.data?.id,
-              createdAt: now.toISOString(),
-              sender: userData.id,
-              seen: false,
+              chat_id: chatId,
+              message: {
+                text: message,
+                id: res?.data?.id,
+                createdAt: now.toISOString(),
+                sender: userData.id,
+                seen: false,
+              },
             })
           );
         }
@@ -169,7 +173,7 @@ const ChatArea = ({
         )}
         {hasAcceptedTerms && (
           <>
-            <Texts />
+            <Texts setClose={setClose} closeChat={closeChat} />
             <div
               className={`${
                 showOptions ? "h-58" : "h-28"
@@ -233,6 +237,7 @@ const ChatArea = ({
                     }
                   }}
                 />
+
                 <div
                   className="rounded-full w-12 h-12 mr-2 flex items-center justify-center cursor-pointer"
                   onClick={handleSubmit}
