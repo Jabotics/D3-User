@@ -7,6 +7,8 @@ export const APIEndPoints = {
   verify_session: '/api/verify-user-session',
   logout: '/api/logout',
 
+  update_profile: '/api/update-user-profile',
+
   // Fetch Ground
   fetch_ground: '/api/grounds',
 
@@ -23,7 +25,7 @@ export const APIEndPoints = {
   book_slot: '/api/book-slot',
 
   // Booking
-  get_booking: '/api/get-slot-bookings',
+  get_booking: '/api/my-bookings',
 
   // GROUNDS
   fetch_grounds: '/api/fetch-grounds',

@@ -133,6 +133,7 @@ export default function LoginPage() {
               joined_academies: res?.Response?.data?.payload?.joined_academies,
               joined_memberships: res?.Response?.data?.payload?.joined_memberships,
               favorites: res?.Response?.data?.payload?.favorites,
+              profile_img: res?.Response?.data?.payload?.profile_img,
             },
           })
         );

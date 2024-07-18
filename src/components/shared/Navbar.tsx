@@ -25,6 +25,7 @@ import {
 } from "@/store/actions/slices/citySlice";
 import { useState } from "react";
 import { setTitle } from "@/store/actions/slices/profileSlice";
+import { APIEndPoints } from "@/APIEndpoint";
 
 // import { TbSparkles } from "react-icons/tb";
 
@@ -36,7 +37,9 @@ export const Navbar = () => {
   const isLarge = window.innerWidth >= 1024;
   // const isSix20 = window.innerWidth >= 620;
 
-  const { hasToken } = useAppSelector((state: RootState) => state.auth);
+  const { userData, hasToken } = useAppSelector(
+    (state: RootState) => state.auth
+  );
 
   const [search, setSearch] = useState<string>("");
 
@@ -263,7 +266,14 @@ export const Navbar = () => {
                             : "border-[1px] border-gray-300"
                         }`}
                         style={{
-                          backgroundImage: "url('/images/viewers.webp')",
+                          backgroundImage: `url('${
+                            userData?.profile_img !== undefined &&
+                            userData?.profile_img?.length > 0
+                              ? userData?.profile_img.includes("blob")
+                                ? userData?.profile_img
+                                : `${APIEndPoints.BackendURL}/${userData?.profile_img}`
+                              : "/images/male.png"
+                          }')`,
                           backgroundSize: "cover",
                           backgroundPosition: "center",
                         }}

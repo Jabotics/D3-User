@@ -1,10 +1,12 @@
 import Loader from "@/components/loader";
 import LeftPanel from "@/components/profile/LeftPanel";
 import RightPanel from "@/components/profile/RightPanel";
+import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
   const [toFetch, setToFetch] = useState(false);
+  useVerifySessionQuery({})
 
   useEffect(() => {
     const fetchHandler = setTimeout(() => {

@@ -1,5 +1,6 @@
 import { APIEndPoints } from "@/APIEndpoint";
 import { IBooking } from "@/interface/data";
+import { RootState } from "@/store";
 import { createSlice } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -16,13 +17,13 @@ export const bookingApi = createApi({
   reducerPath: "BookingApi",
   baseQuery: fetchBaseQuery({
     baseUrl: APIEndPoints.BackendURL,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("token") || "";
+    prepareHeaders: (headers, { getState }) => {
+      const state = getState() as RootState;
+      const token = state.auth.token || localStorage.getItem("token") || "";
       if (token) {
-        headers.set("authorization", token);
-        headers.set("type", "admin");
-        return headers;
+        headers.set("authorization", `Bearer ${token}`);
       }
+      return headers;
     },
   }),
   endpoints: (builder) => ({

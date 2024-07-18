@@ -10,6 +10,14 @@ interface IncomingData {
   data: IAuth;
 }
 
+interface ProfileUpdateIncomingData {
+  status: string;
+  message: string;
+  data: {
+    id: string;
+  };
+}
+
 export const authApi = createApi({
   reducerPath: "AuthApi",
   baseQuery: fetchBaseQuery({
@@ -33,6 +41,21 @@ export const authApi = createApi({
         return {
           url: APIEndPoints.verify_session,
           method: "GET",
+        };
+      },
+    }),
+
+    updateProfile: builder.mutation<
+      ProfileUpdateIncomingData,
+      { formData: FormData }
+    >({
+      query: (body) => {
+        const { formData } = body;
+        return {
+          url: APIEndPoints.update_profile,
+          method: "POST",
+          body: formData,
+          formData: true,
         };
       },
     }),
@@ -93,6 +116,17 @@ export const authSlice = createSlice({
     //     }
     //   }
     // },
+    setProfile: (
+      state,
+      action: PayloadAction<{
+        first_name: string;
+        last_name: string;
+        email: string;
+        profile_img: string;
+      }>
+    ) => {
+      state.userData = { ...state.userData, ...action.payload };
+    },
     logout: (state) => {
       state.status = false;
       state.userData = null;
@@ -114,13 +148,14 @@ export const authSlice = createSlice({
   },
 });
 
-export const { useVerifySessionQuery } = authApi;
+export const { useVerifySessionQuery, useUpdateProfileMutation } = authApi;
 export const {
   login,
   setAuth,
   // setAuthAcademies,
   // setAuthMemberships,
   // setFavorites,
+  setProfile,
   logout,
 } = authSlice.actions;
 export default authSlice.reducer;
