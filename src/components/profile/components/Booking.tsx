@@ -101,7 +101,7 @@ const Booking = () => {
                   </span>
                 </div>
 
-                {item?.slots !== undefined && item?.slots.length > 0 ? (
+                {/* {item?.slots !== undefined && item?.slots.length > 0 ? (
                   <div className="text-[12px] w-[45%] flex justify-center items-center">
                     <span className="inline-block bg-[#E4F6DF] text-[#53A53F] p-2 rounded-md ">
                       {item?.slots[0].slot}
@@ -113,7 +113,7 @@ const Booking = () => {
                       NA
                     </span>
                   </div>
-                )}
+                )} */}
                 <div className="text-[12px] w-[15%] flex justify-center items-center">
                   <span className="inline-block bg-[#FF2626] text-white p-2 rounded-md ">
                     {item?.booking_status}

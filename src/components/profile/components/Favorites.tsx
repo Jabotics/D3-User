@@ -1,26 +1,56 @@
 import { APIEndPoints } from "@/APIEndpoint";
 import { Button } from "@/components/ui/button";
 import { RootState } from "@/store";
-import { useGetGroundQuery } from "@/store/actions/slices/groundSlice";
+import {
+  useGetGroundQuery,
+  useSetFavoriteMutation,
+} from "@/store/actions/slices/groundSlice";
 import { useAppSelector } from "@/store/hooks";
 import { FaLocationDot } from "react-icons/fa6";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { MdBookmarkRemove } from "react-icons/md";
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 const Favorites = () => {
   const navigate = useNavigate();
+  const [removeFavorite] = useSetFavoriteMutation({});
 
   const [toRefetchUserData, setToRefetchUserData] = useState(false);
-  useVerifySessionQuery({}, { skip: !toRefetchUserData });
+  const x = useVerifySessionQuery({}, { skip: !toRefetchUserData });
 
   const { userData } = useAppSelector((state: RootState) => state.auth);
   useGetGroundQuery({});
 
   const { grounds } = useAppSelector((state: RootState) => state.ground);
+
+  async function handleRemoveFavorite(ground_id: string) {
+    try {
+      if (!ground_id) {
+        throw new Error("Please Retry")
+      }
+
+      if (userData && userData.id) {
+        await removeFavorite({
+          ground_id,
+          customer_id: userData?.id,
+        });
+
+        setToRefetchUserData(true)
+      }
+    } catch (error) {
+      console.error('Error removing favorite:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (toRefetchUserData) {
+      x.refetch();
+      setToRefetchUserData(false)
+    }
+  }, [toRefetchUserData])
 
   return (
     <>
@@ -73,6 +103,7 @@ const Favorites = () => {
                         variant={"outline"}
                         className="flex items-center justify-center gap-4 h-6 bg-[#53a53f] text-[#b7cab2] hover: "
                         onClick={() => {
+                          handleRemoveFavorite(grounds[selectedGroundIndex].id);
                           setToRefetchUserData(true);
                         }}
                       >

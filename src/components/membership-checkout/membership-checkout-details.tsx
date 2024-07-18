@@ -268,8 +268,8 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
               <Separator />
             </div>
           </div> */}
-          <div className="h-8 w-full flex items-center gap-3 text-sm">
-            <div className="flex items-center gap-3 w-1/2 lg:w-fit">
+          <div className="h-8 w-full lg:w-1/2 flex items-center gap-3 text-sm">
+            <div className="flex items-center gap-3 w-full lg:w-1/2">
               <span>
                 First <span className="hidden lg:inline-block">Name</span>:{" "}
               </span>
@@ -277,7 +277,7 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
                 {registrationFormDetails.first_name}
               </span>
             </div>
-            <div className="flex items-center gap-3 w-1/2 lg:w-fit">
+            <div className="flex items-center gap-3 w-full lg:w-1/2">
               <span>
                 Last <span className="hidden lg:inline-block">Name</span>:{" "}
               </span>
@@ -286,28 +286,28 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
               </span>
             </div>
           </div>
-          <div className="lg:h-8 w-full flex flex-col lg:flex-row items-start lg:items-center gap-3 text-sm mb-3 lg:mb-0">
-            <div className="flex items-center gap-3">
+          <div className="lg:h-8 w-full lg:w-1/2 flex flex-col lg:flex-row items-start lg:items-center gap-3 text-sm mb-3 lg:mb-0">
+            <div className="flex items-center gap-3 w-full lg:w-1/2">
               <span>Mobile: </span>
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.mobile}
               </span>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 w-full lg:w-1/2">
               <span>Email: </span>
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.email}
               </span>
             </div>
           </div>
-          <div className="lg:h-8 w-full flex flex-col lg:flex-row items-start lg:items-center gap-3 text-sm mb-3 lg:mb-0">
-            <div className="flex items-center gap-3">
+          <div className="lg:h-8 w-full lg:w-1/2 flex flex-col lg:flex-row items-start lg:items-center gap-3 text-sm mb-3 lg:mb-0">
+            <div className="flex items-center gap-3 w-full lg:w-1/2">
               <span>Guardian's Name: </span>
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.guardian_name}
               </span>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 w-full lg:w-1/2">
               <span>Guardian's Mobile: </span>
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.guardian_mobile}

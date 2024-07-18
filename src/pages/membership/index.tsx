@@ -14,11 +14,13 @@ import MembershipDetails from "./components/membership-details";
 import MembershipRegistrationPage from "./components/membership-registration";
 import MembershipCheckout from "./components/membership-checkout";
 import posterImg from "../../assets/posterImg.jpg";
+import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 const MembershipPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  useVerifySessionQuery({})
   const searchParams = useSearchParams();
   const detailsPageId = searchParams[0].get("id");
 

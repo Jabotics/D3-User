@@ -233,7 +233,7 @@ const LeftPanel = () => {
         <div className="flex gap-2">
           <div className="w-10 h-10 border-2 border-[#53A53F] rounded-full overflow-hidden">
             <img
-              src={previewUrl ? previewUrl : `/images/male.png`}
+              src={userData?.profile_img && previewUrl ? previewUrl : `/images/male.png`}
               alt=""
               className="w-full h-full object-cover object-center"
             />

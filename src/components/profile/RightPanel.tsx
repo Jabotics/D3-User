@@ -2,6 +2,7 @@ import React from "react";
 import { useAppSelector } from "@/store/hooks";
 import { Academy, Booking, Favorites, Memberships } from "./components";
 import { RootState } from "@/store";
+import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 const tabInfo: {
   title: "Academy" | "My Booking" | "Memberships" | "Favorite" | "Logout";
@@ -26,6 +27,9 @@ const tabInfo: {
 ];
 
 const RightPanel = () => {
+
+  useVerifySessionQuery({})
+  
   const { title } = useAppSelector((state: RootState) => state.profile);
   const currentTabIndex = tabInfo.findIndex((i) => i.title === title);
 
