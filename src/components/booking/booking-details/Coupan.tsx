@@ -33,7 +33,7 @@ const Coupan = () => {
   if (hasAcademyEndpoint) {
     queryParameters['academy'] = academy;
   }
-  console.log(queryParameters);
+
   const getPromo = useGetPromoQuery(queryParameters);
   const [applyPromo] = useApplyPromoMutation(); // Initialize the mutation hook
   const selectedPromo = useAppSelector((state: RootState) => state.promocode.selectedPromo)

@@ -14,11 +14,13 @@ import AcademyDetails from "./components/academy-details";
 import AcademyRegistrationPage from "./components/academy-registration";
 import AcademyCheckout from "./components/academy-checkout";
 import posterImg from "../../assets/posterImg.jpg";
+import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 const AcademyPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  useVerifySessionQuery({})
   const searchParams = useSearchParams();
   const detailsPageId = searchParams[0].get("id");
 

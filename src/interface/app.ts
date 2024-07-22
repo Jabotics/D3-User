@@ -7,7 +7,7 @@ export interface IAuth {
     last_name?: string;
     mobile?: string;
     gender?: string;
-    profile_image?: string;
+    profile_img?: string;
     joined_academies?: string[];
     joined_memberships?: string[];
     favorites?: string[];

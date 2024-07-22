@@ -3,12 +3,16 @@ import { Button } from "../ui/button";
 import { RootState } from "@/store";
 import { useSearchParams } from "react-router-dom";
 import { useJoinAcademyMutation } from "@/store/actions/slices/academySlice";
-import React from "react";
+import React, { useState } from "react";
+import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 const AcademyCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
   const searchParams = useSearchParams();
   const academyId = searchParams[0].get("id");
+
+  const [toRefetchUserData, setToRefetchUserData] = useState(false)
+  useVerifySessionQuery({}, { skip: !toRefetchUserData })
 
   const [joinAcademy] = useJoinAcademyMutation()
 
@@ -60,6 +64,7 @@ const AcademyCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<React
       })
 
       hasSubmit(true)
+      setToRefetchUserData(true);
 
     } catch (error) {
       console.log(error)

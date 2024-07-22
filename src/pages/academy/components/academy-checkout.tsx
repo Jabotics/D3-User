@@ -5,7 +5,7 @@ import Coupan from "@/components/booking/booking-details/Coupan";
 import HeroLoader from "@/components/hero-loader";
 import { Button } from "@/components/ui/button";
 import { RootState } from "@/store";
-import { setAuthAcademies } from "@/store/actions/slices/authSlice";
+import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 import { setTitle } from "@/store/actions/slices/profileSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
@@ -15,6 +15,9 @@ import { useNavigate } from "react-router-dom";
 const AcademyCheckout = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const [toRefetchUserData, setToRefetchUserData] = useState(false)
+  useVerifySessionQuery({}, { skip: !toRefetchUserData })
 
   const [hasSubmit, setHasSubmit] = useState<boolean>(false);
 
@@ -27,7 +30,7 @@ const AcademyCheckout = () => {
       const fetchHandler = setTimeout(() => {
         navigate("/profile");
         dispatch(setTitle("Academy"));
-        dispatch(setAuthAcademies(registrationFormDetails.academy))
+        setToRefetchUserData(true)
 
         setHasSubmit(false)
         // setToFetch(false);

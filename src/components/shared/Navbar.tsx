@@ -25,6 +25,7 @@ import {
 } from "@/store/actions/slices/citySlice";
 import { useState } from "react";
 import { setTitle } from "@/store/actions/slices/profileSlice";
+import { APIEndPoints } from "@/APIEndpoint";
 
 // import { TbSparkles } from "react-icons/tb";
 
@@ -36,7 +37,9 @@ export const Navbar = () => {
   const isLarge = window.innerWidth >= 1024;
   // const isSix20 = window.innerWidth >= 620;
 
-  const { hasToken } = useAppSelector((state: RootState) => state.auth);
+  const { userData, hasToken } = useAppSelector(
+    (state: RootState) => state.auth
+  );
 
   const [search, setSearch] = useState<string>("");
 
@@ -62,7 +65,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-20 border-b shadow-2xl border-gray-100 shadow-gray-100">
+    <div className="fixed top-0 left-0 w-full z-20 border-b-8 shadow-2xl border-gray-100 shadow-gray-100">
       <div className="w-full border-slate-200 border-solid bg-white py-4">
         <div className="container">
           <div className="grid-container grid grid-cols-12 gap-7 items-center">
@@ -263,7 +266,14 @@ export const Navbar = () => {
                             : "border-[1px] border-gray-300"
                         }`}
                         style={{
-                          backgroundImage: "url('/images/viewers.webp')",
+                          backgroundImage: `url('${
+                            userData?.profile_img !== undefined &&
+                            userData?.profile_img?.length > 0
+                              ? userData?.profile_img.includes("blob")
+                                ? userData?.profile_img
+                                : `${APIEndPoints.BackendURL}/${userData?.profile_img}`
+                              : "/images/male.png"
+                          }')`,
                           backgroundSize: "cover",
                           backgroundPosition: "center",
                         }}

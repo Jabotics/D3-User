@@ -1,4 +1,37 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { RootState } from "@/store";
+import {  createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { APIEndPoints } from "@/APIEndpoint";
+
+export const logoutApi = createApi({
+  reducerPath: "LogoutApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: APIEndPoints.BackendURL,
+    prepareHeaders: (headers, { getState }) => {
+      const state = getState() as RootState;
+      // const stateAuth = localStorage.getItem("persist:d3-root")
+      // console.log(Object.keys(JSON.parse(JSON.stringify(stateAuth))))
+      // console.log(state.auth)
+      const token = state.auth.token || localStorage.getItem("token") || "";
+
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
+  }),
+  endpoints: (builder) => ({
+    logout: builder.query({
+      query: () => {
+        return {
+          url: APIEndPoints.logout,
+          method: "GET",
+        };
+      },
+    })
+  })
+})
 
 interface IOTP {
   startTimer: boolean
@@ -28,5 +61,6 @@ export const otpSlice = createSlice({
   }
 });
 
+export const { useLogoutQuery } = logoutApi
 export const { setStartTimer, setRemainingTime, setRequestTime } = otpSlice.actions
 export default otpSlice.reducer
