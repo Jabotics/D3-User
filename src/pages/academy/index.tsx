@@ -70,7 +70,7 @@ const AcademyPage = () => {
     if (!isJoinAcademy) {
       dispatch(setSelectedSlots(null));
     }
-  }, [isJoinAcademy]);
+  }, [dispatch, isJoinAcademy]);
 
   return (
     <>

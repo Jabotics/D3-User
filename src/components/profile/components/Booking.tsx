@@ -5,11 +5,15 @@ import { useEffect } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { CalendarIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Booking = () => {
-
   const navigate = useNavigate();
-  
+
   const getBookings = useGetBookingsQuery({});
   const { bookings } = useAppSelector((state: RootState) => state.booking);
 
@@ -64,8 +68,27 @@ const Booking = () => {
                 </div>
                 {item?.slots !== undefined && item?.slots.length > 0 ? (
                   <div className="text-[14px] w-[25%] flex justify-center items-center">
-                    <span className="inline-block bg-[#E4F6DF] text-[#53A53F] p-2 rounded-md ">
-                      {item?.slots[0]?.slot}
+                    <span
+                      className={`${
+                        item?.slots?.length > 1
+                          ? "bg-[#53A53F] text-[#E4F6DF]"
+                          : "bg-[#E4F6DF] text-[#53A53F]"
+                      } p-2 w-40 flex items-center justify-center rounded-md `}
+                    >
+                      {item?.slots?.length > 1 ? (
+                        <>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger>SLOTS</DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-60 flex flex-col bg-gray-200 items-center justify-center px-10 py-5 gap-5">
+                              {item?.slots?.map((item, index) => {
+                                return <div key={index} className="text-sm bg-[#2c7e4c] text-[#E4F6DF] px-5 whitespace-nowrap rounded-md">{item.slot}</div>;
+                              })}
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </>
+                      ) : (
+                        item?.slots[0]?.slot
+                      )}
                     </span>
                   </div>
                 ) : (
@@ -131,11 +154,14 @@ const Booking = () => {
           );
         })}
       </div>
-      
+
       <div className="w-full flex items-center justify-center">
-        <div className="px-16 py-3 rounded-full text-sm bg-gray-900 text-gray-100 cursor-pointer" onClick={() => {
-                  navigate("/play");
-                }}>
+        <div
+          className="px-16 py-3 rounded-full text-sm bg-gray-900 text-gray-100 cursor-pointer"
+          onClick={() => {
+            navigate("/play");
+          }}
+        >
           Browse All Grounds
         </div>
       </div>

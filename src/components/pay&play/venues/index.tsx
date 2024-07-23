@@ -253,7 +253,10 @@ const Venues = ({
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="flex flex-wrap items-center border-[1px] h-8 border-gray-100 rounded-md">
+            <Button
+              variant="outline"
+              className="flex flex-wrap items-center border-[1px] h-8 border-gray-100 rounded-md"
+            >
               <HiOutlineSortDescending
                 size={20}
                 color="black"
@@ -293,14 +296,21 @@ const Venues = ({
       </div>
 
       <div className="flex-1 w-full overflow-x-hidden overflow-y-auto">
-        {groundData.length > 0 ? groundData.map((item, index) => {
-          return <VenueItem key={index} item={item} />;
-        }) : (
+        {groundData.length > 0 ? (
+          <div className="flex w-full flex-col gap-3">
+            {groundData.map((item, index) => {
+              return <VenueItem key={index} item={item} />;
+            })}
+          </div>
+        ) : (
           <div className="flex w-full flex-col gap-3">
             {Array.from({ length: 4 }).map((_, index) => {
               return (
-                <div key={index} className="w-full h-16 bg-gray-100 rounded-md"></div>
-              )
+                <div
+                  key={index}
+                  className="w-full h-16 bg-gray-100 rounded-md"
+                ></div>
+              );
             })}
           </div>
         )}

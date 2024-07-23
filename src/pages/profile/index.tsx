@@ -2,30 +2,32 @@ import Loader from "@/components/loader";
 import LeftPanel from "@/components/profile/LeftPanel";
 import RightPanel from "@/components/profile/RightPanel";
 import { RootState } from "@/store";
+import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 import { useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [toFetch, setToFetch] = useState(false);
+  // const [toFetch, setToFetch] = useState(false);
   
+  const toFetch = useVerifySessionQuery({});
   const { hasToken } = useAppSelector((state: RootState) => state.auth);
 
-  useEffect(() => {
-    const fetchHandler = setTimeout(() => {
-      setToFetch(true);
-    }, 5000);
+  // useEffect(() => {
+  //   const fetchHandler = setTimeout(() => {
+  //     setToFetch(true);
+  //   }, 5000);
 
-    return () => clearTimeout(fetchHandler);
-  }, []);
+  //   return () => clearTimeout(fetchHandler);
+  // }, []);
   useEffect(() => {
     if (!hasToken) {
       navigate("/login");
     }
   }, [hasToken])
 
-  if (!toFetch) {
+  if (toFetch.isLoading) {
     return (
       <div className="flex items-center justify-center h-screen mb-10">
         <Loader />

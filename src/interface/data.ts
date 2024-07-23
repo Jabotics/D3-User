@@ -121,10 +121,16 @@ export interface IAcademy {
     _id: string;
     name: string;
   };
-  slotTimes: {
-    _id: string;
-    slot: string;
-  }[];
+  slots: {
+    morning: {
+      _id: string;
+      slot: string;
+    }[];
+    evening: {
+      _id: string;
+      slot: string;
+    }[];
+  };
   is_active: boolean;
   images?: string[];
   video: string;
@@ -137,7 +143,7 @@ export interface IJoinedAcademy {
   academy: string;
   ground: string;
   venue: string;
-  slot: string;
+  shift: string;
   "re-admission_required": boolean;
   last_payment_date: string;
   payment_due_date: string;

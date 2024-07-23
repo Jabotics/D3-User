@@ -7,31 +7,27 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 const BookingSummary = () => {
-  const navigate = useNavigate()
-  const {
-    allSlots,
-    selectedSlots,
-    listOfPrices,
-    selectedGroundId,
-  } = useAppSelector((state: RootState) => state.slots);
-  const { userData } = useAppSelector(
-    (state: RootState) => state.auth
+  const navigate = useNavigate();
+  const { allSlots, selectedSlots, listOfPrices, selectedGroundId } =
+    useAppSelector((state: RootState) => state.slots);
+  const { userData } = useAppSelector((state: RootState) => state.auth);
+  const getGround = useGetGroundQuery({ id: selectedGroundId });
+  const groundDetails = useAppSelector(
+    (state: RootState) => state.ground.grounds
   );
-  const getGround = useGetGroundQuery({ id: selectedGroundId })
-  const groundDetails = useAppSelector((state: RootState) => state.ground.grounds)
-  const { selectedDate } = useAppSelector(
-    (state: RootState) => state.slots
-  );
+  const { selectedDate } = useAppSelector((state: RootState) => state.slots);
   const { newPrice } = useAppSelector((state: RootState) => state.promocode);
   const totalAmount = listOfPrices.reduce((accumulator, currentItem) => {
     return accumulator + currentItem.value;
   }, 0);
-  const selectedPromo = useAppSelector((state: RootState) => state.promocode.selectedPromo)
+  const selectedPromo = useAppSelector(
+    (state: RootState) => state.promocode.selectedPromo
+  );
   useEffect(() => {
-    getGround.refetch()
+    getGround.refetch();
   }, [selectedGroundId]);
 
-  const [add] = useAddSlotsMutation()
+  const [add] = useAddSlotsMutation();
   const handleSlotBooking = async () => {
     try {
       const res: any = await add({
@@ -41,17 +37,15 @@ const BookingSummary = () => {
         date: selectedDate,
         venue: groundDetails[0].venue?._id,
         customer: userData?.id,
-        amount: totalAmount
-      }).unwrap()
+        amount: totalAmount,
+      }).unwrap();
 
-      navigate('/checkout')
-      console.log(res)
+      navigate("/checkout");
+      console.log(res);
+    } catch (error) {
+      toast.error((error as { data: { message: string } })?.data?.message);
     }
-    catch (error) {
-      toast.error((error as { data: { message: string } })?.data?.message)
-    }
-  }
-
+  };
 
   return (
     <div className="flex flex-col bg-[#FFFFFF] border rounded-lg p-4 gap-4">
@@ -66,6 +60,13 @@ const BookingSummary = () => {
         </span>
       </div>
       <div className="flex flex-row justify-between">
+        <span className="inline-block text-[12px]">Ground</span>
+        <span className="inline-block text-[12px] text-[#000000] font-semibold">
+          {" "}
+          {groundDetails[0]?.name}
+        </span>
+      </div>
+      <div className="flex flex-row justify-between">
         <span className="inline-block text-[12px]">Sport</span>
         <span className="inline-block text-[12px] text-[#000000] font-semibold">
           Cricket
@@ -74,7 +75,7 @@ const BookingSummary = () => {
       <div className="flex flex-row justify-between">
         <span className="inline-block text-[12px]">Turf Size</span>
         <span className="inline-block text-[12px] text-[#000000] font-semibold">
-          70ft x 110ft
+        {`${groundDetails[0]?.dimensions?.width} x ${groundDetails[0]?.dimensions?.length}`}
         </span>
       </div>
       {selectedSlots.length !== 0 && (
@@ -97,27 +98,24 @@ const BookingSummary = () => {
       )}
       {selectedSlots.length !== 0 && (
         <div className="flex flex-row justify-between border-t-2 border-dashed pt-1">
-
           <div className="flex flex-col w-full">
             <div className="flex flex-row justify-between ">
               <span className="inline-block text-[12px]">Sub total </span>
-              <span
-                className="inline-block text-[12px] text-[#000000] font-semibold w-16 text-end"
-
-              >
+              <span className="inline-block text-[12px] text-[#000000] font-semibold w-16 text-end">
                 {`₹${totalAmount}`}
               </span>
             </div>
 
-            {(newPrice.discount > 0 && selectedPromo !== null) &&
+            {newPrice.discount > 0 && selectedPromo !== null && (
               <div className="flex flex-row justify-between">
-                <span className="inline-block text-[12px] text-[#53A53F] ">Coupan Code {selectedPromo && selectedPromo?.code}</span>
+                <span className="inline-block text-[12px] text-[#53A53F] ">
+                  Coupan Code {selectedPromo && selectedPromo?.code}
+                </span>
                 <span className="inline-block text-[12px] text-[#53A53F]  font-semibold w-16 text-end">
                   {`- ₹${newPrice.discount}`}
                 </span>
               </div>
-
-            }
+            )}
           </div>
         </div>
       )}
@@ -127,12 +125,19 @@ const BookingSummary = () => {
             Total
           </span>
           <span className="inline-block text-[12px] text-[#000000] font-bold">
-            {(newPrice.discount > 0 && selectedPromo !== null) ? totalAmount - newPrice.discount : `₹${totalAmount}`}
+            {newPrice.discount > 0 && selectedPromo !== null
+              ? totalAmount - newPrice.discount
+              : `₹${totalAmount}`}
           </span>
         </div>
       )}
       {selectedSlots.length !== 0 && (
-        <Button className="bg-[#252525]" onClick={handleSlotBooking}>Proceed INR   {(newPrice.discount > 0 && selectedPromo !== null) ? totalAmount - newPrice.discount : `₹${totalAmount}`}</Button>
+        <Button className="bg-[#252525]" onClick={handleSlotBooking}>
+          Proceed INR{" "}
+          {newPrice.discount > 0 && selectedPromo !== null
+            ? totalAmount - newPrice.discount
+            : `₹${totalAmount}`}
+        </Button>
       )}
     </div>
   );

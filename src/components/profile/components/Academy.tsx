@@ -55,7 +55,7 @@ const Academy = () => {
                 Joined On
               </div>
               <div className="text-sm w-1/6 flex justify-center font-light tracking-wide">
-                Timing
+                Batch
               </div>
               <div className="text-sm w-1/6 flex justify-center font-light tracking-wide">
                 Status
@@ -82,7 +82,7 @@ const Academy = () => {
                     </div>
                     <div className="text-sm w-1/6 flex items-center justify-center font-medium tracking-wide ">
                       <span className="bg-[#69b456] px-3 py-1 rounded-lg text-gray-100">
-                        {item.slot}
+                        {item.shift}
                       </span>
                     </div>
                     <div className="text-sm w-1/6 flex items-center justify-center gap-3 tracking-wide">
