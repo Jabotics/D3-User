@@ -169,11 +169,16 @@ export interface IMembership {
     _id: string;
     name: string;
   };
-  slotTimes: {
-    _id: string;
-    slot: string;
-    booked?: boolean;
-  }[];
+  slots: {
+    morning: {
+      _id: string;
+      slot: string;
+    }[];
+    evening: {
+      _id: string;
+      slot: string;
+    }[];
+  };
   admission_fee: number;
   monthly_fee: number;
   quarterly_fee: number;
@@ -187,7 +192,7 @@ export interface IJoinedMemberships {
   membership: string;
   ground: string;
   venue: string;
-  slot: string;
+  shift: string;
   "re-admission_required": boolean;
   last_payment_date: string;
   payment_due_date: string;
