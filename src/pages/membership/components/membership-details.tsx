@@ -35,9 +35,8 @@ const getEmbedUrl = (url: string): string => {
     case url.includes("youtube.com") || url.includes("youtu.be"):
       if (url.includes("embed")) {
         // Already an embed URL
-        return `${
-          url.split("?")[0]
-        }?rel=0&modestbranding=1&controls=1&start=0&end=600&loop=1`;
+        return `${url.split("?")[0]
+          }?rel=0&modestbranding=1&controls=1&start=0&end=600&loop=1`;
       }
       // Extract video ID from regular YouTube URLs
       const videoId = url.split("v=")[1] || url.split("youtu.be/")[1];
@@ -134,10 +133,9 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                       return (
                         <div
                           key={index}
-                          className={`w-8 h-8 bg-gray-100 ${
-                            selectedImg === url &&
+                          className={`w-8 h-8 bg-gray-100 ${selectedImg === url &&
                             "border-[3px] border-[#53a53f]"
-                          } rounded-lg shrink-0`}
+                            } rounded-lg shrink-0`}
                           onClick={() => {
                             setHasSelectVideo(false);
                             setSelectedImg(url);
@@ -151,7 +149,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                         </div>
                       );
                     })}
-                  {selectedGround && selectedGround.video.length > 0 ? (
+                  {selectedGround && selectedGround.video?.length > 0 ? (
                     <div
                       className="w-8 h-8 bg-gray-100 flex items-center justify-center border-2 border-gray-300 text-gray-700 rounded-md cursor-pointer"
                       onClick={() => {
@@ -173,10 +171,9 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                         return (
                           <div
                             key={index}
-                            className={`w-8 h-8 ${
-                              selectedImg === url &&
+                            className={`w-8 h-8 ${selectedImg === url &&
                               "border-[3px] border-[#53a53f]"
-                            } bg-gray-100 rounded-lg shrink-0`}
+                              } bg-gray-100 rounded-lg shrink-0`}
                             onClick={() => {
                               setHasSelectVideo(false);
                               setSelectedImg(url);
@@ -394,7 +391,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                           Current Subscription
                         </div>
                         <Separator className="bg-gray-800 mt-3 mb-5" />
-                        <div className="w-full">{}</div>
+                        <div className="w-full">{ }</div>
                       </div>
                       {/* <DialogClose className="h-8 rounded-md bg-gray-800 text-xs text-gray-100 ">
                         Close
@@ -440,11 +437,10 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                     return (
                       <div
                         key={index}
-                        className={`flex text-xs items-center gap-2 h-fit ${
-                          index > selectedGround.rules.allowed.length - 1
+                        className={`flex text-xs items-center gap-2 h-fit ${index > selectedGround.rules.allowed.length - 1
                             ? "text-[#53a53f]"
                             : "text-rose-700"
-                        }`}
+                          }`}
                       >
                         {index > selectedGround.rules.allowed.length - 1 ? (
                           <SiTicktick />
@@ -489,11 +485,10 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                             return (
                               <div
                                 key={index}
-                                className={`text-xs h-fit whitespace-nowrap border-[1px] ${
-                                  selectedSlot && selectedSlot === item.slot
+                                className={`text-xs h-fit whitespace-nowrap border-[1px] ${selectedSlot && selectedSlot === item.slot
                                     ? "bg-[#53a53f] text-gray-50"
                                     : "text-[#53a53f] border border-[#53a53f] bg-gray-100"
-                                } border-gray-300 px-2 py-1 rounded-xl cursor-pointer`}
+                                  } border-gray-300 px-2 py-1 rounded-xl cursor-pointer`}
                                 onClick={() => {
                                   dispatch(setSelectedSlots(item.slot));
                                 }}

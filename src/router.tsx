@@ -21,70 +21,71 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "login",
+        path: "/login",
         lazy: async () => ({
           Component: (await import("./pages/login")).default,
         }),
       },
 
       {
-        path: "play",
+        path: "/play",
         lazy: async () => ({
           Component: (await import("./pages/pay_play")).default,
         }),
+
       },
 
       {
-        path: "scoreboard",
+        path: "/scoreboard",
         lazy: async () => ({
           Component: (await import("./pages/scoreboard")).default,
         }),
       },
 
       {
-        path: "booking",
+        path: "/booking",
         lazy: async () => ({
           Component: (await import("./pages/booking")).default,
         }),
       },
 
       {
-        path: "academy",
+        path: "/academy",
         lazy: async () => ({
           Component: (await import("./pages/academy")).default,
         }),
       },
 
       {
-        path: "contact",
+        path: "/contact",
         lazy: async () => ({
           Component: (await import("./pages/contact")).default,
         }),
       },
 
       {
-        path: "profile",
+        path: "/profile",
         lazy: async () => ({
           Component: (await import("./pages/profile")).default,
         }),
       },
 
       {
-        path: "terms-of-use",
+        path: "/terms-of-use",
         lazy: async () => ({
           Component: (await import("./pages/terms")).default,
         }),
       },
 
       {
-        path: "privacy-policy",
+        path: "/privacy-policy",
         lazy: async () => ({
           Component: (await import("./pages/privacy-policy")).default,
         }),
       },
 
       {
-        path: "about",
+        path: "/about",
         lazy: async () => ({
           Component: (await import("./pages/about")).default,
         }),
