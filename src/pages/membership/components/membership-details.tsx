@@ -120,16 +120,16 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
             <div className="flex-1 h-full flex flex-col gap-2">
               <div className="h-12 w-full flex flex-col items-center justify-center">
                 <h1 className="text-2xl font-medium tracking-wide">
-                  {selectedMembership?.ground.name}
+                  {selectedMembership?.ground?.name}
                 </h1>
-                <p className="text-sm tracking-wider text-gray-400 font-black">{`${selectedMembership.sport.name} Membership`}</p>
+                <p className="text-sm tracking-wider text-gray-400 font-black">{`${selectedMembership?.sport?.name} Membership`}</p>
               </div>
               <Separator />
               <div className="flex-1 w-full flex gap-0 mt-3">
                 <div className="w-12 h-full mr-1 flex flex-col overflow-y-auto overflow-x-hidden gap-2 filter-sc">
                   {selectedGround &&
-                    selectedGround.images.length > 0 &&
-                    selectedGround.images.slice(0, 2).map((url, index) => {
+                    selectedGround.images?.length > 0 &&
+                    selectedGround.images?.slice(0, 2).map((url, index) => {
                       return (
                         <div
                           key={index}
@@ -164,9 +164,9 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                   )}
 
                   {selectedGround &&
-                    selectedGround.images.length > 0 &&
+                    selectedGround.images?.length > 0 &&
                     selectedGround.images
-                      .slice(2, selectedGround.images.length)
+                      ?.slice(2, selectedGround.images.length)
                       .map((url, index) => {
                         return (
                           <div
@@ -215,7 +215,6 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                 <div className="w-full h-12 flex flex-col items-start justify-center text-xl text-[#53a53f]">
                   About Membership
                 </div>
-                {/* <Separator /> */}
                 <div className="w-full h-1/6 flex flex-col gap-2">
                   <h2 className="text-sm font-light">
                     Venue :{" "}
@@ -250,9 +249,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                                   key={index}
                                   className="flex h-5 px-3 border border-gray-300 text-gray-600 rounded-xl text-xs items-center justify-center gap-3"
                                 >
-                                  {/* <div className="w-32 text-gray-800"> */}
                                   {amenity}
-                                  {/* </div> */}
                                 </div>
                               );
                             })}
@@ -271,7 +268,6 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                       Timings
                     </h2>
                     <Separator className="bg-gray-300" />
-                    {/* <span className="flex-1 w-full flex items-start"> */}
                     <span className="h-fit w-full flex flex-wrap gap-2">
                       {selectedMembership.slotTimes.map((item, index) => {
                         return (
@@ -284,7 +280,6 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                         );
                       })}
                     </span>
-                    {/* </span> */}
                   </span>
                 </div>
 
@@ -377,7 +372,8 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                             </p>
                           </div>
                           <p className="text-xs text-gray-500 whitespace-nowrap">
-                            Click to view the validity of the current subscription.
+                            Click to view the validity of the current
+                            subscription.
                           </p>
                         </div>
                         <div className="h-full w-10 flex items-center justify-center text-gray-100">
@@ -393,13 +389,9 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                         <Separator className="bg-gray-800 mt-3 mb-5" />
                         <div className="w-full">{ }</div>
                       </div>
-                      {/* <DialogClose className="h-8 rounded-md bg-gray-800 text-xs text-gray-100 ">
-                        Close
-                      </DialogClose> */}
                     </DialogContent>
                   </Dialog>
                 )}
-                {/* <div className="flex-1 w-full"></div> */}
               </div>
             </div>
           </>
@@ -417,9 +409,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                         key={index}
                         className="flex h-5 px-3 border border-gray-300 text-gray-600 rounded-xl text-xs items-center justify-center gap-3"
                       >
-                        {/* <div className="w-32 text-gray-800"> */}
                         {amenity}
-                        {/* </div> */}
                       </div>
                     );
                   })}

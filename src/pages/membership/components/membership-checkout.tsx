@@ -8,13 +8,16 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { setAuthMemberships } from "@/store/actions/slices/authSlice";
 import { setTitle } from "@/store/actions/slices/profileSlice";
 import HeroLoader from "@/components/hero-loader";
+import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 const MembershipCheckout = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const [toRefetchUserData, setToRefetchUserData] = useState(false)
+  useVerifySessionQuery({}, { skip: !toRefetchUserData })
 
   const [hasSubmit, setHasSubmit] = useState<boolean>(false);
 
@@ -27,7 +30,7 @@ const MembershipCheckout = () => {
       const fetchHandler = setTimeout(() => {
         navigate("/profile");
         dispatch(setTitle("Memberships"));
-        dispatch(setAuthMemberships(registrationFormDetails.membership));
+        setToRefetchUserData(true)
 
         setHasSubmit(false);
         // setToFetch(false);

@@ -4,6 +4,10 @@ export const APIEndPoints = {
   // CUSTOMER
   customer_login: '/api/customer-login',
   validate_otp: '/api/validate-otp',
+  verify_session: '/api/verify-user-session',
+  logout: '/api/logout',
+
+  update_profile: '/api/update-user-profile',
 
   // Fetch Ground
   fetch_ground: '/api/grounds',
@@ -21,7 +25,7 @@ export const APIEndPoints = {
   book_slot: '/api/book-slot',
 
   // Booking
-  get_booking: '/api/get-slot-bookings',
+  get_booking: '/api/my-bookings',
 
   // GROUNDS
   fetch_grounds: '/api/fetch-grounds',
@@ -42,5 +46,12 @@ export const APIEndPoints = {
   
   // Promocode
   fetch_promo: '/api/promo-codes',
-  apply_promo: '/api/apply-promo'
+  apply_promo: '/api/apply-promo',
+
+  // CHAT
+  create_chat: '/api/create-chat',
+  all_chats: '/api/chat',
+  send_message: '/api/send-message',
+  update_chat: '/api/update-chat',
+  all_messages: '/api/get-messages',
 }

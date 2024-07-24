@@ -1,10 +1,16 @@
 import Loader from "@/components/loader";
 import LeftPanel from "@/components/profile/LeftPanel";
 import RightPanel from "@/components/profile/RightPanel";
+import { RootState } from "@/store";
+import { useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [toFetch, setToFetch] = useState(false);
+  
+  const { hasToken } = useAppSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const fetchHandler = setTimeout(() => {
@@ -13,6 +19,11 @@ const Profile = () => {
 
     return () => clearTimeout(fetchHandler);
   }, []);
+  useEffect(() => {
+    if (!hasToken) {
+      navigate("/login");
+    }
+  }, [hasToken])
 
   if (!toFetch) {
     return (

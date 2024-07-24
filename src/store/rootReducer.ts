@@ -5,6 +5,9 @@ import {
   GroundSlice,
   // AUTHENTICATION
   authSlice,
+  authApi,
+  logoutApi,
+
   otpSlice,
   groundApi,
   SportSlice,
@@ -32,6 +35,9 @@ import {
   eventsApi,
   eventsSlice,
   profileSlice,
+
+  chatSlice,
+  chatApi,
 
 } from '@/store/actions'
 import { RequestHandler } from './RequestHandler'
@@ -77,6 +83,13 @@ const membershipPersistConfig = {
   blacklist: ['memberships', 'status', 'error', 'count', 'limit', 'offset', 'locationArr', 'selectedSlot']
 }
 
+const chatPersistConfig = {
+  key: 'd3-chats',
+  storage,
+  version: 1,
+  blacklist: ['allMessages', 'status', 'error', 'count', 'chatStatus', 'chatError']
+}
+
 const authPersistedReducer = persistReducer(persistConfig, authSlice)
 const otpPersistReducer = persistReducer(otpPersistConfig, otpSlice)
 
@@ -84,6 +97,8 @@ const cityPersistReducer = persistReducer(appPersistConfig, citySlice)
 const profilePersistReducer = persistReducer(profilePersistConfig, profileSlice)
 const academyPersistReducer = persistReducer(academyPersistConfig, academiesSlice)
 const membershipPersistReducer = persistReducer(membershipPersistConfig, membershipsSlice)
+
+const chatsPersistReducer = persistReducer(chatPersistConfig, chatSlice)
 
 export const rootReducer = combineReducers({
 
@@ -104,8 +119,14 @@ export const rootReducer = combineReducers({
   
   slots: slotsSlice,
   profile: profilePersistReducer,
+
+  chat: chatsPersistReducer,
   
   [RequestHandler.reducerPath]: RequestHandler.reducer,
+
+  [authApi.reducerPath]: authApi.reducer,
+  [logoutApi.reducerPath]: logoutApi.reducer,
+  
   [groundApi.reducerPath]: groundApi.reducer,
   [sportApi.reducerPath]: sportApi.reducer,
   [venueApi.reducerPath]: venueApi.reducer,
@@ -126,5 +147,8 @@ export const rootReducer = combineReducers({
 
   // EVENTS
   [eventsApi.reducerPath]: eventsApi.reducer,
+
+  // CHAT
+  [chatApi.reducerPath]: chatApi.reducer,
 
 })

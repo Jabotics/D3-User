@@ -14,6 +14,9 @@ import { rootReducer } from "./rootReducer";
 import { RequestHandler } from "./RequestHandler";
 
 import {
+  authApi,
+  logoutApi,
+
   bookingApi,
   groundApi,
   promoCodeApi,
@@ -24,6 +27,7 @@ import {
   academiesApi,
   eventsApi,
   membershipsApi,
+  chatApi,
 } from "@/store/actions";
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -37,19 +41,25 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
       const middleware = getDefaultMiddleware({
         serializableCheck: false,
       }).concat(
-        socketMiddleware,
         RequestHandler.middleware,
+
+        authApi.middleware,
+        logoutApi.middleware,
+        
         groundApi.middleware,
         sportApi.middleware,
         venueApi.middleware,
-
+        
         citiesApi.middleware,
         slotsApi.middleware,
         bookingApi.middleware,
         academiesApi.middleware,
         membershipsApi.middleware,
         eventsApi.middleware,
-        promoCodeApi.middleware
+        promoCodeApi.middleware,
+        chatApi.middleware,
+        
+        socketMiddleware,
       );
 
       const middlewareTuple = middleware as Middleware<

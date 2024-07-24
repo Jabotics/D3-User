@@ -9,8 +9,9 @@ import { Button } from "@/components/ui/button";
 import { APIEndPoints } from "@/APIEndpoint";
 import { useSetFavoriteMutation } from "@/store/actions/slices/groundSlice";
 import { RootState } from "@/store";
-import { setFavorites } from "@/store/actions/slices/authSlice";
 import { IoIosHeart } from "react-icons/io";
+import { useState } from "react";
+import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 function generateRandomString(length = 30) {
   const characters =
@@ -31,7 +32,12 @@ const VenueItem = ({ item }: { item: IGround }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { userData } = useAppSelector((state: RootState) => state.auth)
+  const [toRefetchUserData, setToRefetchUserData] = useState(false);
+  useVerifySessionQuery({}, { refetchOnMountOrArgChange: true, skip: !toRefetchUserData });
+
+  const { userData, hasToken } = useAppSelector(
+    (state: RootState) => state.auth
+  );
   const [updateFavorite] = useSetFavoriteMutation();
 
   const openDetailsPage = (id: string) => {
@@ -40,16 +46,23 @@ const VenueItem = ({ item }: { item: IGround }) => {
 
   const handleSetFavorite = async () => {
     try {
-      await updateFavorite({
-        ground_id: item.id,
-        customer_id: userData?.id,
-      })
+      if (hasToken) {
+        await updateFavorite({
+          ground_id: item.id,
+          customer_id: userData?.id,
+        });
+        setToRefetchUserData(true);
 
-      dispatch(setFavorites(item.id))
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      } else {
+        navigate("/login");
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
+    } finally {
+      setToRefetchUserData(false);
     }
-  }
+  };
 
   return (
     <div className="flex rounded-md overflow-hidden w-[90vw] sm:w-full h-24 sm:h-32 border border-gray-100 sm:border-gray-300 ">
@@ -76,8 +89,19 @@ const VenueItem = ({ item }: { item: IGround }) => {
             >
               View Details
             </button>
-            <div className="h-[22px] w-[22px] p-1  bg-[#54a63fb3] rounded-lg flex items-center justify-center cursor-pointer" onClick={handleSetFavorite}>
-              {userData?.favorites?.includes(item.id) ? <IoIosHeart className="font-bold " size={20} color="white" /> : <IoIosHeartEmpty className="font-bold " size={20} color="white" />}
+            <div
+              className="h-[22px] w-[22px] p-1  bg-[#54a63fb3] rounded-lg flex items-center justify-center cursor-pointer"
+              onClick={handleSetFavorite}
+            >
+              {userData?.favorites?.includes(item.id) ? (
+                <IoIosHeart className="font-bold " size={20} color="white" />
+              ) : (
+                <IoIosHeartEmpty
+                  className="font-bold "
+                  size={20}
+                  color="white"
+                />
+              )}
             </div>
           </div>
 
@@ -98,7 +122,10 @@ const VenueItem = ({ item }: { item: IGround }) => {
             <div className="w-60 flex flex-row items-center gap-2 self-start cursor-pointer hover:underline">
               <FaLocationDot size={12} color="#D0D0D0" />
               <p className="p-0 m-0 text-[12px] sm:text-[14px] md:text-xs text-[#676767] whitespace-nowrap">
-                {`${(item?.venue?.name + ' ' + item?.venue?.address).substring(0, 30)}...`}
+                {`${(item?.venue?.name + " " + item?.venue?.address).substring(
+                  0,
+                  30
+                )}...`}
               </p>
             </div>
           </div>

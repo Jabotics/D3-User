@@ -53,6 +53,7 @@ export interface ISlot {
   }
   available: boolean;
 }
+
 export type DayOfWeek = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
 export interface ICity {
   id: string;
@@ -218,4 +219,13 @@ export interface IPromo {
   max_use_limit: string;
   valid_upto: string;
   terms_and_conditions: string[];
+}
+
+export interface IMessage {
+  id: string
+  sender: string
+  // receiver_id: string
+  seen: boolean
+  createdAt: string
+  text: string
 }
