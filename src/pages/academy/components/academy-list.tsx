@@ -131,7 +131,7 @@ const AcademyList = () => {
         </div>
 
         {/*  */}
-        <div className="flex-1 h-full ">
+        <div className="flex-1 h-full">
           <>
             {hasAppliedFilters ? (
               <>
@@ -376,7 +376,6 @@ const AcademyList = () => {
               })
             )}
           </div>
-
           <div className="w-full h-12 flex items-center justify-end">
             <AcademyPagination />
           </div>

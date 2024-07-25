@@ -187,7 +187,7 @@ export const Navbar = () => {
             </div>
 
             {/* BUTTONS */}
-            <div className="col-span-4 sm:col-span-5 max-[290px]:col-span-4 hidden max-[350px]:col-span-5 lg:col-span-7 xl:col-span-8 gap-4 lg:flex lg:justify-center xl:justify-end items-center custome-break sm:mr-2">
+            <div className="col-span-4 sm:col-span-5 max-[290px]:col-span-4 hidden max-[350px]:col-span-5 lg:col-span-7 xl:col-span-8 gap-4 lg:flex lg:justify-start xl:justify-center 2xl:justify-end items-center custome-break sm:mr-2">
               {isLarge && (
                 <div className="max-lg:hidden flex items-center justify-start gap-2">
                   <Link to={"/about"} target="_blank" rel="noreferrer noopener">

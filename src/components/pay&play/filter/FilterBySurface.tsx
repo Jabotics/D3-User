@@ -60,14 +60,14 @@ const FilterBySurface = () => {
               return (
                 <div key={index} className="items-top flex space-x-2">
                   <Checkbox
-                    id="ground_Type"
+                    id={item}
                     checked={selectedGroundType.includes(item)}
                     onCheckedChange={() => {
                       handleCheckboxChange(item);
                     }}
                   />
                   <label
-                    htmlFor="ground_Type"
+                    htmlFor={item}
                     className={`text-xs lg:text-sm ${selectedGroundType.includes(item) ? 'font-medium text-black' : 'font-light'} leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]`}
                   >
                     {item}

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -20,7 +21,7 @@ const MembershipPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  useVerifySessionQuery({})
+  useVerifySessionQuery({});
   const searchParams = useSearchParams();
   const detailsPageId = searchParams[0].get("id");
 
@@ -46,7 +47,7 @@ const MembershipPage = () => {
     },
     {
       refetchOnMountOrArgChange: true,
-      skip: !!!selectedCity,
+      skip: !selectedCity,
     }
   );
 
@@ -86,8 +87,8 @@ const MembershipPage = () => {
                             ? item === "Home"
                             : item === "Home" || item === "Membership"
                         )
-                          ? "text-gray-900 cursor-pointer hover:underline"
-                          : "text-gray-500"
+                          ? "text-[#54a63f] cursor-pointer hover:underline font-semibold"
+                          : "text-[#a7d19d] font-medium"
                       }`}
                       onClick={() => {
                         if (item === "Home") {
@@ -102,13 +103,13 @@ const MembershipPage = () => {
                     {(locationArr.length === 2
                       ? item === "Home"
                       : item === "Home" || item === "Membership") && (
-                      <span className="text-gray-500 ml-1">{"/"}</span>
+                      <span className="text-[#a7d19d] ml-1">{"/"}</span>
                     )}
                   </div>
                 ))}
               </span>
 
-              {!!detailsPageId ? (
+              {detailsPageId ? (
                 isJoinAcademy ? (
                   <MembershipRegistrationPage membershipId={detailsPageId} />
                 ) : (

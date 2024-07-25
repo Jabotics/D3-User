@@ -40,11 +40,14 @@ const AcademyFilter = () => {
     (state: RootState) => state.academy
   );
 
-  useGetVenueQuery({
-    city: selectedCity
-  }, {
-    skip: !!!selectedCity,
-  });
+  useGetVenueQuery(
+    {
+      city: selectedCity,
+    },
+    {
+      skip: !selectedCity,
+    }
+  );
   const venue = useAppSelector((state: RootState) => state.venue.venues);
 
   const handleVenueCheckboxChange = (venueId: string) => {
@@ -71,7 +74,7 @@ const AcademyFilter = () => {
                   <React.Fragment key={index}>
                     <div className="flex items-center space-x-2">
                       <Checkbox
-                        id="terms"
+                        id={item.id}
                         onClick={() => {
                           if (item.id === selectedSportsStore) {
                             dispatch(setSelectedSportsStore(null));
@@ -82,8 +85,12 @@ const AcademyFilter = () => {
                         checked={item.id === selectedSportsStore}
                       />
                       <label
-                        htmlFor="terms"
-                        className="text-sm lg:text-xs xl:text-sm font-light text-gray-600 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        htmlFor={item.id}
+                        className={`text-sm lg:text-xs xl:text-sm ${
+                          item.id === selectedSportsStore
+                            ? "font-medium text-black"
+                            : "font-light"
+                        } text-gray-600 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`}
                       >
                         {item.name}
                       </label>
@@ -97,8 +104,12 @@ const AcademyFilter = () => {
                   setShowMoreSports(!showMoreSports);
                 }}
               >
-                <span>{showMoreSports ? 'Show Less' : 'Show More'}</span>
-                {showMoreSports ? <IoIosArrowUp className="text-gray-500" /> : <IoIosArrowDown className="text-gray-500" />}
+                <span>{showMoreSports ? "Show Less" : "Show More"}</span>
+                {showMoreSports ? (
+                  <IoIosArrowUp className="text-gray-500" />
+                ) : (
+                  <IoIosArrowDown className="text-gray-500" />
+                )}
               </div>
               {showMoreSports &&
                 sports.slice(3, sports.length).map((item, index) => {
@@ -106,7 +117,7 @@ const AcademyFilter = () => {
                     <React.Fragment key={index}>
                       <div className="flex items-center space-x-2">
                         <Checkbox
-                          id="terms"
+                          id={item.id}
                           onClick={() => {
                             if (item.id === selectedSportsStore) {
                               dispatch(setSelectedSportsStore(null));
@@ -117,8 +128,12 @@ const AcademyFilter = () => {
                           checked={item.id === selectedSportsStore}
                         />
                         <label
-                          htmlFor="terms"
-                          className="text-sm font-light text-gray-600 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          htmlFor={item.id}
+                          className={`text-sm lg:text-xs xl:text-sm ${
+                            item.id === selectedSportsStore
+                              ? "font-medium text-black"
+                              : "font-light"
+                          } text-gray-600 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`}
                         >
                           {item.name}
                         </label>
@@ -169,7 +184,11 @@ const AcademyFilter = () => {
                         />
                         <label
                           htmlFor={item.id}
-                          className="text-sm lg:text-xs xl:text-sm font-light leading-none"
+                          className={`text-sm lg:text-xs xl:text-sm ${
+                            selectedVenue.includes(item.id)
+                              ? "font-medium text-black"
+                              : "font-light"
+                          } text-gray-600 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`}
                         >
                           {item?.name}
                         </label>
@@ -205,15 +224,19 @@ const AcademyFilter = () => {
                 return (
                   <div key={index} className="items-top flex space-x-2">
                     <Checkbox
-                      id="ground_Type"
+                      id={item}
                       checked={selectedGroundType.includes(item)}
                       onCheckedChange={() => {
                         handleGroundTypeCheckboxChange(item);
                       }}
                     />
                     <label
-                      htmlFor="ground_Type"
-                      className="text-sm lg:text-xs xl:text-sm font-light leading-none"
+                      htmlFor={item}
+                      className={`text-sm lg:text-xs xl:text-sm ${
+                        selectedGroundType.includes(item)
+                          ? "font-medium text-black"
+                          : "font-light"
+                      } text-gray-600 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`}
                     >
                       {item}
                     </label>
