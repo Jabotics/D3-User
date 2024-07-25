@@ -79,7 +79,7 @@ const Events = () => {
   };
 
   return (
-    <div className="h-[50vh] overflow-hidden">
+    <div className="h-[60vh] sm:h-[50vh] overflow-hidden">
       <div
         key={currentEventIndex}
         className="grid grid-cols-2 items-center h-full"

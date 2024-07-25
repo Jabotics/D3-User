@@ -94,7 +94,7 @@ const PayPlay = () => {
         ))}
       </span>
 
-      <div className="w-full h-full mt-4 sm:mt-8 flex gap-8 items-start lg:-ml-10">
+      <div className="w-full h-full mt-2 sm:mt-8 flex gap-8 items-start lg:-ml-10">
         <div className="hidden lg:block w-80">
           <FilterByCategory />
         </div>

@@ -15,14 +15,24 @@ import { LazyLoadImage } from "../custom/slider-home/EmblaCarouselLazyLoadImage"
 import { Button } from "../ui/button";
 
 import "../../assets/styles/slider.css";
+import { useFetchBannersQuery } from "@/store/actions/slices/bannerSlice";
+import { useAppSelector } from "@/store/hooks";
+import { RootState } from "@/store";
+import { APIEndPoints } from "@/APIEndpoint";
+import { useNavigate } from "react-router-dom";
 
 const options: EmblaOptionsType = {};
-const SLIDE_COUNT = 5;
+const SLIDE_COUNT = 1;
 const slides = Array.from(Array(SLIDE_COUNT).keys());
 
 const SliderSection = () => {
+  const navigate = useNavigate();
+
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const [slidesInView, setSlidesInView] = useState<number[]>([]);
+
+  useFetchBannersQuery({});
+  const { banners } = useAppSelector((state: RootState) => state.banner);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
@@ -67,14 +77,56 @@ const SliderSection = () => {
                 inView={slidesInView.indexOf(index) > -1}
               />
               <div className="embla-slider_container--content">
-                <h4 className="text-xs md:text-[16px] font-medium">PLAY SPORTS</h4>
+                <h4 className="text-xs md:text-[16px] font-medium">
+                  PLAY SPORTS
+                </h4>
                 <h1 className=" text-2xl md:text-4xl font-bold">
                   World's Biggest Sports Community
                 </h1>
-                <Button variant={"lowTheme"} size={'lowTheme'} className="mt-5 h-7 md:h-10 rounded-full">
+                <Button
+                  variant={"lowTheme"}
+                  size={"lowTheme"}
+                  className="mt-5 h-7 md:h-10 rounded-full"
+                  onClick={() => {
+                    navigate(`/play`);
+                  }}
+                >
                   Book Now
                 </Button>
-                <p className="text-[8px] md:text-xs mt-2">No credit card required</p>
+                <p className="text-[8px] md:text-xs mt-2">
+                  No credit card required
+                </p>
+              </div>
+            </div>
+          ))}
+          {banners.map((item, index) => (
+            <div className="embla-slider__slide" key={index}>
+              <LazyLoadImage
+                key={index}
+                index={index}
+                imgSrc={`${APIEndPoints.BackendURL}/${item.image}`}
+                inView={slidesInView.indexOf(index) > -1}
+              />
+              <div className="embla-slider_container--content">
+                <h4 className="text-xs md:text-[16px] font-medium">
+                  PLAY SPORTS
+                </h4>
+                <h1 className=" text-2xl md:text-4xl font-bold">
+                  World's Biggest Sports Community
+                </h1>
+                <Button
+                  variant={"lowTheme"}
+                  size={"lowTheme"}
+                  className="mt-5 h-7 md:h-10 rounded-full"
+                  onClick={() => {
+                    navigate(`${item.type}`);
+                  }}
+                >
+                  {item.type === "academy" ? "Join Now" : "Book Now"}
+                </Button>
+                <p className="text-[8px] md:text-xs mt-2">
+                  No credit card required
+                </p>
               </div>
             </div>
           ))}

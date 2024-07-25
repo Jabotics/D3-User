@@ -117,7 +117,7 @@ export const Navbar = () => {
                 <div className="flex items-center gap-3">
                   <div
                     ref={mobileRef}
-                    className={`flex items-center gap-1 lg:hidden transition-all duration-300 bg-[#d4f0cc] lg:bg-white px-1 rounded-xl border-[1px] lg:border-none border-[#b0cca9] ${
+                    className={`flex items-center gap-1 lg:hidden transition-all duration-300 h-6 bg-[#d4f0cc] lg:bg-white px-1 rounded-xl border-[1px] lg:border-none border-[#b0cca9] ${
                       showMobile ? "fade-in-15" : "fade-out-15"
                     }`}
                     onClick={() => {
@@ -187,7 +187,7 @@ export const Navbar = () => {
             </div>
 
             {/* BUTTONS */}
-            <div className="col-span-4 sm:col-span-5 max-[290px]:col-span-4 hidden max-[350px]:col-span-5 lg:col-span-6 xl:col-span-7 gap-4 lg:flex justify-end  items-center custome-break sm:mr-2">
+            <div className="col-span-4 sm:col-span-5 max-[290px]:col-span-4 hidden max-[350px]:col-span-5 lg:col-span-7 xl:col-span-8 gap-4 lg:flex lg:justify-center xl:justify-end items-center custome-break sm:mr-2">
               {isLarge && (
                 <div className="max-lg:hidden flex items-center justify-start gap-2">
                   <Link to={"/about"} target="_blank" rel="noreferrer noopener">
@@ -265,7 +265,7 @@ export const Navbar = () => {
             </div>
 
             {/* LOCATION */}
-            <div className="ml-3 lg:-ml-12 max-[290px]:col-span-6 max-[350px]:col-span-5 col-span-7 sm:col-span-7 lg:col-span-3 gap-4 flex items-center justify-start max-[390px]:text-xs">
+            <div className="ml-3 lg:-ml-12 max-[290px]:col-span-6 max-[350px]:col-span-5 col-span-7 sm:col-span-7 lg:col-span-2 gap-4 flex items-center justify-start lg:justify-end max-[390px]:text-xs">
               <Dialog
                 open={open}
                 onOpenChange={() => {
@@ -282,19 +282,19 @@ export const Navbar = () => {
                   <Button
                     variant="outline"
                     className={`${
-                      selectedCityName ? "w-36 lg:w-16 ml-3 lg:ml-0" : "w-32 "
-                    } h-6 lg:h-7 rounded-3xl`}
+                      selectedCityName ? "w-36 lg:w-16 ml-3 lg:ml-0 border border-gray-300/50 text-[#53a53f]" : "w-32 "
+                    } h-6 lg:h-7 rounded-3xl hover:bg-[#53a53f] hover:text-gray-100`}
                     onClick={() => setOpen(true)}
                   >
                     <span
                       className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${
-                        selectedCityName && "tracking-tighter"
+                        selectedCityName && "tracking-wider lg:tracking-tight font-extrabold"
                       }`}
                     >
                       {selectedCityName ? (
                         selectedCityName
                       ) : (
-                        <SlLocationPin size={15} className="text-green-500" />
+                        <SlLocationPin size={15} className="text-[#53a53f]" />
                       )}
                     </span>
                   </Button>
@@ -329,7 +329,7 @@ export const Navbar = () => {
                       {cities.map((item, index) => (
                         <div
                           key={index}
-                          className="w-20 h-20 rounded-full flex items-center justify-center text-sm border-2 border-dashed border-gray-300 font-extralight bg-teal-900 text-white cursor-pointer"
+                          className="w-20 h-20 rounded-full flex items-center justify-center text-sm border-2 border-dashed border-gray-300 font-normal bg-[#469b30] text-white cursor-pointer"
                           onClick={() => handleCitySelect(item.id)}
                         >
                           {item.name}
@@ -382,7 +382,7 @@ export const Navbar = () => {
                   )}
                 </>
               </div>
-              <span className="font-medium hidden lg:inline-flex text-[15px] items-end w-full justify-start gap-2 tracking-tighter whitespace-nowrap mr-4">
+              <span className="font-medium hidden lg:inline-flex text-[15px] items-end w-fit justify-start gap-2 tracking-tighter whitespace-nowrap mr-4">
                 <MdCall size={20} className="text-[#53A53F]" />
                 <span className="-mb-[3px] -ml-[3px]">9874 475 988</span>
               </span>

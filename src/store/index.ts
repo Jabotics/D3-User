@@ -17,6 +17,8 @@ import {
   authApi,
   logoutApi,
 
+  homeBannerApi,
+
   bookingApi,
   groundApi,
   promoCodeApi,
@@ -45,6 +47,8 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
 
         authApi.middleware,
         logoutApi.middleware,
+        
+        homeBannerApi.middleware,
         
         groundApi.middleware,
         sportApi.middleware,
