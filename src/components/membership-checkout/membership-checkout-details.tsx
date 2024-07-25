@@ -2,24 +2,24 @@ import { Separator } from "@/components/ui/separator";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { CiEdit } from "react-icons/ci";
+// import { CiEdit } from "react-icons/ci";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 
+// import {
+//   Dialog,
+//   DialogClose,
+//   DialogContent,
+//   DialogDescription,
+//   DialogTitle,
+//   DialogTrigger,
+// } from "@/components/ui/dialog";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  setSelectedSlots,
+  // setSelectedSlots,
   setSubscriptionType,
 } from "@/store/actions/slices/membershipSlice";
-import { useState } from "react";
+// import { useState } from "react";
 
 import { WiDirectionLeft } from "react-icons/wi";
 
@@ -33,7 +33,7 @@ interface MembershipCheckoutDetailsProps {
     address: string;
     membership: string;
     sport: string;
-    slot?: string;
+    shift?: string;
     customer: string;
     ground: string;
     city: string;
@@ -64,7 +64,7 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
   );
   const selectedMembership = memberships.find((i) => i.id === detailsPageId);
 
-  const [hasSlotChanged, setHasSlotChanged] = useState(false);
+  // const [hasSlotChanged, setHasSlotChanged] = useState(false);
 
   return (
     <section className="w-full h-fit lg:h-full flex flex-col gap-2">
@@ -179,9 +179,9 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
           <div className="flex-1 w-full flex flex-col items-start pt-5">
             <div className="flex items-center gap-2">
               <span className="border text-xs border-[#53A53F] px-5 py-1 tracking-wider rounded-full font-medium">
-                {registrationFormDetails.slot}
+                {registrationFormDetails.shift}
               </span>
-              {selectedMembership ? (
+              {/* {selectedMembership ? (
                 <Dialog>
                   <DialogTrigger className="cursor-pointer">
                     <CiEdit />
@@ -228,9 +228,9 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
                     </DialogClose>
                   </DialogContent>
                 </Dialog>
-              ) : null}
+              ) : null} */}
             </div>
-            {selectedMembership ? (
+            {/* {selectedMembership ? (
               <div className="flex flex-col items-start mt-3">
                 <span className="text-xs font-semibold text-gray-500 tracking-wide">
                   Other Slots
@@ -250,7 +250,7 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
                     })}
                 </span>
               </div>
-            ) : null}
+            ) : null} */}
           </div>
         </div>
       </div>
@@ -316,9 +316,9 @@ const MembershipCheckoutDetails: React.FC<MembershipCheckoutDetailsProps> = ({
           </div>
           <div className="lg:h-8 w-full flex flex-col lg:flex-row items-start lg:items-center gap-3 text-sm mb-3 lg:my-5">
             <div className="flex items-center gap-5">
-              <span>Slot: </span>
+              <span>Shift: </span>
               <span className="font-semibold tracking-wide px-3 py-1 rounded-full bg-[#53a53f] text-gray-100">
-                {registrationFormDetails.slot}
+                {registrationFormDetails.shift}
               </span>
             </div>
           </div>

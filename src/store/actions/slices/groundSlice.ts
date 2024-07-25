@@ -71,6 +71,8 @@ interface IParams {
   error: string | undefined;
   params: { [key: string]: string[] };
 
+  locationArr: string[];
+
   selectedSportsStore: string[];
   sortByText: string[];
   selectedVenue: string[];
@@ -85,6 +87,8 @@ const initialState: IParams = {
   status: "idle",
   error: undefined,
   params: {},
+
+  locationArr: ["Home", "Play"],
 
   selectedSportsStore: [],
   sortByText: [],
@@ -158,6 +162,13 @@ export const GroundSlice = createSlice({
         state.selectedSportsStore.push(action.payload);
       }
     },
+    setLocationArr: (state, action: PayloadAction<string>) => {
+      const x = new Set(state.locationArr);
+      state.locationArr = Array.from(x.add(action.payload));
+    },
+    resetLocationArr: (state) => {
+      state.locationArr = ["Home", "Academy"];
+    },
 
     setFavorites: (state, action: PayloadAction<string>) => {
       if (state.favorites.includes(action.payload)) {
@@ -197,6 +208,8 @@ export const { useGetGroundQuery, useSetFavoriteMutation } = groundApi;
 export const {
   setParams,
   setSortByText,
+  setLocationArr,
+  resetLocationArr,
   resetFilters,
   setSelectedVenueInGround,
   setSelectedGroundType,

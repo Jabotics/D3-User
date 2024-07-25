@@ -17,26 +17,26 @@ const FilterByPrice = () => {
       >
         <AccordionItem value="item-1" className="border-b-0 p-0">
           <AccordionTrigger
-            className="no-underline text-[#53A53F] text-[16px]"
+            className="no-underline text-[#53A53F] text-sm lg:text-[16px]"
             state={"open"}
           >
             Price
           </AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-4">
+          <AccordionContent className="flex flex-col gap-4 -ml-4">
             <div className="items-top flex space-x-2">
               <Checkbox id="terms1" />
               <label
                 htmlFor="terms1"
-                className="text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-xs lg:text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]"
               >
-                <RiArrowDropLeftLine size={18} className="inline-block" /> 1000
+                <RiArrowDropLeftLine size={window.innerWidth < 1024 ? 14 : 18} className="inline-block" /> 1000
               </label>
             </div>
             <div className="items-top flex space-x-2">
               <Checkbox id="terms1" />
               <label
                 htmlFor="terms1"
-                className="text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-xs lg:text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]"
               >
                 1000 - 2000
               </label>
@@ -45,7 +45,7 @@ const FilterByPrice = () => {
               <Checkbox id="terms1" />
               <label
                 htmlFor="terms1"
-                className="text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-xs lg:text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]"
               >
                 2000 - 3000
               </label>
@@ -54,7 +54,7 @@ const FilterByPrice = () => {
               <Checkbox id="terms1" />
               <label
                 htmlFor="terms1"
-                className="text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-xs lg:text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]"
               >
                 3000 - 4000
               </label>
@@ -63,9 +63,9 @@ const FilterByPrice = () => {
               <Checkbox id="terms1" />
               <label
                 htmlFor="terms1"
-                className="text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-xs lg:text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]"
               >
-                <RiArrowDropRightLine size={18} className="inline-block" /> 4000
+                <RiArrowDropRightLine size={window.innerWidth < 1024 ? 14 : 18} className="inline-block" /> 4000
               </label>
             </div>
           </AccordionContent>

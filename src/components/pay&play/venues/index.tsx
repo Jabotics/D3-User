@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 import {
   resetFilters,
+  setParams,
   setSelectedGroundType,
   setSelectedSportsStore,
   setSelectedVenueInGround,
@@ -35,6 +36,8 @@ import {
 import FilterByCategory from "../filter";
 import { Button } from "@/components/ui/button";
 import { RiFilterLine } from "react-icons/ri";
+import { setSelectedSports } from "@/store/actions/slices/sportSlice";
+import { setSelectedVenue } from "@/store/actions/slices/venueSlice";
 
 const Venues = ({
   filterArr,
@@ -84,6 +87,7 @@ const Venues = ({
 
   useEffect(() => {
     getGround.refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params, pagination.pageIndex, pageCount, selectedCity]);
 
   useEffect(() => {
@@ -102,6 +106,17 @@ const Venues = ({
     return buttons;
   };
 
+  const handleClearFilter = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+    e.stopPropagation();
+    dispatch(resetFilters());
+    dispatch(setSelectedSports({ sportId: "" }));
+    dispatch(setSelectedVenue({ venueId: "" }));
+    dispatch(setParams({ key: "supported_sports", data: [] }));
+    dispatch(setParams({ key: "venue", data: [] }));
+
+    getGround.refetch();
+  };
+
   return (
     <div className="flex flex-col gap-5 sm:gap-8 h-[80vh] sm:h-[75vh] lg:w-full">
       <div className="h-fit flex flex-row items-center">
@@ -109,22 +124,21 @@ const Venues = ({
           <>
             {hasAppliedFilters ? (
               <>
-                <div className="rounded-2xl bg-gray-200 max-w-full ml-10 h-7 sm:h-12 px-4 flex items-center justify-start gap-3">
+                <div className="rounded-2xl bg-gray-200 w-[90%] sm:w-[93%] lg:w-[95%] ml-2 sm:ml-5 lg:ml-10 h-8 sm:h-12 px-4 flex items-center justify-start gap-3">
                   <FaArrowLeftLong
                     className="rounded-full bg-gray-800/35 p-1 text-gray-200 h-4 w-4 sm:h-8 sm:w-8 cursor-pointer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      dispatch(resetFilters());
-                    }}
+                    onClick={handleClearFilter}
                   />
                   <div className="text-[10px] sm:text-sm font-light text-gray-500 flex items-center">
-                    <span className="text-[#53A53F] font-medium mr-1">
+                    <span className="text-[#53A53F] font-medium mr-1 flex items-center">
                       Total {count}
                     </span>
-                    <span className="text-[9px] sm:text-xs">Results found</span>
+                    <span className="text-[9px] sm:text-xs flex items-center">
+                      Results found
+                    </span>
                   </div>
                 </div>
-                <div className="px-5 text-[9px] sm:text-xs mt-0 sm:mt-5 flex items-center gap-3 h-10">
+                <div className="px-5 text-[9px] sm:text-xs mt-0 sm:mt-5 flex items-center gap-3 h-10 w-[93vw] lg:w-full overflow-y-hidden overflow-x-auto">
                   {filterArr && (
                     <>
                       {sports ? (
@@ -133,7 +147,7 @@ const Venues = ({
                           return (
                             <span
                               key={index}
-                              className="bg-gray-700 text-gray-50 px-5 py-1 sm:py-2 rounded-2xl flex items-center gap-3 cursor-pointer"
+                              className="bg-gray-700 text-gray-50 px-5 py-1 sm:py-2 rounded-2xl flex items-center gap-3 cursor-pointer whitespace-nowrap"
                             >
                               <RxCross2
                                 onClick={(e) => {
@@ -154,7 +168,7 @@ const Venues = ({
                         sortByText.map((item, index) => {
                           return (
                             <span
-                              className="bg-gray-700 text-gray-50 px-5 py-1 sm:py-2 rounded-2xl flex items-center gap-3 cursor-pointer"
+                              className="bg-gray-700 text-gray-50 px-5 py-1 sm:py-2 rounded-2xl flex items-center gap-3 cursor-pointer whitespace-nowrap"
                               key={index}
                             >
                               <RxCross2
@@ -172,7 +186,7 @@ const Venues = ({
                         selectedVenue.map((item, index) => {
                           return (
                             <span
-                              className="bg-gray-700 text-gray-50 px-5 py-1 sm:py-2 rounded-2xl flex items-center gap-3 cursor-pointer"
+                              className="bg-gray-700 text-gray-50 px-5 py-1 sm:py-2 rounded-2xl flex items-center gap-3 cursor-pointer whitespace-nowrap"
                               key={index}
                             >
                               <RxCross2
@@ -194,7 +208,7 @@ const Venues = ({
                         selectedGroundType.map((item, index) => {
                           return (
                             <span
-                              className="bg-gray-700 text-gray-50 px-5 py-1 sm:py-2 rounded-2xl flex items-center gap-3 cursor-pointer"
+                              className="bg-gray-700 text-gray-50 px-5 py-1 sm:py-2 rounded-2xl flex items-center gap-3 cursor-pointer whitespace-nowrap"
                               key={index}
                             >
                               <RxCross2
@@ -213,17 +227,17 @@ const Venues = ({
               </>
             ) : (
               <>
-                <span className="ml-5 mt-1 sm:mt-5 text-lg xl:text-2xl font-medium tracking-wide">
+                <span className="ml-0 lg:ml-5 mt-1 sm:mt-0 text-lg xl:text-2xl font-medium tracking-wide">
                   All Grounds
                 </span>
-                <Separator className="w-[90%] ml-5" />
+                <Separator className="w-[90%] ml-0 lg:ml-5" />
               </>
             )}
           </>
         </div>
       </div>
 
-      <div className="sm:hidden flex items-center justify-between w-full">
+      <div className="lg:hidden flex items-center justify-between w-[93%]">
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -239,11 +253,11 @@ const Venues = ({
             </Button>
           </SheetTrigger>
           <SheetContent side={"left"}>
-            <SheetHeader>
-              <SheetTitle className="text-[#53A53F]">
+            <SheetHeader className="flex items-start">
+              <SheetTitle className="bg-gradient-to-tr from-[#aad6a1] via-[#8acc7d] to-[#53A53F] inline-block text-transparent bg-clip-text">
                 Filter by Category
               </SheetTitle>
-              <SheetDescription>
+              <SheetDescription className="text-xs text-transparent bg-gradient-to-t from-black to-gray-400 bg-clip-text text-left">
                 Filter your search based on given categories.
               </SheetDescription>
             </SheetHeader>
@@ -255,7 +269,7 @@ const Venues = ({
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
-              className="flex flex-wrap items-center border-[1px] h-8 border-gray-100 rounded-md"
+              className="flex justify-center items-center border-[1px] h-8 border-gray-100 rounded-md"
             >
               <HiOutlineSortDescending
                 size={20}
@@ -295,13 +309,32 @@ const Venues = ({
         </DropdownMenu>
       </div>
 
-      <div className="flex-1 w-full overflow-x-hidden overflow-y-auto">
-        {groundData.length > 0 ? (
-          <div className="flex w-full flex-col gap-3">
-            {groundData.map((item, index) => {
-              return <VenueItem key={index} item={item} />;
-            })}
-          </div>
+      <div className="flex-1 w-full sm:w-[95vw] lg:w-full overflow-x-hidden overflow-y-auto scroll-nobg-l pr-5 mt-5">
+        {!getGround.isLoading ? (
+          groundData.length > 0 ? (
+            <div className="flex w-full flex-col gap-4">
+              {groundData.map((item, index) => {
+                return <VenueItem key={index} item={item} />;
+              })}
+            </div>
+          ) : (
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <img
+                src="/images/no-result.jpg"
+                alt=""
+                className="w-auto h-40 lg:h-60"
+              />
+              <a
+                href="https://www.freepik.com/free-vector/hand-drawn-no-data-concept_55024593.htm#fromView=search&page=1&position=2&uuid=3868aee0-2591-453b-8a03-a14ddc6f7e36"
+                className="sr-only"
+              >
+                Image by pikisuperstar on Freepik
+              </a>
+              <div className="text-[#64b94f] font-semibold tracking-wider">
+                No Result Found
+              </div>
+            </div>
+          )
         ) : (
           <div className="flex w-full flex-col gap-3">
             {Array.from({ length: 4 }).map((_, index) => {
@@ -314,32 +347,34 @@ const Venues = ({
             })}
           </div>
         )}
-      </div>
 
-      <div className="h-fit w-full self-end flex items-center justify-end gap-4">
-        <span className="inline-block text-[14px] font-semibold cursor-pointer">
-          Page :
-        </span>
-        {showPagination().map((item, index) => {
-          return (
-            <button
-              key={index}
-              className={`inline-block text-[12px] w-[20px] h-[20px] font-semibold cursor-pointer ${
-                pagination.pageIndex === item
-                  ? "bg-[#53A53F] text-white"
-                  : "bg-gray-200 text-black"
-              } rounded-md`}
-              onClick={() => {
-                setPagination((prev) => ({
-                  ...prev,
-                  pageIndex: item,
-                }));
-              }}
-            >
-              {item + 1}
-            </button>
-          );
-        })}
+        {groundData && groundData.length > 0 ? (
+          <div className="h-fit w-full self-end flex items-center justify-end gap-4 pr-5 mt-5">
+            <span className="inline-block text-[14px] font-semibold cursor-pointer">
+              Page :
+            </span>
+            {showPagination().map((item, index) => {
+              return (
+                <button
+                  key={index}
+                  className={`inline-block text-[12px] w-[20px] h-[20px] font-semibold cursor-pointer ${
+                    pagination.pageIndex === item
+                      ? "bg-[#53A53F] text-white"
+                      : "bg-gray-200 text-black"
+                  } rounded-md`}
+                  onClick={() => {
+                    setPagination((prev) => ({
+                      ...prev,
+                      pageIndex: item,
+                    }));
+                  }}
+                >
+                  {item + 1}
+                </button>
+              );
+            })}
+          </div>
+        ) : null}
       </div>
     </div>
   );

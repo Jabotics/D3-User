@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -152,21 +153,21 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
         data;
       const [first_name, last_name] = name.split(" ");
 
-      if (!!!first_name || !!!last_name) {
+      if (!first_name || !last_name) {
         throw new Error(
           "Name is not proper, add a space between first and last name"
         );
       }
-      if (!!!imgFile) {
+      if (!imgFile) {
         throw new Error("Please upload a Profile Picture");
       }
-      if (!!!idProofFile) {
+      if (!idProofFile) {
         throw new Error("Please upload an ID Proof");
       }
-      if (!!!selectedMembership) {
+      if (!selectedMembership) {
         throw new Error("Something went wrong!");
       }
-      if (!!!userData?.id) {
+      if (!userData?.id) {
         throw new Error("Something went wrong! Can't find User");
       }
 
@@ -211,7 +212,7 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
     if (userData?.mobile) {
       form.setValue("mobile", userData.mobile);
     }
-  }, [userData?.mobile]);
+  }, [form, userData?.mobile]);
 
   return (
     <>

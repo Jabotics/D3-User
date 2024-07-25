@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
+  resetFilters,
   setParams,
   // useGetGroundQuery,
 } from "@/store/actions/slices/groundSlice";
@@ -15,6 +16,7 @@ const FilterHead = () => {
   const dispatch = useDispatch();
   const [isReset, setIsReset] = useState(false);
   const handleReset = () => {
+    dispatch(resetFilters());
     setIsReset(true);
     dispatch(setSelectedSports({ sportId: "" }));
     dispatch(setSelectedVenue({ venueId: "" }));
@@ -32,7 +34,7 @@ const FilterHead = () => {
     // refetch
   ]);
   return (
-    <div className="hidden sm:block w-full h-12 mb-5">
+    <div className="hidden lg:block w-full h-12 mb-5">
       <div className="w-full flex items-center h-full">
         <RiFilterLine
           size={window.innerWidth > 1280 ? 20 : 18}

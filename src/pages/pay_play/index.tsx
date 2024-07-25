@@ -61,8 +61,8 @@ const PayPlay = () => {
   }, [selectedSportsStore]);
 
   return (
-    <section className="flex flex-col px-5 lg:px-20 2xl:px-40 w-full h-screen lg:h-[85vh] overflow-hidden">
-      <span className="h-4 lg:h-8 flex items-center mt-12 sm:mt-8 gap-1 text-[10px] md:text-xs lg:text-sm">
+    <section className="flex flex-col px-5 lg:px-20 2xl:px-36 w-full h-screen lg:h-[85vh] overflow-hidden">
+      <span className="h-4 lg:h-8 flex items-center mt-12 lg:mt-8 gap-1 text-[10px] md:text-xs lg:text-sm lg:-ml-8">
         {locationArr.map((item, index) => (
           <div key={index}>
             <span
@@ -72,8 +72,8 @@ const PayPlay = () => {
                     ? item === "Home"
                     : item === "Home" || item === "Play"
                 )
-                  ? "text-gray-900 cursor-pointer hover:underline"
-                  : "text-gray-500"
+                  ? "text-[#54a63f] cursor-pointer hover:underline font-semibold"
+                  : "text-[#a7d19d] font-medium"
               }`}
               onClick={() => {
                 if (item === "Home") {
@@ -88,13 +88,13 @@ const PayPlay = () => {
             {(locationArr.length === 2
               ? item === "Home"
               : item === "Home" || item === "Play") && (
-              <span className="text-gray-500 ml-1">{"/"}</span>
+              <span className="text-[#a7d19d] ml-1">{"/"}</span>
             )}
           </div>
         ))}
       </span>
 
-      <div className="w-full h-full mt-8 flex gap-8 items-start">
+      <div className="w-full h-full mt-4 sm:mt-8 flex gap-8 items-start lg:-ml-10">
         <div className="hidden lg:block w-80">
           <FilterByCategory />
         </div>
@@ -103,7 +103,7 @@ const PayPlay = () => {
           <Venues filterArr={filtersArr} />
         </div>
 
-        <div className="hidden lg:block w-40 xl:w-60 h-full">
+        <div className="hidden lg:block w-56 xl:w-60 h-full">
           <div className="w-full h-12">
             <div className="w-full flex flex-wrap items-center h-full border-[1px] border-gray-100 p-2 rounded-md">
               <HiOutlineSortDescending

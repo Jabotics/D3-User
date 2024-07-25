@@ -214,7 +214,7 @@ export default function LoginPage() {
             <img src={logo} alt="logo" className="max-lg:h-8 h-10" />
           </div>
           <div className="flex flex-col w-full h-4/5 justify-center mt-20">
-            <h2 className="text-3xl font-semibold tracking-wide whitespace-nowrap">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold tracking-wide whitespace-nowrap">
               {toSendOtp ? "Verify your account" : "Log in"}
             </h2>
             <p className="mb-6 text-sm">

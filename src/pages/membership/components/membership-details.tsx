@@ -472,10 +472,10 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                   <DialogContent aria-describedby="academy slots">
                     <div className="flex h-[30vh] flex-col items-center">
                       <DialogTitle className="mt-5 text-xl text-[#53a53f] font-semibold tracking-wide">
-                        Selected Slot
+                        Selected Shift
                       </DialogTitle>
                       <Separator className="bg-[#53a53f] mt-3 mb-5" />
-                      <div className="w-full text-sm tracking-widest flex flex-col gap-1">
+                      <div className="w-full text-sm tracking-widest flex flex-col gap-3">
                         {/* {selectedMembership &&
                           selectedMembership.slotTimes.map((item, index) => {
                             return (
@@ -494,10 +494,59 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                               </div>
                             );
                           })} */}
+                        <div
+                          onClick={() => {
+                            dispatch(
+                              setSelectedSlots({
+                                batch: "Morning",
+                                slots:
+                                  selectedMembership?.slots?.morning?.map(
+                                    (i) => i._id
+                                  ) || [],
+                              })
+                            );
+                          }}
+                          className={`text-xs lg:text-sm ${
+                            selectedSlot?.batch === "Morning"
+                              ? "bg-[#53a53f]"
+                              : "bg-[#a1c299]"
+                          } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
+                        >
+                          <p>Morning Batch</p>
+                          <p>
+                            <HiOutlineArrowLongRight />
+                          </p>
+                        </div>
+
+                        <div
+                          onClick={() => {
+                            dispatch(
+                              setSelectedSlots({
+                                batch: "Evening",
+                                slots:
+                                  selectedMembership?.slots?.evening?.map(
+                                    (i) => i._id
+                                  ) || [],
+                              })
+                            );
+                          }}
+                          className={`text-xs lg:text-sm ${
+                            selectedSlot?.batch === "Evening"
+                              ? "bg-[#53a53f]"
+                              : "bg-[#a1c299]"
+                          } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
+                        >
+                          <p>Evening Batch</p>
+                          <p>
+                            <HiOutlineArrowLongRight />
+                          </p>
+                        </div>
                       </div>
                     </div>
                     <DialogClose
-                      className="h-8 rounded-md bg-[#53a53f] text-xs text-gray-100 "
+                      className={`h-8 rounded-md ${
+                        selectedSlot ? "bg-[#53a53f]" : "bg-[#a1c299]"
+                      } text-xs text-gray-100 `}
                       onClick={() => {
                         if (selectedSlot) {
                           navigate(`/membership?id=${membershipId}&join=1`);
