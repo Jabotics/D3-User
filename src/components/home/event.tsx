@@ -10,6 +10,7 @@ import { useFetchEventsQuery } from "@/store/actions/slices/eventSlice";
 import { useAppSelector } from "@/store/hooks";
 import { APIEndPoints } from "@/APIEndpoint";
 import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 const monthMap: { [key: number | string]: string } = {
   1: "Jan",
@@ -34,6 +35,9 @@ const formattedTimeOfEvent = (time: string) => {
 };
 
 const Events = () => {
+
+  const navigate = useNavigate();
+
   const { events } = useAppSelector((state) => state.event);
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
   const { isLoading } = useFetchEventsQuery({});
@@ -162,8 +166,11 @@ const Events = () => {
               <Button
                 variant={"default"}
                 className="rounded-full h-8 border border-zinc-100 text-xs"
+                onClick={() => {
+                  navigate(`/event?id=${events[currentEventIndex]?.id}`)
+                }}
               >
-                Become a Member
+                Enroll Now
               </Button>
               <Button
                 variant={"lowTheme"}
@@ -186,7 +193,7 @@ const Events = () => {
                   <img
                     src={`${APIEndPoints.BackendURL}/${event.image}`}
                     alt={`event-image-${index}`}
-                    className="h-full object-cover"
+                    className="w-full h-full object-cover"
                   />
                 )}
               </div>
