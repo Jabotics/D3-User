@@ -49,12 +49,12 @@ export interface ISlot {
   id: string;
   slot: string;
   price: {
-    [key in "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat"]: number
-  }
+    [key in "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat"]: number;
+  };
   available: boolean;
 }
 
-export type DayOfWeek = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
+export type DayOfWeek = "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat";
 export interface ICity {
   id: string;
   name: string;
@@ -121,10 +121,16 @@ export interface IAcademy {
     _id: string;
     name: string;
   };
-  slotTimes: {
-    _id: string;
-    slot: string;
-  }[];
+  slots: {
+    morning: {
+      _id: string;
+      slot: string;
+    }[];
+    evening: {
+      _id: string;
+      slot: string;
+    }[];
+  };
   is_active: boolean;
   images?: string[];
   video: string;
@@ -137,7 +143,7 @@ export interface IJoinedAcademy {
   academy: string;
   ground: string;
   venue: string;
-  slot: string;
+  shift: string;
   "re-admission_required": boolean;
   last_payment_date: string;
   payment_due_date: string;
@@ -163,11 +169,16 @@ export interface IMembership {
     _id: string;
     name: string;
   };
-  slotTimes: {
-    _id: string;
-    slot: string;
-    booked?: boolean;
-  }[];
+  slots: {
+    morning: {
+      _id: string;
+      slot: string;
+    }[];
+    evening: {
+      _id: string;
+      slot: string;
+    }[];
+  };
   admission_fee: number;
   monthly_fee: number;
   quarterly_fee: number;
@@ -181,7 +192,7 @@ export interface IJoinedMemberships {
   membership: string;
   ground: string;
   venue: string;
-  slot: string;
+  shift: string;
   "re-admission_required": boolean;
   last_payment_date: string;
   payment_due_date: string;
@@ -223,10 +234,18 @@ export interface IPromo {
 }
 
 export interface IMessage {
-  id: string
-  sender: string
+  id: string;
+  sender: string;
   // receiver_id: string
-  seen: boolean
-  createdAt: string
-  text: string
+  seen: boolean;
+  createdAt: string;
+  text: string;
+}
+
+export interface IHomeBanner {
+  id: string;
+  url: string;
+  type: "academy" | "membership" | "event";
+  image: string;
+  is_active: true;
 }

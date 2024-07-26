@@ -13,6 +13,7 @@ import slotsSlice, { slotsApi } from "./slices/slotsSlice";
 import eventsSlice, { eventsApi } from "./slices/eventSlice";
 import academiesSlice, { academiesApi } from "./slices/academySlice";
 import membershipsSlice, { membershipsApi } from "./slices/membershipSlice";
+import homeBannerSlice, { homeBannerApi } from "./slices/bannerSlice";
 
 import profileSlice from './slices/profileSlice';
 
@@ -45,6 +46,9 @@ export {
 
   membershipsSlice,
   membershipsApi,
+
+  homeBannerSlice,
+  homeBannerApi,
 
   eventsSlice,
   eventsApi,

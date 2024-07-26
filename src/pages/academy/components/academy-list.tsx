@@ -40,6 +40,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { GoLocation } from "react-icons/go";
+import { FaRegCheckSquare } from "react-icons/fa";
 
 const AcademyList = () => {
   const navigate = useNavigate();
@@ -107,7 +109,7 @@ const AcademyList = () => {
       {/* <AcademySportsSelect /> */}
       <div className="w-full h-full flex items-start gap-2">
         {/*  */}
-        <div className="w-60 xl:w-80 h-full hidden lg:block">
+        <div className="w-60 2xl:w-80 h-full hidden lg:block">
           <div className="w-full h-12">
             <div className="w-full flex items-center h-full">
               <RiFilterLine
@@ -131,7 +133,7 @@ const AcademyList = () => {
         </div>
 
         {/*  */}
-        <div className="flex-1 h-full ">
+        <div className="flex-1 h-full">
           <>
             {hasAppliedFilters ? (
               <>
@@ -237,7 +239,7 @@ const AcademyList = () => {
               </>
             ) : (
               <>
-                <div className="ml-5 mt-5 text-lg xl:text-2xl font-medium tracking-wide">
+                <div className="ml-2 lg:ml-5 mt-5 text-lg xl:text-2xl font-medium tracking-wide">
                   All Academies
                 </div>
                 <Separator className="w-[90%] ml-5" />
@@ -246,7 +248,7 @@ const AcademyList = () => {
           </>
 
           {/*  */}
-          <div className="flex items-center justify-between lg:hidden w-full h-10 px-3 mt-3">
+          <div className="flex items-center justify-between lg:hidden w-full h-10 px-2 lg:px-3 mt-3">
             <Sheet>
               <SheetTrigger asChild>
                 <Button
@@ -319,7 +321,7 @@ const AcademyList = () => {
           <div
             className={`max-w-full ${
               hasAppliedFilters ? "h-[23rem]" : "h-[26.25rem]"
-            } ml-0 lg:ml-5 flex flex-col gap-5 scroll-nobg pr-3 mt-3 lg:mt-8 overflow-x-hidden overflow-y-auto mb-5`}
+            } ml-0 lg:ml-5 flex flex-col gap-5 scroll-nobg px-2 lg:pr-3 mt-3 lg:mt-8 overflow-x-hidden overflow-y-auto mb-5`}
           >
             {academies && academies.length > 0 ? (
               <>
@@ -327,38 +329,83 @@ const AcademyList = () => {
                   return (
                     <div
                       key={index}
-                      className="w-full h-16 sm:h-20 bg-gray-100 rounded-lg flex items-center justify-between px-5 cursor-pointer"
+                      className="w-full h-24 sm:h-32 bg-gray-100 rounded-lg flex items-center justify-between pr-5 cursor-pointer shadow-lg shadow-[#53a53f7e]"
                       onClick={() => {
                         navigate(`/academy?id=${item.id}`);
                         dispatch(setLocationArr(item.name));
                       }}
                     >
                       <div className="flex items-center gap-5">
-                        <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-md overflow-hidden">
+                        <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-md overflow-hidden">
                           <img
                             src="https://res.cloudinary.com/purnesh/image/upload/w_1080,f_auto/west-delhi-cricket-academy0.jpg"
                             alt=""
                             className="w-full h-full object-cover"
                           />
                         </div>
-                        <div className="flex flex-col">
-                          <div className="text-sm sm:text-2xl font-light">
+                        <div className="flex-1 flex flex-col items-start h-20 sm:h-24 md:h-28 lg:h-28">
+                          <div className="text-sm sm:text-xl font-medium text-[#3a7c29]">
                             {item.name}
                           </div>
-                          <div className="flex items-center gap-1">
-                            <div className="text-[8px] sm:text-sm font-medium">
+
+                          <div className="flex items-center gap-1 text-[#3a7c29] bg-[#c8ebbe] px-3 rounded-md font-medium">
+                            {/* <div className="text-[8px] sm:text-sm font-normal">
                               {item.ground.name}
+                            </div> */}
+                            {/* <HiOutlineArrowLongRight
+                              size={20}
+                              className="text-[#215f11]"
+                            /> */}
+                            <div className="text-[8px] sm:text-sm ">
+                              {`${item.sport.name} Academy`}
                             </div>
-                            <div className="text-[8px] sm:text-sm  text-gray-500">
-                              ({item.ground.venue.name})
-                            </div>
+                          </div>
+
+                          <div className="text-[11px] whitespace-nowrap sm:text-sm flex items-center gap-2 font-normal text-[#3a7c29] mt-1">
+                            <GoLocation />
+                            <span className="hidden sm:inline-block">{`Venue :  ${item.ground.venue.name}`}</span>
+                            <span className="inline-block sm:hidden">
+                              {`Venue :  ${item.ground.venue.name}`.substring(
+                                0,
+                                25
+                              ) + "..."}
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-5 justify-start mt-2 text-[#215f11] text-[10px] sm:text-xs font-medium">
+                            <span className={`flex items-center gap-2`}>
+                              <FaRegCheckSquare
+                                size={15}
+                                className="hidden sm:inline-block"
+                              />
+                              <FaRegCheckSquare
+                                size={10}
+                                className="inline-block sm:hidden"
+                              />
+                              <span className="mt-[2px] whitespace-nowrap">
+                                Morning Shift
+                              </span>
+                            </span>
+                            <span className={`flex items-center gap-2`}>
+                              <FaRegCheckSquare
+                                size={15}
+                                className="hidden sm:inline-block"
+                              />
+                              <FaRegCheckSquare
+                                size={10}
+                                className="inline-block sm:hidden"
+                              />
+                              <span className="mt-[2px] whitespace-nowrap">
+                                Evening Shift
+                              </span>
+                            </span>
                           </div>
                         </div>
                       </div>
                       <div>
                         <HiOutlineArrowLongRight
                           size={30}
-                          className="text-gray-400"
+                          className="text-[#215f11] hidden sm:inline-block"
                         />
                       </div>
                     </div>
@@ -376,7 +423,6 @@ const AcademyList = () => {
               })
             )}
           </div>
-
           <div className="w-full h-12 flex items-center justify-end">
             <AcademyPagination />
           </div>

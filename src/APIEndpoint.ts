@@ -17,8 +17,12 @@ export const APIEndPoints = {
 
   // fetch venue
   fetch_venue: '/api/venues',
+
   // CITY
   fetch_cities: '/api/fetch-cities',
+
+  // HOMEPAGE BANNER
+  fetch_banner: '/api/banners',
 
   // SLOTS
   get_slot: '/api/get-available-booking-slots',

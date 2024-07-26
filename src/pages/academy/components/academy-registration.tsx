@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -206,7 +207,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
     if (userData?.mobile) {
       form.setValue("mobile", userData.mobile);
     }
-  }, [userData?.mobile]);
+  }, [form, userData?.mobile]);
 
   return (
     <div className="w-full flex flex-col">

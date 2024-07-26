@@ -28,7 +28,7 @@ const FilterBySurface = () => {
         (type) => type !== groundType
       );
       dispatch(setParams({ key: "ground_type", data: updatedTypes }));
-      return updatedTypes;
+      // return updatedTypes;
     } else {
       dispatch(
         setParams({
@@ -50,25 +50,25 @@ const FilterBySurface = () => {
       >
         <AccordionItem value="item-1" className="border-b-0 p-0">
           <AccordionTrigger
-            className="no-underline text-[#53A53F] text-[16px]"
+            className="no-underline text-[#53A53F] text-sm lg:text-[16px]"
             state={"open"}
           >
             Ground Type
           </AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-4">
+          <AccordionContent className="flex flex-col gap-4 -ml-4">
             {groundType?.map((item: string, index: number) => {
               return (
                 <div key={index} className="items-top flex space-x-2">
                   <Checkbox
-                    id="ground_Type"
+                    id={item}
                     checked={selectedGroundType.includes(item)}
                     onCheckedChange={() => {
                       handleCheckboxChange(item);
                     }}
                   />
                   <label
-                    htmlFor="ground_Type"
-                    className="text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    htmlFor={item}
+                    className={`text-xs lg:text-sm ${selectedGroundType.includes(item) ? 'font-medium text-black' : 'font-light'} leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]`}
                   >
                     {item}
                   </label>

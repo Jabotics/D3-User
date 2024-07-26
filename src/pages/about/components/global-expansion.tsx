@@ -1,8 +1,8 @@
 const GlobalExpansion = () => {
   return (
     <div className="mt-10">
-      <h1 className="text-2xl font-medium">Our Global Expansion</h1>
-      <p className="mt-8 text-sm">
+      <h1 className="text-xl lg:text-2xl font-medium">Our Global Expansion</h1>
+      <p className="mt-8 text-xs md:text-sm">
         D3 Sports Arena is excited to launch our first facility in the vibrant
         city of Howrah, India. This state-of-the-art complex will set the
         standard for future expansions, showcasing our commitment to excellence

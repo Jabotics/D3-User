@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,73 +6,117 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { GiHamburgerMenu } from "react-icons/gi";
+import {
+  MdOutlinePayments,
+  MdOutlineCardMembership,
+  MdOutlinePrivacyTip,
+} from "react-icons/md";
+import { HiMiniAcademicCap } from "react-icons/hi2";
+import { VscDebugBreakpointConditional } from "react-icons/vsc";
+
+import logo from "/images/Logo.svg";
+import logoIcon from "/images/Logo-icon.svg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { HiHome } from "react-icons/hi2";
 
-export function ToggleOptions() {
+export function ToggleOptions({
+  mobile,
+  setMobile,
+}: {
+  mobile: boolean;
+  setMobile: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClick = (path: string) => {
+    setMobile(false);
     navigate(path);
     setIsOpen(false);
   };
+  // console.log(isOpen)
 
   return (
-    <>
-      <DropdownMenu open={isOpen} onOpenChange={() => setIsOpen(false)}>
-        {" "}
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="mx-1 h-6 lg:h-8 flex items-center justify-center"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <GiHamburgerMenu className="h-8 w-[1.2rem] transition-all text-gray-500" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel
-            className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer"
-            onClick={() => handleOptionClick("/play")}
-          >
-            Pay & Play
-          </DropdownMenuLabel>
-          <span className="flex w-full items-center justify-center">
-            <DropdownMenuSeparator className="w-[90%]" />
-          </span>
-          <DropdownMenuLabel
-            className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer"
-            onClick={() => handleOptionClick("/academy")}
-          >
-            Academy
-          </DropdownMenuLabel>
-          <span className="flex w-full items-center justify-center">
-            <DropdownMenuSeparator className="w-[90%]" />
-          </span>
-          <DropdownMenuLabel
-            className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer"
-            onClick={() => handleOptionClick("/membership")}
-          >
-            Membership
-          </DropdownMenuLabel>
-          <span className="flex w-full items-center justify-center">
-            <DropdownMenuSeparator className="w-[90%]" />
-          </span>
-          <DropdownMenuLabel className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer">
-            Terms Of Use
-          </DropdownMenuLabel>
-          <span className="flex w-full items-center justify-center">
-            <DropdownMenuSeparator className="w-[90%]" />
-          </span>
-          <DropdownMenuLabel className="text-xs font-light sm:font-normal sm:text-sm cursor-pointer">
-            Privacy Policy
-          </DropdownMenuLabel>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+      {" "}
+      <DropdownMenuTrigger>
+        <span className="flex items-center">
+          {mobile ? (
+            <img
+              src={logoIcon}
+              alt="logo"
+              className="h-8 md:h-9 cursor-pointer"
+              onClick={() => navigate("/")}
+            />
+          ) : (
+            <img
+              src={logo}
+              alt="logo"
+              className="h-8 md:h-9 cursor-pointer"
+              onClick={() => navigate("/")}
+            />
+          )}
+          <RiArrowDropDownLine size={20} className={`${mobile ? 'text-gray-300' : 'text-gray-800'}`} />
+        </span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="end"
+        className="w-40 rounded-2xl bg-[#ffffffd5]"
+      >
+        <DropdownMenuLabel
+          className="text-sm font-medium sm:font-semibold sm:text-sm cursor-pointer flex items-center justify-between"
+          onClick={() => handleOptionClick("/")}
+        >
+          <span>Home</span>
+          <HiHome size={20} />
+        </DropdownMenuLabel>
+        <span className="flex w-full items-center justify-center">
+          <DropdownMenuSeparator className="w-[90%]" />
+        </span>
+        <DropdownMenuLabel
+          className="text-sm font-medium sm:font-semibold sm:text-sm cursor-pointer flex items-center justify-between"
+          onClick={() => handleOptionClick("/play")}
+        >
+          <span>Pay & Play</span>
+          <MdOutlinePayments size={20} />
+        </DropdownMenuLabel>
+        <span className="flex w-full items-center justify-center">
+          <DropdownMenuSeparator className="w-[90%]" />
+        </span>
+        <DropdownMenuLabel
+          className="text-sm font-medium sm:font-semibold sm:text-sm cursor-pointer flex items-center justify-between"
+          onClick={() => handleOptionClick("/academy")}
+        >
+          <span>Academy</span>
+          <HiMiniAcademicCap size={20} />
+        </DropdownMenuLabel>
+        <span className="flex w-full items-center justify-center">
+          <DropdownMenuSeparator className="w-[90%]" />
+        </span>
+        <DropdownMenuLabel
+          className="text-sm font-medium sm:font-semibold sm:text-sm cursor-pointer flex items-center justify-between"
+          onClick={() => handleOptionClick("/membership")}
+        >
+          <span>Membership</span>
+          <MdOutlineCardMembership size={20} />
+        </DropdownMenuLabel>
+        <span className="flex w-full items-center justify-center">
+          <DropdownMenuSeparator className="w-[90%]" />
+        </span>
+        <DropdownMenuLabel className="text-sm font-medium sm:font-semibold sm:text-sm cursor-pointer flex items-center justify-between">
+          <span>Privacy Policy</span>
+          <MdOutlinePrivacyTip size={20} />
+        </DropdownMenuLabel>
+        <span className="flex w-full items-center justify-center">
+          <DropdownMenuSeparator className="w-[90%]" />
+        </span>
+        <DropdownMenuLabel className="text-sm font-medium sm:font-semibold sm:text-sm cursor-pointer flex items-center justify-between">
+          <span>Terms Of Use</span>
+          <VscDebugBreakpointConditional size={22} />
+        </DropdownMenuLabel>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

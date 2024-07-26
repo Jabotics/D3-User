@@ -32,6 +32,9 @@ import {
   membershipsApi,
   membershipsSlice,
 
+  homeBannerApi,
+  homeBannerSlice,
+
   eventsApi,
   eventsSlice,
   profileSlice,
@@ -105,6 +108,9 @@ export const rootReducer = combineReducers({
   auth: authPersistedReducer,
   city: cityPersistReducer,
   otp: otpPersistReducer,
+
+  banner: homeBannerSlice,
+
   academy: academyPersistReducer,
   membership: membershipPersistReducer,
 
@@ -127,6 +133,7 @@ export const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [logoutApi.reducerPath]: logoutApi.reducer,
   
+  [homeBannerApi.reducerPath]: homeBannerApi.reducer,
   [groundApi.reducerPath]: groundApi.reducer,
   [sportApi.reducerPath]: sportApi.reducer,
   [venueApi.reducerPath]: venueApi.reducer,

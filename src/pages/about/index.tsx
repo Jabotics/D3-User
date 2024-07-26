@@ -9,10 +9,11 @@ import Services from "./components/services";
 import Commitment from "./components/commitment";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { FaFacebook } from "react-icons/fa";
+import { LuInstagram } from "react-icons/lu";
 
 const AboutPage = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const controls1 = useAnimation();
   const controls2 = useAnimation();
@@ -42,16 +43,44 @@ const AboutPage = () => {
       }
     };
 
+    const handleTouchMove = (event: TouchEvent) => {
+      if (!isScrollable) {
+        event.preventDefault();
+        controls1.start({
+          y: -70,
+          transition: {
+            duration: 1,
+            ease: "easeOut",
+          },
+        });
+        controls2.start({
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 1,
+            ease: "easeOut",
+            delay: 0.5,
+          },
+        });
+        setIsScrollable(true);
+      }
+    };
+
     window.addEventListener("wheel", handleScroll, { passive: false });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+
     return () => {
       window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("touchmove", handleTouchMove);
     };
   }, [controls1, controls2, isScrollable]);
+
+  console.log(isScrollable);
 
   return (
     <div className="h-fit min-w-screen overflow-hidden">
       <div
-        className="h-[65vh] w-full flex items-center justify-start relative"
+        className="h-[80vh] lg:h-[65vh] w-full flex items-center justify-start relative"
         style={{
           backgroundImage: "url('/images/contact.jpg')",
           backgroundSize: "cover",
@@ -63,14 +92,20 @@ const AboutPage = () => {
           <motion.div
             initial={{ y: 0 }}
             animate={controls1}
-            className="absolute text-gray-50 pl-40 text-[3rem]"
+            className="absolute text-gray-50 pl-5 lg:pl-40 text-4xl lg:text-[3rem] flex flex-col gap-3"
+            key={"control1"}
           >
-            About Us
+            <span>About Us</span>
+            <span className={`flex items-center gap-3 flex-row text-lg ${isScrollable && 'opacity-0'} transition-opacity duration-150 ml-3`}>
+              <FaFacebook />
+              <LuInstagram />
+            </span>
           </motion.div>
           <motion.div
             initial={{ y: 150, opacity: 0 }}
             animate={controls2}
-            className="absolute px-40 text-gray-300 w-[65%] bottom-40"
+            className="absolute px-5 lg:px-40 text-gray-300 w-full sm:-mt-10 lg:mt-0 sm:w-[85%] xl:w-[65%] bottom-40 text-sm sm:text-base md:text-lg lg:text-base"
+            key={"control2"}
           >
             Welcome to D3 Sports Arena, a place where passion and purpose
             converge and dreams come true. At D3, we're more than just a sports
@@ -81,7 +116,7 @@ const AboutPage = () => {
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="w-full h-fit px-40">
+      <div className="w-full h-fit px-5 lg:px-40">
         <Story />
         <VissionMission />
         <GlobalExpansion />

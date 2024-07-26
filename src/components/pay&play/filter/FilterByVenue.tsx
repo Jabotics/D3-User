@@ -54,51 +54,55 @@ const FilterByVenue = () => {
     <>
       {venue && venue.length > 0 ? (
         <div className="w-[100%] bg-white rounded-lg">
-        <Accordion
-          type="single"
-          collapsible
-          className="w-full border-[1px] border-gray-100 rounded-md px-6"
-          defaultValue="item-1"
-        >
-          <AccordionItem value="item-1" className="border-b-0 p-0">
-            <AccordionTrigger
-              className="no-underline text-[#53A53F] text-[16px]"
-              state={"open"}
-            >
-              Select Venue
-            </AccordionTrigger>
-            <AccordionContent className="flex flex-col gap-4">
-              {venue?.map(
-                (
-                  item: {
-                    id: string;
-                    name: string;
-                  },
-                  index: number
-                ) => {
-                  return (
-                    <div key={index} className="items-top flex space-x-2">
-                      <Checkbox
-                        id={item.id}
-                        checked={selectedVenue.includes(item.id)}
-                        onCheckedChange={() => {
-                          handleCheckboxChange(item.id);
-                        }}
-                      />
-                      <label
-                        htmlFor={item.id}
-                        className="text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        {item?.name}
-                      </label>
-                    </div>
-                  );
-                }
-              )}
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </div>
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full border-[1px] border-gray-100 rounded-md px-6"
+            defaultValue="item-1"
+          >
+            <AccordionItem value="item-1" className="border-b-0 p-0">
+              <AccordionTrigger
+                className="no-underline text-[#53A53F] text-sm lg:text-[16px]"
+                state={"open"}
+              >
+                Select Venue
+              </AccordionTrigger>
+              <AccordionContent className="flex flex-col gap-4 -ml-4">
+                {venue?.map(
+                  (
+                    item: {
+                      id: string;
+                      name: string;
+                    },
+                    index: number
+                  ) => {
+                    return (
+                      <div key={index} className="items-top flex space-x-2">
+                        <Checkbox
+                          id={item.id}
+                          checked={selectedVenue.includes(item.id)}
+                          onCheckedChange={() => {
+                            handleCheckboxChange(item.id);
+                          }}
+                        />
+                        <label
+                          htmlFor={item.id}
+                          className={`text-xs lg:text-sm ${
+                            selectedVenue.includes(item.id)
+                              ? "font-medium text-black"
+                              : "font-light"
+                          } leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]`}
+                        >
+                          {item?.name}
+                        </label>
+                      </div>
+                    );
+                  }
+                )}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
       ) : (
         <div className="w-[100%] bg-gray-100 min-h-20 rounded-md"></div>
       )}

@@ -39,6 +39,7 @@ const getEmbedUrl = (url: string): string => {
           }?rel=0&modestbranding=1&controls=1&start=0&end=600&loop=1`;
       }
       // Extract video ID from regular YouTube URLs
+      // eslint-disable-next-line no-case-declarations
       const videoId = url.split("v=")[1] || url.split("youtu.be/")[1];
       if (!videoId) {
         return "";
@@ -48,6 +49,7 @@ const getEmbedUrl = (url: string): string => {
 
     case url.includes("drive.google.com"):
       // Extract Google Drive file ID
+      // eslint-disable-next-line no-case-declarations
       const fileId = url.match(/\/d\/([a-zA-Z0-9_-]+)(?:\/|$)/);
       if (fileId && fileId[1]) {
         return `https://drive.google.com/file/d/${fileId[1]}/preview`;
@@ -110,7 +112,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
         }
       }
     }
-  }, [selectedMembership, grounds, getEmbedUrl]);
+  }, [selectedMembership, grounds]);
 
   return (
     <div className="w-full h-full flex flex-col gap-5">
@@ -269,7 +271,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                     </h2>
                     <Separator className="bg-gray-300" />
                     <span className="h-fit w-full flex flex-wrap gap-2">
-                      {selectedMembership?.slotTimes?.map((item, index) => {
+                      {/* {selectedMembership.slotTimes.map((item, index) => {
                         return (
                           <div
                             key={index}
@@ -278,7 +280,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                             {item.slot}
                           </div>
                         );
-                      })}
+                      })} */}
                     </span>
                   </span>
                 </div>
@@ -466,12 +468,12 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                   <DialogContent aria-describedby="academy slots">
                     <div className="flex h-[30vh] flex-col items-center">
                       <DialogTitle className="mt-5 text-xl text-[#53a53f] font-semibold tracking-wide">
-                        Selected Slot
+                        Selected Shift
                       </DialogTitle>
                       <Separator className="bg-[#53a53f] mt-3 mb-5" />
-                      <div className="w-full text-sm tracking-widest flex flex-col gap-1">
-                        {selectedMembership &&
-                          selectedMembership?.slotTimes?.map((item, index) => {
+                      <div className="w-full text-sm tracking-widest flex flex-col gap-3">
+                        {/* {selectedMembership &&
+                          selectedMembership.slotTimes.map((item, index) => {
                             return (
                               <div
                                 key={index}
@@ -486,11 +488,60 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                                 {item.slot}
                               </div>
                             );
-                          })}
+                          })} */}
+                        <div
+                          onClick={() => {
+                            dispatch(
+                              setSelectedSlots({
+                                batch: "Morning",
+                                slots:
+                                  selectedMembership?.slots?.morning?.map(
+                                    (i) => i._id
+                                  ) || [],
+                              })
+                            );
+                          }}
+                          className={`text-xs lg:text-sm ${
+                            selectedSlot?.batch === "Morning"
+                              ? "bg-[#53a53f]"
+                              : "bg-[#a1c299]"
+                          } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
+                        >
+                          <p>Morning Batch</p>
+                          <p>
+                            <HiOutlineArrowLongRight />
+                          </p>
+                        </div>
+
+                        <div
+                          onClick={() => {
+                            dispatch(
+                              setSelectedSlots({
+                                batch: "Evening",
+                                slots:
+                                  selectedMembership?.slots?.evening?.map(
+                                    (i) => i._id
+                                  ) || [],
+                              })
+                            );
+                          }}
+                          className={`text-xs lg:text-sm ${
+                            selectedSlot?.batch === "Evening"
+                              ? "bg-[#53a53f]"
+                              : "bg-[#a1c299]"
+                          } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
+                        >
+                          <p>Evening Batch</p>
+                          <p>
+                            <HiOutlineArrowLongRight />
+                          </p>
+                        </div>
                       </div>
                     </div>
                     <DialogClose
-                      className="h-8 rounded-md bg-[#53a53f] text-xs text-gray-100 "
+                      className={`h-8 rounded-md ${
+                        selectedSlot ? "bg-[#53a53f]" : "bg-[#a1c299]"
+                      } text-xs text-gray-100 `}
                       onClick={() => {
                         if (selectedSlot) {
                           navigate(`/membership?id=${membershipId}&join=1`);
