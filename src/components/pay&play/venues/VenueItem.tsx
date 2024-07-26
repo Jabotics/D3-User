@@ -147,10 +147,9 @@ const VenueItem = ({ item }: { item: IGround }) => {
               onClick={() => {
                 dispatch(setSelectedGroundId(item.id));
                 navigate(
-                  `/scoreboard?playid=${
-                    !!generateRandomString()
-                      ? `${generateRandomString(200)}-${item.id}`
-                      : ""
+                  `/scoreboard?playid=${generateRandomString()
+                    ? `${generateRandomString(200)}-${item.id}`
+                    : ""
                   }`
                 );
               }}
@@ -162,7 +161,7 @@ const VenueItem = ({ item }: { item: IGround }) => {
         </div>
       </div>
 
-      <div className="flex sm:hidden flex-1 flex-col justify-center gap-1 px-2">
+      {/* <div className="flex sm:hidden flex-1 flex-col justify-center gap-1 px-2">
         <div className="h-4 w-full flex items-center justify-between ">
           <span className="inline-block w-[40%] text-[14px] sm:text-[16px] md:text-base font-bold">
             {item?.name}
@@ -218,10 +217,9 @@ const VenueItem = ({ item }: { item: IGround }) => {
             onClick={() => {
               dispatch(setSelectedGroundId(item.id));
               navigate(
-                `/scoreboard?playid=${
-                  !!generateRandomString()
-                    ? `${generateRandomString(200)}-${item.id}`
-                    : ""
+                `/scoreboard?playid=${generateRandomString()
+                  ? `${generateRandomString(200)}-${item.id}`
+                  : ""
                 }`
               );
             }}
@@ -230,7 +228,7 @@ const VenueItem = ({ item }: { item: IGround }) => {
             <span>Live</span>
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Carousel,
   CarouselContent,
@@ -10,7 +10,7 @@ import { format, addDays } from "date-fns";
 import { resetSlots, setSelectedDate, setSelectedDay, useGetAllSlotsQuery } from "@/store/actions/slices/slotsSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 type DateInfo = {
   dayOfWeek: string;
@@ -21,7 +21,7 @@ type DateInfo = {
 const SelectBookingDate: React.FC = () => {
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const { selectedGroundId: GroundId } = useAppSelector(
     (state: RootState) => state.slots
@@ -55,11 +55,11 @@ const SelectBookingDate: React.FC = () => {
 
   const dates = generateDates();
 
-  useEffect(() => {
-    if (GroundId.length === 0) {
-      navigate(-1);
-    }
-  }, [GroundId]);
+  // useEffect(() => {
+  //   if (GroundId.length === 0) {
+  //     navigate(-1);
+  //   }
+  // }, [GroundId]);
 
   return (
     <div className="flex flex-col p-4 gap-4 w-[300px] sm:w-full">

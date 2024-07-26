@@ -46,7 +46,7 @@ const MembershipPage = () => {
     },
     {
       refetchOnMountOrArgChange: true,
-      skip: !!!selectedCity,
+      skip: !selectedCity,
     }
   );
 
@@ -108,7 +108,7 @@ const MembershipPage = () => {
                 ))}
               </span>
 
-              {!!detailsPageId ? (
+              {detailsPageId ? (
                 isJoinAcademy ? (
                   <MembershipRegistrationPage membershipId={detailsPageId} />
                 ) : (
