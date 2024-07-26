@@ -269,7 +269,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                     </h2>
                     <Separator className="bg-gray-300" />
                     <span className="h-fit w-full flex flex-wrap gap-2">
-                      {selectedMembership.slotTimes.map((item, index) => {
+                      {selectedMembership?.slotTimes?.map((item, index) => {
                         return (
                           <div
                             key={index}
@@ -428,8 +428,8 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                       <div
                         key={index}
                         className={`flex text-xs items-center gap-2 h-fit ${index > selectedGround.rules.allowed.length - 1
-                            ? "text-[#53a53f]"
-                            : "text-rose-700"
+                          ? "text-[#53a53f]"
+                          : "text-rose-700"
                           }`}
                       >
                         {index > selectedGround.rules.allowed.length - 1 ? (
@@ -471,13 +471,13 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                       <Separator className="bg-[#53a53f] mt-3 mb-5" />
                       <div className="w-full text-sm tracking-widest flex flex-col gap-1">
                         {selectedMembership &&
-                          selectedMembership.slotTimes.map((item, index) => {
+                          selectedMembership?.slotTimes?.map((item, index) => {
                             return (
                               <div
                                 key={index}
                                 className={`text-xs h-fit whitespace-nowrap border-[1px] ${selectedSlot && selectedSlot === item.slot
-                                    ? "bg-[#53a53f] text-gray-50"
-                                    : "text-[#53a53f] border border-[#53a53f] bg-gray-100"
+                                  ? "bg-[#53a53f] text-gray-50"
+                                  : "text-[#53a53f] border border-[#53a53f] bg-gray-100"
                                   } border-gray-300 px-2 py-1 rounded-xl cursor-pointer`}
                                 onClick={() => {
                                   dispatch(setSelectedSlots(item.slot));

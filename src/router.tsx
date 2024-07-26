@@ -109,6 +109,12 @@ const router = createBrowserRouter([
           Component: (await import("./pages/checkout")).default,
         }),
       },
+      {
+        path: "/event",
+        lazy: async () => ({
+          Component: (await import("./pages/event")).default,
+        }),
+      },
     ],
   },
 

@@ -204,6 +204,7 @@ export interface IEvent {
     venue: {
       _id?: string;
       name: string;
+      address: string
     };
     name: string;
   }[];
