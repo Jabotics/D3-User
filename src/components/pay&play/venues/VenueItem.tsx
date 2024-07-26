@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setSelectedGroundId } from "@/store/actions/slices/slotsSlice";
 import { Button } from "@/components/ui/button";
 import { APIEndPoints } from "@/APIEndpoint";
-import { useSetFavoriteMutation } from "@/store/actions/slices/groundSlice";
+import { setLocationArr, useSetFavoriteMutation } from "@/store/actions/slices/groundSlice";
 import { RootState } from "@/store";
 import { IoIosHeart } from "react-icons/io";
 import { useState } from "react";
@@ -47,6 +47,7 @@ const VenueItem = ({ item }: { item: IGround }) => {
 
   const openDetailsPage = (id: string) => {
     navigate(`/details?id=${id}`);
+    dispatch(setLocationArr(item.name))
   };
 
   const handleSetFavorite = async () => {

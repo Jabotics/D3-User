@@ -167,7 +167,7 @@ export const GroundSlice = createSlice({
       state.locationArr = Array.from(x.add(action.payload));
     },
     resetLocationArr: (state) => {
-      state.locationArr = ["Home", "Academy"];
+      state.locationArr = ["Home", "Play"];
     },
 
     setFavorites: (state, action: PayloadAction<string>) => {

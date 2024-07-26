@@ -62,7 +62,7 @@ const Chat = () => {
     <React.Fragment>
       {closeChatModalOpen && (
         <Dialog open={closeChatModalOpen} onOpenChange={setCloseChatModalOpen}>
-          <DialogContent>
+          <DialogContent className="w-[90%] md:w-full rounded-md">
             <DialogTitle>Thanks to have a Chat with us!</DialogTitle>
             <Separator />
             <div className="flex flex-col gap-2">
@@ -77,7 +77,7 @@ const Chat = () => {
                 </div>
 
                 <div className={`flex-1 flex flex-col ${hasClickedARating ? 'items-start justify-start' : 'items-center justify-center'}`}>
-                  <div className={`flex w-full gap-2 ${hasClickedARating ? 'items-start justify-start' :'items-center justify-center'} transition-all duration-500`}>
+                  <div className={`flex w-full ${hasClickedARating ? 'mt-0' : '-mt-10'} lg:mt-0 gap-2 ${hasClickedARating ? 'items-start justify-start' :'items-center justify-center'} transition-all duration-500`}>
                     {[1, 2, 3, 4, 5].map((index) => (
                       <motion.span
                         key={index}
@@ -92,7 +92,7 @@ const Chat = () => {
                           color: index <= rating ? "#FFD700" : "#C0C0C0",
                         }}
                       >
-                        <FaStar size={hasClickedARating ? 25 : 75} />
+                        <FaStar size={hasClickedARating ? 25 : window.innerWidth < 1024 ? 45 : 75} />
                       </motion.span>
                     ))}
                   </div>

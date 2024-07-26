@@ -3,8 +3,8 @@ import { FaCircle } from "react-icons/fa6";
 const Facilities = () => {
   return (
     <div className="my-10">
-      <h1 className="text-2xl font-medium">Our Facilities</h1>
-      <p className="mt-4 text-sm">
+      <h1 className="text-xl lg:text-2xl font-medium">Our Facilities</h1>
+      <p className="mt-4 text-xs md:text-sm">
         D3 Sports Arena boasts a state-of-the-art multi-sports complex designed
         to cater to a diverse range of athletic pursuits. Our facilities
         include:
@@ -16,36 +16,40 @@ const Facilities = () => {
           <h3 className="text-lg tracking-wide font-medium mb-4">
             Indoor Facilities
           </h3>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Basketball Courts:{" "}
+          <span className="text-xs md:text-sm flex items-start mb-5 md:mb-0 md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" />{" "}
+              Basketball Courts:{" "}
             </span>
             <span className="ml-2">
               Multiple full-sized courts equipped with high-quality flooring and
               lighting, ideal for training and tournaments.
             </span>
           </span>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Badminton Courts:{" "}
+          <span className="text-xs md:text-sm flex items-start mb-5 md:mb-0 md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" /> Badminton
+              Courts:{" "}
             </span>
             <span className="ml-2">
               Professional-grade courts for both recreational play and
               competitive matches.
             </span>
           </span>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Squash Courts:{" "}
+          <span className="text-xs md:text-sm flex items-start mb-5 md:mb-0 md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" /> Squash
+              Courts:{" "}
             </span>
             <span className="ml-2">
               Modern courts that meet international standards, perfect for
               enthusiasts and professionals alike.
             </span>
           </span>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Fitness Center:{" "}
+          <span className="text-xs md:text-sm flex items-start mb-5 md:mb-0 md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" /> Fitness
+              Center:{" "}
             </span>
             <span className="ml-2">
               A fully equipped gym with the latest fitness equipment, offering
@@ -61,36 +65,40 @@ const Facilities = () => {
           <h3 className="text-lg tracking-wide font-medium mb-4">
             Outdoor Facilities
           </h3>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Football Field:{" "}
+          <span className="text-xs md:text-sm mb-5 md:mb-0 flex items-start md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" /> Football
+              Field:{" "}
             </span>
             <span className="ml-2">
               A well-maintained, regulation-size field for training sessions,
               leagues, and tournaments.
             </span>
           </span>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Tennis Courts:{" "}
+          <span className="text-xs md:text-sm mb-5 md:mb-0 flex items-start md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" /> Tennis
+              Courts:{" "}
             </span>
             <span className="ml-2">
               High-quality courts suitable for all levels of play, from
               beginners to advanced players.
             </span>
           </span>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Running Track:{" "}
+          <span className="text-xs md:text-sm mb-5 md:mb-0 flex items-start md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" /> Running
+              Track:{" "}
             </span>
             <span className="ml-2">
               A meticulously designed track for runners of all levels, promoting
               cardiovascular fitness and endurance.
             </span>
           </span>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Multi-Purpose Fields:{" "}
+          <span className="text-xs md:text-sm mb-5 md:mb-0 flex items-start md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" />{" "}
+              Multi-Purpose Fields:{" "}
             </span>
             <span className="ml-2">
               Versatile spaces that can be adapted for various sports and
@@ -106,36 +114,39 @@ const Facilities = () => {
           <h3 className="text-lg tracking-wide font-medium mb-4">
             Additional Amenities
           </h3>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Swimming Pool:{" "}
+          <span className="text-xs md:text-sm flex mb-5 md:mb-0 items-start md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" /> Swimming
+              Pool:{" "}
             </span>
             <span className="ml-2">
               An Olympic-sized pool for competitive swimming, training, and
               leisure activities.
             </span>
           </span>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Café and Lounge:{" "}
+          <span className="text-xs md:text-sm flex mb-5 md:mb-0 items-start md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" /> Café and
+              Lounge:{" "}
             </span>
             <span className="ml-2">
               A comfortable space for athletes and visitors to relax, socialize,
               and refuel with nutritious snacks and beverages.
             </span>
           </span>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Pro Shop:{" "}
+          <span className="text-xs md:text-sm flex mb-5 md:mb-0 items-start md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" /> Pro Shop:{" "}
             </span>
             <span className="ml-2">
               A well-stocked shop offering sports equipment, apparel, and
               accessories to meet all your sporting needs.
             </span>
           </span>
-          <span className="text-sm flex items-center justify-start">
-            <span className="font-semibold flex items-center gap-2">
-              <FaCircle size={5} /> Event Spaces:{" "}
+          <span className="text-xs md:text-sm flex mb-5 md:mb-0 items-start md:items-center justify-start">
+            <span className="font-semibold flex items-center gap-2 w-3/5 md:w-fit">
+              <FaCircle size={5} className="hidden md:inline-block" /> Event
+              Spaces:{" "}
             </span>
             <span className="ml-2">
               Versatile spaces for hosting sports events, workshops, seminars,

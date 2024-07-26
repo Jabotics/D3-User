@@ -46,7 +46,7 @@ export function AcademyPagination() {
       pageLinks.push(
         <PaginationItem
           key={i}
-          className="h-6 w-6 sm:h-6 sm:w-6 overflow-hidden"
+          className="h-6 w-6 overflow-hidden"
         >
           <PaginationLink
             href="#"
@@ -70,7 +70,7 @@ export function AcademyPagination() {
   return (
     <>
       {count && count > 0 ? (
-        <Pagination className="w-64 flex items-center justify-end overflow-y-hidden overflow-x-auto mx-0 mr-5">
+        <Pagination className="w-64 pb-1 flex items-center justify-end overflow-y-hidden overflow-x-auto mx-0 mr-5">
           <PaginationContent className="h-fit">
             {totalPages > 1 && (
               <PaginationItem>

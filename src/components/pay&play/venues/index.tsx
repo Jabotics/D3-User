@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 import {
   resetFilters,
+  resetLocationArr,
   setParams,
   setSelectedGroundType,
   setSelectedSportsStore,
@@ -116,6 +117,10 @@ const Venues = ({
 
     getGround.refetch();
   };
+
+  useEffect(() => {
+    dispatch(resetLocationArr())
+  }, [dispatch])
 
   return (
     <div className="flex flex-col gap-5 sm:gap-8 h-[80vh] sm:h-[75vh] lg:w-full">
