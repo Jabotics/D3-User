@@ -9,7 +9,7 @@ const EventSection = () => {
     const { events } = useAppSelector((state: RootState) => state.event);
     return (
         <div className="w-[100%] flex flex-col gap-4 bg-[#f3f4f6] p-4">
-            <div className="flex mb-4 self-center">
+            <div className="flex mt-10 md:mb-4 self-center">
                 <span className="text-[20px] font-bold">Event Details</span>
             </div>
             {events && events.length > 0 ? (

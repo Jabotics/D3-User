@@ -29,7 +29,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
     return (
         <div className="flex flex-col gap-2 w-[100%] md:w-[60%]  items-center rounded-lg bg-[#f3f4f6] px-1">
             <div className="flex flex-col border-2 rounded-lg w-[100%] md:w-[80%]">
-                <img src={`${APIEndPoints.BackendURL}/${event?.image}`} alt='img' className="w-[100%] h-[240px] object-cover bg-red border-t-1 rounded-t-md" />
+                <img src={`${APIEndPoints.BackendURL}/${event?.image}`} alt='img' className="w-[100%] h-[240px] md:h-[400px] object-cover bg-red border-t-1 rounded-t-md" />
                 <div className="p-4 bg-black text-white border-b-1 rounded-b-md flex flex-col md:flex-row justify-between">
                     <span className="inline-block ">{startDate} - {endDate}</span>
                     <span className="inline-block ">Registration {event?.registration_status}</span>
@@ -37,7 +37,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
             </div>
             <div className="flex flex-col md:w-[80%] w-[100%] gap-1 p-1 ">
                 <span className="inline-block text-[18px] font-semibold self-start">{event?.name}</span>
-                <span className="inline-block text-[16px] font-normal">{`${event?.grounds[0]?.name}, ${event?.grounds[0]?.venue?.name}, ${event?.grounds[0]?.venue?.address}`}</span>
+                <span className="inline-block text-[16px] font-semibold">{`${event?.grounds[0]?.name}, ${event?.grounds[0]?.venue?.name}, ${event?.grounds[0]?.venue?.address}`}</span>
                 <span className="inline-block text-[16px] font-normal">{event?.description}</span>
             </div>
         </div>
