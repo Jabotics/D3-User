@@ -48,7 +48,7 @@ const EventRegistrationForm = ({ eventId }: { eventId: string }) => {
         <div className="flex flex-col md:w-[60%] w-[100%] justify-center">
             <span className='inline-block text-[20px] font-bold self-center'>Register Now</span>
             <Form {...form}>
-                <form className='w-[100%] md:w-[90%] lg:w-[80%] flex flex-col gap-2 items-center self-center' onSubmit={form.handleSubmit(onSubmit)}>
+                <form className='w-[100%] md:w-[90%] lg:w-[80%] flex flex-col gap-2  items-center self-center' onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField
                         control={form.control}
                         name='name'
