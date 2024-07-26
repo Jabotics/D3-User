@@ -59,15 +59,14 @@ const PayPlay = () => {
       sports: selectedSportsStore.length === 0 ? null : selectedSportsStore,
     }));
   }, [selectedSportsStore]);
-
+  
   return (
     <section className="flex flex-col px-5 lg:px-20 2xl:px-36 w-full h-screen lg:h-[85vh] overflow-hidden">
       <span className="h-4 lg:h-8 flex items-center mt-12 lg:mt-3 gap-1 text-[10px] md:text-xs lg:text-sm lg:ml-4">
         {locationArr.map((item, index) => (
           <div key={index}>
             <span
-              className={`${
-                (
+              className={`${(
                   locationArr.length === 2
                     ? item === "Home"
                     : item === "Home" || item === "Play"
@@ -127,11 +126,10 @@ const PayPlay = () => {
                   return (
                     <div
                       key={index}
-                      className={`rounded-2xl border cursor-pointer ${
-                        filtersArr.sortBy?.includes(item)
+                      className={`rounded-2xl border cursor-pointer ${filtersArr.sortBy?.includes(item)
                           ? "bg-gray-700 text-gray-50 border-gray-100"
                           : "border-gray-400"
-                      } px-2 text-xs xl:text-sm`}
+                        } px-2 text-xs xl:text-sm`}
                       onClick={() => {
                         dispatch(setSortByText(item));
                       }}

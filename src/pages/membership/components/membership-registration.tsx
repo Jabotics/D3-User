@@ -215,7 +215,7 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
   }, [form, userData?.mobile]);
 
   return (
-    <>
+    <div className="w-full flex flex-col">
       <div className="flex items-center justify-between w-full h-24 mt-0 lg:mt-4 px-5">
         <div
           className="bg-[#53A53F] p-1 rounded-lg text-gray-100 cursor-pointer"
@@ -223,7 +223,7 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
             navigate(`/membership?id=${membershipId}`);
           }}
         >
-          <HiOutlineArrowLongLeft size={30} />
+          <HiOutlineArrowLongLeft size={20} />
         </div>
         <div className="text-xs xs:text-sm sm:text-lg md:text-xl w-full lg:w-[45%] text-center font-medium tracking-wider">
           Step into the World of Sports and Fitness at the Comfort of your Home.
@@ -232,8 +232,8 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex-1 bg-[#83ca711e] rounded-3xl flex flex-col items-center gap-3 lg:gap-0 justify-center border-2 border-[#53A53F] relative mb-10 lg:mb-0">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4 justify-center items-center w-full gap">
+          <div className="xs:w-full sm:w-[80%] md:w-[70%] lg:w-[70%]  bg-[#83ca711e] rounded-3xl flex flex-col items-center gap-3 lg:gap-0 justify-center  relative mb-10 lg:mb-0 px-2">
             {errorMessage && (
               <motion.div
                 initial={{
@@ -263,11 +263,10 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
             </div>
             <div className="flex-1 w-full mt-3">
               <div className="w-full h-full flex flex-col gap-5 lg:gap-3 items-center justify-evenly">
-                <div className="h-1/4 flex items-center lg:items-end justify-center ">
+                <div className="flex items-center lg:items-end justify-center ">
                   <div
-                    className={`w-24 h-24 bg-green-50 border-2 border-[#53a53f] rounded-md flex items-center justify-center relative ${
-                      imageBlobUrl ? "" : "cursor-pointer"
-                    }`}
+                    className={`w-16 h-16 bg-green-50 border-2 border-[#6cd353] rounded-md flex items-center justify-center relative ${imageBlobUrl ? "" : "cursor-pointer"
+                      }`}
                     onClick={handleDivClick}
                   >
                     <input
@@ -283,7 +282,7 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
                         <img
                           src={imageBlobUrl}
                           alt="Selected"
-                          className="w-24 h-24 object-cover rounded-md"
+                          className="w-16 h-16 object-cover rounded-md"
                         />
                       </div>
                     )}
@@ -311,10 +310,10 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
                       render={({ field }) => (
                         <FormItem className="w-full">
                           <FormControl>
-                            <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                            <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE] px-2">
                               <RxAvatar size={24} />
                               <Input
-                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-grey"
                                 placeholder="Name"
                                 style={{ outline: "none", boxShadow: "none" }}
                                 {...field}
@@ -331,10 +330,10 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
                       render={({ field }) => (
                         <FormItem className="w-full">
                           <FormControl>
-                            <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                            <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE] px-2">
                               <IoCallOutline size={24} />
                               <Input
-                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-grey"
                                 placeholder="Phone"
                                 style={{ outline: "none", boxShadow: "none" }}
                                 {...field}
@@ -352,10 +351,10 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
                       render={({ field }) => (
                         <FormItem className="w-full">
                           <FormControl>
-                            <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                            <div className="flex items-center rounded-full w-full bg-stone-50  border-1 border-[#BEBEBE] px-2">
                               <RxAvatar size={24} />
                               <Input
-                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-grey"
                                 placeholder="Guardian name"
                                 style={{ outline: "none", boxShadow: "none" }}
                                 {...field}
@@ -374,10 +373,10 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
                       render={({ field }) => (
                         <FormItem className="w-full">
                           <FormControl>
-                            <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                            <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE] px-2">
                               <MdOutlineEmail size={24} />
                               <Input
-                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-grey"
                                 placeholder="Email"
                                 style={{ outline: "none", boxShadow: "none" }}
                                 {...field}
@@ -395,10 +394,10 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
                       render={({ field }) => (
                         <FormItem className="w-full">
                           <FormControl>
-                            <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                            <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE]] px-2">
                               <MdMyLocation size={24} />
                               <Input
-                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-grey"
                                 placeholder="Address"
                                 style={{ outline: "none", boxShadow: "none" }}
                                 {...field}
@@ -416,10 +415,10 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
                       render={({ field }) => (
                         <FormItem className="w-full">
                           <FormControl>
-                            <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                            <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE] px-2">
                               <IoCallOutline size={24} />
                               <Input
-                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-grey"
                                 placeholder="Guardian Phone"
                                 style={{ outline: "none", boxShadow: "none" }}
                                 {...field}
@@ -443,11 +442,11 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
                   </div>
                   <div className="w-full h-full mt-3 flex flex-col lg:flex-row items-center justify-center">
                     <div
-                      className="w-full lg:w-1/2 h-full flex items-center justify-center"
+                      className="w-full lg:w-[70%] h-full flex items-center justify-center"
                       onClick={handleIdDivClick}
                     >
-                      <div className="w-full h-32 lg:h-full border border-dashed border-green-500 rounded-xl bg-[#53a53f3f] flex items-center gap-4 lg:gap-12 justify-center cursor-pointer">
-                        <div className="w-40 h-full flex flex-col items-center justify-center">
+                      <div className="w-full h-32 lg:h-full border border-dashed border-green-500 rounded-xl bg-[#53a53f3f] flex items-center gap-2 lg:gap-12 justify-center cursor-pointer py-4">
+                        <div className="w-[55%] h-full flex flex-col items-center justify-center">
                           <IoCloudUploadOutline
                             size={window.innerWidth >= 1024 ? 25 : 20}
                             className="text-[#53A53F]"
@@ -456,10 +455,10 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
                             Drag & Drop file to upload
                           </div>
                         </div>
-                        <div className="w-8 h-8 bg-gray-50 rounded-full p-2 flex items-center justify-center">
+                        <div className="w-[10%] h-6 bg-gray-50 rounded-full p-2 flex items-center justify-center">
                           Or
                         </div>
-                        <div className="text-[10px] whitespace-nowrap lg:whitespace-normal lg:text-xs underline font-semibold mr-5 lg:mr-0">
+                        <div className="w-[35%] flex justify-center text-[10px] whitespace-nowrap lg:whitespace-normal lg:text-xs underline font-semibold mr-5 lg:mr-0">
                           Browse File
                         </div>
                         <Input
@@ -508,10 +507,10 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
                 </div>
               </div>
             </div>
-            <div className="h-20 w-full flex items-center justify-center mt-6">
+            <div className="h-20 w-full flex items-center justify-center mt-8">
               <Button
                 variant={"default"}
-                className="w-full mx-4 lg:mx-0 lg:w-[35%] rounded-md lg:rounded-full"
+                className="w-[160px] mx-4 lg:mx-0  rounded-md lg:rounded-full"
                 type="submit"
               >
                 Subscribe
@@ -530,7 +529,7 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
         </div>
         <MembershipFormContainer />
       </div> */}
-    </>
+    </div>
   );
 };
 

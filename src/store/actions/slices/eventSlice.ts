@@ -1,7 +1,7 @@
 import { APIEndPoints } from "@/APIEndpoint";
 import { IEvent } from "@/interface/data";
 import { createSlice } from "@reduxjs/toolkit";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery, FetchBaseQueryMeta } from "@reduxjs/toolkit/query/react";
 
 interface IncomingData {
   data: {
@@ -36,6 +36,28 @@ export const eventsApi = createApi({
           method: "GET",
           params: customParams,
         };
+      },
+    }),
+    addEventRequest: builder.mutation<IncomingData, object>({
+      query: (body) => {
+        const { ...rest } = body;
+        return {
+          url: APIEndPoints.add_event_request,
+          method: "POST",
+          body: rest,
+        };
+      },
+      transformResponse(
+        Response: unknown,
+        meta: FetchBaseQueryMeta | undefined
+      ): IncomingData | Promise<IncomingData> {
+        if (meta?.response?.headers.get("authorization")) {
+          localStorage.setItem(
+            "token",
+            String(meta?.response?.headers.get("authorization"))
+          );
+        }
+        return Response as IncomingData;
       },
     }),
   }),
@@ -83,6 +105,6 @@ export const EventsSlice = createSlice({
   },
 });
 
-export const { useFetchEventsQuery } = eventsApi
-export const {} = EventsSlice.actions
+export const { useFetchEventsQuery, useAddEventRequestMutation } = eventsApi
+// export const {} = EventsSlice.actions
 export default EventsSlice.reducer

@@ -210,15 +210,15 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
   }, [form, userData?.mobile]);
 
   return (
-    <>
-      <div className="flex items-center justify-between w-full h-24 mt-0 lg:mt-4 px-5">
+    <div className="w-full flex flex-col">
+      <div className="flex items-center justify-between w-full h-24 mt-0 lg:mt-4 px-4 ">
         <div
-          className="bg-[#53A53F] p-1 rounded-lg text-gray-100 cursor-pointer"
+          className="bg-[#53A53F] p-1 rounded-lg text-white cursor-pointer"
           onClick={() => {
             navigate(`/academy?id=${academyId}`);
           }}
         >
-          <HiOutlineArrowLongLeft size={30} />
+          <HiOutlineArrowLongLeft size={20} />
         </div>
         <div className="text-xs xs:text-sm sm:text-lg md:text-xl w-full lg:w-[45%] text-center font-medium tracking-wider">
           Step into the World of Sports and Fitness at the Comfort of your Home.
@@ -226,10 +226,10 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
         <div />
       </div>
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex-1 w-full flex items-center justify-center">
-            <div className="h-full bg-[#83ca711e] rounded-3xl w-1/2 flex flex-col items-center gap-3 lg:gap-0 justify-center border-2 border-[#53A53F] relative mb-10 lg:mb-0">
+      <Form {...form} >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex justify-center w-full">
+          <div className="xs:w-full sm:w-[80%] md:w-[70%] lg:w-[70%] flex items-center justify-center">
+            <div className="h-full bg-[#83ca711e] rounded-3xl  sm: w-full flex flex-col items-center gap-2 lg:gap-0 justify-center relative mb-10 lg:mb-0">
               {errorMessage && (
                 <motion.div
                   initial={{
@@ -257,13 +257,12 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
               <div className="w-full h-16 flex items-center lg:items-end text-center text-sm lg:text-lg justify-center font-semibold tracking-wide text-[#53A53F]">
                 Fill in the form to join this academy.
               </div>
-              <div className="flex-1 w-full mt-3">
+              <div className="flex-1 w-full mt-2">
                 <div className="w-full h-full flex flex-col gap-5 lg:gap-3 items-center justify-evenly">
-                  <div className="h-1/4 flex items-center lg:items-end justify-center ">
+                  <div className="flex items-center lg:items-end justify-center ">
                     <div
-                      className={`w-24 h-24 bg-green-50 border-2 border-[#53a53f] rounded-md flex items-center justify-center relative ${
-                        imageBlobUrl ? "" : "cursor-pointer"
-                      }`}
+                      className={`w-16 h-16 bg-green-50 border-2 border-[#6cd353] rounded-md flex items-center justify-center relative ${imageBlobUrl ? "" : "cursor-pointer"
+                        }`}
                       onClick={handleDivClick}
                     >
                       <input
@@ -279,12 +278,12 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                           <img
                             src={imageBlobUrl}
                             alt="Selected"
-                            className="w-24 h-24 object-cover rounded-md"
+                            className="w-16 h-16 object-cover rounded-md"
                           />
                         </div>
                       )}
                       {imageBlobUrl && (
-                        <div className="absolute -bottom-2 -right-2 bg-[#53a53f] w-7 h-7 rounded-full flex items-center justify-center">
+                        <div className="absolute -bottom-2 -right-2 bg-[#6cd353] w-4 h-4 rounded-full flex items-center justify-center">
                           <div
                             className="flex items-center justify-center border-2 border-gray-50 rounded-full h-5 w-5 cursor-pointer"
                             onClick={() => {
@@ -307,11 +306,13 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                         render={({ field }) => (
                           <FormItem className="w-full">
                             <FormControl>
-                              <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                              <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE] px-2" >
                                 <RxAvatar size={24} />
                                 <Input
-                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                  className="rounded-full bg-transparent border-none outline-none placeholder:text-grey"
                                   placeholder="Name"
+                                  autoFocus={true}
+
                                   style={{ outline: "none", boxShadow: "none" }}
                                   {...field}
                                 />
@@ -327,10 +328,10 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                         render={({ field }) => (
                           <FormItem className="w-full">
                             <FormControl>
-                              <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                              <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE] px-2">
                                 <IoCallOutline size={24} />
                                 <Input
-                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-gray-900 disabled:text-gray-900 tracking-wide"
                                   placeholder="Phone"
                                   style={{ outline: "none", boxShadow: "none" }}
                                   {...field}
@@ -348,10 +349,10 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                         render={({ field }) => (
                           <FormItem className="w-full">
                             <FormControl>
-                              <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                              <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE]  px-2">
                                 <RxAvatar size={24} />
                                 <Input
-                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-grey"
                                   placeholder="Guardian name"
                                   style={{ outline: "none", boxShadow: "none" }}
                                   {...field}
@@ -370,10 +371,10 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                         render={({ field }) => (
                           <FormItem className="w-full">
                             <FormControl>
-                              <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                              <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE]  px-2">
                                 <MdOutlineEmail size={24} />
                                 <Input
-                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-grey"
                                   placeholder="Email"
                                   style={{ outline: "none", boxShadow: "none" }}
                                   {...field}
@@ -391,10 +392,10 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                         render={({ field }) => (
                           <FormItem className="w-full">
                             <FormControl>
-                              <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                              <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE]  px-2">
                                 <MdMyLocation size={24} />
                                 <Input
-                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-grey"
                                   placeholder="Address"
                                   style={{ outline: "none", boxShadow: "none" }}
                                   {...field}
@@ -412,10 +413,10 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                         render={({ field }) => (
                           <FormItem className="w-full">
                             <FormControl>
-                              <div className="flex items-center rounded-full w-full bg-stone-50 border-2 border-[#53a53f] px-2">
+                              <div className="flex items-center rounded-full w-full bg-stone-50 border-1 border-[#BEBEBE]  px-2">
                                 <IoCallOutline size={24} />
                                 <Input
-                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#53a53f85]"
+                                  className="rounded-full bg-transparent border-none outline-none focus:ring-0 placeholder:text-grey"
                                   placeholder="Guardian Phone"
                                   style={{ outline: "none", boxShadow: "none" }}
                                   {...field}
@@ -439,11 +440,11 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                     </div>
                     <div className="w-full h-full mt-3 flex flex-col lg:flex-row items-center justify-center">
                       <div
-                        className="w-full lg:w-1/2 h-full flex items-center justify-center"
+                        className="w-full lg:w-[70%] h-full flex items-center justify-center"
                         onClick={handleIdDivClick}
                       >
-                        <div className="w-full h-32 lg:h-full border border-dashed border-green-500 rounded-xl bg-[#53a53f3f] flex items-center gap-4 lg:gap-12 justify-center cursor-pointer">
-                          <div className="w-40 h-full flex flex-col items-center justify-center">
+                        <div className="w-full h-32 lg:h-full border border-dashed border-green-500 rounded-xl bg-[#53a53f3f] flex items-center gap-4 lg:gap-12 justify-center cursor-pointer py-4">
+                          <div className="w-[55%] h-full flex flex-col items-center justify-center">
                             <IoCloudUploadOutline
                               size={window.innerWidth >= 1024 ? 25 : 20}
                               className="text-[#53A53F]"
@@ -452,10 +453,10 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                               Drag & Drop file to upload
                             </div>
                           </div>
-                          <div className="w-8 h-8 bg-gray-50 rounded-full p-2 flex items-center justify-center">
+                          <div className="w-[10%] h-6 bg-gray-50 rounded-full p-2 flex items-center justify-center">
                             Or
                           </div>
-                          <div className="text-[10px] whitespace-nowrap lg:whitespace-normal lg:text-xs underline font-semibold mr-5 lg:mr-0">
+                          <div className="w-[35%] flex justify-center text-[10px] whitespace-nowrap lg:whitespace-normal lg:text-xs underline font-semibold mr-2 lg:mr-0">
                             Browse File
                           </div>
                           <Input
@@ -505,10 +506,10 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
                   </div>
                 </div>
               </div>
-              <div className="h-20 w-full flex items-center justify-center mt-6">
+              <div className="h-20 w-full flex items-center justify-center mt-8">
                 <Button
                   variant={"default"}
-                  className="w-full mx-4 lg:mx-0 lg:w-[35%] rounded-md lg:rounded-full"
+                  className="w-[160px] mx-4 lg:mx-0  rounded-md lg:rounded-full"
                   type="submit"
                 >
                   Join Academy
@@ -518,7 +519,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
           </div>
         </form>
       </Form>
-    </>
+    </div>
   );
 };
 
