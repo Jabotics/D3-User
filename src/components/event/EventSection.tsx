@@ -13,7 +13,7 @@ const EventSection = () => {
     const eventData = events.filter((event) => { return event?.id === id })
     return (
         <div className="w-[100%] flex flex-col gap-4 bg-[#f3f4f6] p-4">
-            <div className="flex mt-10 md:mb-4 self-center">
+            <div className="flex mt-6 md:mb-4 self-center">
                 <span className="text-[20px] font-bold">Event Details</span>
             </div>
             {eventData && eventData.length > 0 ? (
