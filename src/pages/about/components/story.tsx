@@ -1,8 +1,8 @@
 const Story = () => {
   return (
     <div className="my-20">
-      <h1 className="text-2xl font-medium">Our Story</h1>
-      <p className="mt-8 text-sm">
+      <h1 className="text-xl lg:text-2xl font-medium">Our Story</h1>
+      <p className="mt-8 text-xs md:text-sm">
         The inception of D3 Sports Arena is a testament to the power of
         friendship and shared vision. D3 stands for "Dreams of Three," a name
         inspired by the lifelong dream of three friends who envisioned creating

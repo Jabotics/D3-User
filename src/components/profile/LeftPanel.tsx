@@ -219,33 +219,37 @@ const LeftPanel = () => {
         userData?.email !== undefined ? userData.email : ""
       );
 
-      if (userData.profile_img?.includes('blob')) {
-        setPreviewUrl(userData.profile_img)
+      if (userData.profile_img?.includes("blob")) {
+        setPreviewUrl(userData.profile_img);
       } else {
         setPreviewUrl(`${APIEndPoints.BackendURL}/${userData.profile_img}`);
       }
     }
-  }, [userData]);
+  }, [form, userData]);
 
   return (
     <div className="w-full h-full ">
-      <div className="flex justify-between">
+      <div className="flex justify-between px-5 lg:px-0">
         <div className="flex gap-2">
           <div className="w-10 h-10 border-2 border-[#53A53F] rounded-full overflow-hidden">
             <img
-              src={userData?.profile_img && previewUrl ? previewUrl : `/images/male.png`}
+              src={
+                userData?.profile_img && previewUrl
+                  ? previewUrl
+                  : `/images/male.png`
+              }
               alt=""
               className="w-full h-full object-cover object-center"
             />
           </div>
-          <div className="flex flex-col">
-            <span className="text-sm font-medium">
+          <div className="flex flex-col items-start justify-center">
+            <span className="text-xs font-medium">
               {userData && userData.first_name && userData.last_name
                 ? `${userData?.first_name + " " + userData?.last_name}`
                 : "John Doe"}
             </span>
-            <span className="text-xs tracking-wide font-medium text-[#53A53F]">
-              {userData && userData.mobile ? `+91 ${userData?.mobile}` : ""}
+            <span className="text-sm tracking-wide font-medium text-[#53A53F]">
+              {userData && userData.mobile ? `${userData?.mobile}` : ""}
             </span>
           </div>
         </div>
@@ -409,15 +413,16 @@ const LeftPanel = () => {
         </Dialog>
       </div>
 
-      <div className=" hidden sm:block w-[100%] h-1/2 bg-white mt-10 rounded-3xl">
-        <div className="pt-6 cursor">
+      <div className="block w-[100%] h-1/2 bg-white mt-8 lg:mt-10 rounded-3xl overflow-hidden">
+        <div className="pt-0 h-10 sm:h-12 lg:pt-6 cursor flex flex-row lg:flex-col justify-between items-center lg:items-start w-full">
           {sideMenu.map((menu, index) => {
             const IconComponent = menu.icon;
             return (
               <div
-                className={`px-5 mt-4 pb-4 flex justify-between items-center ${
-                  menu.title !== "Logout" && "border-b-2"
-                } cursor-pointer`}
+                className={`px-0 lg:px-5 mt-0 lg:mt-4 py-0 lg:py-4 flex justify-center lg:justify-between items-center ${
+                  menu.title !== "Logout" &&
+                  "border-r-2 border-gray-100 lg:border-b-2"
+                } cursor-pointer w-1/5 lg:w-full h-full`}
                 key={index}
                 onClick={() => {
                   if (menu.title === "Logout") {
@@ -427,19 +432,35 @@ const LeftPanel = () => {
                   }
                 }}
               >
-                <div className="flex items-center text-sm gap-2 ">
-                  <IconComponent className="text-[#53A53F] text-xl" />
+                <div
+                  className={`flex items-center justify-center lg:justify-start text-sm gap-2 ${
+                    window.innerWidth < 1024 && menu.title === title
+                      ? "bg-[#53A53F] "
+                      : ""
+                  } w-full h-full`}
+                >
+                  <IconComponent
+                    className={`${
+                      menu.title !== "Logout"
+                        ? "text-[#53A53F]"
+                        : "text-gray-800"
+                    } ${
+                      window.innerWidth < 1024 && menu.title === title
+                        ? "text-gray-100"
+                        : "text-[#53A53F]"
+                    } text-xl`}
+                  />
                   <span
                     className={` ${
                       menu.title === title && "text-[#53A53F] font-medium"
                     } ${
                       menu.title === "Logout" ? "font-medium" : "font-light"
-                    } tracking-wide`}
+                    } tracking-wide hidden lg:block`}
                   >
                     {menu.title === "Logout" ? "Log out" : menu.title}
                   </span>
                 </div>
-                <IoIosArrowForward className="text-[#53A53F] " />
+                <IoIosArrowForward className="text-[#53A53F] hidden lg:block" />
               </div>
             );
           })}

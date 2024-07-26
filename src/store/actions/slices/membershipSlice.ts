@@ -102,7 +102,10 @@ interface InitialState {
   sortByText: string[];
   selectedVenue: string[];
   selectedGroundType: string[];
-  selectedSlot: string | null;
+  selectedSlot: {
+    batch: "Morning" | "Evening";
+    slots: string[]
+  } | null;
 
   registrationFormDetails: {
     first_name: string;
@@ -113,7 +116,7 @@ interface InitialState {
     address: string;
     membership: string;
     sport: string;
-    slot?: string;
+    shift?: "morning" | "evening";
     customer: string;
     ground: string;
     city: string;
@@ -163,7 +166,7 @@ const initialState: InitialState = {
     first_name: "",
     ground: "",
     last_name: "",
-    slot: "",
+    shift: "morning",
     sport: "",
     subscription_type: null,
     venue: "",
@@ -232,10 +235,10 @@ export const MembershipsSlice = createSlice({
     resetLocationArr: (state) => {
       state.locationArr = ["Home", "Membership"];
     },
-    setSelectedSlots: (state, action: PayloadAction<string | null>) => {
+    setSelectedSlots: (state, action: PayloadAction<{ batch: "Morning" | "Evening", slots: string[] } | null>) => {
       state.selectedSlot = action.payload;
       if (action.payload) {
-        state.registrationFormDetails.slot = action.payload;
+        state.registrationFormDetails.shift = action.payload.batch.toLowerCase() as "morning" | "evening";
       }
     },
 

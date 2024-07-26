@@ -2,24 +2,24 @@ import { Separator } from "@/components/ui/separator";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { CiEdit } from "react-icons/ci";
+// import { CiEdit } from "react-icons/ci";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 
+// import {
+//   Dialog,
+//   DialogClose,
+//   DialogContent,
+//   DialogDescription,
+//   DialogTitle,
+//   DialogTrigger,
+// } from "@/components/ui/dialog";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  setSelectedSlots,
+  // setSelectedSlots,
   setSubscriptionType,
 } from "@/store/actions/slices/academySlice";
-import { useState } from "react";
+// import { useState } from "react";
 import { WiDirectionLeft } from "react-icons/wi";
 
 interface AcademyCheckoutDetailsProps {
@@ -32,7 +32,7 @@ interface AcademyCheckoutDetailsProps {
     address: string;
     academy: string;
     sport: string;
-    slot?: string;
+    shift?: "morning" | "evening";
     customer: string;
     ground: string;
     city: string;
@@ -61,7 +61,7 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
   const { academies } = useAppSelector((state: RootState) => state.academy);
   const selectedAcademy = academies.find((i) => i.id === detailsPageId);
 
-  const [hasSlotChanged, setHasSlotChanged] = useState(false);
+  // const [hasSlotChanged, setHasSlotChanged] = useState(false);
 
   return (
     <section className="w-full h-fit lg:h-full flex flex-col gap-2">
@@ -176,78 +176,9 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
           <div className="flex-1 w-full flex flex-col items-start pt-5">
             <div className="flex items-center gap-2">
               <span className="border text-xs border-[#53A53F] px-5 py-1 tracking-wider rounded-full font-medium">
-                {registrationFormDetails.slot}
+                {registrationFormDetails.shift}
               </span>
-              {selectedAcademy ? (
-                <Dialog>
-                  <DialogTrigger className="cursor-pointer">
-                    <CiEdit />
-                  </DialogTrigger>
-                  <DialogContent aria-describedby="academy slots">
-                    <DialogDescription className="sr-only">
-                      Slots Details
-                    </DialogDescription>
-                    <div className="flex h-[30vh] flex-col items-center">
-                      <DialogTitle className="mt-5 text-xl text-[#53a53f] font-semibold tracking-wide">
-                        Selected Slot
-                      </DialogTitle>
-                      <Separator className="bg-[#53a53f] mt-3 mb-5" />
-                      <div className="w-full text-sm tracking-widest flex flex-col gap-1">
-                        {selectedAcademy.slotTimes.map((item, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className={`text-xs h-fit whitespace-nowrap border-[1px] ${
-                                registrationFormDetails.slot &&
-                                registrationFormDetails.slot === item.slot
-                                  ? "bg-[#53a53f] text-gray-50"
-                                  : "text-[#53a53f] border border-[#53a53f] bg-gray-100"
-                              } border-gray-300 px-2 py-1 rounded-xl cursor-pointer`}
-                              onClick={() => {
-                                if (
-                                  registrationFormDetails.slot !== item.slot
-                                ) {
-                                  dispatch(setSelectedSlots(item.slot));
-                                  setHasSlotChanged(true);
-                                } else {
-                                  setHasSlotChanged(false);
-                                }
-                              }}
-                            >
-                              {item.slot}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                    <DialogClose className="h-8 rounded-md bg-[#53a53f] text-xs text-gray-100 ">
-                      {hasSlotChanged ? "Continue" : "Close"}
-                    </DialogClose>
-                  </DialogContent>
-                </Dialog>
-              ) : null}
             </div>
-            {selectedAcademy ? (
-              <div className="flex flex-col items-start mt-3">
-                <span className="text-xs font-semibold text-gray-500 tracking-wide">
-                  Other Slots
-                </span>
-                <span className="flex items-center gap-3 overflow-y-hidden overflow-x-auto text-xs mt-3">
-                  {selectedAcademy.slotTimes
-                    .filter((i) => i.slot !== registrationFormDetails.slot)
-                    .map((item, index) => {
-                      return (
-                        <div
-                          key={index}
-                          className="px-3 bg-gray-300 rounded-full py-1 tracking-wide text-gray-600"
-                        >
-                          {item.slot}
-                        </div>
-                      );
-                    })}
-                </span>
-              </div>
-            ) : null}
           </div>
         </div>
       </div>
@@ -317,9 +248,9 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
           </div>
           <div className="lg:h-8 w-full flex flex-col lg:flex-row items-start lg:items-center gap-3 text-sm mb-3 lg:my-5">
             <div className="flex items-center gap-5">
-              <span>Slot: </span>
+              <span>Batch: </span>
               <span className="font-semibold tracking-wide px-3 py-1 rounded-full bg-[#53a53f] text-gray-100">
-                {registrationFormDetails.slot}
+                {registrationFormDetails.shift}
               </span>
             </div>
           </div>

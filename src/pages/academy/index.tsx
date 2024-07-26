@@ -20,7 +20,7 @@ const AcademyPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  useVerifySessionQuery({})
+  useVerifySessionQuery({});
   const searchParams = useSearchParams();
   const detailsPageId = searchParams[0].get("id");
 
@@ -70,7 +70,7 @@ const AcademyPage = () => {
     if (!isJoinAcademy) {
       dispatch(setSelectedSlots(null));
     }
-  }, [isJoinAcademy]);
+  }, [dispatch, isJoinAcademy]);
 
   return (
     <>
@@ -90,8 +90,8 @@ const AcademyPage = () => {
                             ? item === "Home"
                             : item === "Home" || item === "Academy"
                         )
-                          ? "text-gray-900 cursor-pointer hover:underline"
-                          : "text-gray-500"
+                          ? "text-[#54a63f] cursor-pointer hover:underline font-semibold"
+                          : "text-[#a7d19d] font-medium"
                       }`}
                       onClick={() => {
                         if (item === "Home") {
@@ -106,7 +106,7 @@ const AcademyPage = () => {
                     {(locationArr.length === 2
                       ? item === "Home"
                       : item === "Home" || item === "Academy") && (
-                      <span className="text-gray-500 ml-1">{"/"}</span>
+                      <span className="text-[#a7d19d] ml-1">{"/"}</span>
                     )}
                   </div>
                 ))}
@@ -121,7 +121,7 @@ const AcademyPage = () => {
                   </>
                 )
               ) : (
-                <div className="h-full lg:h-[125vh] w-full flex flex-col gap-2 mb-20">
+                <div className="h-full w-full flex flex-col gap-2 mb-20">
                   <div className="flex items-center justify-center w-full h-24">
                     <div className="w-1/2 h-full bg-[#53A53F] rounded-l-xl hidden md:flex flex-col items-start justify-center pl-5 lg:pl-20">
                       <div className="text-lg font-semibold text-gray-50">

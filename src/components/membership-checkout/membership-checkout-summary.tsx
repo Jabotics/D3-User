@@ -1,36 +1,39 @@
 import { useAppSelector } from "@/store/hooks";
 import { Button } from "../ui/button";
 import { RootState } from "@/store";
-import { useSearchParams } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 import { useJoinMembershipMutation } from "@/store/actions/slices/membershipSlice";
 import { useState } from "react";
 import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 const MembershipCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
-  const searchParams = useSearchParams();
-  const academyId = searchParams[0].get("id");
+  // const searchParams = useSearchParams();
+  // const academyId = searchParams[0].get("id");
 
   const [toRefetchUserData, setToRefetchUserData] = useState(false)
   useVerifySessionQuery({}, { skip: !toRefetchUserData })
 
   const [joinMembership] = useJoinMembershipMutation()
 
-  const { memberships, registrationFormDetails } = useAppSelector(
+  const { 
+    // memberships, 
+    registrationFormDetails 
+  } = useAppSelector(
     (state: RootState) => state.membership
   );
   const selectedPromo = useAppSelector((state: RootState) => state.promocode.selectedPromo)
   const { newPrice } = useAppSelector((state: RootState) => state.promocode);
-  const selectedMembership = memberships.find((i) => i.id === academyId);
+  // const selectedMembership = memberships.find((i) => i.id === academyId);
   const handleSubmitRegistration = async () => {
     try {
       const formData = new FormData()
-      const { membership, membership_fee, address, joining_fee, city, customer, email, first_name, ground, guardian_mobile, guardian_name, last_name, sport, venue, doc, profile, slot, subscription_type } = registrationFormDetails;
+      const { membership, membership_fee, address, joining_fee, city, customer, email, first_name, ground, guardian_mobile, guardian_name, last_name, sport, venue, doc, profile, shift, subscription_type } = registrationFormDetails;
 
-      let slotId;
-      if (slot) {
-        slotId = selectedMembership?.slotTimes.find(i => i.slot === slot)?._id
-      }
+      // let slotId;
+      // if (slot) {
+      //   slotId = selectedMembership?.slotTimes.find(i => i.slot === slot)?._id
+      // }
 
       formData.append('membership', membership)
       formData.append('membership_fee', String(membership_fee))
@@ -53,8 +56,8 @@ const MembershipCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<Re
       if (profile) {
         formData.append('profile', profile);
       }
-      if (slotId) {
-        formData.append('slot', slotId)
+      if (shift) {
+        formData.append('shift', shift)
       }
       formData.append('subscription_type', String(subscription_type))
 
@@ -84,10 +87,10 @@ const MembershipCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<Re
         </div>
       ) : null} */}
       <div className="flex flex-row justify-between">
-        <span className="inline-block text-[12px]">Slot</span>
+        <span className="inline-block text-[12px]">Shift</span>
         <span className="inline-block text-[12px] text-[#000000] font-semibold">
           {" "}
-          {registrationFormDetails.slot}
+          {registrationFormDetails.shift}
         </span>
       </div>
       {registrationFormDetails.subscription_type && (

@@ -25,6 +25,14 @@ import { useEffect, useState } from "react";
 
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { BsPassport } from "react-icons/bs";
+import {
+  Table,
+  TableBody,
+  // TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const getEmbedUrl = (url: string): string => {
   switch (true) {
@@ -35,6 +43,7 @@ const getEmbedUrl = (url: string): string => {
           }?rel=0&modestbranding=1&controls=1&start=0&end=600&loop=1`;
       }
       // Extract video ID from regular YouTube URLs
+      // eslint-disable-next-line no-case-declarations
       const videoId = url.split("v=")[1] || url.split("youtu.be/")[1];
       if (!videoId) {
         return "";
@@ -44,6 +53,7 @@ const getEmbedUrl = (url: string): string => {
 
     case url.includes("drive.google.com"):
       // Extract Google Drive file ID
+      // eslint-disable-next-line no-case-declarations
       const fileId = url.match(/\/d\/([a-zA-Z0-9_-]+)(?:\/|$)/);
       if (fileId && fileId[1]) {
         return `https://drive.google.com/file/d/${fileId[1]}/preview`;
@@ -123,12 +133,12 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                   </DialogTrigger>
                   <DialogContent aria-describedby="academy slots">
                     <div className="flex h-[30vh] flex-col items-center">
-                      <DialogTitle className="mt-5 text-xl text-[#53a53f] font-semibold tracking-wide">
-                        Selected Slot
+                      <DialogTitle className="mt-5 text-base text-[#a1c299] font-semibold tracking-wide">
+                        Selected Batch
                       </DialogTitle>
-                      <Separator className="bg-[#53a53f] mt-3 mb-5" />
-                      <div className="w-full text-sm tracking-widest flex flex-col gap-1">
-                        {selectedAcademy?.slotTimes?.map((item, index) => {
+                      <Separator className="bg-[#a1c299] mt-3 mb-5" />
+                      <div className="w-full text-sm tracking-widest flex flex-col gap-3">
+                        {/* {selectedAcademy.slotTimes.map((item, index) => {
                           return (
                             <div
                               key={index}
@@ -143,11 +153,54 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                               {item.slot}
                             </div>
                           );
-                        })}
+                        })} */}
+                        <div
+                          onClick={() => {
+                            dispatch(
+                              setSelectedSlots({
+                                batch: "Morning",
+                                slots: selectedAcademy?.slots?.morning?.map(
+                                  (i) => i._id
+                                ),
+                              })
+                            );
+                          }}
+                          className={`text-xs lg:text-sm ${
+                            selectedSlot?.batch === "Morning" ? "bg-[#53a53f]" : "bg-[#a1c299]"
+                          } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
+                        >
+                          <p>Morning Batch</p>
+                          <p>
+                            <HiOutlineArrowLongRight />
+                          </p>
+                        </div>
+
+                        <div
+                          onClick={() => {
+                            dispatch(
+                              setSelectedSlots({
+                                batch: "Evening",
+                                slots: selectedAcademy?.slots?.evening?.map(
+                                  (i) => i._id
+                                ),
+                              })
+                            );
+                          }}
+                          className={`text-xs lg:text-sm ${
+                            selectedSlot?.batch === "Evening" ? "bg-[#53a53f]" : "bg-[#a1c299]"
+                          } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
+                        >
+                          <p>Evening Batch</p>
+                          <p>
+                            <HiOutlineArrowLongRight />
+                          </p>
+                        </div>
                       </div>
                     </div>
                     <DialogClose
-                      className="h-8 rounded-md bg-[#53a53f] text-xs text-gray-100 "
+                      className={`h-8 rounded-md ${
+                        selectedSlot ? "bg-[#53a53f]" : "bg-[#a1c299]"
+                      } text-xs text-gray-100 `}
                       onClick={() => {
                         if (selectedSlot) {
                           navigate(`/academy?id=${academyId}&join=1`);
@@ -307,8 +360,8 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                     </h2>
                     <Separator className="bg-gray-300" />
                     {/* <span className="flex-1 w-full flex items-start"> */}
-                    <span className="h-fit w-full flex flex-wrap gap-2">
-                      {selectedAcademy?.slotTimes?.map((item, index) => {
+                    {/* <span className="h-fit w-full flex flex-wrap gap-2">
+                      {selectedAcademy.slotTimes.map((item, index) => {
                         return (
                           <div
                             key={index}
@@ -318,7 +371,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                           </div>
                         );
                       })}
-                    </span>
+                    </span> */}
                     {/* </span> */}
                   </span>
                 </div>
@@ -482,7 +535,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
           <></>
         )}
       </div>
-      <div className="hidden lg:flex h-full w-[20rem] xl:w-[28rem] flex-col gap-3">
+      <div className="hidden lg:flex h-full w-[20rem] xl:w-[33rem] flex-col gap-3">
         <div className="flex-1 flex flex-col">
           {selectedAcademy ? (
             <div className="w-full h-full flex flex-col">
@@ -511,24 +564,63 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
               </div>
 
               {/* SLOTS */}
-              <div className="w-full flex items-center justify-center mt-5">
-                <span className="w-full bg-gray-100 rounded-md py-2 px-5 flex flex-col gap-3 border border-[#53a53f]">
-                  <h2 className="font-medium tracking-wider">
+              <div className="flex-1 w-full flex items-center justify-center mt-5">
+                <span className="w-full h-full bg-gray-100 rounded-md p-5 flex flex-col gap-3 border border-[#53a53f]">
+                  {/* <h2 className="font-medium tracking-wider text-xs mt-3 -mb-1">
                     Practice Timings
-                  </h2>
-                  <Separator className="bg-gray-300" />
-                  <span className="flex-1 w-full flex items-start">
-                    <span className="h-20 w-full flex flex-wrap gap-2">
-                      {selectedAcademy?.slotTimes?.map((item, index) => {
-                        return (
-                          <div
-                            key={index}
-                            className="text-xs h-fit whitespace-nowrap border-[1px] bg-[#53a53f] text-gray-50 border-gray-300 px-2 py-1 rounded-xl"
-                          >
-                            {item.slot}
+                  </h2> */}
+                  {/* <Separator className="bg-gray-300" /> */}
+                  <span className="flex-1 w-full flex gap-1">
+                    <span className="h-20 w-1/2 flex flex-wrap gap-2">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Morning</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody className="h-40 pl-5 overflow-x-hidden overflow-y-auto">
+                          <div className=" grid grid-cols-2 gap-2 mt-5">
+                            {selectedAcademy.slots.morning.map(
+                              (slot, index) => {
+                                return (
+                                  <div
+                                    key={index}
+                                    className="h-5 text-[10px] px-2 text-gray-100 bg-[#53a53f] whitespace-nowrap col-span-1 flex items-center justify-center rounded-md w-fit"
+                                  >
+                                    {slot.slot}
+                                  </div>
+                                );
+                              }
+                            )}
                           </div>
-                        );
-                      })}
+                        </TableBody>
+                      </Table>
+                    </span>
+                    <Separator orientation="vertical" />
+                    <span className="h-20 w-1/2 flex flex-wrap gap-2">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Evening</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody className="h-40 pl-5 overflow-x-hidden overflow-y-auto">
+                          <div className=" grid grid-cols-2 gap-3 mt-5">
+                            {selectedAcademy.slots.evening.map(
+                              (slot, index) => {
+                                return (
+                                  <div
+                                    key={index}
+                                    className="h-5 text-[10px] px-2 text-gray-100 bg-[#53a53f] whitespace-nowrap col-span-1 flex items-center justify-center rounded-md w-fit"
+                                  >
+                                    {slot.slot}
+                                  </div>
+                                );
+                              }
+                            )}
+                          </div>
+                        </TableBody>
+                      </Table>
                     </span>
                   </span>
                 </span>
@@ -612,7 +704,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
         </div>
 
         {/* MORE ACADEMIES */}
-        <div className="flex flex-col h-80 gap-3">
+        <div className="flex flex-col h-60 gap-3">
           <div className="h-fit flex items-center justify-between font-medium text-lg">
             <span className="flex-1 text-gray-800">More Academies</span>
             <span

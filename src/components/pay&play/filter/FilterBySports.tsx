@@ -53,12 +53,12 @@ const FilterBySports = () => {
           >
             <AccordionItem value="item-1" className="border-b-0 p-0">
               <AccordionTrigger
-                className="no-underline text-[#53A53F] text-[16px]"
+                className="no-underline text-[#53A53F] text-sm lg:text-[16px]"
                 state={"open"}
               >
                 Sports
               </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-2">
+              <AccordionContent className="flex flex-col gap-2 -ml-4">
                 {sports.length > 0 &&
                   sports?.map(
                     (
@@ -79,7 +79,7 @@ const FilterBySports = () => {
                           />
                           <label
                             htmlFor={item.id}
-                            className="text-sm font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            className={`text-xs lg:text-sm ${selectedSportsStore.includes(item.id) ? 'font-medium text-black' : 'font-light'} leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]`}
                           >
                             {item?.name}
                           </label>

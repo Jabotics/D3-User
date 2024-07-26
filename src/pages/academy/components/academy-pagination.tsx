@@ -46,7 +46,7 @@ export function AcademyPagination() {
       pageLinks.push(
         <PaginationItem
           key={i}
-          className="h-6 w-6 sm:h-8 sm:w-8 overflow-hidden"
+          className="h-6 w-6 overflow-hidden"
         >
           <PaginationLink
             href="#"
@@ -56,7 +56,7 @@ export function AcademyPagination() {
             }
             className={`w-full h-full ${
               isActive ? "bg-[#53a53f] text-gray-50" : "bg-white text-gray-800"
-            } hover:bg-[#53a53f] hover:text-gray-50 focus:bg-[#53a53f] focus:text-gray-50`}
+            } hover:bg-[#53a53f] hover:text-gray-50 focus:bg-[#53a53f] focus:text-gray-50 rounded-lg`}
           >
             {i}
           </PaginationLink>
@@ -70,8 +70,8 @@ export function AcademyPagination() {
   return (
     <>
       {count && count > 0 ? (
-        <Pagination className="w-64 flex items-center justify-end overflow-y-hidden overflow-x-auto">
-          <PaginationContent className="h-5">
+        <Pagination className="w-64 pb-1 flex items-center justify-end overflow-y-hidden overflow-x-auto mx-0 mr-5">
+          <PaginationContent className="h-fit">
             {totalPages > 1 && (
               <PaginationItem>
                 <PaginationPrevious
@@ -98,7 +98,7 @@ export function AcademyPagination() {
             )}
 
             {isSm && currentPage < totalPages - 1 && (
-              <PaginationItem>
+              <PaginationItem className="">
                 <PaginationEllipsis />
               </PaginationItem>
             )}
