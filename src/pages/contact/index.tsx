@@ -1,16 +1,75 @@
-import { useRef } from "react";
+import ContactForm from "@/components/contact/contact-form";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { AccordionContent } from "@radix-ui/react-accordion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+type SectionRefs = {
+  [key: string]: React.MutableRefObject<HTMLDivElement | null>;
+};
 
 const Contact = () => {
-  const overviewRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
-  const scrollToOverview = () => {
+  const overviewRef = useRef<HTMLDivElement | null>(null);
+  const allVenuesRef = useRef<HTMLDivElement | null>(null);
+  const feedbackRef = useRef<HTMLDivElement | null>(null);
+
+  const [hasScrollSticky, setHasScrollSticky] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>("Overview");
+
+  const sectionRefs: SectionRefs = useMemo(
+    () => ({
+      Overview: overviewRef,
+      "All Venues": allVenuesRef,
+      "Customer Feedback": feedbackRef,
+    }),
+    [overviewRef, allVenuesRef, feedbackRef]
+  );
+
+  const scrollToOverview = (
+    item: "Overview" | "All Venues" | "Customer Feedback"
+  ) => {
     if (overviewRef.current) {
-      overviewRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
+      const nextIndex = Object.entries(sectionRefs).findIndex(
+        (i) => i[0] === item
+      );
+      const currentIndex = Object.entries(sectionRefs).findIndex(
+        (i) => i[0] === activeTab
+      );
+
+      const element = sectionRefs[item]?.current;
+      if (element) {
+        window.scrollTo({
+          top:
+            nextIndex > currentIndex
+              ? element.offsetTop - 100
+              : element.offsetTop - 150,
+          behavior: "smooth",
+        });
+      }
     }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 550) {
+        setHasScrollSticky(true);
+      } else {
+        setHasScrollSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="h-fit min-w-screen overflow-hidden">
@@ -28,31 +87,55 @@ const Contact = () => {
         </span>
         <div className="absolute bottom-4 left-40 text-gray-50 text-lg flex items-center gap-10">
           {[
-            {
-              title: "Overview",
-            },
-            {
-              title: "All Venues",
-            },
-            {
-              title: "Customer Feedback",
-            },
-            {
-              title: "Press Contacts",
-            },
-          ].map((item, index) => {
-            return (
-              <div
-                key={index}
-                onClick={() => scrollToOverview()}
-                className="cursor-pointer"
-              >
-                {item.title}
-              </div>
-            );
-          })}
+            { title: "Overview" },
+            { title: "All Venues" },
+            { title: "Customer Feedback" },
+          ].map((item, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                if (
+                  item.title === "Overview" ||
+                  item.title === "All Venues" ||
+                  item.title === "Customer Feedback"
+                ) {
+                  setActiveTab(item.title);
+                  scrollToOverview(item.title);
+                }
+              }}
+              className="cursor-pointer"
+            >
+              {item.title}
+            </div>
+          ))}
         </div>
       </div>
+      {hasScrollSticky && (
+        <div className="fixed top-16 bg-gray-800 text-gray-50 text-lg flex items-center gap-10 pt-5 pb-4 px-40 w-full z-30">
+          {[
+            { title: "Overview" },
+            { title: "All Venues" },
+            { title: "Customer Feedback" },
+          ].map((item, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                if (
+                  item.title === "Overview" ||
+                  item.title === "All Venues" ||
+                  item.title === "Customer Feedback"
+                ) {
+                  setActiveTab(item.title);
+                  scrollToOverview(item.title);
+                }
+              }}
+              className="cursor-pointer"
+            >
+              {item.title}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div
         className="flex items-start justify-start gap-40 px-40 mt-40"
@@ -71,7 +154,7 @@ const Contact = () => {
           <span className="text-teal-600 underline mt-7 text-lg">{"map>"}</span>
         </div>
 
-        <div>
+        <div className="flex-1">
           <h1 className="text-[3.5rem] font-light -mt-8">
             Please provide your details.
           </h1>
@@ -80,18 +163,83 @@ const Contact = () => {
           </p>
 
           {/* Form */}
-          <div className="w-full h-[80vh]"></div>
+          <div className="w-full h-[80vh]">
+            <ContactForm />
+          </div>
         </div>
       </div>
 
       {/* VENUES */}
-      <div className="h-[30vh] mb-12 bg-stone-900"></div>
+      <div
+        className="min-h-[30vh] mb-12 bg-gray-900 px-40 text-white flex items-center justify-center py-10"
+        ref={allVenuesRef}
+      >
+        <Accordion type="multiple">
+          <AccordionItem
+            value={"hey"}
+            className="w-[80vw] border border-gray-800"
+          >
+            <AccordionTrigger
+              state={"open"}
+              className={`bg-white text-gray-800 rounded-lg px-5`}
+            >
+              Howrah
+            </AccordionTrigger>
+            <AccordionContent className="bg-transparent h-96">
+              hey
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem
+            value={"hey2"}
+            className="w-[80vw] border border-gray-800"
+          >
+            <AccordionTrigger
+              state={"open"}
+              className={`bg-white text-gray-800 rounded-lg px-5`}
+            >
+              Kolkata
+            </AccordionTrigger>
+            <AccordionContent className="bg-transparent h-96">
+              hey
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
 
       {/* Feedback */}
-      <div className="h-[100vh]"></div>
+      <div className="h-[100vh] px-40 pt-10 mb-36" ref={feedbackRef}>
+        <h2 className="text-[2.5rem] font-light">Customer Feedbacks</h2>
 
-      {/* Contacts */}
-      <div className="h-[100vh]"></div>
+        <div
+          className="w-1/2 h-[65vh] bg-black my-5 rounded-md overflow-hidden cursor-pointer hover:opacity-50 group transition-all duration-700"
+          onClick={() => {
+            navigate("/contact/feedback");
+          }}
+        >
+          <img
+            src="/images/feedback.jpg"
+            alt="feedback image"
+            className="w-full h-full object-cover object-center group-hover:scale-[1.1]"
+          />
+        </div>
+
+        <h4 className="font-normal text-2xl mb-5">
+          Customer feedback: Help us improve
+        </h4>
+        <p className="mb-5">
+          Our customers matter to us! Please share your needs or concerns so
+          that we will able to improve.
+        </p>
+
+        <p
+          className="text-[#53a53f] font-medium tracking-wide"
+          onClick={() => {
+            navigate("/contact/feedback");
+          }}
+        >
+          (Please share your feedback with us)
+        </p>
+      </div>
     </div>
   );
 };
