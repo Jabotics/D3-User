@@ -50,7 +50,8 @@ export const Navbar = () => {
   const { cities, selectedCity } = useAppSelector(
     (state: RootState) => state.city
   );
-  const [open, setOpen] = useState(selectedCity ? false : true);
+  // const [open, setOpen] = useState(selectedCity ? false : true);
+  const [open, setOpen] = useState(false);
 
   useGetCitiesQuery(
     {
@@ -187,7 +188,7 @@ export const Navbar = () => {
             </div>
 
             {/* BUTTONS */}
-            <div className="col-span-4 sm:col-span-5 max-[290px]:col-span-4 hidden max-[350px]:col-span-5 lg:col-span-7 xl:col-span-8 gap-4 lg:flex lg:justify-start xl:justify-center 2xl:justify-end items-center custome-break sm:mr-2">
+            <div className="col-span-4 sm:col-span-5 max-[290px]:col-span-4 hidden max-[350px]:col-span-5 lg:col-span-7 xl:col-span-8 gap-4 lg:flex lg:justify-start xl:justify-center items-center custome-break sm:mr-2">
               {isLarge && (
                 <div className="max-lg:hidden flex items-center justify-start gap-2">
                   <Link to={"/about"} target="_blank" rel="noreferrer noopener">
@@ -294,7 +295,7 @@ export const Navbar = () => {
                       {selectedCityName ? (
                         selectedCityName
                       ) : (
-                        <SlLocationPin size={15} className="text-[#53a53f]" />
+                        <SlLocationPin size={15} className="text-[#53a53f] hover:text-gray-100" />
                       )}
                     </span>
                   </Button>
@@ -384,7 +385,7 @@ export const Navbar = () => {
               </div>
               <span className="font-medium hidden lg:inline-flex text-[15px] items-end w-fit justify-start gap-2 tracking-tighter whitespace-nowrap mr-4">
                 <MdCall size={20} className="text-[#53A53F]" />
-                <span className="-mb-[3px] -ml-[3px]">9874 475 988</span>
+                <span className="-mb-[3px] -ml-[3px]">9874-475-988</span>
               </span>
             </div>
 

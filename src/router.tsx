@@ -85,6 +85,13 @@ const router = createBrowserRouter([
       },
 
       {
+        path: "/privacy-policy/privacy-security-notice",
+        lazy: async () => ({
+          Component: (await import("./pages/privacy-policy/privacy-notice")).default,
+        }),
+      },
+
+      {
         path: "/about",
         lazy: async () => ({
           Component: (await import("./pages/about")).default,
