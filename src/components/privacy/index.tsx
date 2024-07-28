@@ -92,7 +92,7 @@ const PrivacyPolicyComponent = ({
 
       <div className="my-10 mb-20" id="cyberSecurities" ref={cyberSecurities}>
         <h2 className="text-4xl mb-5">
-          Stay Secure Online – Cybersecurity Hygiene
+          Stay Secure Online – Cybersecurity Guidelines
         </h2>
         <div>
           Keeping your private information private is increasingly important as
@@ -103,7 +103,14 @@ const PrivacyPolicyComponent = ({
 
         <p className="mt-5">
           Read on for some{" "}
-          <span className="text-[#53a53f]">cybersecurity hygiene</span>
+          <Link
+            to={"/cybersecurity-guidelines-for-online-safety"}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-[#53a53f]"
+          >
+            cybersecurity guidelines{" "}
+          </Link>
           steps to take to keep yourself secure online
         </p>
       </div>
@@ -112,7 +119,15 @@ const PrivacyPolicyComponent = ({
         <h2 className="text-4xl mb-5">Privacy & Security FAQs</h2>
 
         <p className="mt-5">
-          View the <span className="text-[#53a53f]">FAQs.</span>
+          View the{" "}
+          <Link
+            to={"/frequently-asked-questions"}
+            target="_blank"
+            rel="norefferer noopener"
+            className="text-[#53a53f]"
+          >
+            FAQs.
+          </Link>
         </p>
       </div>
     </div>

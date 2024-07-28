@@ -87,7 +87,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-20 border-b-2 shadow-md border-[#f3faf1] shadow-[#dbebd7]">
+    <div className="fixed top-0 left-0 w-full z-30 border-b-2 shadow-md border-[#f3faf1] shadow-[#dbebd7]">
       <div className="w-full border-slate-200 border-solid bg-white py-4">
         <div className="container">
           <div className="grid-container grid grid-cols-12 gap-1 md:gap-3 lg:gap-7 items-center">

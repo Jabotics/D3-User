@@ -71,6 +71,20 @@ const router = createBrowserRouter([
       },
 
       {
+        path: "/frequently-asked-questions",
+        lazy: async () => ({
+          Component: (await import("./pages/faqs")).default,
+        }),
+      },
+
+      {
+        path: "/cybersecurity-guidelines-for-online-safety",
+        lazy: async () => ({
+          Component: (await import("./pages/cybersecurity-guidelines-for-online-safety")).default,
+        }),
+      },
+
+      {
         path: "/profile",
         lazy: async () => ({
           Component: (await import("./pages/profile")).default,
