@@ -255,3 +255,17 @@ export interface IFaq {
   question: string;
   answer: string;
 }
+
+export interface IBlog {
+  id: string;
+  title: string;
+  description: string;
+  quotation: string;
+  details: {
+    sub_title: string;
+    description: string;
+    _id: string;
+  }[];
+  createdAt: string;
+  image: string
+}

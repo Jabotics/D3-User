@@ -21,6 +21,7 @@ import chatSlice, { chatApi } from './slices/chatSlice';
 import { contactApi } from './slices/contactSlice'
 
 import faqsSlice, { faqsApi } from './slices/faqSlice'
+import blogsSlice, { blogsApi } from './slices/blogSlice'
 
 export {
   authSlice,
@@ -67,4 +68,7 @@ export {
 
   faqsSlice,
   faqsApi,
+
+  blogsApi,
+  blogsSlice,
 }

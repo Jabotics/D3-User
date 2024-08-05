@@ -696,3 +696,43 @@ html::-webkit-scrollbar-thumb:hover {
   }
 }
 
+#curved-corner-bottomleft,
+#curved-corner-bottomright,
+#curved-corner-topleft,
+#curved-corner-topright {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+#curved-corner-bottomleft:before,
+#curved-corner-bottomright:before,
+#curved-corner-topleft:before,
+#curved-corner-topright:before {
+  content: "";
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  border-radius: 20px;
+}
+#curved-corner-bottomleft:before {
+  bottom: 0;
+  left: 0;
+  box-shadow: -50px 50px 0 0 white;
+}
+#curved-corner-bottomright:before {
+  bottom: 0;
+  right: 0;
+  box-shadow: 50px 50px 0 0 white;
+}
+#curved-corner-topleft:before {
+  top: 0;
+  left: 0;
+  box-shadow: -50px -50px 0 0 white;
+}
+#curved-corner-topright:before {
+  top: 0;
+  right: 0;
+  box-shadow: 50px -50px 0 0 white;
+}

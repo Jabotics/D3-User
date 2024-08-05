@@ -15,8 +15,11 @@ import { HiMiniAcademicCap } from "react-icons/hi2";
 import { VscDebugBreakpointConditional } from "react-icons/vsc";
 
 import logo from "/images/Logo.svg";
+import logoBlog from "/images/logo-blog.svg";
 import logoIcon from "/images/Logo-icon.svg";
-import { useNavigate } from "react-router-dom";
+import logoIconBlog from "/images/Logo-icon-blog.svg";
+
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { HiHome } from "react-icons/hi2";
@@ -29,6 +32,9 @@ export function ToggleOptions({
   setMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const navigate = useNavigate();
+  const pathName = useLocation();
+
+  const isBlogPage = pathName.pathname.split('/').includes('blogs');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClick = (path: string) => {
@@ -45,14 +51,14 @@ export function ToggleOptions({
         <span className="flex items-center">
           {mobile ? (
             <img
-              src={logoIcon}
+              src={isBlogPage ? logoIconBlog : logoIcon}
               alt="logo"
               className="h-8 md:h-9 cursor-pointer"
               onClick={() => navigate("/")}
             />
           ) : (
             <img
-              src={logo}
+              src={isBlogPage ? logoBlog : logo}
               alt="logo"
               className="h-8 md:h-9 cursor-pointer"
               onClick={() => navigate("/")}

@@ -64,4 +64,7 @@ export const APIEndPoints = {
 
   // FAQ
   fetch_faqs: '/api/faqs',
+
+  // BLOGS
+  fetch_blogs: '/api/blogs',
 }

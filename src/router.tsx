@@ -146,6 +146,38 @@ const router = createBrowserRouter([
     ],
   },
 
+  // Blog routes
+  {
+    path: "/blogs",
+    // lazy: async () => {
+    //   const AppShell = await import("./components/blog");
+    //   return { Component: AppShell.default };
+    // },
+    errorElement: <GeneralError />,
+    children: [
+      {
+        index: true,
+        lazy: async () => ({
+          Component: (await import("./pages/blog")).default,
+        }),
+      },
+
+      {
+        path: ":postId",
+        lazy: async () => ({
+          Component: (await import("./pages/blog/components/blogPost")).default,
+        }),
+      },
+
+      {
+        path: "all-posts",
+        lazy: async () => ({
+          Component: (await import("./pages/blog/components/blogHome")).default,
+        }),
+      },
+    ]
+  },
+
   // Error routes
   { path: "/500", Component: GeneralError },
   { path: "/404", Component: NotFoundError },

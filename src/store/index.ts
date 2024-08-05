@@ -34,6 +34,7 @@ import {
   contactApi,
 
   faqsApi,
+  blogsApi,
 
 } from "@/store/actions";
 
@@ -71,6 +72,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         contactApi.middleware,
 
         faqsApi.middleware,
+        blogsApi.middleware,
         
         socketMiddleware,
       );
