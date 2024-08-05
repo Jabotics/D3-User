@@ -215,7 +215,7 @@ export interface IEvent {
     venue: {
       _id?: string;
       name: string;
-      address: string
+      address: string;
     };
     name: string;
   }[];
@@ -248,4 +248,10 @@ export interface IHomeBanner {
   type: "academy" | "membership" | "event";
   image: string;
   is_active: true;
+}
+
+export interface IFaq {
+  id: string;
+  question: string;
+  answer: string;
 }

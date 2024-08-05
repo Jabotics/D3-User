@@ -61,4 +61,7 @@ export const APIEndPoints = {
 
   // CONTACT
   submit_inquiry: '/api/add-inquiry',
+
+  // FAQ
+  fetch_faqs: '/api/faqs',
 }

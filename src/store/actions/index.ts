@@ -20,6 +20,8 @@ import profileSlice from './slices/profileSlice';
 import chatSlice, { chatApi } from './slices/chatSlice';
 import { contactApi } from './slices/contactSlice'
 
+import faqsSlice, { faqsApi } from './slices/faqSlice'
+
 export {
   authSlice,
   authApi,
@@ -62,4 +64,7 @@ export {
   chatSlice,
 
   contactApi,
+
+  faqsSlice,
+  faqsApi,
 }

@@ -43,6 +43,9 @@ import {
   chatApi,
 
   contactApi,
+  
+  faqsApi,
+  faqsSlice,
 
 } from '@/store/actions'
 import { RequestHandler } from './RequestHandler'
@@ -128,6 +131,8 @@ export const rootReducer = combineReducers({
   slots: slotsSlice,
   profile: profilePersistReducer,
 
+  faqs: faqsSlice,
+
   chat: chatsPersistReducer,
   
   [RequestHandler.reducerPath]: RequestHandler.reducer,
@@ -173,5 +178,8 @@ export const rootReducer = combineReducers({
 
   // CONTACT
   [contactApi.reducerPath]: contactApi.reducer,
+
+  // FAQ
+  [faqsApi.reducerPath]: faqsApi.reducer,
 
 })

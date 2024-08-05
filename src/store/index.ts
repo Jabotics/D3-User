@@ -33,6 +33,8 @@ import {
 
   contactApi,
 
+  faqsApi,
+
 } from "@/store/actions";
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -67,6 +69,8 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         chatApi.middleware,
 
         contactApi.middleware,
+
+        faqsApi.middleware,
         
         socketMiddleware,
       );
