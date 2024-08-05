@@ -42,7 +42,7 @@ import {
 import { GoLocation } from "react-icons/go";
 import { FaRegCheckSquare } from "react-icons/fa";
 
-const MembershipList = () => {
+const MembershipList = ({ isLoading }: { isLoading: boolean }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -322,94 +322,113 @@ const MembershipList = () => {
               hasAppliedFilters ? "h-[23rem]" : "h-[26.25rem]"
             } ml-0 lg:ml-5 flex flex-col gap-5 scroll-nobg px-2 lg:pr-3 mt-3 lg:mt-8 overflow-x-hidden overflow-y-auto mb-5`}
           >
-            {memberships && memberships.length > 0 ? (
-              <>
-                {memberships.map((item, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="w-full h-24 sm:h-32 bg-gray-100 rounded-lg flex items-center justify-between pr-5 cursor-pointer shadow-lg shadow-[#53a53f7e]"
-                      onClick={() => {
-                        navigate(`/membership?id=${item.id}`);
-                      }}
-                    >
-                      <div className="flex items-center gap-5">
-                        <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-md overflow-hidden ">
-                          <img
-                            src="https://res.cloudinary.com/purnesh/image/upload/w_1080,f_auto/west-delhi-cricket-academy0.jpg"
-                            alt=""
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="flex-1 flex flex-col items-start h-20 sm:h-24 md:h-28 lg:h-28">
-                          <div className="text-sm sm:text-xl font-medium text-[#3a7c29]">
-                            {`${item.ground.name}`}
+            {!isLoading ? (
+              memberships && memberships.length > 0 ? (
+                <>
+                  {memberships.map((item, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="w-full h-24 sm:h-32 bg-gray-100 rounded-lg flex items-center justify-between pr-5 cursor-pointer shadow-lg shadow-[#53a53f7e]"
+                        onClick={() => {
+                          navigate(`/membership?id=${item.id}`);
+                        }}
+                      >
+                        <div className="flex items-center gap-5">
+                          <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-md overflow-hidden ">
+                            <img
+                              src="https://res.cloudinary.com/purnesh/image/upload/w_1080,f_auto/west-delhi-cricket-academy0.jpg"
+                              alt=""
+                              className="w-full h-full object-cover"
+                            />
                           </div>
+                          <div className="flex-1 flex flex-col items-start h-20 sm:h-24 md:h-28 lg:h-28">
+                            <div className="text-sm sm:text-xl font-medium text-[#3a7c29]">
+                              {`${item.ground.name}`}
+                            </div>
 
-                          <div className="flex items-center gap-1 text-[#3a7c29] bg-[#c8ebbe] px-3 rounded-md font-medium">
-                            {/* <div className="text-[8px] sm:text-sm font-normal">
+                            <div className="flex items-center gap-1 text-[#3a7c29] bg-[#c8ebbe] px-3 rounded-md font-medium">
+                              {/* <div className="text-[8px] sm:text-sm font-normal">
                               {item.ground.name}
                             </div> */}
-                            {/* <HiOutlineArrowLongRight
+                              {/* <HiOutlineArrowLongRight
                               size={20}
                               className="text-[#215f11]"
                             /> */}
-                            <div className="text-[8px] sm:text-sm ">
-                              {`${item.sport.name} Membership`}
+                              <div className="text-[8px] sm:text-sm ">
+                                {`${item.sport.name} Membership`}
+                              </div>
+                            </div>
+
+                            <div className="text-[11px] whitespace-nowrap sm:text-sm flex items-center gap-2 font-normal text-[#3a7c29] mt-1">
+                              <GoLocation />
+                              <span className="hidden sm:inline-block">{`Venue :  ${item.ground.venue.name}`}</span>
+                              <span className="inline-block sm:hidden">
+                                {`Venue :  ${item.ground.venue.name}`.substring(
+                                  0,
+                                  25
+                                ) + "..."}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center gap-5 justify-start mt-2 text-[#215f11] text-[10px] sm:text-xs font-medium">
+                              <span className={`flex items-center gap-2`}>
+                                <FaRegCheckSquare
+                                  size={15}
+                                  className="hidden sm:inline-block"
+                                />
+                                <FaRegCheckSquare
+                                  size={10}
+                                  className="inline-block sm:hidden"
+                                />
+                                <span className="mt-[2px] whitespace-nowrap">
+                                  Morning Shift
+                                </span>
+                              </span>
+                              <span className={`flex items-center gap-2`}>
+                                <FaRegCheckSquare
+                                  size={15}
+                                  className="hidden sm:inline-block"
+                                />
+                                <FaRegCheckSquare
+                                  size={10}
+                                  className="inline-block sm:hidden"
+                                />
+                                <span className="mt-[2px] whitespace-nowrap">
+                                  Evening Shift
+                                </span>
+                              </span>
                             </div>
                           </div>
-
-                          <div className="text-[11px] whitespace-nowrap sm:text-sm flex items-center gap-2 font-normal text-[#3a7c29] mt-1">
-                            <GoLocation />
-                            <span className="hidden sm:inline-block">{`Venue :  ${item.ground.venue.name}`}</span>
-                            <span className="inline-block sm:hidden">
-                              {`Venue :  ${item.ground.venue.name}`.substring(
-                                0,
-                                25
-                              ) + "..."}
-                            </span>
-                          </div>
-
-                          <div className="flex items-center gap-5 justify-start mt-2 text-[#215f11] text-[10px] sm:text-xs font-medium">
-                            <span className={`flex items-center gap-2`}>
-                              <FaRegCheckSquare
-                                size={15}
-                                className="hidden sm:inline-block"
-                              />
-                              <FaRegCheckSquare
-                                size={10}
-                                className="inline-block sm:hidden"
-                              />
-                              <span className="mt-[2px] whitespace-nowrap">
-                                Morning Shift
-                              </span>
-                            </span>
-                            <span className={`flex items-center gap-2`}>
-                              <FaRegCheckSquare
-                                size={15}
-                                className="hidden sm:inline-block"
-                              />
-                              <FaRegCheckSquare
-                                size={10}
-                                className="inline-block sm:hidden"
-                              />
-                              <span className="mt-[2px] whitespace-nowrap">
-                                Evening Shift
-                              </span>
-                            </span>
-                          </div>
+                        </div>
+                        <div>
+                          <HiOutlineArrowLongRight
+                            size={30}
+                            className="text-[#215f11] hidden sm:inline-block"
+                          />
                         </div>
                       </div>
-                      <div>
-                        <HiOutlineArrowLongRight
-                          size={30}
-                          className="text-[#215f11] hidden sm:inline-block"
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </>
+                    );
+                  })}
+                </>
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center">
+                  <img
+                    src="/images/no-result.jpg"
+                    alt=""
+                    className="w-auto h-40 lg:h-60"
+                  />
+                  <a
+                    href="https://www.freepik.com/free-vector/hand-drawn-no-data-concept_55024593.htm#fromView=search&page=1&position=2&uuid=3868aee0-2591-453b-8a03-a14ddc6f7e36"
+                    className="sr-only"
+                  >
+                    Image by pikisuperstar on Freepik
+                  </a>
+                  <div className="text-[#64b94f] font-semibold tracking-wider">
+                    No Result Found
+                  </div>
+                </div>
+              )
             ) : (
               [...Array.from({ length: 4 })].map((_, index) => {
                 return (

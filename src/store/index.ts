@@ -30,6 +30,9 @@ import {
   eventsApi,
   membershipsApi,
   chatApi,
+
+  contactApi,
+
 } from "@/store/actions";
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -62,6 +65,8 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         eventsApi.middleware,
         promoCodeApi.middleware,
         chatApi.middleware,
+
+        contactApi.middleware,
         
         socketMiddleware,
       );

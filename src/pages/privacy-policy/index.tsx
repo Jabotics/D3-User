@@ -102,6 +102,11 @@ const PrivacyPolicyPage = () => {
                   ? "text-[#54a63f] cursor-pointer hover:underline font-semibold"
                   : "text-[#a7d19d] font-medium"
               }`}
+              onClick={() => {
+                if (item === "Home") {
+                  navigate('/')
+                }
+              }}
             >
               {item}
             </span>
@@ -209,12 +214,12 @@ const PrivacyPolicyPage = () => {
       </div>
 
       <div className="w-full h-40 bg-gray-200 flex items-center justify-center text-4xl lg:text-[3rem] relative rounded-md overflow-hidden">
-        <span className="z-10 text-[#1a470f] font-medium">Privacy Policy</span>
-        <img
+        <span className="z-10 text-gray-800 font-medium">Privacy Policy</span>
+        {/* <img
           src={"/images/academy-bg.webp"}
           alt=""
           className="absolute top-0 left-0 h-full object-cover w-full opacity-95 -z-0"
-        />
+        /> */}
       </div>
 
       <section>

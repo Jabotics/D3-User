@@ -18,6 +18,7 @@ import homeBannerSlice, { homeBannerApi } from "./slices/bannerSlice";
 import profileSlice from './slices/profileSlice';
 
 import chatSlice, { chatApi } from './slices/chatSlice';
+import { contactApi } from './slices/contactSlice'
 
 export {
   authSlice,
@@ -59,4 +60,6 @@ export {
   
   chatApi,
   chatSlice,
+
+  contactApi,
 }

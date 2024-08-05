@@ -42,6 +42,8 @@ import {
   chatSlice,
   chatApi,
 
+  contactApi,
+
 } from '@/store/actions'
 import { RequestHandler } from './RequestHandler'
 
@@ -133,11 +135,22 @@ export const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [logoutApi.reducerPath]: logoutApi.reducer,
   
+  // HOME BANNER
   [homeBannerApi.reducerPath]: homeBannerApi.reducer,
+
+  // GROUNDS
   [groundApi.reducerPath]: groundApi.reducer,
+
+  // SPORTS
   [sportApi.reducerPath]: sportApi.reducer,
+
+  // VENUES
   [venueApi.reducerPath]: venueApi.reducer,
+
+  // BOOKINGS
   [bookingApi.reducerPath]: bookingApi.reducer,
+
+  // PROMO CODES
   [promoCodeApi.reducerPath]: promoCodeApi.reducer,
   
   // CITY
@@ -157,5 +170,8 @@ export const rootReducer = combineReducers({
 
   // CHAT
   [chatApi.reducerPath]: chatApi.reducer,
+
+  // CONTACT
+  [contactApi.reducerPath]: contactApi.reducer,
 
 })

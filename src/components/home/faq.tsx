@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Link } from "react-router-dom";
 
 export const Faqs = () => {
 
@@ -47,7 +48,7 @@ export const Faqs = () => {
           Frequently Asked Questions
         </h2>
         <div className="accordion-section text-left ">
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full mb-10">
             {faqData.map((faq) => (
               <AccordionItem key={faq.id} value={faq.id} className={`${openItems.includes(faq.id) ? "border-none" : "border-b"} text-xs sm:text-[16px]`}>
                 <AccordionTrigger
@@ -60,6 +61,9 @@ export const Faqs = () => {
               </AccordionItem>
             ))}
           </Accordion>
+          <div className="w-full flex items-center justify-center h-8">
+            <Link to={'/frequently-asked-questions'} className="bg-gray-300 shadow-md rounded-2xl px-5 py-1">Read More</Link>
+          </div>
         </div>
       </div>
     </div>

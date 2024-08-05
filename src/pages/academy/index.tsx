@@ -36,7 +36,7 @@ const AcademyPage = () => {
   );
   const { selectedCity } = useAppSelector((state: RootState) => state.city);
 
-  useFetchAcademiesQuery(
+  const { isLoading: academiesLoading } = useFetchAcademiesQuery(
     {
       city: selectedCity,
       sport: selectedSportsStore ? selectedSportsStore : null,
@@ -162,7 +162,7 @@ const AcademyPage = () => {
                   </div>
 
                   <div className="h-full w-full mt-4">
-                    <AcademyList />
+                    <AcademyList isLoading={academiesLoading} />
                   </div>
                 </div>
               )}
