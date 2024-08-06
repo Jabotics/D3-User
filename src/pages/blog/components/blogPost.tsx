@@ -1,20 +1,66 @@
-// import { Navbar } from "@/components/shared/Navbar";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import BlogLayout from "@/components/blogs";
 import { APIEndPoints } from "@/APIEndpoint";
-import { useFetchBlogsQuery } from "@/store/actions/slices/blogSlice";
-import { useAppSelector } from "@/store/hooks";
+import {
+  setLocationArr,
+  useFetchBlogsQuery,
+  useFetchPopularBlogsQuery,
+} from "@/store/actions/slices/blogSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
+import React, { useEffect, useState } from "react";
+import { resetLocationArr } from "@/store/actions/slices/groundSlice";
 
 const BlogPostPage = () => {
   const { postId } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const blogpostId = postId?.split("=")[1];
-  const { isLoading, isError } = useFetchBlogsQuery({
-    id: blogpostId,
-  });
+  const { isLoading, isError } = useFetchBlogsQuery(
+    {
+      id: blogpostId,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
-  const { blogs } = useAppSelector((state: RootState) => state.blogs);
+  const popularBlogsFetch = useFetchPopularBlogsQuery();
+  const { blogs, popularBlogs } = useAppSelector(
+    (state: RootState) => state.blogs
+  );
+
+  const [popularIndex, setPopularIndex] = useState<1 | 2 | 3>(1);
+
+  const handleDotClick = (index: 1 | 2 | 3) => {
+    setPopularIndex(index);
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    dispatch(resetLocationArr());
+    if (blogs[0]?.title !== undefined && !isLoading) {
+      dispatch(setLocationArr(`${blogs[0]?.title}`));
+    }
+  }, [blogs, dispatch, isLoading]);
+
+  useEffect(() => {
+    popularBlogsFetch.refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [popularIndex]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPopularIndex((prevIndex) => {
+        const nextIndex = ((prevIndex % 3) + 1) as 1 | 2 | 3;
+        return nextIndex;
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   if (!blogpostId || isError) {
     return <Navigate to="/blogs" replace={true} />;
@@ -48,8 +94,48 @@ const BlogPostPage = () => {
         <div className="h-[2px] flex-1 bg-[#93d18371]"></div>
       </div>
 
-      <div className="my-20 w-full flex items-center gap-5">
-        <div className="w-96"></div>
+      <div className="my-20 w-full flex items-start gap-10">
+        <div className="w-96 bg-gray-100 h-40 mt-5 rounded-md flex flex-col py-3">
+          <div className="w-full flex items-center justify-between px-3">
+            <h2 className="font-medium">Popular Posts</h2>
+            <div className="flex gap-1 flex-row">
+              {Array.from({ length: 3 }).map((_, index) => {
+                const toSetIndex = index + 1;
+                return (
+                  <p
+                    className={`w-2 h-2 rounded-full ${
+                      popularIndex === toSetIndex
+                        ? "bg-[#54a63f]"
+                        : "bg-[#93d18371]"
+                    } cursor-pointer`}
+                    key={index}
+                    onClick={() => handleDotClick(toSetIndex as 1 | 2 | 3)}
+                  ></p>
+                );
+              })}
+            </div>
+          </div>
+          {popularBlogs && popularBlogs.length > 0 ? (
+            <div className="flex flex-col fade-in-30 px-3 py-5">
+              <p
+                className="text-lg font-semibold line-clamp-2 hover:underline cursor-pointer"
+                onClick={() => {
+                  navigate(
+                    `/blogs/post-id=${popularBlogs[popularIndex - 1]?.id}`
+                  );
+                  dispatch(
+                    setLocationArr(`${popularBlogs[popularIndex - 1]?.title}`)
+                  );
+                }}
+              >
+                {popularBlogs[popularIndex - 1]?.title}
+              </p>
+              <p className="text-sm mt-5">
+                {popularBlogs[popularIndex - 1]?.createdAt}
+              </p>
+            </div>
+          ) : null}
+        </div>
 
         <div className="flex-1 pr-10 ">
           <p className={`leading-loose ${isLoading ? "bg-gray-100 h-20" : ""}`}>
@@ -78,6 +164,34 @@ const BlogPostPage = () => {
       )}
 
       {/* OTHER PARAGRAPHS */}
+      {blogs[0]?.details && blogs[0]?.details?.length > 1 ? (
+        <div
+          className={`my-20 w-full flex items-start gap-10 ${
+            blogs[0]?.details?.length === 1 && "hidden"
+          }`}
+        >
+          <div className="w-96 h-40 mt-5 rounded-md flex flex-col py-3"></div>
+
+          <div className="flex-1 pr-10 ">
+            <div className="w-full flex flex-col mt-10">
+              {blogs[0]?.details
+                ?.slice(1, blogs[0].details.length)
+                ?.map((item, index) => {
+                  return (
+                    <React.Fragment key={index}>
+                      <p className="mb-5 font-bold tracking-wide">
+                        {item?.sub_title}
+                      </p>
+                      <p className={`${isLoading ? "bg-gray-100 h-20" : ""}`}>
+                        {!isLoading ? item?.description : null}
+                      </p>
+                    </React.Fragment>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       {/* QUOTATION */}
       <div className="my-40 relative border-t-0 border-[#93d18371]">

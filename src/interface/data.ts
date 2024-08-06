@@ -269,3 +269,9 @@ export interface IBlog {
   createdAt: string;
   image: string
 }
+
+export interface IPopularBlog {
+  id: string
+  title: string
+  createdAt: string
+}

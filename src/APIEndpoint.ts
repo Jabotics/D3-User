@@ -67,4 +67,5 @@ export const APIEndPoints = {
 
   // BLOGS
   fetch_blogs: '/api/blogs',
+  fetch_popular_blogs: '/api/popular-blogs',
 }

@@ -1,6 +1,6 @@
 import { APIEndPoints } from "@/APIEndpoint";
-import { IBlog } from "@/interface/data";
-import { createSlice } from "@reduxjs/toolkit";
+import { IBlog, IPopularBlog } from "@/interface/data";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface IncomingData {
@@ -10,6 +10,12 @@ interface IncomingData {
     count: number;
     blogs: IBlog[];
   };
+}
+
+interface PopularBlogIncomingData {
+  status: string;
+  message: string;
+  data: IPopularBlog[];
 }
 
 export const blogsApi = createApi({
@@ -38,6 +44,14 @@ export const blogsApi = createApi({
         };
       },
     }),
+    fetchPopularBlogs: builder.query<PopularBlogIncomingData, void>({
+      query: () => {
+        return {
+          url: APIEndPoints.fetch_popular_blogs,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -49,6 +63,12 @@ interface InitialState {
 
   limit: number;
   offset: number;
+
+  locationArr: string[];
+
+  popularBlogs: IPopularBlog[];
+  popularStatus: "idle" | "loading" | "succeeded" | "failed";
+  popularError: string | undefined;
 }
 
 const initialState: InitialState = {
@@ -59,12 +79,26 @@ const initialState: InitialState = {
 
   limit: 10,
   offset: 0,
+
+  locationArr: ["Home"],
+
+  popularBlogs: [],
+  popularStatus: "idle",
+  popularError: undefined,
 };
 
 export const BlogsSlice = createSlice({
   name: "BlogsSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setLocationArr: (state, action: PayloadAction<string>) => {
+      const x = new Set(state.locationArr);
+      state.locationArr = Array.from(x.add(action.payload));
+    },
+    resetLocationArr: (state) => {
+      state.locationArr = ["Home"];
+    },
+  },
   extraReducers: (builder) => {
     // Handle the asynchronous fetchItems action
     builder
@@ -85,9 +119,27 @@ export const BlogsSlice = createSlice({
           state.status = "failed";
           state.error = action.error.message;
         }
+      )
+      .addMatcher(blogsApi.endpoints.fetchPopularBlogs.matchPending, (state) => {
+        state.popularStatus = "loading";
+      })
+      .addMatcher(
+        blogsApi.endpoints.fetchPopularBlogs.matchFulfilled,
+        (state, action) => {
+          state.popularStatus = "succeeded";
+          state.popularBlogs = action.payload.data;
+        }
+      )
+      .addMatcher(
+        blogsApi.endpoints.fetchPopularBlogs.matchRejected,
+        (state, action) => {
+          state.popularStatus = "failed";
+          state.popularError = action.error.message;
+        }
       );
   },
 });
 
-export const { useFetchBlogsQuery } = blogsApi
+export const { useFetchBlogsQuery, useFetchPopularBlogsQuery } = blogsApi
+export const { setLocationArr, resetLocationArr } = BlogsSlice.actions
 export default BlogsSlice.reducer
