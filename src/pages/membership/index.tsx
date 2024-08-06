@@ -37,7 +37,7 @@ const MembershipPage = () => {
   } = useAppSelector((state: RootState) => state.membership);
   const { selectedCity } = useAppSelector((state: RootState) => state.city);
 
-  useFetchMembershipsQuery(
+  const { isLoading: membershipLoading } = useFetchMembershipsQuery(
     {
       city: selectedCity,
       sport: selectedSportsStore ? selectedSportsStore : null,
@@ -159,7 +159,7 @@ const MembershipPage = () => {
                   </div>
 
                   <div className="h-full w-full mt-4">
-                    <MembershipList />
+                    <MembershipList isLoading={membershipLoading} />
                   </div>
                 </div>
               )}

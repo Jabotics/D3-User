@@ -64,6 +64,27 @@ const router = createBrowserRouter([
       },
 
       {
+        path: "/contact/feedback",
+        lazy: async () => ({
+          Component: (await import("./pages/contact/components/feedback")).default,
+        }),
+      },
+
+      {
+        path: "/frequently-asked-questions",
+        lazy: async () => ({
+          Component: (await import("./pages/faqs")).default,
+        }),
+      },
+
+      {
+        path: "/cybersecurity-guidelines-for-online-safety",
+        lazy: async () => ({
+          Component: (await import("./pages/cybersecurity-guidelines-for-online-safety")).default,
+        }),
+      },
+
+      {
         path: "/profile",
         lazy: async () => ({
           Component: (await import("./pages/profile")).default,
@@ -81,6 +102,13 @@ const router = createBrowserRouter([
         path: "/privacy-policy",
         lazy: async () => ({
           Component: (await import("./pages/privacy-policy")).default,
+        }),
+      },
+
+      {
+        path: "/privacy-policy/privacy-security-notice",
+        lazy: async () => ({
+          Component: (await import("./pages/privacy-policy/privacy-notice")).default,
         }),
       },
 
@@ -116,6 +144,38 @@ const router = createBrowserRouter([
         }),
       },
     ],
+  },
+
+  // Blog routes
+  {
+    path: "/blogs",
+    // lazy: async () => {
+    //   const AppShell = await import("./components/blog");
+    //   return { Component: AppShell.default };
+    // },
+    errorElement: <GeneralError />,
+    children: [
+      {
+        index: true,
+        lazy: async () => ({
+          Component: (await import("./pages/blog")).default,
+        }),
+      },
+
+      {
+        path: ":postId",
+        lazy: async () => ({
+          Component: (await import("./pages/blog/components/blogPost")).default,
+        }),
+      },
+
+      {
+        path: "all-posts",
+        lazy: async () => ({
+          Component: (await import("./pages/blog/components/blogHome")).default,
+        }),
+      },
+    ]
   },
 
   // Error routes

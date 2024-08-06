@@ -18,6 +18,10 @@ import homeBannerSlice, { homeBannerApi } from "./slices/bannerSlice";
 import profileSlice from './slices/profileSlice';
 
 import chatSlice, { chatApi } from './slices/chatSlice';
+import { contactApi } from './slices/contactSlice'
+
+import faqsSlice, { faqsApi } from './slices/faqSlice'
+import blogsSlice, { blogsApi } from './slices/blogSlice'
 
 export {
   authSlice,
@@ -59,4 +63,12 @@ export {
   
   chatApi,
   chatSlice,
+
+  contactApi,
+
+  faqsSlice,
+  faqsApi,
+
+  blogsApi,
+  blogsSlice,
 }

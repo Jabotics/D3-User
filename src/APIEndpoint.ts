@@ -58,4 +58,14 @@ export const APIEndPoints = {
   send_message: '/api/send-message',
   update_chat: '/api/update-chat',
   all_messages: '/api/get-messages',
+
+  // CONTACT
+  submit_inquiry: '/api/add-inquiry',
+
+  // FAQ
+  fetch_faqs: '/api/faqs',
+
+  // BLOGS
+  fetch_blogs: '/api/blogs',
+  fetch_popular_blogs: '/api/popular-blogs',
 }

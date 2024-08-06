@@ -5,28 +5,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Link } from "react-router-dom";
+import { useFetchFaqsQuery } from "@/store/actions/slices/faqSlice";
+import { useAppSelector } from "@/store/hooks";
+import { RootState } from "@/store";
 
 export const Faqs = () => {
 
-  const faqData = [
-    {
-      id: "item-1",
-      question: "Is it accessible?",
-      answer: "Yes. It adheres to the WAI-ARIA design pattern.",
-    },
-    {
-      id: "item-2",
-      question: "Is it styled?",
-      answer:
-        "Yes. It comes with default styles that matches the other components' aesthetic.",
-    },
-    {
-      id: "item-3",
-      question: "Is it animated?",
-      answer:
-        "Yes. It's animated by default, but you can disable it if you prefer.",
-    },
-  ];
+  useFetchFaqsQuery({});
+  const { faqs: faqData } = useAppSelector((state: RootState) => state.faqs)
 
   const [openItems, setOpenItems] = useState<string[]>([]);
 
@@ -47,7 +34,7 @@ export const Faqs = () => {
           Frequently Asked Questions
         </h2>
         <div className="accordion-section text-left ">
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full mb-10">
             {faqData.map((faq) => (
               <AccordionItem key={faq.id} value={faq.id} className={`${openItems.includes(faq.id) ? "border-none" : "border-b"} text-xs sm:text-[16px]`}>
                 <AccordionTrigger
@@ -60,6 +47,9 @@ export const Faqs = () => {
               </AccordionItem>
             ))}
           </Accordion>
+          <div className="w-full flex items-center justify-center h-8">
+            <Link to={'/frequently-asked-questions'} className="bg-gray-300 shadow-md rounded-2xl px-5 py-1">Read More</Link>
+          </div>
         </div>
       </div>
     </div>

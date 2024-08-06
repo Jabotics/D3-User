@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FaMinus, FaCircle } from "react-icons/fa";
 import logo from "/images/Logo.svg";
 import { Button } from "@/components/ui/button";

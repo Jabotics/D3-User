@@ -82,7 +82,7 @@ const AboutPage = () => {
       <div
         className="h-[80vh] lg:h-[65vh] w-full flex items-center justify-start relative"
         style={{
-          backgroundImage: "url('/images/contact.jpg')",
+          backgroundImage: "url('/images/about.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -96,9 +96,9 @@ const AboutPage = () => {
             key={"control1"}
           >
             <span>About Us</span>
-            <span className={`flex items-center gap-3 flex-row text-lg ${isScrollable && 'opacity-0'} transition-opacity duration-150 ml-3`}>
-              <FaFacebook />
-              <LuInstagram />
+            <span className={`flex items-center gap-3 flex-row text-lg ${isScrollable && 'opacity-0'} transition-opacity duration-150 ml-3 scale-[1.1] mt-5`}>
+              <FaFacebook size={30} />
+              <LuInstagram size={30} />
             </span>
           </motion.div>
           <motion.div

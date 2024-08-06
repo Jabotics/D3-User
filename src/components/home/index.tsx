@@ -9,6 +9,7 @@ import Testimonials from "./testimonial";
 import Events from "./event";
 import Faqs from "./faq";
 import Chat from "./chat";
+// import D3App from "./d3-app";
 
 export const HomePage = () => {
   return (
@@ -21,6 +22,7 @@ export const HomePage = () => {
       <Testimonials />
       <Events />
       <Faqs />
+      {/* <D3App /> */}
 
       <Chat />
     </div>
