@@ -268,6 +268,7 @@ export interface IBlog {
   }[];
   createdAt: string;
   image: string
+  featured: boolean
 }
 
 export interface IPopularBlog {

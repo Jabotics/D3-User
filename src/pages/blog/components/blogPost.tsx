@@ -94,7 +94,7 @@ const BlogPostPage = () => {
         <div className="h-[2px] flex-1 bg-[#93d18371]"></div>
       </div>
 
-      <div className="my-20 w-full flex items-start gap-10">
+      <div className="my-10 w-full flex items-start gap-10">
         <div className="w-96 bg-gray-100 h-40 mt-5 rounded-md flex flex-col py-3">
           <div className="w-full flex items-center justify-between px-3">
             <h2 className="font-medium">Popular Posts</h2>
@@ -159,18 +159,18 @@ const BlogPostPage = () => {
         <img
           src={`${APIEndPoints.BackendURL}/${blogs[0]?.image}`}
           alt=""
-          className="h-auto max-h-[65vh] w-full mb-20 object-cover object-center"
+          className="h-auto max-h-[65vh] w-full object-cover object-center"
         />
       )}
 
       {/* OTHER PARAGRAPHS */}
       {blogs[0]?.details && blogs[0]?.details?.length > 1 ? (
         <div
-          className={`my-20 w-full flex items-start gap-10 ${
+          className={`mb-20 w-full flex items-start gap-10 ${
             blogs[0]?.details?.length === 1 && "hidden"
           }`}
         >
-          <div className="w-96 h-40 mt-5 rounded-md flex flex-col py-3"></div>
+          {/* <div className="w-96 h-40 mt-5 rounded-md flex flex-col py-3"></div> */}
 
           <div className="flex-1 pr-10 ">
             <div className="w-full flex flex-col mt-10">

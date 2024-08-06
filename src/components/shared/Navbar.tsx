@@ -6,6 +6,10 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SlLocationPin } from "react-icons/sl";
 import { MdCall } from "react-icons/md";
+import { IoIosArrowDropdownCircle } from "react-icons/io";
+import { FaMouse } from "react-icons/fa";
+import { MdContactSupport, MdOutlineReviews } from "react-icons/md";
+import { RiNewspaperLine } from "react-icons/ri";
 
 import { RootState } from "@/store";
 
@@ -26,7 +30,7 @@ import { useEffect, useRef, useState } from "react";
 import { setTitle } from "@/store/actions/slices/profileSlice";
 import { APIEndPoints } from "@/APIEndpoint";
 
-// import { RiArrowDropDownLine } from "react-icons/ri";
+import { LiaCampgroundSolid } from "react-icons/lia";
 import { ToggleOptions } from "../toggle-options";
 
 export const Navbar = () => {
@@ -113,7 +117,10 @@ export const Navbar = () => {
                   //   <RiArrowDropDownLine size={20} />
                   // </span>
                   <>
-                    <ToggleOptions mobile={showMobile} setMobile={setShowMobile} />
+                    <ToggleOptions
+                      mobile={showMobile}
+                      setMobile={setShowMobile}
+                    />
                   </>
                 )}
                 <div className="flex items-center gap-3">
@@ -189,10 +196,12 @@ export const Navbar = () => {
             </div>
 
             {/* BUTTONS */}
-            <div className={`col-span-4 sm:col-span-5 max-[290px]:col-span-4 hidden max-[350px]:col-span-5 lg:col-span-7 xl:col-span-8 gap-4 lg:flex lg:justify-start xl:justify-center items-center custome-break sm:mr-2`}>
+            <div
+              className={`col-span-4 sm:col-span-5 max-[290px]:col-span-4 hidden max-[350px]:col-span-5 lg:col-span-7 xl:col-span-8 gap-4 lg:flex lg:justify-start xl:justify-center items-center custome-break sm:mr-2`}
+            >
               {isLarge && (
                 <div className="max-lg:hidden flex items-center justify-start gap-2">
-                  <Link to={"/about"} target="_blank" rel="noreferrer noopener">
+                  {/* <Link to={"/about"} target="_blank" rel="noreferrer noopener">
                     <Button
                       variant={"outline"}
                       className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
@@ -203,7 +212,7 @@ export const Navbar = () => {
                     >
                       About Us
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   <Button
                     variant={"outline"}
@@ -245,22 +254,125 @@ export const Navbar = () => {
                     Membership
                   </Button>
 
-                  <Link
-                    to={"/contact"}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
+                  {/* <div className="group relative">
                     <Button
                       variant={"outline"}
-                      className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                        pathName.pathname === "/contact"
-                          ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
-                          : ""
-                      }`}
+                      className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl`}
                     >
-                      Contact
+                      <p>More</p>
+                      <FaSortDown
+                        size={15}
+                        className="ml-1 mb-2 text-gray-300 group-hover:text-gray-900 group-hover:rotate-180"
+                      />
                     </Button>
-                  </Link>
+
+                    <div className="invisible absolute w-[200%] -bottom-24 left-0 h-fit bg-white border border-gray-300 rounded-md group-hover:flex flex-col py-2">
+                      <Link
+                        to={"/about"}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="mx-1 text-sm"
+                      >
+                        About Us
+                      </Link>
+                      <Link
+                        to={"/contact"}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="mx-1 text-sm"
+                      >
+                        Contact
+                      </Link>
+                      <div className="h-px mx-1 bg-gray-300 my-1"></div>
+                      <Link
+                        to={"/contact"}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="mx-1 text-sm"
+                      >
+                        Blogs
+                      </Link>
+                      
+                    </div>
+                  </div> */}
+
+                  <div className="group relative">
+                    <Button
+                      variant="outline"
+                      className="px-4 2xl:px-12 text-xs h-7 rounded-3xl"
+                    >
+                      <p>More</p>
+                      <IoIosArrowDropdownCircle
+                        size={15}
+                        className="ml-1 text-gray-300 group-hover:text-gray-900 transition-transform duration-300 group-hover:rotate-180 group-hover:mb-0 transform origin-center"
+                      />
+                    </Button>
+
+                    <div className="relative group">
+                      <div className="absolute left-0 w-[200%] hidden group-hover:block top-[65%] pt-3">
+                        <div className="w-full flex flex-col gap-1 bg-white border border-gray-300 rounded-md py-5 transition-transform transform opacity-0 group-hover:opacity-100 translate-y-0 group-hover:translate-y-2 duration-1000 ease-out">
+                          <Link
+                            to="/about"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
+                          >
+                            <LiaCampgroundSolid size={20} />
+                            <span>About Us</span>
+                          </Link>
+                          <Link
+                            to="/about"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
+                          >
+                            <FaMouse size={20} />
+                            <span>Terms Of Use</span>
+                          </Link>
+                          <Link
+                            to="/contact"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
+                          >
+                            <MdContactSupport size={20} />
+                            <span>Contact</span>
+                          </Link>
+                          <div className="h-[1px] bg-gray-200 my-1"></div>
+                          <Link
+                            to="/blogs"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
+                          >
+                            <RiNewspaperLine size={20} />
+                            Blogs
+                          </Link>
+                          <Link
+                            to="/contact/feedback"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
+                          >
+                            <MdOutlineReviews size={20} />
+                            Give Review
+                          </Link>
+                          <div className="h-[1px] bg-gray-200 my-1"></div>
+                          <Link
+                            to="/privacy-policy"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-col "
+                          >
+                            <p>Privacy policy</p>
+                            <p className="text-xs text-[#53a53fd8]">
+                              Read about our privacy notice
+                            </p>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
               <div />
@@ -284,19 +396,25 @@ export const Navbar = () => {
                   <Button
                     variant="outline"
                     className={`${
-                      selectedCityName ? "w-36 lg:w-16 ml-3 lg:ml-0 border border-gray-300/50 text-[#53a53f]" : "w-32 "
+                      selectedCityName
+                        ? "w-36 lg:w-16 ml-3 lg:ml-0 border border-gray-300/50 text-[#53a53f]"
+                        : "w-32 "
                     } h-6 lg:h-7 rounded-3xl hover:bg-[#53a53f] hover:text-gray-100`}
                     onClick={() => setOpen(true)}
                   >
                     <span
                       className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${
-                        selectedCityName && "tracking-wider lg:tracking-tight font-extrabold"
+                        selectedCityName &&
+                        "tracking-wider lg:tracking-tight font-extrabold"
                       }`}
                     >
                       {selectedCityName ? (
                         selectedCityName
                       ) : (
-                        <SlLocationPin size={15} className="text-[#53a53f] hover:text-gray-100" />
+                        <SlLocationPin
+                          size={15}
+                          className="text-[#53a53f] hover:text-gray-100"
+                        />
                       )}
                     </span>
                   </Button>

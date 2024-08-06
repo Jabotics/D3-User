@@ -83,7 +83,7 @@ const BlogPage = () => {
               <div className="w-1/2 bg-gray-100 rounded-md h-80 "></div>
             </>
           ) : (
-            blogs.slice(0, 3).map((blog, index) => {
+            blogs.filter(i => i.featured).slice(0, 3).map((blog, index) => {
               return (
                 <div key={index} className="w-1/3 group">
                   <div
