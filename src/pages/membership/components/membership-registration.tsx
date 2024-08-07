@@ -31,7 +31,7 @@ import { setRegistrationMembership } from "@/store/actions/slices/membershipSlic
 
 import { motion } from "framer-motion";
 import { RootState } from "@/store";
-import { logout } from "@/store/actions/slices/authSlice";
+import { logout, useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 interface MembershipDetailsProps {
   membershipId: string;
@@ -70,6 +70,8 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
   const { memberships } = useAppSelector(
     (state: RootState) => state.membership
   );
+
+  const { isError } = useVerifySessionQuery({});
 
   const [progress, setProgress] = React.useState(0);
   const [fileName, setFileName] = React.useState<string | null>(null);
@@ -207,6 +209,13 @@ const MembershipRegistrationPage: React.FC<MembershipDetailsProps> = ({
       }
     }
   }
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(logout())
+      navigate("/login")
+    }
+  }, [dispatch, isError, navigate])
 
   useEffect(() => {
     if (userData?.mobile) {

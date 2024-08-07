@@ -63,7 +63,8 @@ export const authApi = createApi({
 });
 
 const initialState: IAuth = {
-  status: false,
+  status: "idle",
+  error: undefined,
   userData: null,
   token: null,
   hasToken: false,
@@ -77,7 +78,7 @@ export const authSlice = createSlice({
   reducers: {
     login: (
       state,
-      action: PayloadAction<{ status?: boolean; token?: string }>
+      action: PayloadAction<{ status?: "idle" | "loading" | "succeeded" | "failed"; token?: string }>
     ) => {
       if (action.payload.status !== undefined) {
         state.status = action.payload.status;
@@ -128,23 +129,37 @@ export const authSlice = createSlice({
       state.userData = { ...state.userData, ...action.payload };
     },
     logout: (state) => {
-      state.status = false;
+      state.status = "idle";
       state.userData = null;
       state.token = null;
       state.hasToken = false;
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      authApi.endpoints.verifySession.matchFulfilled,
-      (state, action) => {
-        if (action.payload.status) {
-          state.status = true;
-          state.userData = { ...state.userData, ...action.payload.data };
-          state.hasToken = true;
+    builder
+      .addMatcher(
+        authApi.endpoints.verifySession.matchPending,
+        (state) => {
+          state.status = "loading";
         }
-      }
-    );
+      )
+      .addMatcher(
+        authApi.endpoints.verifySession.matchFulfilled,
+        (state, action) => {
+          if (action.payload.status) {
+            state.status = "succeeded";
+            state.userData = { ...state.userData, ...action.payload.data };
+            state.hasToken = true;
+          }
+        }
+      )
+      .addMatcher(
+        authApi.endpoints.verifySession.matchRejected,
+        (state, action) => {
+          state.status = "failed";
+          state.error = action.error.message;
+        }
+      );
   },
 });
 

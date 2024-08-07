@@ -116,7 +116,7 @@ interface InitialState {
     address: string;
     membership: string;
     sport: string;
-    shift?: "morning" | "evening";
+    shift?: "morning" | "evening" | null;
     customer: string;
     ground: string;
     city: string;
@@ -166,7 +166,7 @@ const initialState: InitialState = {
     first_name: "",
     ground: "",
     last_name: "",
-    shift: "morning",
+    shift: null,
     sport: "",
     subscription_type: null,
     venue: "",
@@ -235,11 +235,16 @@ export const MembershipsSlice = createSlice({
     resetLocationArr: (state) => {
       state.locationArr = ["Home", "Membership"];
     },
-    setSelectedSlots: (state, action: PayloadAction<{ batch: "Morning" | "Evening", slots: string[] } | null>) => {
-      state.selectedSlot = action.payload;
-      if (action.payload) {
-        state.registrationFormDetails.shift = action.payload.batch.toLowerCase() as "morning" | "evening";
+    setSelectedSlots: (state, action: PayloadAction<{ batch: "Morning" | "Evening" | null, slots: string[] } | null>) => {
+      if (action.payload === null) {
+        state.selectedSlot = null;
+        state.registrationFormDetails.shift = null; 
+        return;
       }
+    
+      const { batch, slots } = action.payload;
+      state.selectedSlot = batch !== null ? { batch, slots } : null;
+      state.registrationFormDetails.shift = batch !== null ? (batch.toLowerCase() as "morning" | "evening") : null;
     },
 
     setRegistrationMembership: (

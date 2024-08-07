@@ -2,8 +2,8 @@ import Loader from "@/components/loader";
 import LeftPanel from "@/components/profile/LeftPanel";
 import RightPanel from "@/components/profile/RightPanel";
 import { RootState } from "@/store";
-import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
-import { useAppSelector } from "@/store/hooks";
+import { logout, useVerifySessionQuery } from "@/store/actions/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { 
   useEffect, 
   // useState 
@@ -11,20 +11,19 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   
   const toFetch = useVerifySessionQuery({});
   const { hasToken } = useAppSelector((state: RootState) => state.auth);
 
   useEffect(() => {
-    if (!hasToken) {
+    if (!hasToken || toFetch.isError) {
+      dispatch(logout());
       navigate("/login");
     }
   }, 
-  [
-    hasToken, 
-    navigate // ---> check
-  ])
+  [dispatch, hasToken, navigate, toFetch.isError])
 
   if (toFetch.isLoading) {
     return (

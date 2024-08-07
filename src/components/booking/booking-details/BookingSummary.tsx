@@ -2,12 +2,15 @@ import { Button } from "@/components/ui/button";
 import { RootState } from "@/store";
 import { useGetGroundQuery } from "@/store/actions/slices/groundSlice";
 import { useAddSlotsMutation } from "@/store/actions/slices/slotsSlice";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { logout } from "@/store/actions/slices/authSlice";
 const BookingSummary = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const { allSlots, selectedSlots, listOfPrices, selectedGroundId } =
     useAppSelector((state: RootState) => state.slots);
   const { userData } = useAppSelector((state: RootState) => state.auth);
@@ -44,6 +47,11 @@ const BookingSummary = () => {
       console.log(res);
     } catch (error) {
       toast.error((error as { data: { message: string } })?.data?.message);
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      dispatch(logout());
+
+      navigate('/login')
     }
   };
 
