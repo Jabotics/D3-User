@@ -38,7 +38,7 @@ const Profile = () => {
         <div className="w-full lg:w-80 h-fit lg:h-full">
           <LeftPanel />
         </div>
-        <div className="w-full lg:flex-1 h-fit lg:h-screen flex flex-col gap-0 lg:gap-12">
+        <div className="w-full lg:flex-1 h-fit lg:h-screen flex flex-col gap-0 lg:gap-12 mt-11">
           <RightPanel />
           
           <div className="flex-1 flex items-start justify-center mt-5 lg:mt-0">
