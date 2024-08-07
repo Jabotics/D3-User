@@ -14,15 +14,18 @@ const Booking = () => {
       setIsHidden(true);
     }
   };
-
+  
+  const handleBook = () => {
+    setIsHidden(false);
+  };
+  
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  const handleBook = () => {
-    setIsHidden(false);
-  };
 
   return (
     <div className="flex px-2 sm:px-40 pt-8 border-t-[1px] gap-4 pb-12 w-full">

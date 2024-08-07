@@ -1,18 +1,26 @@
 import SlotCard from "../slot-card/card";
 import { Button } from "../ui/button";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { useGetGroundQuery } from "@/store/actions/slices/groundSlice";
+import { useAppSelector } from "@/store/hooks";
+import { RootState } from "@/store";
 
 const Slots = () => {
+  const navigate = useNavigate();
   const carouselRef = useRef<Carousel>(null);
+
+  useGetGroundQuery({});
+  const { grounds } = useAppSelector((state: RootState) => state.ground);
 
   const handleNext = () => {
     if (carouselRef.current) {
       carouselRef.current.next(1);
-    } 
+    }
   };
 
   const handlePrev = () => {
@@ -50,7 +58,7 @@ const Slots = () => {
         <div className="flex items-start justify-between">
           <div className="slot-header flex flex-row align-center justify-start gap-8 mb-12">
             <div className="heading">
-              <h2 className="text-2xl font-medium ml-4">Available Slots</h2>
+              <h2 className="text-2xl font-medium ml-4">All Grounds</h2>
             </div>
             <div className="btn-grup hidden lg:flex gap-2 items-center justify-center">
               <Button
@@ -71,11 +79,17 @@ const Slots = () => {
             <Button
               variant={"link"}
               className="tracking-tight font-semibold underline decoration-gray-300 hover:decoration-gray-950"
+              onClick={() => {
+                navigate("/play");
+              }}
             >
               VIEW ALL
             </Button>
             <IoIosArrowBack onClick={handlePrev} className="cursor-pointer" />
-            <IoIosArrowForward onClick={handleNext} className="cursor-pointer" />
+            <IoIosArrowForward
+              onClick={handleNext}
+              className="cursor-pointer"
+            />
           </div>
         </div>
         <div className="flex lg:hidden items-center justify-between mb-12 -mt-10 px-4">
@@ -101,7 +115,10 @@ const Slots = () => {
               VIEW ALL
             </Button>
             <IoIosArrowBack onClick={handlePrev} className="cursor-pointer" />
-            <IoIosArrowForward onClick={handleNext} className="cursor-pointer" />
+            <IoIosArrowForward
+              onClick={handleNext}
+              className="cursor-pointer"
+            />
           </div>
         </div>
         <div className="-mt-5">
@@ -118,15 +135,21 @@ const Slots = () => {
             itemClass="carousel-item-padding-40-px"
             partialVisible={true}
           >
+            {grounds.map((item, index) => {
+              return (
+                <React.Fragment key={index}>
+                  <SlotCard data={item} />
+                </React.Fragment>
+              );
+            })}
+            {/* <SlotCard />
             <SlotCard />
             <SlotCard />
             <SlotCard />
             <SlotCard />
             <SlotCard />
             <SlotCard />
-            <SlotCard />
-            <SlotCard />
-            <SlotCard />
+            <SlotCard /> */}
           </Carousel>
         </div>
       </div>

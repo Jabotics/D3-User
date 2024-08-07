@@ -94,5 +94,5 @@ export const BookingSlice = createSlice({
 });
 
 export const { useGetBookingsQuery } = bookingApi;
-export const {} = BookingSlice.actions;
+// export const {} = BookingSlice.actions;
 export default BookingSlice.reducer;

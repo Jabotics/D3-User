@@ -28,11 +28,13 @@ const BookingSummary = () => {
   );
   useEffect(() => {
     getGround.refetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroundId]);
 
   const [add] = useAddSlotsMutation();
   const handleSlotBooking = async () => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const res: any = await add({
         city: groundDetails[0].city?._id,
         ground: groundDetails[0].id,
@@ -51,7 +53,7 @@ const BookingSummary = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       dispatch(logout());
 
-      navigate('/login')
+      navigate("/login");
     }
   };
 
@@ -80,12 +82,14 @@ const BookingSummary = () => {
           Cricket
         </span>
       </div>
-      <div className="flex flex-row justify-between">
-        <span className="inline-block text-[12px]">Turf Size</span>
-        <span className="inline-block text-[12px] text-[#000000] font-semibold">
-        {`${groundDetails[0]?.dimensions?.width} x ${groundDetails[0]?.dimensions?.length}`}
-        </span>
-      </div>
+      {groundDetails[0]?.dimensions && (
+        <div className="flex flex-row justify-between">
+          <span className="inline-block text-[12px]">Turf Size</span>
+          <span className="inline-block text-[12px] text-[#000000] font-semibold">
+            {`${groundDetails[0]?.dimensions?.width} x ${groundDetails[0]?.dimensions?.length}`}
+          </span>
+        </div>
+      )}
       {selectedSlots.length !== 0 && (
         <div className="flex flex-row justify-between">
           <span className="inline-block text-[12px]">Time</span>
