@@ -54,8 +54,8 @@ export const Navbar = () => {
   const { cities, selectedCity } = useAppSelector(
     (state: RootState) => state.city
   );
-  // const [open, setOpen] = useState(selectedCity ? false : true);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(selectedCity ? false : true);
+  // const [open, setOpen] = useState(false);
 
   useGetCitiesQuery(
     {
