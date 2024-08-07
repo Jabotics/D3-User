@@ -98,7 +98,15 @@ export const Navbar = () => {
           <div className="grid-container grid grid-cols-12 gap-1 md:gap-3 lg:gap-7 items-center">
             {/* LOGO */}
             <div className="col-span-12 lg:col-span-3 xl:col-span-2 gap-4">
-              <div className="logo text-center flex items-center justify-between px-4">
+              <div
+                className="logo text-center flex items-center justify-between px-4"
+                onClick={() => {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                  });
+                }}
+              >
                 {window.innerWidth > 1023 ? (
                   <img
                     src={logo}
