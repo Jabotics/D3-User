@@ -13,9 +13,7 @@ export const SlotCard = ({ data }: { data: IGround }) => {
 
   return (
     <div
-      className={`card-main mx-4 ${
-        !data ? "h-80 bg-gray-100 rounded-md" : ""
-      }`}
+      className={`card-main mx-4 ${!data ? "h-80 bg-gray-100 rounded-md" : ""}`}
     >
       <div className=" flex relative flex-col gap-4">
         <div className="ground-image rounded-lg relative overflow-hidden">
@@ -33,7 +31,9 @@ export const SlotCard = ({ data }: { data: IGround }) => {
         </div>
         <div className="slot-content text-left flex flex-row justify-between align-center">
           <div className="slot-title-content">
-            <h3 className="font-semibold">{data?.name}</h3>
+            <h3 className="font-semibold group cursor-pointer">
+              <span className="text-gray-400">{data?.venue?.name}/</span> &nbsp;<span className="group-hover:underline">{data?.name}</span>
+            </h3>
             <p className="text-xs">
               {data.supported_sports.map((item, index) => {
                 return (
