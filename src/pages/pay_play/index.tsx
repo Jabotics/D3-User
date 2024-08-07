@@ -1,16 +1,19 @@
 import FilterByCategory from "@/components/pay&play/filter";
 import Venues from "@/components/pay&play/venues";
 import { RootState } from "@/store";
-import { setSortByText } from "@/store/actions/slices/groundSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+// import { setSortByText } from "@/store/actions/slices/groundSlice";
+import { 
+  // useAppDispatch, 
+  useAppSelector 
+} from "@/store/hooks";
 import { useEffect, useState } from "react";
-import { HiOutlineSortDescending } from "react-icons/hi";
+// import { HiOutlineSortDescending } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 
 const locationArr = ["Home", "Play"];
 const PayPlay = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const [filtersArr, setFiltersArr] = useState<{
     sports: string[] | null;
@@ -25,7 +28,7 @@ const PayPlay = () => {
   });
 
   const {
-    grounds,
+    // grounds,
     sortByText,
     selectedGroundType,
     selectedVenue,
@@ -59,14 +62,15 @@ const PayPlay = () => {
       sports: selectedSportsStore.length === 0 ? null : selectedSportsStore,
     }));
   }, [selectedSportsStore]);
-  
+
   return (
     <section className="flex flex-col px-5 lg:px-20 2xl:px-36 w-full h-screen lg:h-[85vh] overflow-hidden">
       <span className="h-4 lg:h-8 flex items-center mt-12 lg:mt-3 gap-1 text-[10px] md:text-xs lg:text-sm lg:ml-4">
         {locationArr.map((item, index) => (
           <div key={index}>
             <span
-              className={`${(
+              className={`${
+                (
                   locationArr.length === 2
                     ? item === "Home"
                     : item === "Home" || item === "Play"
@@ -103,7 +107,7 @@ const PayPlay = () => {
         </div>
 
         <div className="hidden lg:block w-56 xl:w-60 h-full">
-          <div className="w-full h-12">
+          {/* <div className="w-full h-fit mb-16">
             <div className="w-full flex flex-wrap items-center h-full border-[1px] border-gray-100 p-2 rounded-md">
               <HiOutlineSortDescending
                 size={20}
@@ -126,10 +130,11 @@ const PayPlay = () => {
                   return (
                     <div
                       key={index}
-                      className={`rounded-2xl border cursor-pointer ${filtersArr.sortBy?.includes(item)
+                      className={`rounded-2xl border cursor-pointer ${
+                        filtersArr.sortBy?.includes(item)
                           ? "bg-gray-700 text-gray-50 border-gray-100"
                           : "border-gray-400"
-                        } px-2 text-xs xl:text-sm`}
+                      } px-2 text-xs xl:text-sm`}
                       onClick={() => {
                         dispatch(setSortByText(item));
                       }}
@@ -151,7 +156,8 @@ const PayPlay = () => {
                 })}
               </div>
             )}
-          </div>
+          </div> */}
+          {/* <div>hey</div> */}
         </div>
       </div>
     </section>

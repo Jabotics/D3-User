@@ -448,7 +448,7 @@ const MembershipList = ({ isLoading }: { isLoading: boolean }) => {
 
         {/*  */}
         <div className="w-40 xl:w-60 h-full hidden lg:block">
-          <div className="w-full h-12">
+          {/* <div className="w-full h-fit mb-16">
             <div className="w-full flex flex-wrap items-center h-full border-[1px] border-gray-100 p-2 rounded-md">
               <HiOutlineSortDescending
                 size={20}
@@ -464,8 +464,6 @@ const MembershipList = ({ isLoading }: { isLoading: boolean }) => {
                 {[
                   "Nearest",
                   "Newest Arrivals",
-                  // "Price: Low to High",
-                  // "Price: High to Low",
                   "Customer Reviews",
                 ].map((item, index) => {
                   return (
@@ -497,7 +495,7 @@ const MembershipList = ({ isLoading }: { isLoading: boolean }) => {
                 })}
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </>
