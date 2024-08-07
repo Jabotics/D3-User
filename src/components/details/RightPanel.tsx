@@ -22,9 +22,9 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
 
   useEffect(() => {
     if (groundDetails && groundDetails?.name) {
-      dispatch(setLocationArr(groundDetails?.name))
+      dispatch(setLocationArr(groundDetails?.name));
     }
-  }, [dispatch, groundDetails])
+  }, [dispatch, groundDetails]);
 
   return (
     <div className="w-full h-full mt-5 lg:mt-0">
@@ -54,7 +54,7 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
           for sports fields and recreational areas.{" "}
         </span>
         <span className="text-lg tracking-widest w-full overflow-y-hidden whitespace-nowrap overflow-x-auto scroll-nobg pb-2">
-          {groundDetails?.supported_sports?.map((item, index) => {
+          {/* {groundDetails?.supported_sports?.map((item, index) => {
             return (
               <span
                 key={index}
@@ -63,23 +63,22 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
                 {item.name}
               </span>
             );
+          })} */}
+          {groundDetails?.amenities?.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="flex items-center gap-2 whitespace-nowrap"
+              >
+                <FaRegCheckSquare className="text-[#53a53f]" />
+                <span>{item}</span>
+              </div>
+            );
           })}
         </span>
       </div>
 
-      <div className="mt-8 flex flex-wrap items-center gap-3 w-full text-xs">
-        {groundDetails?.amenities?.map((item, index) => {
-          return (
-            <div
-              key={index}
-              className="flex items-center gap-2 whitespace-nowrap"
-            >
-              <FaRegCheckSquare className="text-[#53a53f]" />
-              <span>{item}</span>
-            </div>
-          );
-        })}
-      </div>
+      {/* <div className="mt-8 flex flex-wrap items-center gap-3 w-full text-xs"></div> */}
 
       <Dialog>
         <DialogTrigger className="mt-1 flex items-center gap-1 bg-[#53a53f] shadow-md shadow-[#aacca194] px-3 py-0 rounded-2xl">

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -121,7 +122,7 @@ export default function LoginPage() {
           .get("authorization")
           ?.split(" ")[1];
 
-        dispatch(login({ status: true, token }));
+        dispatch(login({ status: 'succeeded', token }));
         dispatch(
           setAuth({
             userData: {
@@ -203,7 +204,7 @@ export default function LoginPage() {
     if (hasToken || token) {
       navigate("/");
     }
-  }, []);
+  }, [hasToken, navigate, token]);
 
   return (
     <>

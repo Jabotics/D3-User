@@ -2,8 +2,8 @@ import Loader from "@/components/loader";
 import LeftPanel from "@/components/profile/LeftPanel";
 import RightPanel from "@/components/profile/RightPanel";
 import { RootState } from "@/store";
-import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
-import { useAppSelector } from "@/store/hooks";
+import { logout, useVerifySessionQuery } from "@/store/actions/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { 
   useEffect, 
   // useState 
@@ -11,20 +11,19 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   
   const toFetch = useVerifySessionQuery({});
   const { hasToken } = useAppSelector((state: RootState) => state.auth);
 
   useEffect(() => {
-    if (!hasToken) {
+    if (!hasToken || toFetch.isError) {
+      dispatch(logout());
       navigate("/login");
     }
   }, 
-  [
-    hasToken, 
-    navigate // ---> check
-  ])
+  [dispatch, hasToken, navigate, toFetch.isError])
 
   if (toFetch.isLoading) {
     return (
@@ -39,7 +38,7 @@ const Profile = () => {
         <div className="w-full lg:w-80 h-fit lg:h-full">
           <LeftPanel />
         </div>
-        <div className="w-full lg:flex-1 h-fit lg:h-screen flex flex-col gap-0 lg:gap-12">
+        <div className="w-full lg:flex-1 h-fit lg:h-screen flex flex-col gap-0 lg:gap-12 mt-11">
           <RightPanel />
           
           <div className="flex-1 flex items-start justify-center mt-5 lg:mt-0">

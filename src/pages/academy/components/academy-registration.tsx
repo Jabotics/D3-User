@@ -28,7 +28,7 @@ import { setRegistrationAcademy } from "@/store/actions/slices/academySlice";
 
 import { motion } from "framer-motion";
 import { RootState } from "@/store";
-import { logout } from "@/store/actions/slices/authSlice";
+import { logout, useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 interface AcademyDetailsProps {
   academyId: string;
@@ -65,6 +65,8 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
   const { userData } = useAppSelector((state: RootState) => state.auth);
   const { selectedCity } = useAppSelector((state: RootState) => state.city);
   const { academies } = useAppSelector((state: RootState) => state.academy);
+
+  const { isError } = useVerifySessionQuery({});
 
   const [progress, setProgress] = React.useState(0);
   const [fileName, setFileName] = React.useState<string | null>(null);
@@ -202,6 +204,13 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
       }
     }
   }
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(logout())
+      navigate("/login")
+    }
+  }, [dispatch, isError, navigate])
 
   useEffect(() => {
     if (userData?.mobile) {

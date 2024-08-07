@@ -1,5 +1,7 @@
 export interface IAuth {
-  status: boolean;
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | undefined;
+  
   userData: {
     id?: string;
     email?: string;

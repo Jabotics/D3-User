@@ -31,7 +31,7 @@ const Booking = () => {
   return (
     <>
       <div className="px-2 lg:px-0 flex-col gap-4 w-full h-16 mt-5 lg:mt-0 lg:h-[500px] flex">
-        <span className="inline-block text-sm font-base text-gray-500">
+        <span className="inline-block text-sm font-base text-black">
           {title}
         </span>
         <div id="bookings" className="w-full hidden lg:flex flex-col gap-4">
@@ -81,7 +81,7 @@ const Booking = () => {
                   </span>
                 </div>
                 {item?.slots !== undefined && item?.slots.length > 0 ? (
-                  <div className="text-[14px] w-[25%] flex justify-center items-center">
+                  <div className="text-[14px] w-[35%] flex justify-center items-center">
                     <span
                       className={`${
                         item?.slots?.length > 1

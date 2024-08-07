@@ -2,7 +2,7 @@
   max-width: 48rem;
   margin: auto;
   position: relative;
-  --slide-height: 40vh;
+  --slide-height: 60vh;
   --slide-spacing: 1rem;
   --slide-size: 100%;
 }

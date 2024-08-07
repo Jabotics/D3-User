@@ -90,9 +90,36 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
   const [hasSelectVideo, setHasSelectVideo] = useState(false);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   dispatch(resetLocationArr());
-  // }, [membershipId]);
+  const [joinModal, setJoinModal] = useState(false);
+
+  const handleJoinModal = async (toggle: boolean) => {
+    setJoinModal(toggle)
+
+    dispatch(
+      setSelectedSlots({
+        batch: null,
+        slots: [],
+      })
+    );
+
+    const { default: WorkerConstructor } = await import(
+      "@/workers/delayWorker?worker"
+    );
+
+    const worker = new WorkerConstructor() as Worker;
+
+    worker.postMessage({
+      delay: 60000,
+    });
+
+    worker.onmessage = () => {
+      setJoinModal(false)
+    };
+
+    worker.onerror = (error) => {
+      console.error("Worker error:", error.message);
+    };
+  };
 
   useEffect(() => {
     if (selectedMembership) {
@@ -231,7 +258,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                     </span>
                   </h2>
 
-                  <Dialog>
+                  <Dialog open={joinModal} onOpenChange={handleJoinModal}>
                     <DialogTrigger>
                       <p className="text-xs text-gray-400 flex items-center gap-2 cursor-pointer">
                         <AiOutlineExclamationCircle className="text-amber-700/80" />{" "}

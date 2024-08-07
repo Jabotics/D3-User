@@ -32,7 +32,7 @@ interface AcademyCheckoutDetailsProps {
     address: string;
     academy: string;
     sport: string;
-    shift?: "morning" | "evening";
+    shift?: "morning" | "evening" | null;
     customer: string;
     ground: string;
     city: string;

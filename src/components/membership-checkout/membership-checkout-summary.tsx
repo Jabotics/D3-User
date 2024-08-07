@@ -1,18 +1,21 @@
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Button } from "../ui/button";
 import { RootState } from "@/store";
 // import { useSearchParams } from "react-router-dom";
 import { useJoinMembershipMutation } from "@/store/actions/slices/membershipSlice";
-import { useState } from "react";
-import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
+import { useEffect, useState } from "react";
+import { logout, useVerifySessionQuery } from "@/store/actions/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const MembershipCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   // const searchParams = useSearchParams();
   // const academyId = searchParams[0].get("id");
 
   const [toRefetchUserData, setToRefetchUserData] = useState(false)
-  useVerifySessionQuery({}, { skip: !toRefetchUserData })
+  const { isError } = useVerifySessionQuery({}, { skip: !toRefetchUserData })
 
   const [joinMembership] = useJoinMembershipMutation()
 
@@ -72,6 +75,13 @@ const MembershipCheckoutSummary = ({ hasSubmit }: { hasSubmit: React.Dispatch<Re
       console.log(error)
     }
   };
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(logout())
+      navigate("/login")
+    }
+  }, [dispatch, isError, navigate])
 
   return (
     <div className="flex flex-col bg-[#FFFFFF] border rounded-lg p-4 gap-4">

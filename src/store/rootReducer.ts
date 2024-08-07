@@ -1,5 +1,4 @@
-
-import storage from 'redux-persist/lib/storage'
+import storage from "redux-persist/lib/storage";
 
 import {
   GroundSlice,
@@ -7,16 +6,13 @@ import {
   authSlice,
   authApi,
   logoutApi,
-
   otpSlice,
   groundApi,
   SportSlice,
   sportApi,
   VenueSlice,
   venueApi,
-
   settingSlice,
-
   citySlice,
   citiesApi,
   slotsSlice,
@@ -25,94 +21,139 @@ import {
   BookingSlice,
   promoCodeApi,
   PromoSlice,
-
   academiesApi,
   academiesSlice,
-
   membershipsApi,
   membershipsSlice,
-
   homeBannerApi,
   homeBannerSlice,
-
   eventsApi,
   eventsSlice,
   profileSlice,
-
   chatSlice,
   chatApi,
-
   contactApi,
-  
   faqsApi,
   faqsSlice,
-
   blogsApi,
   blogsSlice,
+} from "@/store/actions";
+import { RequestHandler } from "./RequestHandler";
 
-} from '@/store/actions'
-import { RequestHandler } from './RequestHandler'
-
-import { persistReducer } from 'redux-persist'
-import { combineReducers } from '@reduxjs/toolkit'
+import { persistReducer } from "redux-persist";
+import { combineReducers } from "@reduxjs/toolkit";
 
 const persistConfig = {
-  key: 'd3-root',
+  key: "d3-root",
   storage,
   version: 1,
-}
+};
 
 const otpPersistConfig = {
-  key: 'd3-otp-verify',
+  key: "d3-otp-verify",
   storage,
   version: 1,
-}
+};
 
 const appPersistConfig = {
-  key: 'd3-app',
+  key: "d3-app",
   storage,
   version: 1,
-}
+};
 
 const profilePersistConfig = {
-  key: 'd3-profile',
+  key: "d3-profile",
   storage,
   version: 1,
-}
+};
+
+const playPersistConfig = {
+  key: "d3-play",
+  storage,
+  version: 1,
+  blacklist: [
+    "allSlots",
+    "total",
+    "status",
+    "error",
+    "selectedSlots",
+    "selectedDate",
+    "selectedDay",
+    "listOfPrices",
+    "totalPrice",
+
+    "prev",
+  ],
+};
 
 const academyPersistConfig = {
-  key: 'd3-academies',
+  key: "d3-academies",
   storage,
   version: 1,
-  blacklist: ['academies', 'status', 'error', 'count', 'limit', 'offset', 'locationArr', 'selectedSlot']
-}
+  blacklist: [
+    "academies",
+    "status",
+    "error",
+    "count",
+    "limit",
+    "offset",
+    "locationArr",
+    "selectedSlot",
+  ],
+};
 
 const membershipPersistConfig = {
-  key: 'd3-memberships',
+  key: "d3-memberships",
   storage,
   version: 1,
-  blacklist: ['memberships', 'status', 'error', 'count', 'limit', 'offset', 'locationArr', 'selectedSlot']
-}
+  blacklist: [
+    "memberships",
+    "status",
+    "error",
+    "count",
+    "limit",
+    "offset",
+    "locationArr",
+    "selectedSlot",
+  ],
+};
 
 const chatPersistConfig = {
-  key: 'd3-chats',
+  key: "d3-chats",
   storage,
   version: 1,
-  blacklist: ['allMessages', 'status', 'error', 'count', 'chatStatus', 'chatError']
-}
+  blacklist: [
+    "allMessages",
+    "status",
+    "error",
+    "count",
+    "chatStatus",
+    "chatError",
+  ],
+};
 
-const authPersistedReducer = persistReducer(persistConfig, authSlice)
-const otpPersistReducer = persistReducer(otpPersistConfig, otpSlice)
+const authPersistedReducer = persistReducer(persistConfig, authSlice);
+const otpPersistReducer = persistReducer(otpPersistConfig, otpSlice);
 
-const cityPersistReducer = persistReducer(appPersistConfig, citySlice)
-const profilePersistReducer = persistReducer(profilePersistConfig, profileSlice)
-const academyPersistReducer = persistReducer(academyPersistConfig, academiesSlice)
-const membershipPersistReducer = persistReducer(membershipPersistConfig, membershipsSlice)
+const slotsPersistReducer = persistReducer(playPersistConfig, slotsSlice);
 
-const chatsPersistReducer = persistReducer(chatPersistConfig, chatSlice)
+const cityPersistReducer = persistReducer(appPersistConfig, citySlice);
+const profilePersistReducer = persistReducer(
+  profilePersistConfig,
+  profileSlice
+);
+const academyPersistReducer = persistReducer(
+  academyPersistConfig,
+  academiesSlice
+);
+const membershipPersistReducer = persistReducer(
+  membershipPersistConfig,
+  membershipsSlice
+);
+
+const chatsPersistReducer = persistReducer(chatPersistConfig, chatSlice);
 
 export const rootReducer = combineReducers({
-
   auth: authPersistedReducer,
   city: cityPersistReducer,
   otp: otpPersistReducer,
@@ -128,22 +169,22 @@ export const rootReducer = combineReducers({
   booking: BookingSlice,
   setting: settingSlice,
   promocode: PromoSlice,
-  
+
   event: eventsSlice,
-  
-  slots: slotsSlice,
+
+  slots: slotsPersistReducer,
   profile: profilePersistReducer,
 
   faqs: faqsSlice,
   blogs: blogsSlice,
 
   chat: chatsPersistReducer,
-  
+
   [RequestHandler.reducerPath]: RequestHandler.reducer,
 
   [authApi.reducerPath]: authApi.reducer,
   [logoutApi.reducerPath]: logoutApi.reducer,
-  
+
   // HOME BANNER
   [homeBannerApi.reducerPath]: homeBannerApi.reducer,
 
@@ -161,7 +202,7 @@ export const rootReducer = combineReducers({
 
   // PROMO CODES
   [promoCodeApi.reducerPath]: promoCodeApi.reducer,
-  
+
   // CITY
   [citiesApi.reducerPath]: citiesApi.reducer,
 
@@ -188,5 +229,4 @@ export const rootReducer = combineReducers({
 
   // BLOGS
   [blogsApi.reducerPath]: blogsApi.reducer,
-
-})
+});

@@ -1,5 +1,5 @@
 import Quote from "../../../public/images/quote.svg";
-import viewers from "../../../public/images/viewers.webp";
+// import viewers from "../../../public/images/viewers.webp";
 
 export const TestimonialCard = () => {
   return (
@@ -18,7 +18,7 @@ export const TestimonialCard = () => {
           booking.
         </p>
         <div className="viewer flex justify-end w-full gap-4 align-center -mt-5 md:mt-0">
-          <img src={viewers} className="rounded-full w-6 h-6 md:w-14 md:h-14" alt="viewer" />
+          {/* <img src={viewers} className="rounded-full w-6 h-6 md:w-14 md:h-14" alt="viewer" /> */}
           <div className="flex flex-col items-end justify-start">
             <p className="font-semibold text-[8px] md:text-[16px]">Chirag Chedda</p>
             <small className="text-[6px] md:text-xs font-medium text-zinc-600">pAY n pLAY uSER</small>

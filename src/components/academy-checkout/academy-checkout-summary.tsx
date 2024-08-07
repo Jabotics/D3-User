@@ -1,22 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Button } from "../ui/button";
 import { RootState } from "@/store";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useJoinAcademyMutation } from "@/store/actions/slices/academySlice";
-import React, { useState } from "react";
-import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
+import React, { useEffect, useState } from "react";
+import { logout, useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 
 const AcademyCheckoutSummary = ({
   hasSubmit,
 }: {
   hasSubmit: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const searchParams = useSearchParams();
   const academyId = searchParams[0].get("id");
 
   const [toRefetchUserData, setToRefetchUserData] = useState(false);
-  useVerifySessionQuery({}, { skip: !toRefetchUserData });
+  const { isError } = useVerifySessionQuery({}, { skip: !toRefetchUserData });
 
   const [joinAcademy] = useJoinAcademyMutation();
 
@@ -99,6 +101,13 @@ const AcademyCheckoutSummary = ({
       console.log(error);
     }
   };
+  
+  useEffect(() => {
+    if (isError) {
+      dispatch(logout())
+      navigate("/login")
+    }
+  }, [dispatch, isError, navigate])
 
   return (
     <div className="flex flex-col bg-[#FFFFFF] border rounded-lg p-4 gap-4">

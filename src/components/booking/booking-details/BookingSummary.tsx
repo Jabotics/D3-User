@@ -2,12 +2,15 @@ import { Button } from "@/components/ui/button";
 import { RootState } from "@/store";
 import { useGetGroundQuery } from "@/store/actions/slices/groundSlice";
 import { useAddSlotsMutation } from "@/store/actions/slices/slotsSlice";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { logout } from "@/store/actions/slices/authSlice";
 const BookingSummary = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const { allSlots, selectedSlots, listOfPrices, selectedGroundId } =
     useAppSelector((state: RootState) => state.slots);
   const { userData } = useAppSelector((state: RootState) => state.auth);
@@ -25,11 +28,13 @@ const BookingSummary = () => {
   );
   useEffect(() => {
     getGround.refetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroundId]);
 
   const [add] = useAddSlotsMutation();
   const handleSlotBooking = async () => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const res: any = await add({
         city: groundDetails[0].city?._id,
         ground: groundDetails[0].id,
@@ -44,6 +49,11 @@ const BookingSummary = () => {
       console.log(res);
     } catch (error) {
       toast.error((error as { data: { message: string } })?.data?.message);
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      dispatch(logout());
+
+      navigate("/login");
     }
   };
 
@@ -72,12 +82,14 @@ const BookingSummary = () => {
           Cricket
         </span>
       </div>
-      <div className="flex flex-row justify-between">
-        <span className="inline-block text-[12px]">Turf Size</span>
-        <span className="inline-block text-[12px] text-[#000000] font-semibold">
-        {`${groundDetails[0]?.dimensions?.width} x ${groundDetails[0]?.dimensions?.length}`}
-        </span>
-      </div>
+      {groundDetails[0]?.dimensions && (
+        <div className="flex flex-row justify-between">
+          <span className="inline-block text-[12px]">Turf Size</span>
+          <span className="inline-block text-[12px] text-[#000000] font-semibold">
+            {`${groundDetails[0]?.dimensions?.width} x ${groundDetails[0]?.dimensions?.length}`}
+          </span>
+        </div>
+      )}
       {selectedSlots.length !== 0 && (
         <div className="flex flex-row justify-between">
           <span className="inline-block text-[12px]">Time</span>

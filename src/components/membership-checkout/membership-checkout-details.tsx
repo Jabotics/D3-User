@@ -33,7 +33,7 @@ interface MembershipCheckoutDetailsProps {
     address: string;
     membership: string;
     sport: string;
-    shift?: string;
+    shift?: "morning" | "evening" | null;
     customer: string;
     ground: string;
     city: string;
