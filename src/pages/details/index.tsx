@@ -13,6 +13,10 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 
+import { SiTicktick } from "react-icons/si";
+import { RxCrossCircled } from "react-icons/rx";
+import { FaRegCheckSquare } from "react-icons/fa";
+
 const items = [
   {
     title: "Sports Available",
@@ -31,7 +35,10 @@ const Details = () => {
   const selectedCity = useAppSelector(
     (state: RootState) => state.city.selectedCity
   );
-  useGetGroundQuery({ id: id, city: selectedCity }, { refetchOnMountOrArgChange: true });
+  useGetGroundQuery(
+    { id: id, city: selectedCity },
+    { refetchOnMountOrArgChange: true }
+  );
   const { grounds: groundDetails, locationArr } = useAppSelector(
     (state: RootState) => state.ground
   );
@@ -39,11 +46,15 @@ const Details = () => {
   useEffect(() => {
     // getGround.refetch();
     // if (!getGround.isLoading) {
-      if (groundDetails.length === 1) {
-        dispatch(setLocationArr(groundDetails[0]?.name));
-      }
+    if (groundDetails.length === 1) {
+      dispatch(setLocationArr(groundDetails[0]?.name));
+    }
     // }
-  }, [id, selectedCity]);
+  }, [dispatch, groundDetails, id, selectedCity]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section className="flex flex-col px-5 lg:px-[95px] xl:px-40 w-full overflow-hidden">
@@ -79,7 +90,7 @@ const Details = () => {
         ))}
       </span>
 
-      <div className="flex flex-col mt-5 gap-16 w-full">
+      <div className="flex flex-col mt-5 gap-8 w-full">
         <div className="flex justify-center items-center xl:gap-10 lg:gap-6 gap-5 flex-col lg:flex-row md:items-center w-full h-fit lg:h-[65vh] overflow-hidden">
           <div className="w-full lg:w-2/3 h-full ">
             <LeftPanel groundDetails={groundDetails[0] as IGround} />
@@ -89,20 +100,52 @@ const Details = () => {
           </div>
         </div>
         <div className="flex justify-center flex-col items-center gap-4 mt-20 md:mt-16 lg:mt-2 w-full">
-          <div className="w-full">
-            <Accordion items={items} />
+          <div className="w-full h-40 flex flex-row items-start gap-5">
+            <div className="flex-1 h-full flex flex-col gap-1">
+              <h1 className="text-2xl">Amenities</h1>
+              <span className="flex-1 flex flex-row gap-3">
+                {groundDetails[0]?.amenities?.length > 0
+                  ? groundDetails[0]?.amenities?.map((item, index) => {
+                      return (
+                        <div key={index}>
+                          <FaRegCheckSquare />
+                          <span>{item}</span>
+                        </div>
+                      );
+                    })
+                  : "No Amenities is there"}
+              </span>
+            </div>
+            <div className="w-1/3 h-full">
+              <h1 className="text-2xl">AddOns</h1>
+              <span className="flex-1 flex flex-col gap-1 overflow-x-hidden overflow-y-auto">
+                {groundDetails[0]?.rules?.not_allowed?.length > 0
+                  ? groundDetails[0]?.rules?.not_allowed?.map((item, index) => {
+                      return (
+                        <div key={index}>
+                          <FaRegCheckSquare />
+                          <span>{item}</span>
+                        </div>
+                      );
+                    })
+                  : "No Add ons"}
+              </span>
+            </div>
           </div>
           <div className="w-full">
             <Accordion items={items} />
           </div>
-          <div className="w-full">
-            <Accordion items={items} />
-          </div>
-          <div className="w-full">
-            <Accordion items={items} />
-          </div>
-          <div className="w-full">
-            <Accordion items={items} />
+          <div className="w-full h-10 flex flex-row items-center gap-4 mt-2">
+            {groundDetails[0]?.coupon_available ? (
+              <SiTicktick size={25} className="text-[#54a63f]" />
+            ) : (
+              <RxCrossCircled size={25} className="text-[#C63927]" />
+            )}
+            <span className="text-xl">
+              {groundDetails[0]?.coupon_available
+                ? "Coupon(s) Available"
+                : "Coupon Not Available"}
+            </span>
           </div>
         </div>
         <hr />

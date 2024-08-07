@@ -32,6 +32,8 @@ export interface IGround {
   images: string[];
   video: string;
   amenities: string[];
+  coupon_available: boolean;
+  is_popular: boolean;
 }
 
 export interface ISport {
@@ -267,12 +269,12 @@ export interface IBlog {
     _id: string;
   }[];
   createdAt: string;
-  image: string
-  featured: boolean
+  image: string;
+  featured: boolean;
 }
 
 export interface IPopularBlog {
-  id: string
-  title: string
-  createdAt: string
+  id: string;
+  title: string;
+  createdAt: string;
 }
