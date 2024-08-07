@@ -30,7 +30,7 @@ import { useEffect, useRef, useState } from "react";
 import { setTitle } from "@/store/actions/slices/profileSlice";
 import { APIEndPoints } from "@/APIEndpoint";
 
-import { LiaCampgroundSolid } from "react-icons/lia";
+import { FaRegBuilding } from "react-icons/fa";
 import { ToggleOptions } from "../toggle-options";
 
 export const Navbar = () => {
@@ -317,7 +317,7 @@ export const Navbar = () => {
                             rel="noreferrer noopener"
                             className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
                           >
-                            <LiaCampgroundSolid size={20} />
+                            <FaRegBuilding size={15} className="w-5" />
                             <span>About Us</span>
                           </Link>
                           <Link
@@ -326,7 +326,7 @@ export const Navbar = () => {
                             rel="noreferrer noopener"
                             className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
                           >
-                            <FaMouse size={20} />
+                            <FaMouse size={15} className="w-5" />
                             <span>Terms Of Use</span>
                           </Link>
                           <Link
@@ -335,7 +335,7 @@ export const Navbar = () => {
                             rel="noreferrer noopener"
                             className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
                           >
-                            <MdContactSupport size={20} />
+                            <MdContactSupport size={20} className="w-5" />
                             <span>Contact</span>
                           </Link>
                           <div className="h-[1px] bg-gray-200 my-1"></div>
@@ -345,7 +345,7 @@ export const Navbar = () => {
                             rel="noreferrer noopener"
                             className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
                           >
-                            <RiNewspaperLine size={20} />
+                            <RiNewspaperLine size={20} className="w-5" />
                             Blogs
                           </Link>
                           <Link
@@ -354,7 +354,7 @@ export const Navbar = () => {
                             rel="noreferrer noopener"
                             className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
                           >
-                            <MdOutlineReviews size={20} />
+                            <MdOutlineReviews size={20} className="w-5" />
                             Give Review
                           </Link>
                           <div className="h-[1px] bg-gray-200 my-1"></div>
