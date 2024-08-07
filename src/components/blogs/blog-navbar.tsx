@@ -166,7 +166,7 @@ const BlogNavbar = () => {
                     ) : (
                       <Button
                         variant={"default"}
-                        className="w-21 text-sm h-6 lg:h-7 rounded-3xl bg-[#9add8a] text-gray-50 hover:bg-[#53a53fcb]"
+                        className="w-21 text-sm h-6 lg:h-7 rounded-3xl border border-[#9add8a] bg-transparent text-gray-50 hover:bg-[#53a53fcb]"
                         onClick={() => {
                           navigate("/login");
                         }}

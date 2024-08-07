@@ -19,6 +19,8 @@ import { useVerifySessionQuery } from "@/store/actions/slices/authSlice";
 import { FaRegCheckSquare } from "react-icons/fa";
 import React from "react";
 
+import { FaDiamond } from "react-icons/fa6";
+
 function generateRandomString(length = 30) {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -79,7 +81,7 @@ const VenueItem = ({ item }: { item: IGround }) => {
       {Object.keys(item).length !== 0 ? (
         <div className="flex flex-col items-center justify-center relative">
           <span className="w-fit absolute bg-[#c1ecb6] block sm:hidden top-1 left-1 text-teal-900 px-1 rounded-md text-xs font-semibold tracking-wide">
-            {`₹20000`}
+            {`₹2000`}
             <span className="italic"> onwards</span>
           </span>
           <div className="flex rounded-t-md overflow-hidden w-[90vw] sm:w-full lg:w-[45vw] xl:w-[65vw] 2xl:w-full h-24 sm:h-32 lg:h-24 xl:h-32 border border-b-gray-200 border-t-[#b2d8a9] border-r-[#b2d8a9]">
@@ -101,8 +103,16 @@ const VenueItem = ({ item }: { item: IGround }) => {
             <div className="hidden flex-1 sm:flex flex-row gap-4 py-2 sm:py-2 px-4 sm:px-5">
               <div className="w-full flex flex-col">
                 <div className="flex flex-row w-full gap-2 justify-between items-center mt-0 xl:mt-3">
-                  <span className="inline-block w-[40%] text-[8px] sm:text-[12px] md:text-base lg:text-sm xl:text-base font-bold">
-                    {item?.name}
+                  <span className="w-[40%] text-[8px] sm:text-[12px] md:text-base lg:text-sm xl:text-base font-bold flex flex-row gap-5 items-center">
+                    <span className="w-fit h-full">{item?.name}</span>
+                    {item?.is_popular ? (
+                      <span className="flex-1 h-full overflow-hidden flex flex-row items-center ">
+                        <span className="font-light text-sm flex items-center gap-1 bg-[#8ddb7970] px-3 rounded-md">
+                          <FaDiamond size={8} className="text-[#54a63f]" />
+                          <span>Popular</span>
+                        </span>
+                      </span>
+                    ) : null}
                   </span>
                   <button
                     className="bg-[#54a63f] w-[40%] md:w-[30%] ms-auto h-[24px] xl:h-[30px] text-[12px] lg:text-sm xl:text-[12px] flex items-center justify-center text-white p-2 rounded-lg shadow-md shadow-gray-500"
@@ -127,40 +137,6 @@ const VenueItem = ({ item }: { item: IGround }) => {
                         color="white"
                       />
                     )}
-                  </div>
-                </div>
-
-                <div className="flex items-start justify-between gap-2 mt-1">
-                  <span className="w-40 overflow-y-hidden overflow-x-auto pb-2 flex-1 hidden lg:flex text-[12px] sm:text-[14px] md:text-xs lg:text-[10px] xl:text-xs font-base text-[#676767] gap-2 whitespace-nowrap">
-                    {item?.supported_sports &&
-                      item.supported_sports.map((item, index) => {
-                        return (
-                          <p
-                            key={index}
-                            className="bg-gray-300 w-fit px-3 rounded-md"
-                          >
-                            {item.name}
-                          </p>
-                        );
-                      })}
-                  </span>
-                  <div className="w-full lg:w-40 xl:w-60 overflow-hidden flex flex-row items-center gap-2 self-start cursor-pointer hover:underline">
-                    <FaLocationDot size={12} color="#000" />
-                    <p className="p-0 m-0 text-[12px] sm:text-[14px] md:text-xs text-[#676767] whitespace-nowrap">
-                      {window.innerWidth > 1280
-                        ? `${(
-                            item?.venue?.name +
-                            " " +
-                            item?.venue?.address
-                          ).substring(0, 30)}...`
-                        : window.innerWidth > 1024
-                        ? `${(
-                            item?.venue?.name +
-                            " " +
-                            item?.venue?.address
-                          ).substring(0, 20)}...`
-                        : `${item?.venue?.name + " " + item?.venue?.address}`}
-                    </p>
                   </div>
                 </div>
 
@@ -192,6 +168,40 @@ const VenueItem = ({ item }: { item: IGround }) => {
                     <span className="animate-fade-in-out bg-rose-700 h-2 w-2 rounded-full"></span>
                     <span>Live</span>
                   </Button>
+                </div>
+
+                <div className="flex items-start justify-between gap-2 mt-5">
+                  <span className="w-40 overflow-y-hidden overflow-x-auto pb-2 flex-1 hidden lg:flex text-[12px] sm:text-[14px] md:text-xs lg:text-[10px] xl:text-xs font-base text-[#676767] gap-2 whitespace-nowrap">
+                    {item?.supported_sports &&
+                      item.supported_sports.map((item, index) => {
+                        return (
+                          <p
+                            key={index}
+                            className="bg-gray-300 w-fit px-3 rounded-md"
+                          >
+                            {item.name}
+                          </p>
+                        );
+                      })}
+                  </span>
+                  <div className="w-full lg:w-40 xl:w-60 overflow-hidden flex flex-row items-center gap-2 self-start cursor-pointer hover:underline">
+                    <FaLocationDot size={12} color="#000" />
+                    <p className="p-0 m-0 text-[12px] sm:text-[14px] md:text-xs text-[#676767] whitespace-nowrap">
+                      {window.innerWidth > 1280
+                        ? `${(
+                            item?.venue?.name +
+                            " " +
+                            item?.venue?.address
+                          ).substring(0, 30)}...`
+                        : window.innerWidth > 1024
+                        ? `${(
+                            item?.venue?.name +
+                            " " +
+                            item?.venue?.address
+                          ).substring(0, 20)}...`
+                        : `${item?.venue?.name + " " + item?.venue?.address}`}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

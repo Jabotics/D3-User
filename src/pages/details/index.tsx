@@ -16,6 +16,7 @@ import { RootState } from "@/store";
 import { SiTicktick } from "react-icons/si";
 import { RxCrossCircled } from "react-icons/rx";
 import { FaRegCheckSquare } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
 
 const items = [
   {
@@ -150,7 +151,43 @@ const Details = () => {
         </div>
         <hr />
         <div className="mb-10">
-          <RelatedGrounds />
+          <RelatedGrounds relatedGroundsOfId={groundDetails[0]?.id} />
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center w-full h-24 mt-20 mb-10">
+        <div className="w-1/2 h-full bg-[#53A53F] rounded-l-md hidden md:flex flex-col items-start justify-center pl-5 lg:pl-20">
+          <div className="text-lg font-semibold text-gray-50">
+            Host Your Events
+          </div>
+          <div className="w-[340px] text-xs text-gray-50">
+            Engage with the Largest Sports Community and Network
+          </div>
+          <Button variant={"default"} className="rounded-md mt-2 h-6">
+            Get In Touch
+          </Button>
+        </div>
+        <div
+          className={`w-full md:w-1/2 h-full rounded-r-md overflow-hidden relative`}
+        >
+          <img
+            src="/images/academy.jpeg"
+            alt="academy"
+            className="w-full h-full object-cover object-top "
+          />
+
+          <div className="absolute top-4 left-4 md:hidden text-xl font-semibold text-gray-200 bg-gray-500/25">
+            Host Your Events
+          </div>
+          <div className="absolute top-12 left-4 md:hidden max-w-[340px] text-xs text-gray-100 bg-gray-500/25">
+            Engage with the Largest Sports Community and Network
+          </div>
+          <Button
+            variant={"default"}
+            className="absolute bottom-4 left-4 md:hidden rounded-md mt-3 h-5 text-xs"
+          >
+            Get In Touch
+          </Button>
         </div>
       </div>
     </section>
