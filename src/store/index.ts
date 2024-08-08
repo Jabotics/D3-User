@@ -32,6 +32,7 @@ import {
   chatApi,
 
   contactApi,
+  reviewApi,
 
   faqsApi,
   blogsApi,
@@ -70,6 +71,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         chatApi.middleware,
 
         contactApi.middleware,
+        reviewApi.middleware,
 
         faqsApi.middleware,
         blogsApi.middleware,

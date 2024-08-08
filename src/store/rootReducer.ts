@@ -33,6 +33,7 @@ import {
   chatSlice,
   chatApi,
   contactApi,
+  reviewApi,
   faqsApi,
   faqsSlice,
   blogsApi,
@@ -223,6 +224,9 @@ export const rootReducer = combineReducers({
 
   // CONTACT
   [contactApi.reducerPath]: contactApi.reducer,
+
+  // REVIEW
+  [reviewApi.reducerPath]: reviewApi.reducer,
 
   // FAQ
   [faqsApi.reducerPath]: faqsApi.reducer,

@@ -357,7 +357,7 @@ export const Navbar = () => {
                             Blogs
                           </Link>
                           <Link
-                            to="/contact/feedback"
+                            to="/contact/customer-review"
                             target="_blank"
                             rel="noreferrer noopener"
                             className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"

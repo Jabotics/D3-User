@@ -13,7 +13,7 @@ const AppShell = () => {
   const shouldHideNavbarFooter = hiddenRoutesFooter.includes(location.pathname);
 
   return (
-    <div className="flex flex-col gap-0">
+    <div className="flex flex-col gap-0 overflow-hidden">
       {!shouldHideNavbarNavbar && <Navbar />}
       <Outlet />
       {!shouldHideNavbarFooter && <Footer />}
