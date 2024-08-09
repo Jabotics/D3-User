@@ -167,7 +167,7 @@ export const ChatSlice = createSlice({
       // console.log(action.payload)
       if (action.payload.chat_id == state.chatId) {
         if (
-          Array.from(new Set(y.map((i) => i.sender))).length < 2 ||
+          Array.from(new Set(y.map((i) => i.sender))).length <= 2 ||
           x.has(action.payload.message.sender)
         ) {
           state.allMessages.push(action.payload.message)
