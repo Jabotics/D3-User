@@ -71,4 +71,7 @@ export const APIEndPoints = {
 
   // FEEDBACK
   feedback: '/api/feedback',
+
+  // HAPPY CUSTOMERS
+  happy_customers: '/api/happy-customers',
 }

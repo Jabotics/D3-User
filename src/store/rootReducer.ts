@@ -38,6 +38,10 @@ import {
   faqsSlice,
   blogsApi,
   blogsSlice,
+
+  happyCustomersApi,
+
+  happyCustomersSlice,
 } from "@/store/actions";
 import { RequestHandler } from "./RequestHandler";
 
@@ -179,6 +183,8 @@ export const rootReducer = combineReducers({
   faqs: faqsSlice,
   blogs: blogsSlice,
 
+  happyCustomers: happyCustomersSlice,
+
   chat: chatsPersistReducer,
 
   [RequestHandler.reducerPath]: RequestHandler.reducer,
@@ -233,4 +239,8 @@ export const rootReducer = combineReducers({
 
   // BLOGS
   [blogsApi.reducerPath]: blogsApi.reducer,
+
+  // HAPPY CUSTOMERS
+  [happyCustomersApi.reducerPath]: happyCustomersApi.reducer,
+  
 });

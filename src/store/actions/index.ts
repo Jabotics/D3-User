@@ -23,6 +23,7 @@ import { reviewApi } from './slices/reviewSlice'
 
 import faqsSlice, { faqsApi } from './slices/faqSlice'
 import blogsSlice, { blogsApi } from './slices/blogSlice'
+import happyCustomersSlice, { happyCustomersApi } from './slices/happyCustomerSlice'
 
 export {
   authSlice,
@@ -74,4 +75,7 @@ export {
 
   blogsApi,
   blogsSlice,
+  
+  happyCustomersSlice,
+  happyCustomersApi,
 }

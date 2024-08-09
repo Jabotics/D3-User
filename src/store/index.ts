@@ -37,6 +37,8 @@ import {
   faqsApi,
   blogsApi,
 
+  happyCustomersApi,
+
 } from "@/store/actions";
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -75,6 +77,8 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
 
         faqsApi.middleware,
         blogsApi.middleware,
+
+        happyCustomersApi.middleware,
         
         socketMiddleware,
       );
