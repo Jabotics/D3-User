@@ -32,7 +32,7 @@ export const Testimonials = () => {
     },
   };
 
-  useGetHappyCustomersQuery();
+  const x = useGetHappyCustomersQuery();
   const { happyCustomers } = useAppSelector(
     (state: RootState) => state.happyCustomers
   );
@@ -78,7 +78,7 @@ export const Testimonials = () => {
             partialVisible={true}
           >
             <>
-              {happyCustomers?.length > 0 ? (
+              {!x.isLoading || happyCustomers?.length > 0 ? (
                 <>
                   {happyCustomers.map((item, index) => {
                     return (
