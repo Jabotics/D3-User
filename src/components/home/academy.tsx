@@ -60,7 +60,7 @@ export const Academy = () => {
             Join Sports Academy{" "}
           </h2>
           <h5 className="mt-0 2xl:mt-3 text-sm md:text-sm">List Your Academy With Us</h5>
-          <p className="mt-5 text-sm md:text-base w-[75%] line-clamp-[10]">
+          <p className="mt-5 text-sm md:text-base w-[75%] line-clamp-[10] leading-5 md:leading-normal">
             Welcome to Ports Academy, where the tide of knowledge meets the
             currents of innovation. Our demo content provides a glimpse into the
             dynamic world of maritime studies, where students navigate through
