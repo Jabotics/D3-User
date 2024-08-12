@@ -107,8 +107,8 @@ const VenueItem = ({ item }: { item: IGround }) => {
                     <span className="w-fit h-full">{item?.name}</span>
                     {item?.is_popular ? (
                       <span className="flex-1 h-full overflow-hidden flex flex-row items-center ">
-                        <span className="font-light text-sm flex items-center gap-1 bg-[#8ddb7970] px-3 rounded-md">
-                          <FaDiamond size={8} className="text-[#54a63f]" />
+                        <span className="font-light text-sm flex items-center gap-1 bg-[#f0f18eb9] px-3 rounded-md">
+                          <FaDiamond size={8} className="text-[#b88436]" />
                           <span>Popular</span>
                         </span>
                       </span>
