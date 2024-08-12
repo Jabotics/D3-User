@@ -117,7 +117,7 @@ const PrivacyPolicyPage = () => {
         ))}
       </div>
 
-      <div className="sticky top-16 bg-white z-20 flex items-center gap-5 whitespace-nowrap pt-10 lg:pt-12 pb-4 mb-4">
+      <div className="sticky top-16 max-w-[100vw] overflow-y-hidden overflow-x-auto bg-white z-20 flex items-center gap-5 whitespace-nowrap pt-10 lg:pt-12 pb-4 mb-4">
         {[
           "Privacy Policies",
           "Privacy Certifications",
@@ -213,7 +213,7 @@ const PrivacyPolicyPage = () => {
         </div>
       </div>
 
-      <div className="w-full h-40 bg-gray-200 flex items-center justify-center text-4xl lg:text-[3rem] relative rounded-md overflow-hidden">
+      <div className="w-full h-20 md:h-40 bg-gray-200 flex items-center justify-center text-2xl md:text-4xl lg:text-[3rem] relative rounded-md overflow-hidden">
         <span className="z-10 text-gray-800 font-medium">Privacy Policy</span>
         {/* <img
           src={"/images/academy-bg.webp"}

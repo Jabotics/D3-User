@@ -17,10 +17,10 @@ const PrivacyPolicyComponent = ({
   faqs: React.MutableRefObject<HTMLDivElement | null>;
 }) => {
   return (
-    <div className="ml-20 pr-60 mt-20">
+    <div className="ml-5 md:ml-10 xl:ml-20 pr-5 md:pr-40 xl:pr-60 mt-20">
       <div className="mt-10 mb-20" id="policies" ref={policies}>
-        <h2 className="text-4xl mb-5">Privacy Policies</h2>
-        <div>
+        <h2 className="text-2xl lg:text-4xl mb-5">Privacy Policies</h2>
+        <div className="text-sm md:text-base">
           Welcome to D3 Sports Arena! Your privacy and security are important to
           us. This Privacy Policy outlines how we collect, use, disclose, and
           safeguard your information when you visit our website, use our app, or
@@ -36,7 +36,7 @@ const PrivacyPolicyComponent = ({
             rel="norefferer noopener"
           >
             <MdCircle className="text-[#53a53f]" size={10} />
-            <p className="text-[#53a53f] font-medium text-lg tracking-wider hover:underline cursor-pointer">
+            <p className="text-[#53a53f] font-medium tracking-wider hover:underline cursor-pointer text-sm md:text-lg">
               Privacy Notice
             </p>
           </Link>
@@ -44,23 +44,23 @@ const PrivacyPolicyComponent = ({
       </div>
 
       <div className="my-10 mb-20" id="certifications" ref={certifications}>
-        <h2 className="text-4xl mb-5">Privacy Certifications</h2>
-        <div>
+        <h2 className="text-2xl lg:text-4xl mb-5">Privacy Certifications</h2>
+        <div className="text-sm md:text-base">
           As part of our overall approach to privacy and security, D3
           occasionally participates in privacy-related programs and maintains
           privacy-related certifications on certain products, services, and
           experiences.
         </div>
 
-        <p className="mt-5">
+        <p className="mt-5 text-sm md:text-base">
           Learn more about our current{" "}
           <span className="text-[#53a53f]">privacy certifications.</span>
         </p>
       </div>
 
       <div className="my-10 mb-20" id="frauds" ref={frauds}>
-        <h2 className="text-4xl mb-5">Fraud Alerts</h2>
-        <div>
+        <h2 className="text-2xl lg:text-4xl mb-5">Fraud Alerts</h2>
+        <div className="text-sm md:text-base">
           The following fraud and scams are not from Walmart. We are listing
           them here in an effort to educate you about these activities. If you
           feel that you have been defrauded, you may want to contact the Federal
@@ -68,15 +68,15 @@ const PrivacyPolicyComponent = ({
           Attorney General's office.
         </div>
 
-        <p className="mt-5">
+        <p className="mt-5 text-sm md:text-base">
           Learn more about important{" "}
           <span className="text-[#53a53f]">fraud alerts.</span>
         </p>
       </div>
 
       <div className="my-10 mb-20" id="identityThefts" ref={identityThefts}>
-        <h2 className="text-4xl mb-5">Report Identity Theft</h2>
-        <div>
+        <h2 className="text-2xl lg:text-4xl mb-5">Report Identity Theft</h2>
+        <div className="text-sm md:text-base">
           If you are a victim of identity theft, you may request, at no charge,
           copies of application and business records in our control relating to
           the fraudulent transactions which may have occurred at Walmart or
@@ -84,7 +84,7 @@ const PrivacyPolicyComponent = ({
           theft, use this page to request copies of records in our control.
         </div>
 
-        <p className="mt-5">
+        <p className="mt-5 text-sm md:text-base">
           Learn more about{" "}
           <span className="text-[#53a53f]">reporting identity theft.</span>
         </p>
@@ -94,14 +94,14 @@ const PrivacyPolicyComponent = ({
         <h2 className="text-4xl mb-5">
           Stay Secure Online – Cybersecurity Guidelines
         </h2>
-        <div>
+        <div className="text-sm md:text-base">
           Keeping your private information private is increasingly important as
           our digital world expands. There are steps you can take to protect the
           things you want to stay private – and some of them take but a few
           clicks.
         </div>
 
-        <p className="mt-5">
+        <p className="mt-5 text-sm md:text-base">
           Read on for some{" "}
           <Link
             to={"/cybersecurity-guidelines-for-online-safety"}
@@ -116,9 +116,9 @@ const PrivacyPolicyComponent = ({
       </div>
 
       <div className="my-10 mb-20" id="faqs" ref={faqs}>
-        <h2 className="text-4xl mb-5">Privacy & Security FAQs</h2>
+        <h2 className="text-2xl lg:text-4xl mb-5">Privacy & Security FAQs</h2>
 
-        <p className="mt-5">
+        <p className="mt-5 text-sm md:text-base">
           View the{" "}
           <Link
             to={"/frequently-asked-questions"}
