@@ -96,7 +96,7 @@ const BlogNavbar = () => {
                   {hasToken ? (
                     <div className="w-full flex items-center justify-center">
                       <div
-                        className={`w-7 h-7 lg:w-8 lg:h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${
+                        className={` w-7 h-7 lg:w-8 lg:h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${
                           pathName.pathname === "/profile"
                             ? "border-4 border-[#53a53fbe]"
                             : "border-[1px] border-gray-300"
@@ -122,12 +122,12 @@ const BlogNavbar = () => {
                   ) : (
                     <Button
                       variant={"default"}
-                      className="w-21 text-sm h-6 lg:h-7 rounded-3xl bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb]"
+                      className=" text-sm h-6 border lg:border-none border-[#ddffd57a] lg:h-7 rounded-3xl bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb]"
                       onClick={() => {
                         navigate("/login");
                       }}
                     >
-                      <LogIn className="mr-2 text-white" size={14} />
+                      <LogIn className="text-white" size={14} />
                       {isLarge && "Login"}
                     </Button>
                   )}

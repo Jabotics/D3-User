@@ -20,7 +20,7 @@ const BlogLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <BlogNavbar />
       <div className="container mt-10 overflow-hidden">
-        <span className={`h-4 lg:h-8 flex items-center mt-12 lg:mt-3 gap-1 text-[10px] md:text-xs lg:text-sm lg:ml-4 mb-6 ${locationArr.length === 1 && 'hidden'}`}>
+        <span className={`h-4 lg:h-8 flex items-center mt-12 lg:mt-3 gap-1 text-[10px] md:text-xs lg:text-sm ml-4 mb-6 ${locationArr.length === 1 && 'hidden'}`}>
           {locationArr.map((item, index) => (
             <div key={index}>
               <span
@@ -49,7 +49,7 @@ const BlogLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
           ))}
         </span>
-        <article className="ml-0 lg:ml-4">{children}</article>
+        <article className="ml-0 lg:ml-4 px-3 lg:px-0">{children}</article>
       </div>
       <Footer />
     </>

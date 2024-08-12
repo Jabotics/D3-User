@@ -53,7 +53,7 @@ export const HomePage = () => {
               across nation.
             </p>
 
-            <Link to={"/blogs"}>
+            <Link to={"/blogs"} target="_blank" rel="noreferrer noopener">
               <Button className="mt-5 h-8 px-10 bg-white text-black">
                 Blogs
               </Button>

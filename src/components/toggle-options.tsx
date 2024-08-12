@@ -64,7 +64,7 @@ export function ToggleOptions({
               onClick={() => navigate("/")}
             />
           )}
-          <RiArrowDropDownLine size={20} className={`${mobile ? 'text-gray-300' : 'text-gray-800'}`} />
+          <RiArrowDropDownLine size={20} className={`${isBlogPage ? 'text-gray-300' : mobile ? 'text-gray-300' : 'text-gray-800'}`} />
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent

@@ -25,10 +25,10 @@ const BlogPage = () => {
   return (
     <BlogLayout>
       <section className="min-h-screen w-full">
-        <div className="w-full h-[65vh] bg-transparent relative rounded-md overflow-hidden">
-          <div className="w-2/3 h-64 absolute top-0 left-0">
-            <div className="w-full h-32 flex flex-row">
-              <div className="bg-white w-1/2 h-32 rounded-br-2xl flex items-center justify-center">
+        <div className="w-full h-[35vh] lg:h-[65vh] bg-transparent relative rounded-md overflow-hidden">
+          <div className="w-1/2 h-20 lg:h-64 absolute top-0 left-0">
+            <div className="w-full h-10 lg:h-32 flex flex-row">
+              <div className="bg-white w-full lg:w-1/2 h-16 lg:h-32 rounded-br-2xl flex items-center justify-center">
                 <div className="w-[95%] h-[90%] text-5xl text-[#54a63f] font-medium tracking-wider rounded-2xl border-2 border-[#54a63f] flex items-center justify-center">
                   D3 Blogs
                 </div>
@@ -52,7 +52,7 @@ const BlogPage = () => {
             className="w-full h-full object-cover object-top"
           />
 
-          <div className="absolute bottom-16 right-16 flex flex-col">
+          <div className="absolute bottom-2 right-2 lg:bottom-16 lg:right-16 flex flex-col">
             <p className="text-xs text-[#54a63f] ml-5 mb-1">
               Read All the important measures to be taken
             </p>
@@ -68,7 +68,7 @@ const BlogPage = () => {
           </div>
         </div>
 
-        <h1 className={`mt-10 text-2xl ${blogs.length === 0 && "hidden"}`}>
+        <h1 className={`mt-10 text-lg lg:text-2xl ${blogs.length === 0 && "hidden"}`}>
           Featured blogs
         </h1>
 
@@ -83,38 +83,48 @@ const BlogPage = () => {
               <div className="w-1/2 bg-gray-100 rounded-md h-80 "></div>
             </>
           ) : (
-            blogs.filter(i => i.featured).slice(0, 3).map((blog, index) => {
-              return (
-                <div key={index} className="w-1/3 group">
-                  <div
-                    className=" bg-gray-100 rounded-md h-80 cursor-pointer overflow-hidden"
-                    onClick={() => {
-                      navigate(`/blogs/post-id=${blog.id}`);
-                      dispatch(setLocationArr(`${blog.title}`));
-                    }}
-                  >
-                    <img
-                      src={`${APIEndPoints.BackendURL}/${blog?.image}`}
-                      alt=""
-                      className={`w-full object-cover object-center grayscale-[80%] group-hover:grayscale-0 h-full`}
-                    />
-                  </div>
-                  <div className="mt-5 text-xs">
-                    <p
-                      className="float-right px-10 py-1 h-7 mt-2 flex items-center justify-center ml-5 mb-5 rounded-md bg-[#54a63f] cursor-pointer text-white"
-                      onClick={() => {
-                        navigate(`/blogs/post-id=${blog.id}`);
-                        dispatch(setLocationArr(`${blog.title}`));
-                      }}
+            <div className="flex overflow-x-auto overflow-y-hidden gap-3 justify-between">
+              {blogs
+                .filter((i) => i.featured)
+                .slice(0, 3)
+                .map((blog, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="w-1/2 lg:w-[32%] flex-shrink-0 group"
                     >
-                      View
-                    </p>
-                    <h1 className="text-xl mt-5 font-medium">{blog.title}</h1>
-                  </div>
-                  <p className=" mt-5 line-clamp-3">{blog.description}</p>
-                </div>
-              );
-            })
+                      <div
+                        className="bg-gray-100 rounded-md h-80 cursor-pointer overflow-hidden"
+                        onClick={() => {
+                          navigate(`/blogs/post-id=${blog.id}`);
+                          dispatch(setLocationArr(`${blog.title}`));
+                        }}
+                      >
+                        <img
+                          src={`${APIEndPoints.BackendURL}/${blog?.image}`}
+                          alt=""
+                          className={`w-full object-cover object-center grayscale-[80%] group-hover:grayscale-0 h-full`}
+                        />
+                      </div>
+                      <div className="mt-5 text-xs">
+                        <p
+                          className="float-right px-10 py-1 h-7 mt-2 flex items-center justify-center ml-5 mb-5 rounded-md bg-[#54a63f] cursor-pointer text-white"
+                          onClick={() => {
+                            navigate(`/blogs/post-id=${blog.id}`);
+                            dispatch(setLocationArr(`${blog.title}`));
+                          }}
+                        >
+                          View
+                        </p>
+                        <h1 className="text-xl mt-5 font-medium">
+                          {blog.title}
+                        </h1>
+                      </div>
+                      <p className="mt-5 line-clamp-3">{blog.description}</p>
+                    </div>
+                  );
+                })}
+            </div>
           )}
         </div>
 
