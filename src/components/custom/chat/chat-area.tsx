@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FaMinus, FaCircle } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
 import logo from "/images/Logo.svg";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { IoSend } from "react-icons/io5";
-import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import Texts from "./texts";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
@@ -39,7 +38,6 @@ const ChatArea = ({
 
   const [message, setMessage] = useState("");
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
-  const [showOptions, setShowOptions] = useState(false);
 
   const { chatId, allMessages } = useAppSelector(
     (state: RootState) => state.chat
@@ -119,14 +117,13 @@ const ChatArea = ({
 
   return (
     <div
-      className={`fixed bottom-8 right-8 w-[85vw] xs:w-[65vw] sm:w-[50vw] md:w-[40vw] lg:w-[30vw] xl:w-[25vw] 2xl:w-[20vw] ${
-        hasAcceptedTerms ? "h-[85vh]" : "h-[55vh]"
-      } bg-lime-50 shadow-lg transition-transform transform rounded-3xl z-50 overflow-hidden`}
-      // style={{ backgroundImage: `url('/images/chat.png')` }}
+      className={`fixed bottom-0 sm:bottom-8 right-0 sm:right-8 w-screen sm:w-[20rem] ${
+        hasAcceptedTerms ? "h-[100%] sm:h-[70vh]" : "h-[100%] sm:h-[55vh]"
+      } bg-lime-50 shadow-lg transition-transform transform rounded-none sm:rounded-3xl z-50 overflow-hidden`}
     >
-      <div className="flex items-center justify-between px-4 py-2 sm:p-4">
+      <div className="flex items-center justify-between px-4 py-2 w-full h-fit sm:p-4">
         <div>
-          <img src={logo} alt="logo" className="h-6 lg:h-8 " />
+          <img src={logo} alt="logo" className="h-8 " />
         </div>
         <button
           onClick={() => {
@@ -139,17 +136,19 @@ const ChatArea = ({
         </button>
       </div>
       <div
-        className={`mx-2 rounded-3xl border-t-2 border-lime-200 bg-[#ffffff] ${
-          hasAcceptedTerms ? "h-[75vh]" : "h-[21rem] xs:h-[27rem] sm:h-[25rem]"
+        className={`mx-2 h-fit rounded-md sm:rounded-3xl border-t-2 border-lime-200 bg-[#ffffff] ${
+          hasAcceptedTerms
+            ? "h-[92vh] sm:h-[60vh]"
+            : "h-[21rem] xs:h-[27rem] sm:h-[25rem]"
         } flex flex-col items-center justify-center`}
       >
         <p className="border-b border-gray-200 h-5 sm:h-7 w-full flex items-center justify-center text-[8px] sm:text-[10px] font-medium tracking-wide text-gray-500">
           By using D3, you agree to our &nbsp;
           <span className="text-blue-800 underline">Priavcy Policy</span>
         </p>
-        {!hasAcceptedTerms && (
+        {!hasAcceptedTerms ? (
           <>
-            <div className="flex-1 flex items-center justify-center">
+            <div className="h-[65vh] flex items-center justify-center">
               Welcome to D3 Chatbox!
             </div>
             <div className="h-24 xs:h-28 sm:h-36 border-t border-t-gray-200 bg-gray-50 w-full text-[8px] sm:text-[10px] md:text-[12px] p-4 flex flex-col items-center rounded-b-3xl border-b-lime-200 border-b">
@@ -171,57 +170,12 @@ const ChatArea = ({
               </Button>
             </div>
           </>
-        )}
-        {hasAcceptedTerms && (
+        ) : (
           <>
             <Texts setClose={setClose} closeChat={closeChat} />
             <div
-              className={`${
-                showOptions ? "h-58" : "h-28"
-              } border-t border-t-gray-200 bg-white w-full text-sm p-4 flex flex-col justify-between rounded-b-3xl border-b-lime-200 border-b mt-5`}
+              className={`h-20 border-t border-t-gray-200 bg-white w-full text-sm p-4 flex flex-col justify-between rounded-b-3xl border-b-lime-200 border-b mt-5`}
             >
-              {showOptions && (
-                <div className="flex-1 flex flex-col items-start justify-start -mt-3 mb-5">
-                  <span className="flex items-center">
-                    <FaCircle size={10} className="text-blue-800" />
-                    <Button
-                      variant={"link"}
-                      className="text-xs rounded-md h-8 text-blue-800 flex items-center justify-start"
-                    >
-                      Pay & Play
-                    </Button>
-                  </span>
-                  <span className="flex items-center">
-                    <FaCircle size={10} className="text-blue-800" />
-                    <Button
-                      variant={"link"}
-                      className="text-xs rounded-md h-8 text-blue-800 flex items-center justify-start"
-                    >
-                      Membership
-                    </Button>
-                  </span>
-                  <span className="flex items-center">
-                    <FaCircle size={10} className="text-blue-800" />
-                    <Button
-                      variant={"link"}
-                      className="text-xs rounded-md h-8 text-blue-800 flex items-center justify-start"
-                    >
-                      Academy
-                    </Button>
-                  </span>
-                </div>
-              )}
-              <div
-                className="text-xs flex w-full items-center justify-between text-blue-800 mb-2 cursor-pointer"
-                onClick={() => {
-                  setShowOptions(!showOptions);
-                }}
-              >
-                <span>Choose options</span>
-                <span>
-                  <MdOutlineKeyboardArrowUp size={20} />
-                </span>
-              </div>
               <div className="flex items-center bg-gray-100 border border-gray-300 rounded-full h-12">
                 <Input
                   placeholder="Ask Me Anything..."

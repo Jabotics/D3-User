@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IMessage } from "@/interface";
 import { RootState } from "@/store";
 import {
@@ -179,7 +180,7 @@ const Texts = ({
   }, []);
 
   return (
-    <div className="flex-1 w-full flex items-center justify-center overflow-x-hidden overflow-y-auto scroll-nobg">
+    <div className="h-[65vh] w-full flex items-center justify-center overflow-x-hidden overflow-y-auto scroll-nobg">
       {allMessages && allMessages.length > 0 ? (
         <div className="w-full h-full flex flex-col gap-2 px-5">
           {allMessages.map((item, index) => {

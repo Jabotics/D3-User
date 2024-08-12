@@ -15,14 +15,20 @@ import { Separator } from "../ui/separator";
 import { FaRegEdit } from "react-icons/fa";
 import { Button } from "../ui/button";
 
-const Chat = () => {
+const Chat = ({
+  openChat,
+  setOpenChat,
+}: {
+  openChat: boolean;
+  setOpenChat: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { hasToken } = useAppSelector((state: RootState) => state.auth);
   const { chatId } = useAppSelector((state: RootState) => state.chat);
 
-  const [openChat, setOpenChat] = useState<boolean>(false);
+  // const [openChat, setOpenChat] = useState<boolean>(false);
   const [closeChatModalOpen, setCloseChatModalOpen] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -83,11 +89,15 @@ const Chat = () => {
         </Dialog>
       )}
       {!closeChatModalOpen && openChat && (
-        <ChatArea
-          open={openChat}
-          setClose={setOpenChat}
-          closeChat={setCloseChatModalOpen}
-        />
+        <div className="fixed top-0 left-0 w-screen h-screen bg-transparent overflow-hidden z-50">
+          <div className="relative w-full h-full bg-transparent overflow-hidden">
+            <ChatArea
+              open={openChat}
+              setClose={setOpenChat}
+              closeChat={setCloseChatModalOpen}
+            />
+          </div>
+        </div>
       )}
       {!closeChatModalOpen && !openChat && (
         <div
