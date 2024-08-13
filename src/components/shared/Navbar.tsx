@@ -10,7 +10,12 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { FaMouse } from "react-icons/fa";
 import { MdContactSupport, MdOutlineReviews } from "react-icons/md";
 import { RiNewspaperLine } from "react-icons/ri";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { RootState } from "@/store";
 
 import {
@@ -32,6 +37,8 @@ import { APIEndPoints } from "@/APIEndpoint";
 
 import { FaRegBuilding } from "react-icons/fa";
 import { ToggleOptions } from "../toggle-options";
+import { setParams, setSelectedSportsStore } from "@/store/actions/slices/groundSlice";
+import { setSelectedSports } from "@/store/actions/slices/sportSlice";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -44,13 +51,15 @@ export const Navbar = () => {
   // const isSix20 = window.innerWidth >= 620;
 
   const [showMobile, setShowMobile] = useState(false);
-
+  const [isOpen, setIsOpen] = useState(false);
   const { userData, hasToken } = useAppSelector(
     (state: RootState) => state.auth
   );
-
+  const { selectedSportsStore } = useAppSelector(
+    (state: RootState) => state.ground
+  );
   const [search, setSearch] = useState<string>("");
-
+  const { sports } = useAppSelector((state: RootState) => state.sport);
   const { cities, selectedCity } = useAppSelector(
     (state: RootState) => state.city
   );
@@ -126,9 +135,8 @@ export const Navbar = () => {
                 <div className="flex items-center gap-3">
                   <div
                     ref={mobileRef}
-                    className={`flex items-center gap-1 lg:hidden transition-all duration-300 h-6 bg-[#d4f0cc] lg:bg-white px-1 rounded-xl border-[1px] lg:border-none border-[#b0cca9] ${
-                      showMobile ? "fade-in-15" : "fade-out-15"
-                    }`}
+                    className={`flex items-center gap-1 lg:hidden transition-all duration-300 h-6 bg-[#d4f0cc] lg:bg-white px-1 rounded-xl border-[1px] lg:border-none border-[#b0cca9] ${showMobile ? "fade-in-15" : "fade-out-15"
+                      }`}
                     onClick={() => {
                       if (window.innerWidth < 1023) {
                         setShowMobile(!showMobile);
@@ -140,11 +148,10 @@ export const Navbar = () => {
                       className="text-green-700"
                     />
                     <span
-                      className={`${
-                        window.innerWidth > 1023 || showMobile
-                          ? "block"
-                          : "hidden"
-                      } text-sm lg:text-[12px] font-[900] tracking-tighter `}
+                      className={`${window.innerWidth > 1023 || showMobile
+                        ? "block"
+                        : "hidden"
+                        } text-sm lg:text-[12px] font-[900] tracking-tighter `}
                     >
                       9987 878 878
                     </span>
@@ -154,20 +161,18 @@ export const Navbar = () => {
                       {hasToken ? (
                         <div className="w-full flex items-center justify-center">
                           <div
-                            className={`w-7 h-7 lg:w-8 lg:h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${
-                              pathName.pathname === "/profile"
-                                ? "border-4 border-[#53a53fbe]"
-                                : "border-[1px] border-gray-300"
-                            }`}
+                            className={`w-7 h-7 lg:w-8 lg:h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${pathName.pathname === "/profile"
+                              ? "border-4 border-[#53a53fbe]"
+                              : "border-[1px] border-gray-300"
+                              }`}
                             style={{
-                              backgroundImage: `url('${
-                                userData?.profile_img !== undefined &&
+                              backgroundImage: `url('${userData?.profile_img !== undefined &&
                                 userData?.profile_img?.length > 0
-                                  ? userData?.profile_img.includes("blob")
-                                    ? userData?.profile_img
-                                    : `${APIEndPoints.BackendURL}/${userData?.profile_img}`
-                                  : "/images/male.png"
-                              }')`,
+                                ? userData?.profile_img.includes("blob")
+                                  ? userData?.profile_img
+                                  : `${APIEndPoints.BackendURL}/${userData?.profile_img}`
+                                : "/images/male.png"
+                                }')`,
                               backgroundSize: "cover",
                               backgroundPosition: "center",
                             }}
@@ -214,26 +219,70 @@ export const Navbar = () => {
                     </Button>
                   </Link> */}
 
-                  <Button
+                  {/* <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/play"
-                        ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
-                        : ""
-                    }`}
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/play"
+                      ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
+                      : ""
+                      }`}
                     onClick={() => {
                       navigate("/play");
                     }}
                   >
                     Pay & Play
-                  </Button>
+                  </Button> */}
+                  <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+                    <div
+                      className="relative"
+                      onMouseEnter={() => setIsOpen(true)}
+                      onMouseLeave={() => setIsOpen(false)}
+                      onClick={() => {
+                        navigate("/play");
+                      }}
+                    >
+                      <DropdownMenuTrigger
+                        className={`px-4 2xl:px-12 text-xs h-7 border rounded-3xl ${pathName.pathname === "/play"
+                          ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
+                          : ""
+                          }`}
+                      >
+                        <span>Pay & Play</span>
+                      </DropdownMenuTrigger>
+
+                      <DropdownMenuContent className="mt-2">
+                        {sports.length > 0 ?
+                          sports?.map(
+                            (
+                              item: {
+                                id: string;
+                                name: string;
+                              }
+                            ) => {
+                              return (
+                                <DropdownMenuItem onClick={() => {
+                                  dispatch(setSelectedSports({ sportId: item.id }))
+                                  const updatedIds = selectedSportsStore.includes(item.id)
+                                    ? selectedSportsStore.filter((id) => id !== item.id)
+                                    : [...selectedSportsStore, item.id];
+
+                                  dispatch(setParams({ key: "supported_sports", data: updatedIds }))
+                                  dispatch(setSelectedSportsStore(item.id))
+                                }}>
+                                  <span>{item.name}</span>
+                                </DropdownMenuItem>
+                              );
+                            }
+                          ) : <DropdownMenuItem>No Sports Available</DropdownMenuItem>}
+                      </DropdownMenuContent>
+                    </div>
+                  </DropdownMenu>
+
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/academy"
-                        ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
-                        : ""
-                    }`}
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/academy"
+                      ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
+                      : ""
+                      }`}
                     onClick={() => {
                       navigate("/academy");
                     }}
@@ -242,11 +291,10 @@ export const Navbar = () => {
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
-                      pathName.pathname === "/membership"
-                        ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
-                        : ""
-                    }`}
+                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${pathName.pathname === "/membership"
+                      ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
+                      : ""
+                      }`}
                     onClick={() => {
                       navigate("/membership");
                     }}
@@ -395,18 +443,16 @@ export const Navbar = () => {
                 >
                   <Button
                     variant="outline"
-                    className={`${
-                      selectedCityName
-                        ? "w-36 lg:w-16 ml-3 lg:ml-0 border border-gray-300/50 text-[#53a53f]"
-                        : "w-32 "
-                    } h-6 lg:h-7 rounded-3xl hover:bg-[#53a53f] hover:text-gray-100`}
+                    className={`${selectedCityName
+                      ? "w-36 lg:w-16 ml-3 lg:ml-0 border border-gray-300/50 text-[#53a53f]"
+                      : "w-32 "
+                      } h-6 lg:h-7 rounded-3xl hover:bg-[#53a53f] hover:text-gray-100`}
                     onClick={() => setOpen(true)}
                   >
                     <span
-                      className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${
-                        selectedCityName &&
+                      className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${selectedCityName &&
                         "tracking-wider lg:tracking-tight font-extrabold"
-                      }`}
+                        }`}
                     >
                       {selectedCityName ? (
                         selectedCityName
@@ -465,20 +511,18 @@ export const Navbar = () => {
                   {hasToken ? (
                     <div className="w-full flex items-center justify-center">
                       <div
-                        className={`w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${
-                          pathName.pathname === "/profile"
-                            ? "border-4 border-[#53a53fbe]"
-                            : "border-[1px] border-gray-300"
-                        }`}
+                        className={`w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${pathName.pathname === "/profile"
+                          ? "border-4 border-[#53a53fbe]"
+                          : "border-[1px] border-gray-300"
+                          }`}
                         style={{
-                          backgroundImage: `url('${
-                            userData?.profile_img !== undefined &&
+                          backgroundImage: `url('${userData?.profile_img !== undefined &&
                             userData?.profile_img?.length > 0
-                              ? userData?.profile_img.includes("blob")
-                                ? userData?.profile_img
-                                : `${APIEndPoints.BackendURL}/${userData?.profile_img}`
-                              : "/images/male.png"
-                          }')`,
+                            ? userData?.profile_img.includes("blob")
+                              ? userData?.profile_img
+                              : `${APIEndPoints.BackendURL}/${userData?.profile_img}`
+                            : "/images/male.png"
+                            }')`,
                           backgroundSize: "cover",
                           backgroundPosition: "center",
                         }}
