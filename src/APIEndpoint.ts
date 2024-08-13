@@ -48,7 +48,7 @@ export const APIEndPoints = {
 
   // EVENTS
   fetch_events: '/api/fetch-events',
-  add_event_request:'/api/add-event-request',
+  add_event_request: '/api/add-event-request',
   // Promocode
   fetch_promo: '/api/promo-codes',
   apply_promo: '/api/apply-promo',
