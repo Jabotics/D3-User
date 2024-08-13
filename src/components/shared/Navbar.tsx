@@ -38,13 +38,13 @@ import { APIEndPoints } from "@/APIEndpoint";
 import { FaRegBuilding } from "react-icons/fa";
 import { ToggleOptions } from "../toggle-options";
 import { setParams, setSelectedSportsStore } from "@/store/actions/slices/groundSlice";
-import { setSelectedSports } from "@/store/actions/slices/sportSlice";
+import { setSelectedSports, useGetSportQuery } from "@/store/actions/slices/sportSlice";
 
 export const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const pathName = useLocation();
-
+  useGetSportQuery({});
   const mobileRef = useRef<HTMLDivElement>(null);
 
   const isLarge = window.innerWidth >= 1024;
