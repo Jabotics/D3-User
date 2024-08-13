@@ -15,8 +15,9 @@ import { RootState } from "@/store";
 
 import { SiTicktick } from "react-icons/si";
 import { RxCrossCircled } from "react-icons/rx";
-import { FaRegCheckSquare } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 const items = [
   {
@@ -101,30 +102,25 @@ const Details = () => {
           </div>
         </div>
         <div className="flex justify-center flex-col items-center gap-4 mt-20 md:mt-16 lg:mt-2 w-full">
-          <div className="w-full h-40 flex flex-row items-start gap-5">
-            <div className="flex-1 h-full flex flex-col gap-1">
-              <h1 className="text-2xl">Amenities</h1>
-              <span className="flex-1 flex flex-row gap-3">
-                {groundDetails[0]?.amenities?.length > 0
-                  ? groundDetails[0]?.amenities?.map((item, index) => {
+          <div className="w-full h-20 flex flex-row items-start gap-5">
+            <div className="w-full h-full">
+              <h1 className="text-2xl">AddOns</h1>
+              <span className="flex-1 flex gap-7 mt-3">
+                {groundDetails[0]?.rules?.not_allowed?.length > 0
+                  ? groundDetails[0]?.rules?.not_allowed?.map((item, index) => {
                       return (
-                        <div key={index}>
-                          <FaRegCheckSquare />
+                        <div key={index} className="flex items-center gap-2">
+                          <RxCrossCircled className="text-red-800" />
                           <span>{item}</span>
                         </div>
                       );
                     })
-                  : "No Amenities is there"}
-              </span>
-            </div>
-            <div className="w-1/3 h-full">
-              <h1 className="text-2xl">AddOns</h1>
-              <span className="flex-1 flex flex-col gap-1 overflow-x-hidden overflow-y-auto">
-                {groundDetails[0]?.rules?.not_allowed?.length > 0
-                  ? groundDetails[0]?.rules?.not_allowed?.map((item, index) => {
+                  : "No Add ons"}
+                {groundDetails[0]?.rules?.allowed?.length > 0
+                  ? groundDetails[0]?.rules?.allowed?.map((item, index) => {
                       return (
-                        <div key={index}>
-                          <FaRegCheckSquare />
+                        <div key={index} className="flex items-center gap-2">
+                          <IoIosCheckmarkCircleOutline className="text-[#54a63f]" />
                           <span>{item}</span>
                         </div>
                       );
