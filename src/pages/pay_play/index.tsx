@@ -1,19 +1,20 @@
 import FilterByCategory from "@/components/pay&play/filter";
 import Venues from "@/components/pay&play/venues";
 import { RootState } from "@/store";
-// import { setSortByText } from "@/store/actions/slices/groundSlice";
+import { setSortByText } from "@/store/actions/slices/groundSlice";
 import { 
-  // useAppDispatch, 
+  useAppDispatch, 
   useAppSelector 
 } from "@/store/hooks";
 import { useEffect, useState } from "react";
-// import { HiOutlineSortDescending } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+
+import { MdOutlineFeaturedPlayList } from "react-icons/md";
 
 const locationArr = ["Home", "Play"];
 const PayPlay = () => {
   const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const [filtersArr, setFiltersArr] = useState<{
     sports: string[] | null;
@@ -28,7 +29,7 @@ const PayPlay = () => {
   });
 
   const {
-    // grounds,
+    grounds,
     sortByText,
     selectedGroundType,
     selectedVenue,
@@ -107,25 +108,29 @@ const PayPlay = () => {
         </div>
 
         <div className="hidden lg:block w-56 xl:w-60 h-full">
-          {/* <div className="w-full h-fit mb-16">
+          <div className="w-full h-fit mb-16">
             <div className="w-full flex flex-wrap items-center h-full border-[1px] border-gray-100 p-2 rounded-md">
-              <HiOutlineSortDescending
+              <MdOutlineFeaturedPlayList
                 size={20}
                 color="black"
                 className="mr-2"
               />
               <span className="inline-block text-xs xl:text-sm font-medium">
-                Sort by
+                Amenities
               </span>
             </div>
             {grounds && grounds.length > 0 ? (
               <div className="flex flex-wrap w-full gap-2 mt-5">
                 {[
-                  "Nearest",
-                  "Newest Arrivals",
-                  "Multisports",
-                  // "Price: High to Low",
-                  "Customer Reviews",
+                  "Umpires",
+                  "Drinking Water",
+                  "Sports kit",
+                  "Washroom",
+                  "Locker",
+                  "Changing Room",
+                  "Trainer",
+                  "Scoreboard",
+                  "Canteen"
                 ].map((item, index) => {
                   return (
                     <div
@@ -156,7 +161,7 @@ const PayPlay = () => {
                 })}
               </div>
             )}
-          </div> */}
+          </div>
           {/* <div>hey</div> */}
         </div>
       </div>

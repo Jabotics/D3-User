@@ -17,10 +17,15 @@ import {
   setSelectedSports,
   useGetSportQuery,
 } from "@/store/actions/slices/sportSlice";
+import { useState } from "react";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import React from "react";
 
 const FilterBySports = () => {
   const dispatch = useDispatch();
   useGetSportQuery({});
+
+  const [showMoreSports, setShowMoreSports] = useState<boolean>(false);
 
   const { sports } = useAppSelector((state: RootState) => state.sport);
 
@@ -40,7 +45,6 @@ const FilterBySports = () => {
     dispatch(setSelectedSportsStore(sportId));
   };
 
-  
   return (
     <>
       {sports && sports.length > 0 ? (
@@ -60,7 +64,7 @@ const FilterBySports = () => {
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-2 -ml-4">
                 {sports.length > 0 &&
-                  sports?.map(
+                  sports?.slice(0, 3).map(
                     (
                       item: {
                         id: string;
@@ -79,7 +83,11 @@ const FilterBySports = () => {
                           />
                           <label
                             htmlFor={item.id}
-                            className={`text-xs lg:text-sm ${selectedSportsStore.includes(item.id) ? 'font-medium text-black' : 'font-light'} leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]`}
+                            className={`text-xs lg:text-sm ${
+                              selectedSportsStore.includes(item.id)
+                                ? "font-medium text-black"
+                                : "font-light"
+                            } leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]`}
                           >
                             {item?.name}
                           </label>
@@ -87,6 +95,47 @@ const FilterBySports = () => {
                       );
                     }
                   )}
+                <div
+                  className="text-xs xl:text-sm font-medium text-[#53A53F] cursor-pointer w-full mt-3 flex items-center justify-between"
+                  onClick={() => {
+                    setShowMoreSports(!showMoreSports);
+                  }}
+                >
+                  <span>{showMoreSports ? "Show Less" : "Show More"}</span>
+                  {showMoreSports ? (
+                    <IoIosArrowUp className="text-gray-500" />
+                  ) : (
+                    <IoIosArrowDown className="text-gray-500" />
+                  )}
+                </div>
+                <div className="mt-3 flex flex-col gap-2">
+                  {showMoreSports &&
+                    sports.slice(3, sports.length).map((item, index) => {
+                      return (
+                        <React.Fragment key={index}>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox
+                              id={item.id}
+                              checked={selectedSportsStore.includes(item.id)}
+                              onCheckedChange={() => {
+                                handleCheckboxChange(item.id);
+                              }}
+                            />
+                            <label
+                              htmlFor={item.id}
+                              className={`text-xs lg:text-sm ${
+                                selectedSportsStore.includes(item.id)
+                                  ? "font-medium text-black"
+                                  : "font-light"
+                              } leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-0 lg:-mt-[2px]`}
+                            >
+                              {item.name}
+                            </label>
+                          </div>
+                        </React.Fragment>
+                      );
+                    })}
+                </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>

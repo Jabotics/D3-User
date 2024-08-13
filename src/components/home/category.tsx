@@ -85,7 +85,7 @@ export const Category = () => {
   };
 
   return (
-    <div className="w-screen overflow-hidden py-14">
+    <div className="w-screen overflow-hidden pt-5 pb-14">
       <div className="container">
         <div className="mb-12 w-full flex flex-col items-center justify-center">
           <h2 className="text-xl md:text-2xl font-semibold mb-5">

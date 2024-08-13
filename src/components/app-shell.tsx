@@ -7,13 +7,25 @@ const AppShell = () => {
   const location = useLocation();
 
   const hiddenRoutesNav = ["/login"];
-  const hiddenRoutesFooter = ["/login", "/academy", "/play", "/membership", "/scoreboard"];
+  const hiddenRoutesFooter = [
+    "/login",
+    "/academy",
+    "/play",
+    "/membership",
+    "/scoreboard",
+  ];
 
   const shouldHideNavbarNavbar = hiddenRoutesNav.includes(location.pathname);
   const shouldHideNavbarFooter = hiddenRoutesFooter.includes(location.pathname);
 
   return (
-    <div className="flex flex-col gap-0">
+    <div
+      className={`flex flex-col gap-0 ${
+        location.pathname.split("/").includes("privacy-policy")
+          ? ""
+          : "overflow-hidden"
+      }`}
+    >
       {!shouldHideNavbarNavbar && <Navbar />}
       <Outlet />
       {!shouldHideNavbarFooter && <Footer />}

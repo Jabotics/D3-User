@@ -159,18 +159,17 @@ const BlogPostPage = () => {
         <img
           src={`${APIEndPoints.BackendURL}/${blogs[0]?.image}`}
           alt=""
-          className="h-auto max-h-[65vh] w-full object-cover object-center"
+          className="h-auto max-h-[65vh] w-full object-cover object-top"
         />
       )}
 
       {/* OTHER PARAGRAPHS */}
       {blogs[0]?.details && blogs[0]?.details?.length > 1 ? (
         <div
-          className={`mb-20 w-full flex items-start gap-10 ${
+          className={`mb-10 w-full flex items-start gap-10 ${
             blogs[0]?.details?.length === 1 && "hidden"
           }`}
         >
-          {/* <div className="w-96 h-40 mt-5 rounded-md flex flex-col py-3"></div> */}
 
           <div className="flex-1 pr-10 ">
             <div className="w-full flex flex-col mt-10">
@@ -178,14 +177,14 @@ const BlogPostPage = () => {
                 ?.slice(1, blogs[0].details.length)
                 ?.map((item, index) => {
                   return (
-                    <React.Fragment key={index}>
+                    <div key={index} className="mb-5">
                       <p className="mb-5 font-bold tracking-wide">
                         {item?.sub_title}
                       </p>
                       <p className={`${isLoading ? "bg-gray-100 h-20" : ""}`}>
                         {!isLoading ? item?.description : null}
                       </p>
-                    </React.Fragment>
+                    </div>
                   );
                 })}
             </div>

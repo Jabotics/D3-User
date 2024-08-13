@@ -1,5 +1,6 @@
 export const APIEndPoints = {
-  BackendURL: 'http://192.168.29.16:5050',
+  BackendURL: 'http://localhost:5050',
+  // BackendURL: 'http://192.168.29.16:5050',
 
   // CUSTOMER
   customer_login: '/api/customer-login',
@@ -47,7 +48,7 @@ export const APIEndPoints = {
 
   // EVENTS
   fetch_events: '/api/fetch-events',
-  add_event_request:'/api/add-event-request',
+  add_event_request: '/api/add-event-request',
   // Promocode
   fetch_promo: '/api/promo-codes',
   apply_promo: '/api/apply-promo',
@@ -68,4 +69,10 @@ export const APIEndPoints = {
   // BLOGS
   fetch_blogs: '/api/blogs',
   fetch_popular_blogs: '/api/popular-blogs',
+
+  // FEEDBACK
+  feedback: '/api/feedback',
+
+  // HAPPY CUSTOMERS
+  happy_customers: '/api/happy-customers',
 }

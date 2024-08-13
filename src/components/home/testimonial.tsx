@@ -1,6 +1,10 @@
+import { useGetHappyCustomersQuery } from "@/store/actions/slices/happyCustomerSlice";
 import TestimonialCard from "../testimonial-card/card";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useAppSelector } from "@/store/hooks";
+import { RootState } from "@/store";
+import React from "react";
 
 export const Testimonials = () => {
   const responsive = {
@@ -27,13 +31,31 @@ export const Testimonials = () => {
       infinite: true,
     },
   };
+
+  const x = useGetHappyCustomersQuery();
+  const { happyCustomers } = useAppSelector(
+    (state: RootState) => state.happyCustomers
+  );
+
   return (
     <div className="-mt-12 py-24 text-center relative">
-      <img src="/images/icons-bg/batter.svg" alt="" className="absolute hidden sm:block top-8 lg:top-5 left-20 lg:left-40 xl:left-[20rem] 2xl:left-[35rem] h-28 w-28 lg:h-32 lg:w-32 2xl:h-40 2xl:w-40" />
-      <img src="/images/icons-bg/baller.svg" alt="" className="absolute hidden sm:block top-8 lg:top-5 right-20 lg:right-40 xl:right-[20rem] 2xl:right-[35rem] h-28 w-28 lg:h-32 lg:w-32 2xl:h-40 2xl:w-40" />
+      <img
+        src="/images/icons-bg/batter.svg"
+        alt=""
+        className="absolute hidden sm:block top-8 lg:top-5 left-20 lg:left-40 xl:left-[20rem] 2xl:left-[35rem] h-28 w-28 lg:h-32 lg:w-32 2xl:h-40 2xl:w-40"
+      />
+      <img
+        src="/images/icons-bg/baller.svg"
+        alt=""
+        className="absolute hidden sm:block top-8 lg:top-5 right-20 lg:right-40 xl:right-[20rem] 2xl:right-[35rem] h-28 w-28 lg:h-32 lg:w-32 2xl:h-40 2xl:w-40"
+      />
       <div className="container">
-        <h2 className="text-xl md:text-3xl font-medium tracking-wide">Our Happy Customers</h2>
-        <p className="mt-4 tracking-wide font-normal text-xs md:text-sm">What customers are saying about our safety standards</p>
+        <h2 className="text-xl md:text-3xl font-medium tracking-wide">
+          Our Happy Customers
+        </h2>
+        <p className="mt-4 tracking-wide font-normal text-xs md:text-sm">
+          What customers are saying about our safety standards
+        </p>
 
         <div
           className="hiw-slider mt-10"
@@ -55,11 +77,27 @@ export const Testimonials = () => {
             dotListClass="carousel-testimonial-dots"
             partialVisible={true}
           >
-            <TestimonialCard />
-            <TestimonialCard />
-            <TestimonialCard />
-            <TestimonialCard />
-            <TestimonialCard />
+            <>
+              {!x.isLoading || happyCustomers?.length > 0 ? (
+                <>
+                  {happyCustomers.map((item, index) => {
+                    return (
+                      <React.Fragment key={index}>
+                        <TestimonialCard data={item} />
+                      </React.Fragment>
+                    )
+                  })}
+                </>
+              ) : (
+                <>
+                  <TestimonialCard />
+                  <TestimonialCard />
+                  <TestimonialCard />
+                  <TestimonialCard />
+                  <TestimonialCard />
+                </>
+              )}
+            </>
           </Carousel>
         </div>
       </div>

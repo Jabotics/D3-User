@@ -17,7 +17,7 @@ const Contact = () => {
 
   const overviewRef = useRef<HTMLDivElement | null>(null);
   const allVenuesRef = useRef<HTMLDivElement | null>(null);
-  const feedbackRef = useRef<HTMLDivElement | null>(null);
+  const reviewRef = useRef<HTMLDivElement | null>(null);
 
   const [hasScrollSticky, setHasScrollSticky] = useState(false);
   const [activeTab, setActiveTab] = useState<string>("Overview");
@@ -26,13 +26,13 @@ const Contact = () => {
     () => ({
       Overview: overviewRef,
       "All Venues": allVenuesRef,
-      "Customer Feedback": feedbackRef,
+      "Customer Review": reviewRef,
     }),
-    [overviewRef, allVenuesRef, feedbackRef]
+    [overviewRef, allVenuesRef, reviewRef]
   );
 
   const scrollToOverview = (
-    item: "Overview" | "All Venues" | "Customer Feedback"
+    item: "Overview" | "All Venues" | "Customer Review"
   ) => {
     if (overviewRef.current) {
       const nextIndex = Object.entries(sectionRefs).findIndex(
@@ -89,7 +89,7 @@ const Contact = () => {
           {[
             { title: "Overview" },
             { title: "All Venues" },
-            { title: "Customer Feedback" },
+            { title: "Customer Review" },
           ].map((item, index) => (
             <div
               key={index}
@@ -97,7 +97,7 @@ const Contact = () => {
                 if (
                   item.title === "Overview" ||
                   item.title === "All Venues" ||
-                  item.title === "Customer Feedback"
+                  item.title === "Customer Review"
                 ) {
                   setActiveTab(item.title);
                   scrollToOverview(item.title);
@@ -111,11 +111,11 @@ const Contact = () => {
         </div>
       </div>
       {hasScrollSticky && (
-        <div className="fixed top-16 bg-gray-800 text-gray-50 text-lg flex items-center gap-10 pt-5 pb-4 px-40 w-full z-30">
+        <div className="fixed top-16 bg-gray-800 text-gray-50 text-lg flex items-center gap-10 pt-5 pb-4 px-40 w-full z-20">
           {[
             { title: "Overview" },
             { title: "All Venues" },
-            { title: "Customer Feedback" },
+            { title: "Customer Review" },
           ].map((item, index) => (
             <div
               key={index}
@@ -123,7 +123,7 @@ const Contact = () => {
                 if (
                   item.title === "Overview" ||
                   item.title === "All Venues" ||
-                  item.title === "Customer Feedback"
+                  item.title === "Customer Review"
                 ) {
                   setActiveTab(item.title);
                   scrollToOverview(item.title);
@@ -207,13 +207,13 @@ const Contact = () => {
       </div>
 
       {/* Feedback */}
-      <div className="h-[100vh] px-40 pt-10 mb-36" ref={feedbackRef}>
-        <h2 className="text-[2.5rem] font-light">Customer Feedbacks</h2>
+      <div className="h-[100vh] px-40 pt-10 mb-36" ref={reviewRef}>
+        <h2 className="text-[2.5rem] font-light">Customer Reviews</h2>
 
         <div
           className="w-1/2 h-[65vh] bg-black my-5 rounded-md overflow-hidden cursor-pointer hover:opacity-50 group transition-all duration-700"
           onClick={() => {
-            navigate("/contact/feedback");
+            navigate("/contact/customer-review");
           }}
         >
           <img
@@ -224,7 +224,7 @@ const Contact = () => {
         </div>
 
         <h4 className="font-normal text-2xl mb-5">
-          Customer feedback: Help us improve
+          Customer Review: Help us improve
         </h4>
         <p className="mb-5">
           Our customers matter to us! Please share your needs or concerns so
@@ -234,7 +234,7 @@ const Contact = () => {
         <p
           className="text-[#53a53f] font-medium tracking-wide"
           onClick={() => {
-            navigate("/contact/feedback");
+            navigate("/contact/customer-review");
           }}
         >
           (Please share your feedback with us)

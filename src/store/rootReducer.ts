@@ -33,10 +33,15 @@ import {
   chatSlice,
   chatApi,
   contactApi,
+  reviewApi,
   faqsApi,
   faqsSlice,
   blogsApi,
   blogsSlice,
+
+  happyCustomersApi,
+
+  happyCustomersSlice,
 } from "@/store/actions";
 import { RequestHandler } from "./RequestHandler";
 
@@ -178,6 +183,8 @@ export const rootReducer = combineReducers({
   faqs: faqsSlice,
   blogs: blogsSlice,
 
+  happyCustomers: happyCustomersSlice,
+
   chat: chatsPersistReducer,
 
   [RequestHandler.reducerPath]: RequestHandler.reducer,
@@ -224,9 +231,16 @@ export const rootReducer = combineReducers({
   // CONTACT
   [contactApi.reducerPath]: contactApi.reducer,
 
+  // REVIEW
+  [reviewApi.reducerPath]: reviewApi.reducer,
+
   // FAQ
   [faqsApi.reducerPath]: faqsApi.reducer,
 
   // BLOGS
   [blogsApi.reducerPath]: blogsApi.reducer,
+
+  // HAPPY CUSTOMERS
+  [happyCustomersApi.reducerPath]: happyCustomersApi.reducer,
+  
 });

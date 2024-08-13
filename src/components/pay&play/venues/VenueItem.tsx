@@ -107,8 +107,8 @@ const VenueItem = ({ item }: { item: IGround }) => {
                     <span className="w-fit h-full">{item?.name}</span>
                     {item?.is_popular ? (
                       <span className="flex-1 h-full overflow-hidden flex flex-row items-center ">
-                        <span className="font-light text-sm flex items-center gap-1 bg-[#8ddb7970] px-3 rounded-md">
-                          <FaDiamond size={8} className="text-[#54a63f]" />
+                        <span className="font-light text-sm flex items-center gap-1 bg-[#f0f18eb9] px-3 rounded-md">
+                          <FaDiamond size={8} className="text-[#b88436]" />
                           <span>Popular</span>
                         </span>
                       </span>
@@ -291,19 +291,14 @@ const VenueItem = ({ item }: { item: IGround }) => {
               </div>
             </div>
           </div>
-          <div className="flex rounded-b-md overflow-hidden w-[90vw] sm:w-full lg:w-[45vw] xl:w-[65vw] 2xl:w-full h-16 shadow-md shadow-[#b2d8a9] mb-3 bg-gradient-to-r from-[#54a63f] via-[#81d86b] to-[#a5e794]">
+          <div className="flex rounded-b-md overflow-hidden w-[90vw] sm:w-full lg:w-[45vw] xl:w-[65vw] 2xl:w-full h-16 shadow-md shadow-[#b2d8a9] mb-3 bg-white">
             <div className="w-24 sm:w-60 max-h-full flex flex-col px-2 py-1 md:py-2 md:px-5">
               <span className="text-[12px] md:text-sm text-gray-100 mt-2 md:mt-0">
-                {/* {window.innerWidth > 768 ? (
-              <span className="text-[10px]">
-                <span className="underline ">Dimensions</span> :
-              </span>
-            ) : null} */}
-                <span className="font-extrabold tracking-wide font-mono text-[#fff]">{`${item.dimensions.width} x ${item.dimensions.length}`}</span>
+                <span className="font-extrabold tracking-wide font-mono text-[#000]">{`${item.dimensions.width} x ${item.dimensions.length}`}</span>
                 <span className="w-fit bg-[#c1ecb6] hidden sm:block text-teal-900 font-mono font-semibold px-3 rounded-md">{`₹2000 onwards`}</span>
               </span>
             </div>
-            <span className="flex-1 border-l-[1px] border-[#a5e794] flex items-start pt-2 text-sm pl-5">
+            <span className="flex-1 border-l-[1px] border-[#c9c9c9ab] flex items-start pt-2 text-sm pl-5">
               <span className="w-full flex flex-wrap gap-2 md:gap-5 leading-none mt-1">
                 {item.amenities.map((amenity, index) => {
                   return (
@@ -311,7 +306,7 @@ const VenueItem = ({ item }: { item: IGround }) => {
                       className="flex items-center gap-1 text-[11px] font-medium tracking-wide"
                       key={index}
                     >
-                      <FaRegCheckSquare className="text-green-100" />
+                      <FaRegCheckSquare className="text-gray-800" />
                       <span>{amenity}</span>
                     </span>
                   );

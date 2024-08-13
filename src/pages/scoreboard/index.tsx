@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 
 const ScoreboardPage = () => {
   // const searchParams = useSearchParams();
-  const currentSports = "Football";
-  // const currentSports = "Kabaddi";
+  // const currentSports = "Cricket";
+  const currentSports = "Kabaddi";
   // const currentSports = "Kabaddi";
 
   // const { grounds } = useAppSelector((state: RootState) => state.ground);

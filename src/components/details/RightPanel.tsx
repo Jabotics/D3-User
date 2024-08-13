@@ -12,9 +12,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { TbInfoTriangle } from "react-icons/tb";
 import { useEffect } from "react";
 import { setLocationArr } from "@/store/actions/slices/groundSlice";
+import { IoTime } from "react-icons/io5";
 
 const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
   return (
     <div className="w-full h-full mt-5 lg:mt-0">
       <div className="flex justify-between">
-        <h2 className="md:text-3xl text-2xl font-bold text-[#53A53F]">
+        <h2 className="md:text-3xl text-2xl font-medium text-[#53A53F]">
           {groundDetails?.name}
         </h2>
         <div className="flex gap-1 items-center">
@@ -43,70 +43,86 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
       </div>
 
       <div className="mt-2">
-        <span className="font-semibold text-[#53a53fad] text-base tracking-wide">
-          {groundDetails?.dimensions?.width} x{" "}
-          {groundDetails?.dimensions?.length}
-        </span>
+        {groundDetails?.dimensions?.width &&
+        groundDetails?.dimensions?.length ? (
+          <span className="font-semibold text-[#53a53fad] text-base tracking-wide">
+            {groundDetails?.dimensions?.width} x{" "}
+            {groundDetails?.dimensions?.length}
+          </span>
+        ) : (
+          <div className="h-10 w-full bg-gray-100"></div>
+        )}
       </div>
-      <div className="mt-3 ml-[1px] flex flex-col">
-        <span className="font-normal text-gray-500 text-sm">
-          {groundDetails?.name} is a premium synthetic grass product designed
-          for sports fields and recreational areas.{" "}
-        </span>
-        <span className="text-lg tracking-widest w-full overflow-y-hidden whitespace-nowrap overflow-x-auto scroll-nobg pb-2">
-          {/* {groundDetails?.supported_sports?.map((item, index) => {
+      {groundDetails?.name &&
+      groundDetails?.amenities &&
+      groundDetails?.amenities?.length > 0 ? (
+        <div className="mt-3 ml-[1px] flex flex-col">
+          <span className="font-normal text-gray-500 ">
+            {groundDetails?.name} is a premium synthetic grass product designed
+            for sports fields and recreational areas.{" "}
+          </span>
+          <span className=" tracking-widest w-full scroll-nobg py-5 flex flex-wrap gap-3">
+            {groundDetails?.amenities?.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 whitespace-nowrap"
+                >
+                  <FaRegCheckSquare className="text-[#53a53f]" />
+                  <span>{item}</span>
+                </div>
+              );
+            })}
+          </span>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {Array.from({ length: 6 }).map((_, index) => {
             return (
-              <span
+              <p
                 key={index}
-                className="text-xs mr-2 px-3 py-1 rounded-lg bg-[#53a53f] text-gray-50 shrink-0"
-              >
-                {item.name}
-              </span>
-            );
-          })} */}
-          {groundDetails?.amenities?.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className="flex items-center gap-2 whitespace-nowrap"
-              >
-                <FaRegCheckSquare className="text-[#53a53f]" />
-                <span>{item}</span>
-              </div>
+                className="w-full h-5 rounded-full bg-gray-100"
+              ></p>
             );
           })}
-        </span>
-      </div>
+        </div>
+      )}
 
       {/* <div className="mt-8 flex flex-wrap items-center gap-3 w-full text-xs"></div> */}
 
       <Dialog>
         <DialogTrigger className="mt-1 flex items-center gap-1 bg-[#53a53f] shadow-md shadow-[#aacca194] px-3 py-0 rounded-2xl">
-          <TbInfoTriangle className="text-gray-100" />
-          <span className="text-gray-100">Rules</span>
+          <IoTime className="text-gray-100" />
+          <span className="text-gray-100">Timings</span>
         </DialogTrigger>
         <DialogContent>
-          <DialogTitle className="sr-only">Rules</DialogTitle>
+          <DialogTitle className="sr-only">Timings</DialogTitle>
         </DialogContent>
       </Dialog>
 
-      <div className="mt-8 max-h-32 min-h-24 overflow-hidden">
+      {/* <div className="mt-8 max-h-16 min-h-12 overflow-hidden">
         <h2 className="text-lg font-bold">Timing</h2>
         <span className="text-sm font-light">
           6 AM- 9 AM & 3 PM - 11 PM On Weekday, 6 AM - 11 PM On Weekends
         </span>
-      </div>
+      </div> */}
 
-      <div className="flex justify-between mt-16 mb-4 mr-1 md:mr-0">
-        <span className="text-base flex items-center gap-2">
-          <GoLocation className="text-[#53a53f]" />
-          <span>{groundDetails?.venue?.address}</span>
-        </span>
-        <div className="flex items-center gap-1 cursor-pointer  rounded-md px-3">
-          <IoIosSend className="" />
-          <span className="text-sm font-medium ">Navigate</span>
+      {groundDetails?.venue?.address ? (
+        <div className="flex justify-between mt-32 mb-4 mr-1 md:mr-0">
+          <span className=" flex items-center gap-2">
+            <GoLocation className="text-[#53a53f] w-10" size={20} />
+            <span className="line-clamp-1">
+              {groundDetails?.venue?.address}
+            </span>
+          </span>
+          <div className="flex items-center gap-1 cursor-pointer  rounded-md px-3">
+            <IoIosSend className="" />
+            <span className="text-sm font-medium ">Navigate</span>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="h-5 rounded-full bg-gray-100 mt-36"></div>
+      )}
       <div className="mt-4 mr-2 md:mr-0">
         <button
           className="w-full bg-gray-900 p-3 rounded-3xl text-white"

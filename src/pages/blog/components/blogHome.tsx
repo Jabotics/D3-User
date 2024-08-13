@@ -44,9 +44,9 @@ const BlogHomePage = () => {
                     return (
                       <div
                         key={index}
-                        className="w-1/4 h-[55vh] py-5 pr-10 rounded-md overflow-hidden"
+                        className="w-1/2 md:w-1/3 lg:w-1/4 h-fit lg:h-[55vh] py-5 pr-10 rounded-md overflow-hidden"
                       >
-                        <div className="w-full h-[55vh] flex flex-col gap-5">
+                        <div className="w-full h-fit lg:h-[55vh] flex flex-col gap-5">
                           <div
                             className="w-full h-1/2 flex-shrink-0 rounded-md overflow-hidden"
                             onClick={() => {
@@ -63,7 +63,7 @@ const BlogHomePage = () => {
                           <div className="flex flex-col gap-3">
                             <div className="mt-5 text-xs">
                               <p
-                                className="float-right px-10 py-1 h-7 flex items-center justify-center ml-5 mb-5 mt-3 rounded-md bg-[#54a63f] cursor-pointer text-white"
+                                className="float-right px-10 py-1 h-5 lg:h-7 flex items-center justify-center ml-5 mb-5 mt-3 rounded-md bg-black lg:bg-[#54a63f] cursor-pointer text-white"
                                 onClick={() => {
                                   navigate(`/blogs/post-id=${blog.id}`);
                                   dispatch(setLocationArr(`${blog.title}`));
@@ -71,11 +71,11 @@ const BlogHomePage = () => {
                               >
                                 View
                               </p>
-                              <h1 className="text-lg font-medium">
+                              <h1 className="text-sm lg:text-lg font-medium">
                                 {blog.title}
                               </h1>
                             </div>
-                            <p className="text-sm line-clamp-3">{blog.description}</p>
+                            <p className="text-xs md:text-sm line-clamp-3">{blog.description}</p>
                           </div>
                         </div>
                       </div>

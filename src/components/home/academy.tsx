@@ -32,7 +32,7 @@ export const Academy = () => {
   };
 
   return (
-    <div className="h-[65vh] lg:h-[35vh] xl:h-[45vh] 2xl:h-[60vh] overflow-hidden grid grid-cols-2 items-center mt-32 mb-24 relative">
+    <div className="h-[65vh] lg:h-[50vh] 2xl:h-[60vh] overflow-hidden grid grid-cols-2 items-center mt-32 mb-24 relative">
       <div className="hidden h-full lg:flex flex-col gap-4 relative">
         <video
           src={video}
@@ -56,11 +56,11 @@ export const Academy = () => {
       </div>
       <div className="flex flex-col gap-4 h-full relative items-center justify-center col-span-2 lg:col-span-1">
         <div className="z-10 w-full lg:w-[75%] text-green-50 flex justify-center flex-col items-center">
-          <h2 className="text-lg md:text-3xl font-semibold -mt-8">
+          <h2 className="text-lg 2xl:text-3xl font-semibold mt-0 2xl:-mt-8">
             Join Sports Academy{" "}
           </h2>
-          <h5 className="mt-3 text-sm md:text-sm">List Your Academy With Us</h5>
-          <p className="mt-5 text-[10px] leading-5 md:leading-none md:text-sm w-[75%]">
+          <h5 className="mt-0 2xl:mt-3 text-sm md:text-sm">List Your Academy With Us</h5>
+          <p className="mt-5 text-sm md:text-base w-[75%] line-clamp-[10] leading-5 md:leading-normal">
             Welcome to Ports Academy, where the tide of knowledge meets the
             currents of innovation. Our demo content provides a glimpse into the
             dynamic world of maritime studies, where students navigate through

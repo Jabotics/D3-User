@@ -1,3 +1,4 @@
+
 export interface IGround {
   id: string;
   venue: {
@@ -277,4 +278,10 @@ export interface IPopularBlog {
   id: string;
   title: string;
   createdAt: string;
+}
+
+export interface IHappyCustomers {
+  id: string
+  name: string
+  review: string
 }

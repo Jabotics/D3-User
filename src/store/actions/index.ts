@@ -19,9 +19,11 @@ import profileSlice from './slices/profileSlice';
 
 import chatSlice, { chatApi } from './slices/chatSlice';
 import { contactApi } from './slices/contactSlice'
+import { reviewApi } from './slices/reviewSlice'
 
 import faqsSlice, { faqsApi } from './slices/faqSlice'
 import blogsSlice, { blogsApi } from './slices/blogSlice'
+import happyCustomersSlice, { happyCustomersApi } from './slices/happyCustomerSlice'
 
 export {
   authSlice,
@@ -66,9 +68,14 @@ export {
 
   contactApi,
 
+  reviewApi,
+
   faqsSlice,
   faqsApi,
 
   blogsApi,
   blogsSlice,
+  
+  happyCustomersSlice,
+  happyCustomersApi,
 }

@@ -76,7 +76,6 @@ const PrivacyNoticePage = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight / 2;
-      // let currentTab = "Privacy Policies";
 
       for (const [key, ref] of Object.entries(sectionRefs)) {
         if (ref.current) {
@@ -85,7 +84,6 @@ const PrivacyNoticePage = () => {
             scrollPosition >= offsetTop &&
             scrollPosition <= offsetTop + clientHeight
           ) {
-            // currentTab = key;
             setActiveTab(key);
           }
         }
@@ -192,7 +190,6 @@ const PrivacyNoticePage = () => {
                     item === "Children's Privacy" ||
                     item === "Contact Us"
                   ) {
-                    setActiveTab(item);
                     scrollToSection(item);
                   }
                 }}
