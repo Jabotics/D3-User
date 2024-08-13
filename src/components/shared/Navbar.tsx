@@ -259,7 +259,7 @@ export const Navbar = () => {
                               }
                             ) => {
                               return (
-                                <DropdownMenuItem onClick={() => {
+                                <DropdownMenuItem className="cursor-pointer" onClick={() => {
                                   dispatch(setSelectedSports({ sportId: item.id }))
                                   const updatedIds = selectedSportsStore.includes(item.id)
                                     ? selectedSportsStore.filter((id) => id !== item.id)
