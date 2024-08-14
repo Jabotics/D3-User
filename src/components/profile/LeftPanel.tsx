@@ -61,7 +61,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useLogoutQuery } from "@/store/actions/slices/otpSlice";
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
+
+import { FaRegUser } from "react-icons/fa";
 
 interface SideMenu {
   title: "Academy" | "My Booking" | "Memberships" | "Favorite" | "Logout";
@@ -136,22 +138,25 @@ const LeftPanel = () => {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [deletedFiles, setDeletedFiles] = useState<string | null>(null);
 
   const onSubmit = async (values: { name: string; email: string }) => {
-    if (!selectedFile) {
-      console.error("No file selected.");
-      return;
-    }
-
+    
     const formData = new FormData();
-
+    
     const first_name = values.name.split(" ")[0].trim();
     const last_name = values.name.split(" ")[1].trim();
-
+    
     formData.append("first_name", first_name);
     formData.append("last_name", last_name);
     formData.append("email", values.email);
-    formData.append("profile_img", selectedFile, selectedFile.name); // Append file with name and content type
+    if (deletedFiles) {
+      formData.append("deleted_files", JSON.stringify([deletedFiles]));
+    }
+
+    if (selectedFile) {
+      formData.append("profile_img", selectedFile, selectedFile.name);
+    }
 
     try {
       const res = await update({
@@ -163,16 +168,12 @@ const LeftPanel = () => {
       }
 
       userData &&
-        userData.profile_img &&
-        previewUrl &&
         dispatch(
           setProfile({
             email: values.email,
             first_name,
             last_name,
-            profile_img: previewUrl.includes("blob")
-              ? previewUrl
-              : userData?.profile_img,
+            profile_img: previewUrl ?? '',
           })
         );
 
@@ -190,6 +191,12 @@ const LeftPanel = () => {
       setSelectedFile(renamedFile);
       const blobUrl = URL.createObjectURL(file);
       setPreviewUrl(blobUrl);
+
+      if (userData) {
+        if (!userData.profile_img?.includes("blob")) {
+          setDeletedFiles(previewUrl);
+        }
+      }
     } else {
       setSelectedFile(null);
       setPreviewUrl(null);
@@ -213,37 +220,43 @@ const LeftPanel = () => {
 
   useEffect(() => {
     if (userData) {
-      form.setValue("name", `${userData.first_name} ${userData.last_name}`);
+      console.log(userData)
+      form.setValue("name", `${userData.first_name}${userData.last_name ? ` ${userData.last_name}` : ''}`);
       form.setValue(
         "email",
         userData?.email !== undefined ? userData.email : ""
       );
 
-      if (userData.profile_img?.includes("blob")) {
-        setPreviewUrl(userData.profile_img);
-      } else {
-        setPreviewUrl(`${APIEndPoints.BackendURL}/${userData.profile_img}`);
-      }
+      // if (userData.profile_img?.includes("blob")) {
+      userData && userData?.profile_img && setPreviewUrl(userData.profile_img);
+      // } else {
+      //   setPreviewUrl(`${APIEndPoints.BackendURL}/${userData.profile_img}`);
+      // }
     }
   }, [form, userData]);
 
+  console.log(form.watch())
   return (
     <div className="w-full h-full ">
       <div className="flex justify-between px-5 lg:px-0">
         <div className="flex gap-2">
-          <div className="w-10 h-10 border-2 border-[#53A53F] rounded-full overflow-hidden">
-            <img
-              src={
-                userData?.profile_img && previewUrl
-                  ? previewUrl
-                  : `/images/male.png`
-              }
-              alt=""
-              className="w-full h-full object-cover object-center"
-            />
+          <div
+            className="w-10 h-10 border-2 border-[#53A53F] rounded-full overflow-hidden flex items-center justify-center"
+          >
+            {previewUrl ? (
+              <img
+                src={previewUrl}
+                alt=""
+                className="w-full h-full object-cover object-center"
+              />
+            ) : (
+              <>
+                <FaRegUser size={25} className="text-[#53A53F]" />
+              </>
+            )}
           </div>
           <div className="flex flex-col items-start justify-center">
-            <span className="text-xs font-medium">
+            <span className="text-sm font-normal">
               {userData && userData.first_name && userData.last_name
                 ? `${userData?.first_name + " " + userData?.last_name}`
                 : "John Doe"}
@@ -270,12 +283,18 @@ const LeftPanel = () => {
               <DialogDescription className="h-2/3 w-full relative">
                 <span className="h-1/2 bg-[#53A53F]" />
                 <span className="h-1/2 bg-gray-50" />
-                <label className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-24 w-24 border-[5px] border-gray-50 overflow-hidden rounded-full flex items-center justify-center cursor-pointer">
-                  <img
-                    src={previewUrl ? previewUrl : `/images/male.png`}
-                    alt=""
-                    className="w-full h-full object-cover object-center"
-                  />
+                <label className="absolute left-1/2 -translate-x-1/2 top-1/3 -translate-y-1/2 h-24 w-24 border-[5px] border-[#53A53F] overflow-hidden rounded-full flex items-center justify-center cursor-pointer">
+                  {previewUrl ? (
+                    <img
+                      src={previewUrl}
+                      alt=""
+                      className="w-full h-full object-cover object-center"
+                    />
+                  ) : (
+                    <span className="bg-white w-full h-full flex items-center justify-center">
+                      <FaRegUser size={45} className="text-[#53a53f93]" />
+                    </span>
+                  )}
                   <input
                     type="file"
                     className="opacity-0 w-full h-full absolute inset-0 cursor-pointer"

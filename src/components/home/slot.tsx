@@ -47,12 +47,12 @@ const Slots = () => {
       partialVisibilityGutter: 50,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 3,
+      breakpoint: { max: 1024, min: 768 },
+      items: 2,
       partialVisibilityGutter: 30,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 768, min: 0 },
       items: 1,
       partialVisibilityGutter: 30,
     },
