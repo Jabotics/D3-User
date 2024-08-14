@@ -27,3 +27,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm run preview 
+    - name: Clean up
+      run: |
+        sudo rm -rf /tmp/*
+        sudo rm -rf ~/.npm/_cacache
