@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useFetchEventsQuery } from "@/store/actions/slices/eventSlice";
 import { useAppSelector } from "@/store/hooks";
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -191,7 +191,7 @@ const Events = () => {
               <div key={index}>
                 {event.image && (
                   <img
-                    src={`${APIEndPoints.BackendURL}/${event.image}`}
+                    src={`${event.image}`}
                     alt={`event-image-${index}`}
                     className="w-full h-full object-cover"
                   />

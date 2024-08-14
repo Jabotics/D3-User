@@ -12,36 +12,30 @@ import {
   DialogContent,
   DialogTitle,
   DialogTrigger,
-  DialogDescription
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { RiMoneyRupeeCircleLine } from "react-icons/ri";
 import {
   // resetLocationArr,
   setSelectedSlots,
 } from "@/store/actions/slices/academySlice";
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 
 import { FaRegPlayCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { BsPassport } from "react-icons/bs";
-import {
-  Table,
-  TableBody,
-  // TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { motion, AnimatePresence } from "framer-motion";
 
 const getEmbedUrl = (url: string): string => {
   switch (true) {
     case url.includes("youtube.com") || url.includes("youtu.be"):
       if (url.includes("embed")) {
         // Already an embed URL
-        return `${url.split("?")[0]
-          }?rel=0&modestbranding=1&controls=1&start=0&end=600&loop=1`;
+        return `${
+          url.split("?")[0]
+        }?rel=0&modestbranding=1&controls=1&start=0&end=600&loop=1`;
       }
       // Extract video ID from regular YouTube URLs
       // eslint-disable-next-line no-case-declarations
@@ -83,6 +77,9 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
 
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const selectedAcademy = academies.find((i) => i.id === academyId);
+  const [selectedBatch, setSelectedBatch] = useState<
+    "morning" | "evening" | null
+  >(null);
 
   const [hasSelectVideo, setHasSelectVideo] = useState(false);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
@@ -90,7 +87,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
   const [joinModal, setJoinModal] = useState(false);
 
   const handleJoinModal = async (toggle: boolean) => {
-    setJoinModal(toggle)
+    setJoinModal(toggle);
 
     // dispatch(
     //   setSelectedSlots({
@@ -110,7 +107,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
     });
 
     worker.onmessage = () => {
-      setJoinModal(false)
+      setJoinModal(false);
     };
 
     worker.onerror = (error) => {
@@ -160,7 +157,9 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                     </p>
                   </DialogTrigger>
                   <DialogContent aria-describedby="academy slots">
-                    <DialogDescription className="sr-only">Choose Batch</DialogDescription>
+                    <DialogDescription className="sr-only">
+                      Choose Batch
+                    </DialogDescription>
                     <div className="flex h-[30vh] flex-col items-center">
                       <DialogTitle className="mt-5 text-base text-[#a1c299] font-semibold tracking-wide">
                         Selected Batch
@@ -178,10 +177,11 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                               })
                             );
                           }}
-                          className={`text-xs lg:text-sm ${selectedSlot?.batch === "Morning"
+                          className={`text-xs lg:text-sm ${
+                            selectedSlot?.batch === "Morning"
                               ? "bg-[#53a53f]"
                               : "bg-[#a1c299]"
-                            } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
+                          } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
                         >
                           <p>Morning Batch</p>
                           <p>
@@ -200,10 +200,11 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                               })
                             );
                           }}
-                          className={`text-xs lg:text-sm ${selectedSlot?.batch === "Evening"
+                          className={`text-xs lg:text-sm ${
+                            selectedSlot?.batch === "Evening"
                               ? "bg-[#53a53f]"
                               : "bg-[#a1c299]"
-                            } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
+                          } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
                         >
                           <p>Evening Batch</p>
                           <p>
@@ -213,8 +214,9 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                       </div>
                     </div>
                     <DialogClose
-                      className={`h-8 rounded-md ${selectedSlot ? "bg-[#53a53f]" : "bg-[#a1c299]"
-                        } text-xs text-gray-100 `}
+                      className={`h-8 rounded-md ${
+                        selectedSlot ? "bg-[#53a53f]" : "bg-[#a1c299]"
+                      } text-xs text-gray-100 `}
                       onClick={() => {
                         if (selectedSlot) {
                           navigate(`/academy?id=${academyId}&join=1`);
@@ -243,33 +245,34 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                   <div className="w-80 sm:w-12 h-12 sm:h-full pb-0 sm:pb-5 overflow-x-auto sm:overflow-x-hidden filter-sc overflow-y-hidden sm:overflow-y-auto flex flex-row sm:flex-col items-center gap-2 mt-2 rounded-md overflow-hidden">
                     {selectedAcademy.images
                       ? selectedAcademy.images.slice(0, 2).map((url, index) => {
-                        return (
-                          <div
-                            key={index}
-                            className={`w-8 h-8 shrink-0 bg-gray-100 ${selectedImg === url &&
-                              "border-[3px] border-[#53a53f]"
+                          return (
+                            <div
+                              key={index}
+                              className={`w-8 h-8 shrink-0 bg-gray-100 ${
+                                selectedImg === url &&
+                                "border-[3px] border-[#53a53f]"
                               } rounded-md`}
-                            onClick={() => {
-                              setHasSelectVideo(false);
-                              setSelectedImg(url);
-                            }}
-                          >
-                            <img
-                              src={`${APIEndPoints.BackendURL}/${url}`}
-                              alt=""
-                              className="w-full h-full object-cover rounded-md cursor-pointer"
-                            />
-                          </div>
-                        );
-                      })
+                              onClick={() => {
+                                setHasSelectVideo(false);
+                                setSelectedImg(url);
+                              }}
+                            >
+                              <img
+                                src={`${url}`}
+                                alt=""
+                                className="w-full h-full object-cover rounded-md cursor-pointer"
+                              />
+                            </div>
+                          );
+                        })
                       : Array.from({ length: 4 }).map((_, index) => {
-                        return (
-                          <div
-                            key={index}
-                            className="w-8 h-8 bg-gray-100"
-                          ></div>
-                        );
-                      })}
+                          return (
+                            <div
+                              key={index}
+                              className="w-8 h-8 bg-gray-100"
+                            ></div>
+                          );
+                        })}
                     {selectedAcademy.video ? (
                       <div
                         className="w-8 h-8 bg-gray-100 flex items-center justify-center border border-gray-300 rounded-md cursor-pointer"
@@ -280,45 +283,37 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                       >
                         <FaRegPlayCircle size={25} />
                       </div>
-                    ) : (
-                      <div className="w-8 h-8 shrink-0 bg-gray-100"></div>
-                    )}
+                    ) : null}
                     {selectedAcademy.images
                       ? selectedAcademy.images
-                        .slice(2, selectedAcademy.images.length)
-                        .map((url, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className={`w-8 h-8 shrink-0 bg-gray-100 ${selectedImg === url &&
-                                "border-[3px] border-[#53a53f]"
+                          .slice(2, selectedAcademy.images.length)
+                          .map((url, index) => {
+                            return (
+                              <div
+                                key={index}
+                                className={`w-8 h-8 shrink-0 bg-gray-100 ${
+                                  selectedImg === url &&
+                                  "border-[3px] border-[#53a53f]"
                                 } rounded-md`}
-                              onClick={() => {
-                                setHasSelectVideo(false);
-                                setSelectedImg(url);
-                              }}
-                            >
-                              <img
-                                src={`${APIEndPoints.BackendURL}/${url}`}
-                                alt=""
-                                className="w-full h-full object-cover rounded-md cursor-pointer"
-                              />
-                            </div>
-                          );
-                        })
-                      : Array.from({ length: 4 }).map((_, index) => {
-                        return (
-                          <div
-                            key={index}
-                            className="w-8 h-8 bg-gray-100"
-                          ></div>
-                        );
-                      })}
+                                onClick={() => {
+                                  setHasSelectVideo(false);
+                                  setSelectedImg(url);
+                                }}
+                              >
+                                <img
+                                  src={`${url}`}
+                                  alt=""
+                                  className="w-full h-full object-cover rounded-md cursor-pointer"
+                                />
+                              </div>
+                            );
+                          })
+                      : null}
                   </div>
                   <div
                     className="w-80 sm:flex-1 h-[34vh] rounded-md overflow-hidden"
                     style={{
-                      backgroundImage: `url(${APIEndPoints.BackendURL}/${selectedImg})`,
+                      backgroundImage: `url(${selectedImg})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
@@ -351,12 +346,13 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                         return (
                           <div
                             key={index}
-                            className={`${selectedAcademy.active_days.includes(
-                              item.toLowerCase()
-                            )
+                            className={`${
+                              selectedAcademy.active_days.includes(
+                                item.toLowerCase()
+                              )
                                 ? "bg-[#53a53f] text-gray-200"
                                 : "bg-gray-300"
-                              } flex items-center justify-center px-2 py-1 rounded-lg text-xs`}
+                            } flex items-center justify-center px-2 py-1 rounded-lg text-xs`}
                           >
                             {item}
                           </div>
@@ -531,7 +527,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                             <img
                               src={
                                 item.images[0]
-                                  ? `${APIEndPoints.BackendURL}/${item.images[0]}`
+                                  ? `${item.images[0]}`
                                   : "https://res.cloudinary.com/purnesh/image/upload/w_1080,f_auto/west-delhi-cricket-academy0.jpg"
                               }
                               alt=""
@@ -562,12 +558,13 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                       return (
                         <div
                           key={index}
-                          className={`${selectedAcademy.active_days.includes(
-                            item.toLowerCase()
-                          )
+                          className={`${
+                            selectedAcademy.active_days.includes(
+                              item.toLowerCase()
+                            )
                               ? "bg-[#53a53f] text-gray-200"
                               : "bg-gray-300"
-                            } flex items-center justify-center px-2 py-1 rounded-lg text-sm`}
+                          } flex items-center justify-center px-2 py-1 rounded-lg text-sm`}
                         >
                           {item}
                         </div>
@@ -578,67 +575,77 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
               </div>
 
               {/* SLOTS */}
-              <div className="flex-1 w-full flex items-center justify-center mt-5">
-                <span className="w-full h-full bg-gray-100 rounded-md p-5 flex flex-col gap-3 border border-[#53a53f]">
-                  {/* <h2 className="font-medium tracking-wider text-xs mt-3 -mb-1">
-                    Practice Timings
-                  </h2> */}
-                  {/* <Separator className="bg-gray-300" /> */}
-                  <span className="flex-1 w-full flex gap-1">
-                    <span className="h-20 w-1/2 flex flex-wrap gap-2">
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>Morning</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody className="h-40 pl-5 overflow-x-hidden overflow-y-auto">
-                          <div className=" grid grid-cols-2 gap-2 mt-5">
-                            {selectedAcademy.slots.morning.map(
-                              (slot, index) => {
-                                return (
-                                  <div
-                                    key={index}
-                                    className="h-5 text-[10px] px-2 text-gray-100 bg-[#53a53f] whitespace-nowrap col-span-1 flex items-center justify-center rounded-md w-fit"
-                                  >
-                                    {slot.slot}
-                                  </div>
-                                );
-                              }
-                            )}
-                          </div>
-                        </TableBody>
-                      </Table>
-                    </span>
-                    <Separator orientation="vertical" />
-                    <span className="h-20 w-1/2 flex flex-wrap gap-2">
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>Evening</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody className="h-40 pl-5 overflow-x-hidden overflow-y-auto">
-                          <div className=" grid grid-cols-2 gap-3 mt-5">
-                            {selectedAcademy.slots.evening.map(
-                              (slot, index) => {
-                                return (
-                                  <div
-                                    key={index}
-                                    className="h-5 text-[10px] px-2 text-gray-100 bg-[#53a53f] whitespace-nowrap col-span-1 flex items-center justify-center rounded-md w-fit"
-                                  >
-                                    {slot.slot}
-                                  </div>
-                                );
-                              }
-                            )}
-                          </div>
-                        </TableBody>
-                      </Table>
-                    </span>
-                  </span>
-                </span>
+              <p className="mt-5 font-medium tracking-wide h-fit">
+                {selectedAcademy.slots.morning.length > 0 &&
+                selectedAcademy.slots.evening.length > 0
+                  ? "Available Batches"
+                  : "Available Batch"}
+              </p>
+              <div className="h-fit w-full flex items-start gap-5 justify-start mt-5">
+                {selectedAcademy.slots.morning.length > 0 ? (
+                  <div
+                    className={`w-[40%] cursor-pointer text-center py-3 rounded-lg ${
+                      selectedBatch === "morning"
+                        ? "bg-[#53a53f] text-gray-200 "
+                        : "border border-[#53a53f] "
+                    }`}
+                    onClick={() => {
+                      if (selectedBatch === "morning") {
+                        setSelectedBatch(null);
+                      } else {
+                        setSelectedBatch("morning");
+                      }
+                    }}
+                  >
+                    Morning
+                  </div>
+                ) : null}
+                {selectedAcademy.slots.evening.length > 0 ? (
+                  <div
+                    className={`w-[40%] cursor-pointer text-center py-3 rounded-lg ${
+                      selectedBatch === "evening"
+                        ? "bg-[#53a53f] text-gray-200 "
+                        : "border border-[#53a53f] "
+                    }`}
+                    onClick={() => {
+                      if (selectedBatch === "evening") {
+                        setSelectedBatch(null);
+                      } else {
+                        setSelectedBatch("evening");
+                      }
+                    }}
+                  >
+                    Evening
+                  </div>
+                ) : null}
               </div>
+              <AnimatePresence>
+                <div className="h-40 pl-5 pt-5 flex flex-col">
+                  {selectedBatch && (
+                    <motion.div
+                      className="flex flex-col gap-1 max-w-full overflow-x-hidden overflow-y-auto booked-slot"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        opacity: { duration: 0.5 },
+                        staggerChildren: 1,
+                      }}
+                    >
+                      {selectedAcademy?.slots?.[
+                        selectedBatch as "morning" | "evening"
+                      ]?.map((item, index) => (
+                        <span key={index} className="flex items-center gap-4 text-gray-400 hover:text-[#53a53f] text-lg font-medium">
+                          <span className="p-1 border-2 h-5 w-5 flex items-center justify-center border-[#53a53f] rounded-full">
+                            <span className="w-full h-full bg-[#53a53f] rounded-full"></span>
+                          </span>
+                          <p>{item.slot}</p>
+                        </span>
+                      ))}
+                    </motion.div>
+                  )}
+                </div>
+              </AnimatePresence>
 
               {/* FEES */}
               <Dialog>

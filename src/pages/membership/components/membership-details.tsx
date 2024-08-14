@@ -17,7 +17,7 @@ import {
   // resetLocationArr,
   setSelectedSlots,
 } from "@/store/actions/slices/membershipSlice";
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 
 import { FaRegPlayCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
@@ -29,14 +29,16 @@ import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { MdCardMembership } from "react-icons/md";
 import { SiTicktick } from "react-icons/si";
 import { CgCloseR } from "react-icons/cg";
+import { motion, AnimatePresence } from "framer-motion";
 
 const getEmbedUrl = (url: string): string => {
   switch (true) {
     case url.includes("youtube.com") || url.includes("youtu.be"):
       if (url.includes("embed")) {
         // Already an embed URL
-        return `${url.split("?")[0]
-          }?rel=0&modestbranding=1&controls=1&start=0&end=600&loop=1`;
+        return `${
+          url.split("?")[0]
+        }?rel=0&modestbranding=1&controls=1&start=0&end=600&loop=1`;
       }
       // Extract video ID from regular YouTube URLs
       // eslint-disable-next-line no-case-declarations
@@ -82,6 +84,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
   const { hasToken, userData } = useAppSelector(
     (state: RootState) => state.auth
   );
+  const [selectedBatch, setSelectedBatch] = useState<"morning" | "evening" | null>(null)
 
   const [selectedGround, setSelectedGround] = useState<IGround | null>(null);
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
@@ -93,7 +96,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
   const [joinModal, setJoinModal] = useState(false);
 
   const handleJoinModal = async (toggle: boolean) => {
-    setJoinModal(toggle)
+    setJoinModal(toggle);
 
     dispatch(
       setSelectedSlots({
@@ -113,7 +116,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
     });
 
     worker.onmessage = () => {
-      setJoinModal(false)
+      setJoinModal(false);
     };
 
     worker.onerror = (error) => {
@@ -142,8 +145,8 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
   }, [selectedMembership, grounds]);
 
   return (
-    <div className="w-full h-full flex flex-col gap-5">
-      <div className="flex-1 w-full flex gap-5">
+    <div className="w-full h-full flex flex-col gap-10">
+      <div className="flex-1 w-full flex gap-10">
         {selectedMembership ? (
           <>
             <div className="flex-1 h-full flex flex-col gap-2">
@@ -162,16 +165,17 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                       return (
                         <div
                           key={index}
-                          className={`w-8 h-8 bg-gray-100 ${selectedImg === url &&
+                          className={`w-8 h-8 bg-gray-100 ${
+                            selectedImg === url &&
                             "border-[3px] border-[#53a53f]"
-                            } rounded-lg shrink-0`}
+                          } rounded-lg shrink-0`}
                           onClick={() => {
                             setHasSelectVideo(false);
                             setSelectedImg(url);
                           }}
                         >
                           <img
-                            src={`${APIEndPoints.BackendURL}/${url}`}
+                            src={`${url}`}
                             alt=""
                             className="w-full h-full object-cover rounded-md cursor-pointer"
                           />
@@ -200,16 +204,17 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                         return (
                           <div
                             key={index}
-                            className={`w-8 h-8 ${selectedImg === url &&
+                            className={`w-8 h-8 ${
+                              selectedImg === url &&
                               "border-[3px] border-[#53a53f]"
-                              } bg-gray-100 rounded-lg shrink-0`}
+                            } bg-gray-100 rounded-lg shrink-0`}
                             onClick={() => {
                               setHasSelectVideo(false);
                               setSelectedImg(url);
                             }}
                           >
                             <img
-                              src={`${APIEndPoints.BackendURL}/${url}`}
+                              src={`${url}`}
                               alt=""
                               className="w-full h-full object-cover rounded-md cursor-pointer"
                             />
@@ -220,7 +225,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                 <div
                   className="flex-1 h-full w-[93%] bg-black flex items-center justify-center rounded-2xl"
                   style={{
-                    backgroundImage: `url(${APIEndPoints.BackendURL}/${selectedImg})`,
+                    backgroundImage: `url(${selectedImg})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -291,31 +296,86 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                   </Dialog>
                 </div>
 
-                <div className="h-40 w-full">
-                  <span className="w-full h-full bg-gray-100 rounded-md py-2 px-5 flex flex-col gap-3 border border-[#53a53f3d]">
-                    <h2 className="font-medium tracking-wider text-sm">
-                      Timings
-                    </h2>
-                    <Separator className="bg-gray-300" />
-                    <span className="h-fit w-full flex flex-wrap gap-2">
-                      {/* {selectedMembership.slotTimes.map((item, index) => {
-                        return (
-                          <div
-                            key={index}
-                            className="text-sm h-fit whitespace-nowrap border-[1px] bg-[#53a53f] text-gray-50 border-gray-300 px-2 py-1 rounded-xl"
-                          >
-                            {item.slot}
-                          </div>
-                        );
-                      })} */}
-                    </span>
-                  </span>
+                {/* SLOTS */}
+                <p className="mt-5 font-medium tracking-wide h-fit">
+                  {selectedMembership.slots.morning.length > 0 &&
+                  selectedMembership.slots.evening.length > 0
+                    ? "Available Batches"
+                    : "Available Batch"}
+                </p>
+                <div className="h-fit w-full flex items-start gap-5 justify-start mt-5">
+                  {selectedMembership.slots.morning.length > 0 ? (
+                    <div
+                      className={`w-[40%] cursor-pointer text-center py-3 rounded-lg ${
+                        selectedBatch === "morning"
+                          ? "bg-[#53a53f] text-gray-200 "
+                          : "border border-[#53a53f] "
+                      }`}
+                      onClick={() => {
+                        if (selectedBatch === "morning") {
+                          setSelectedBatch(null);
+                        } else {
+                          setSelectedBatch("morning");
+                        }
+                      }}
+                    >
+                      Morning
+                    </div>
+                  ) : null}
+                  {selectedMembership.slots.evening.length > 0 ? (
+                    <div
+                      className={`w-[40%] cursor-pointer text-center py-3 rounded-lg ${
+                        selectedBatch === "evening"
+                          ? "bg-[#53a53f] text-gray-200 "
+                          : "border border-[#53a53f] "
+                      }`}
+                      onClick={() => {
+                        if (selectedBatch === "evening") {
+                          setSelectedBatch(null);
+                        } else {
+                          setSelectedBatch("evening");
+                        }
+                      }}
+                    >
+                      Evening
+                    </div>
+                  ) : null}
                 </div>
+                <AnimatePresence>
+                  <div className="h-32 pl-5 pt-5 flex flex-col">
+                    {selectedBatch && (
+                      <motion.div
+                        className="flex flex-col gap-1 max-w-full overflow-x-hidden overflow-y-auto booked-slot"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                          opacity: { duration: 0.5 },
+                          staggerChildren: 1,
+                        }}
+                      >
+                        {selectedMembership?.slots?.[
+                          selectedBatch as "morning" | "evening"
+                        ]?.map((item, index) => (
+                          <span
+                            key={index}
+                            className="flex items-center gap-4 text-gray-400 hover:text-[#53a53f] text-lg font-medium"
+                          >
+                            <span className="p-1 border-2 h-5 w-5 flex items-center justify-center border-[#53a53f] rounded-full">
+                              <span className="w-full h-full bg-[#53a53f] rounded-full"></span>
+                            </span>
+                            <p>{item.slot}</p>
+                          </span>
+                        ))}
+                      </motion.div>
+                    )}
+                  </div>
+                </AnimatePresence>
 
                 {!userData?.joined_memberships?.includes(membershipId) ? (
                   <Dialog>
                     <DialogTrigger className="flex-1 w-full">
-                      <div className="h-[65%] w-full bg-gray-900 rounded-xl py-3 px-5 flex gap-1 text-gray-100">
+                      <div className="h-full w-full bg-gray-900 rounded-xl py-3 px-5 flex gap-1 text-gray-100">
                         <div className="flex-1 flex flex-col gap-1 items-start justify-center">
                           <div className="flex items-center gap-1">
                             <MdCardMembership
@@ -416,7 +476,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                           Current Subscription
                         </div>
                         <Separator className="bg-gray-800 mt-3 mb-5" />
-                        <div className="w-full">{ }</div>
+                        <div className="w-full">{}</div>
                       </div>
                     </DialogContent>
                   </Dialog>
@@ -426,7 +486,7 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
           </>
         ) : null}
       </div>
-      <div className="h-[33%] w-full flex items-start gap-5">
+      <div className="h-[30%] w-full flex items-start gap-10">
         <div className="flex-1 w-full h-full flex items-start gap-4">
           <div className="flex-1 flex flex-col gap-5">
             <div className="h-12 w-full flex items-end">
@@ -456,10 +516,11 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                     return (
                       <div
                         key={index}
-                        className={`flex text-xs items-center gap-2 h-fit ${index > selectedGround.rules.allowed.length - 1
-                          ? "text-[#53a53f]"
-                          : "text-rose-700"
-                          }`}
+                        className={`flex text-xs items-center gap-2 h-fit ${
+                          index > selectedGround.rules.allowed.length - 1
+                            ? "text-[#53a53f]"
+                            : "text-rose-700"
+                        }`}
                       >
                         {index > selectedGround.rules.allowed.length - 1 ? (
                           <SiTicktick />
@@ -499,23 +560,6 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                       </DialogTitle>
                       <Separator className="bg-[#53a53f] mt-3 mb-5" />
                       <div className="w-full text-sm tracking-widest flex flex-col gap-3">
-                        {/* {selectedMembership &&
-                          selectedMembership.slotTimes.map((item, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className={`text-xs h-fit whitespace-nowrap border-[1px] ${selectedSlot && selectedSlot === item.slot
-                                  ? "bg-[#53a53f] text-gray-50"
-                                  : "text-[#53a53f] border border-[#53a53f] bg-gray-100"
-                                  } border-gray-300 px-2 py-1 rounded-xl cursor-pointer`}
-                                onClick={() => {
-                                  dispatch(setSelectedSlots(item.slot));
-                                }}
-                              >
-                                {item.slot}
-                              </div>
-                            );
-                          })} */}
                         <div
                           onClick={() => {
                             dispatch(

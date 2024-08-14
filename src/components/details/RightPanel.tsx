@@ -61,7 +61,7 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
             {groundDetails?.name} is a premium synthetic grass product designed
             for sports fields and recreational areas.{" "}
           </span>
-          <span className=" tracking-widest w-full scroll-nobg py-5 flex flex-wrap gap-3">
+          <span className="mt-12 tracking-widest w-full scroll-nobg py-5 flex flex-wrap gap-3">
             {groundDetails?.amenities?.map((item, index) => {
               return (
                 <div
@@ -108,7 +108,7 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
       </div> */}
 
       {groundDetails?.venue?.address ? (
-        <div className="flex justify-between mt-32 mb-4 mr-1 md:mr-0">
+        <div className="flex justify-between mt-20 mb-4 mr-1 md:mr-0">
           <span className=" flex items-center gap-2">
             <GoLocation className="text-[#53a53f] w-10" size={20} />
             <span className="line-clamp-1">

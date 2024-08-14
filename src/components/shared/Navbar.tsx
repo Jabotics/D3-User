@@ -53,6 +53,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const pathName = useLocation();
+
   useGetSportQuery({});
   const mobileRef = useRef<HTMLDivElement>(null);
 
@@ -237,86 +238,90 @@ export const Navbar = () => {
                   <div className="group relative">
                     <Button
                       variant="outline"
-                      className={`px-4 2xl:px-12 text-xs h-7 border rounded-3xl ${
+                      className={`px-4 2xl:px-12 h-7 border rounded-3xl ${
                         pathName.pathname === "/play"
                           ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
-                          : ""
+                          : "text-gray-500 hover:text-gray-900 hover:font-bold"
                       }`}
                       onClick={() => {
                         navigate("/play");
                       }}
                     >
-                      <p>Pay & Play</p>
+                      <p className="outfit">Pay & Play</p>
                     </Button>
 
-                    <div className="relative group">
-                      <div className="absolute left-0 w-[150%] top-[65%] pt-3 hidden transform translate-y-2 transition-all duration-300 ease-out group-hover:block group-hover:translate-y-0 group-hover:delay-300">
-                        <div className="w-full flex flex-col gap-1 bg-white border border-gray-300 rounded-md py-5 px-5">
-                          {sports.length > 0 ? (
-                            sports.map((item, index) => (
-                              <div
-                                key={index}
-                                className="flex flex-row gap-2 items-center"
-                                onClick={() => {
-                                  dispatch(
-                                    setSelectedSports({
-                                      sportId: item.id,
-                                    })
-                                  );
-                                  const updatedIds =
-                                    selectedSportsStore.includes(item.id)
-                                      ? selectedSportsStore.filter(
-                                          (id) => id !== item.id
-                                        )
-                                      : [...selectedSportsStore, item.id];
+                    {pathName.pathname !== "/play" && (
+                      <div className="relative group">
+                        <div className="absolute left-0 w-[150%] top-[65%] pt-3 hidden transform translate-y-2 transition-all duration-300 ease-out group-hover:block group-hover:translate-y-0 group-hover:delay-300">
+                          <div className="w-full flex flex-col gap-5 bg-white border border-gray-300 rounded-md py-5 px-5">
+                            <div className="w-full h-40 booked-slot flex flex-col gap-1 overflow-x-hidden overflow-y-auto">
+                              {sports.length > 0 ? (
+                                sports.map((item, index) => (
+                                  <div
+                                    key={index}
+                                    className="flex flex-row gap-2 items-center"
+                                    onClick={() => {
+                                      dispatch(
+                                        setSelectedSports({
+                                          sportId: item.id,
+                                        })
+                                      );
+                                      const updatedIds =
+                                        selectedSportsStore.includes(item.id)
+                                          ? selectedSportsStore.filter(
+                                              (id) => id !== item.id
+                                            )
+                                          : [...selectedSportsStore, item.id];
 
-                                  dispatch(
-                                    setParams({
-                                      key: "supported_sports",
-                                      data: updatedIds,
-                                    })
-                                  );
-                                  dispatch(setSelectedSportsStore(item.id));
-                                }}
-                              >
-                                <Checkbox
-                                  checked={selectedSportsStore.includes(
-                                    item.id
-                                  )}
-                                  className="border-[#53a53f] data-[state=checked]:bg-[#53a53f]"
-                                />
-                                <p className="cursor-pointer">
-                                  <span className="text-[#53a53f]">
-                                    {item.name}
-                                  </span>
-                                </p>
-                              </div>
-                            ))
-                          ) : (
-                            <p>No Sports Available</p>
-                          )}
-                          <div
-                            className="bg-[#53a53f] w-full h-10 mt-3 rounded-md text-white flex items-center justify-center cursor-pointer"
-                            onClick={() => {
-                              navigate("/play");
-                            }}
-                          >
-                            {selectedSportsStore.length > 0
-                              ? "Show Results"
-                              : "All Grounds"}
+                                      dispatch(
+                                        setParams({
+                                          key: "supported_sports",
+                                          data: updatedIds,
+                                        })
+                                      );
+                                      dispatch(setSelectedSportsStore(item.id));
+                                    }}
+                                  >
+                                    <Checkbox
+                                      checked={selectedSportsStore.includes(
+                                        item.id
+                                      )}
+                                      className="border-[#53a53f] data-[state=checked]:bg-[#53a53f]"
+                                    />
+                                    <p className="cursor-pointer">
+                                      <span className="text-[#53a53f]">
+                                        {item.name}
+                                      </span>
+                                    </p>
+                                  </div>
+                                ))
+                              ) : (
+                                <p>No Sports Available</p>
+                              )}
+                            </div>
+                            <div
+                              className="bg-[#53a53f] w-full h-10 mt-3 rounded-md text-white flex items-center justify-center cursor-pointer"
+                              onClick={() => {
+                                navigate("/play");
+                              }}
+                            >
+                              {selectedSportsStore.length > 0
+                                ? "Show Results"
+                                : "All Grounds"}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
+                    className={`px-4 2xl:px-12 h-7 rounded-3xl ${
                       pathName.pathname === "/academy"
                         ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
-                        : ""
-                    }`}
+                        : "text-gray-500 hover:text-gray-900 hover:font-bold"
+                    } outfit`}
                     onClick={() => {
                       navigate("/academy");
                     }}
@@ -325,11 +330,11 @@ export const Navbar = () => {
                   </Button>
                   <Button
                     variant={"outline"}
-                    className={`px-4 2xl:px-12 text-xs h-7 rounded-3xl ${
+                    className={`px-4 2xl:px-12 h-7 rounded-3xl ${
                       pathName.pathname === "/membership"
                         ? "bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb] hover:text-white"
-                        : ""
-                    }`}
+                        : "text-gray-500 hover:text-gray-900 hover:font-bold"
+                    } outfit`}
                     onClick={() => {
                       navigate("/membership");
                     }}
@@ -342,7 +347,9 @@ export const Navbar = () => {
                       variant="outline"
                       className="px-4 2xl:px-12 text-xs h-7 rounded-3xl"
                     >
-                      <p>More</p>
+                      <p className="outfit text-gray-500 group-hover:text-gray-900 group-hover:font-bold tracking-wide">
+                        More
+                      </p>
                       <IoIosArrowDropdownCircle
                         size={15}
                         className="ml-1 text-gray-300 transition-transform duration-300 group-hover:text-gray-900 group-hover:rotate-180 transform origin-center"
@@ -362,7 +369,7 @@ export const Navbar = () => {
                             <span>About Us</span>
                           </Link>
                           <Link
-                            to="/about"
+                            to="/terms-of-use"
                             target="_blank"
                             rel="noreferrer noopener"
                             className="px-3 text-[#53a53f] py-1 hover:bg-[#ebffe5] font-medium flex flex-row items-center gap-2"
@@ -446,7 +453,7 @@ export const Navbar = () => {
                     <span
                       className={`flex items-center justify-center text-[11px] md:text-[10px] font-base ${
                         selectedCityName &&
-                        "tracking-wider lg:tracking-tight font-extrabold"
+                        "tracking-wider lg:tracking-normal font-extrabold josephine"
                       }`}
                     >
                       {selectedCityName ? (
