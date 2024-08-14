@@ -8,7 +8,7 @@ import {
 } from "@/store/actions/slices/blogSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { resetLocationArr } from "@/store/actions/slices/groundSlice";
 
 const BlogPostPage = () => {
@@ -72,9 +72,8 @@ const BlogPostPage = () => {
         <div className="w-full flex items-start gap-3">
           <div className="w-3/5">
             <h1
-              className={`${
-                isLoading ? "bg-gray-100 w-full h-28" : ""
-              } text-5xl font-bold leading-tight`}
+              className={`${isLoading ? "bg-gray-100 w-full h-28" : ""
+                } text-5xl font-bold leading-tight`}
             >
               {!isLoading ? blogs[0]?.title : null}
             </h1>
@@ -84,9 +83,8 @@ const BlogPostPage = () => {
       </section>
 
       <div
-        className={`${
-          isLoading ? "bg-gray-100 w-full h-5" : ""
-        } w-full flex items-center gap-5 mt-16 text-xs`}
+        className={`${isLoading ? "bg-gray-100 w-full h-5" : ""
+          } w-full flex items-center gap-5 mt-16 text-xs`}
       >
         <p className="uppercase font-bold text-[#54a63f] tracking-wider w-fit h-fit">
           {!isLoading ? blogs[0]?.createdAt : null}
@@ -103,11 +101,10 @@ const BlogPostPage = () => {
                 const toSetIndex = index + 1;
                 return (
                   <p
-                    className={`w-2 h-2 rounded-full ${
-                      popularIndex === toSetIndex
+                    className={`w-2 h-2 rounded-full ${popularIndex === toSetIndex
                         ? "bg-[#54a63f]"
                         : "bg-[#93d18371]"
-                    } cursor-pointer`}
+                      } cursor-pointer`}
                     key={index}
                     onClick={() => handleDotClick(toSetIndex as 1 | 2 | 3)}
                   ></p>
@@ -166,9 +163,8 @@ const BlogPostPage = () => {
       {/* OTHER PARAGRAPHS */}
       {blogs[0]?.details && blogs[0]?.details?.length > 1 ? (
         <div
-          className={`mb-10 w-full flex items-start gap-10 ${
-            blogs[0]?.details?.length === 1 && "hidden"
-          }`}
+          className={`mb-10 w-full flex items-start gap-10 ${blogs[0]?.details?.length === 1 && "hidden"
+            }`}
         >
 
           <div className="flex-1 pr-10 ">
