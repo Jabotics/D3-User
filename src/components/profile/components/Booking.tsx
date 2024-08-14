@@ -41,7 +41,7 @@ const Booking = () => {
               <span className="hidden sm:block lg:hidden">Ground</span>
               <BsInfoCircle className="block sm:hidden" />
             </div>
-            <div className="text-sm w-1/6 flex justify-center font-light tracking-wide">
+            <div className="text-sm w-1/3 flex justify-center font-light tracking-wide">
               <span className="hidden sm:block">Location</span>
               <GoLocation className="block sm:hidden" />
             </div>
@@ -69,9 +69,9 @@ const Booking = () => {
                 <div className="text-[14px] w-[20%] flex justify-center items-center">
                   {item?.ground?.name}
                 </div>
-                <div className="text-[14px] w-[20%] text-[#676767] flex justify-center items-center gap-2">
-                  <FaLocationDot size={16} color="#D0D0D0" />
-                  <span className="inline-block ">{item?.venue?.address}</span>
+                <div className="text-[14px] w-[40%] text-[#676767] flex justify-center items-center gap-2">
+                  <FaLocationDot size={20} color="#D0D0D0" />
+                  <span className="inline-block line-clamp-1 ">{item?.venue?.address}</span>
                 </div>
                 <div className="text-[14px] w-[20%] flex justify-center items-center gap-2">
                   <CalendarIcon size={16} />
@@ -83,11 +83,10 @@ const Booking = () => {
                 {item?.slots !== undefined && item?.slots.length > 0 ? (
                   <div className="text-[14px] w-[35%] flex justify-center items-center">
                     <span
-                      className={`${
-                        item?.slots?.length > 1
-                          ? "bg-[#53A53F] text-[#E4F6DF]"
-                          : "bg-[#E4F6DF] text-[#53A53F]"
-                      } p-2 w-40 flex items-center justify-center rounded-md `}
+                      className={`${item?.slots?.length > 1
+                        ? "bg-[#53A53F] text-[#E4F6DF]"
+                        : "bg-[#E4F6DF] text-[#53A53F]"
+                        } p-2 w-40 flex items-center justify-center rounded-md `}
                     >
                       {item?.slots?.length > 1 ? (
                         <>

@@ -28,7 +28,7 @@ const BookingSummary = () => {
   );
   useEffect(() => {
     getGround.refetch();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroundId]);
 
   const [add] = useAddSlotsMutation();
@@ -45,7 +45,7 @@ const BookingSummary = () => {
         amount: totalAmount,
       }).unwrap();
 
-      navigate("/checkout");
+      navigate("/profile");
       console.log(res);
     } catch (error) {
       toast.error((error as { data: { message: string } })?.data?.message);

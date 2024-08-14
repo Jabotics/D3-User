@@ -123,11 +123,11 @@ interface InitialState {
     venue: string;
     academy_fee: number;
     subscription_type?:
-      | "Monthly"
-      | "Quarterly"
-      | "Half_Yearly"
-      | "Yearly"
-      | null;
+    | "Monthly"
+    | "Quarterly"
+    | "Half_Yearly"
+    | "Yearly"
+    | null;
     admission_fee: number;
     profile?: File | null;
     doc?: File | null;
@@ -236,17 +236,18 @@ export const AcademiesSlice = createSlice({
       state.locationArr = ["Home", "Academy"];
     },
     setSelectedSlots: (state, action: PayloadAction<{ batch: "Morning" | "Evening" | null, slots: string[] } | null>) => {
+      console.log(action.payload)
       if (action.payload === null) {
         state.selectedSlot = null;
-        state.registrationFormDetails.shift = null; 
+        state.registrationFormDetails.shift = null;
         return;
       }
-    
+
       const { batch, slots } = action.payload;
       state.selectedSlot = batch !== null ? { batch, slots } : null;
       state.registrationFormDetails.shift = batch !== null ? (batch.toLowerCase() as "morning" | "evening") : null;
     },
-    
+
 
     setRegistrationAcademy: (
       state,

@@ -40,9 +40,8 @@ const getEmbedUrl = (url: string): string => {
     case url.includes("youtube.com") || url.includes("youtu.be"):
       if (url.includes("embed")) {
         // Already an embed URL
-        return `${
-          url.split("?")[0]
-        }?rel=0&modestbranding=1&controls=1&start=0&end=600&loop=1`;
+        return `${url.split("?")[0]
+          }?rel=0&modestbranding=1&controls=1&start=0&end=600&loop=1`;
       }
       // Extract video ID from regular YouTube URLs
       // eslint-disable-next-line no-case-declarations
@@ -93,12 +92,12 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
   const handleJoinModal = async (toggle: boolean) => {
     setJoinModal(toggle)
 
-    dispatch(
-      setSelectedSlots({
-        batch: null,
-        slots: [],
-      })
-    );
+    // dispatch(
+    //   setSelectedSlots({
+    //     batch: null,
+    //     slots: [],
+    //   })
+    // );
 
     const { default: WorkerConstructor } = await import(
       "@/workers/delayWorker?worker"
@@ -179,11 +178,10 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                               })
                             );
                           }}
-                          className={`text-xs lg:text-sm ${
-                            selectedSlot?.batch === "Morning"
+                          className={`text-xs lg:text-sm ${selectedSlot?.batch === "Morning"
                               ? "bg-[#53a53f]"
                               : "bg-[#a1c299]"
-                          } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
+                            } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
                         >
                           <p>Morning Batch</p>
                           <p>
@@ -202,11 +200,10 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                               })
                             );
                           }}
-                          className={`text-xs lg:text-sm ${
-                            selectedSlot?.batch === "Evening"
+                          className={`text-xs lg:text-sm ${selectedSlot?.batch === "Evening"
                               ? "bg-[#53a53f]"
                               : "bg-[#a1c299]"
-                          } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
+                            } flex items-center gap-2 px-5 py-3 md:py-2 rounded-md font-medium text-gray-50 cursor-pointer`}
                         >
                           <p>Evening Batch</p>
                           <p>
@@ -216,9 +213,8 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                       </div>
                     </div>
                     <DialogClose
-                      className={`h-8 rounded-md ${
-                        selectedSlot ? "bg-[#53a53f]" : "bg-[#a1c299]"
-                      } text-xs text-gray-100 `}
+                      className={`h-8 rounded-md ${selectedSlot ? "bg-[#53a53f]" : "bg-[#a1c299]"
+                        } text-xs text-gray-100 `}
                       onClick={() => {
                         if (selectedSlot) {
                           navigate(`/academy?id=${academyId}&join=1`);
@@ -247,34 +243,33 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                   <div className="w-80 sm:w-12 h-12 sm:h-full pb-0 sm:pb-5 overflow-x-auto sm:overflow-x-hidden filter-sc overflow-y-hidden sm:overflow-y-auto flex flex-row sm:flex-col items-center gap-2 mt-2 rounded-md overflow-hidden">
                     {selectedAcademy.images
                       ? selectedAcademy.images.slice(0, 2).map((url, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className={`w-8 h-8 shrink-0 bg-gray-100 ${
-                                selectedImg === url &&
-                                "border-[3px] border-[#53a53f]"
+                        return (
+                          <div
+                            key={index}
+                            className={`w-8 h-8 shrink-0 bg-gray-100 ${selectedImg === url &&
+                              "border-[3px] border-[#53a53f]"
                               } rounded-md`}
-                              onClick={() => {
-                                setHasSelectVideo(false);
-                                setSelectedImg(url);
-                              }}
-                            >
-                              <img
-                                src={`${APIEndPoints.BackendURL}/${url}`}
-                                alt=""
-                                className="w-full h-full object-cover rounded-md cursor-pointer"
-                              />
-                            </div>
-                          );
-                        })
+                            onClick={() => {
+                              setHasSelectVideo(false);
+                              setSelectedImg(url);
+                            }}
+                          >
+                            <img
+                              src={`${APIEndPoints.BackendURL}/${url}`}
+                              alt=""
+                              className="w-full h-full object-cover rounded-md cursor-pointer"
+                            />
+                          </div>
+                        );
+                      })
                       : Array.from({ length: 4 }).map((_, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className="w-8 h-8 bg-gray-100"
-                            ></div>
-                          );
-                        })}
+                        return (
+                          <div
+                            key={index}
+                            className="w-8 h-8 bg-gray-100"
+                          ></div>
+                        );
+                      })}
                     {selectedAcademy.video ? (
                       <div
                         className="w-8 h-8 bg-gray-100 flex items-center justify-center border border-gray-300 rounded-md cursor-pointer"
@@ -290,36 +285,35 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                     )}
                     {selectedAcademy.images
                       ? selectedAcademy.images
-                          .slice(2, selectedAcademy.images.length)
-                          .map((url, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className={`w-8 h-8 shrink-0 bg-gray-100 ${
-                                  selectedImg === url &&
-                                  "border-[3px] border-[#53a53f]"
-                                } rounded-md`}
-                                onClick={() => {
-                                  setHasSelectVideo(false);
-                                  setSelectedImg(url);
-                                }}
-                              >
-                                <img
-                                  src={`${APIEndPoints.BackendURL}/${url}`}
-                                  alt=""
-                                  className="w-full h-full object-cover rounded-md cursor-pointer"
-                                />
-                              </div>
-                            );
-                          })
-                      : Array.from({ length: 4 }).map((_, index) => {
+                        .slice(2, selectedAcademy.images.length)
+                        .map((url, index) => {
                           return (
                             <div
                               key={index}
-                              className="w-8 h-8 bg-gray-100"
-                            ></div>
+                              className={`w-8 h-8 shrink-0 bg-gray-100 ${selectedImg === url &&
+                                "border-[3px] border-[#53a53f]"
+                                } rounded-md`}
+                              onClick={() => {
+                                setHasSelectVideo(false);
+                                setSelectedImg(url);
+                              }}
+                            >
+                              <img
+                                src={`${APIEndPoints.BackendURL}/${url}`}
+                                alt=""
+                                className="w-full h-full object-cover rounded-md cursor-pointer"
+                              />
+                            </div>
                           );
-                        })}
+                        })
+                      : Array.from({ length: 4 }).map((_, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className="w-8 h-8 bg-gray-100"
+                          ></div>
+                        );
+                      })}
                   </div>
                   <div
                     className="w-80 sm:flex-1 h-[34vh] rounded-md overflow-hidden"
@@ -357,13 +351,12 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                         return (
                           <div
                             key={index}
-                            className={`${
-                              selectedAcademy.active_days.includes(
-                                item.toLowerCase()
-                              )
+                            className={`${selectedAcademy.active_days.includes(
+                              item.toLowerCase()
+                            )
                                 ? "bg-[#53a53f] text-gray-200"
                                 : "bg-gray-300"
-                            } flex items-center justify-center px-2 py-1 rounded-lg text-xs`}
+                              } flex items-center justify-center px-2 py-1 rounded-lg text-xs`}
                           >
                             {item}
                           </div>
@@ -569,13 +562,12 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                       return (
                         <div
                           key={index}
-                          className={`${
-                            selectedAcademy.active_days.includes(
-                              item.toLowerCase()
-                            )
+                          className={`${selectedAcademy.active_days.includes(
+                            item.toLowerCase()
+                          )
                               ? "bg-[#53a53f] text-gray-200"
                               : "bg-gray-300"
-                          } flex items-center justify-center px-2 py-1 rounded-lg text-sm`}
+                            } flex items-center justify-center px-2 py-1 rounded-lg text-sm`}
                         >
                           {item}
                         </div>

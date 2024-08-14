@@ -39,11 +39,11 @@ interface AcademyCheckoutDetailsProps {
     venue: string;
     academy_fee: number;
     subscription_type?:
-      | "Monthly"
-      | "Quarterly"
-      | "Half_Yearly"
-      | "Yearly"
-      | null;
+    | "Monthly"
+    | "Quarterly"
+    | "Half_Yearly"
+    | "Yearly"
+    | null;
     admission_fee?: number;
     profile?: File | null;
     doc?: File | null;
@@ -63,6 +63,7 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
 
   // const [hasSlotChanged, setHasSlotChanged] = useState(false);
 
+  console.log(registrationFormDetails)
   return (
     <section className="w-full h-fit lg:h-full flex flex-col gap-2">
       <div className="w-full lg:h-40 flex flex-col lg:flex-row gap-5">
@@ -260,7 +261,7 @@ const AcademyCheckoutDetails: React.FC<AcademyCheckoutDetailsProps> = ({
               <span className="font-semibold tracking-wide">
                 {registrationFormDetails.subscription_type ? (
                   registrationFormDetails.subscription_type ===
-                  "Half_Yearly" ? (
+                    "Half_Yearly" ? (
                     "Half Yearly"
                   ) : (
                     registrationFormDetails.subscription_type

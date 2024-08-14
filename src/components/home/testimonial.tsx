@@ -58,7 +58,7 @@ export const Testimonials = () => {
         </p>
 
         <div
-          className="hiw-slider mt-10"
+          className="hiw-slider mt-10 "
           style={{
             background:
               "linear-gradient(to top, transparent, rgba(0, 0, 0, 0.1), transparent, transparent",
@@ -68,7 +68,7 @@ export const Testimonials = () => {
             responsive={responsive}
             swipeable={true}
             draggable={true}
-            arrows={false}
+            arrows={true}
             showDots={true}
             infinite={true}
             autoPlay={false}
@@ -77,27 +77,27 @@ export const Testimonials = () => {
             dotListClass="carousel-testimonial-dots"
             partialVisible={true}
           >
-            <>
-              {!x.isLoading || happyCustomers?.length > 0 ? (
-                <>
-                  {happyCustomers.map((item, index) => {
-                    return (
-                      <React.Fragment key={index}>
-                        <TestimonialCard data={item} />
-                      </React.Fragment>
-                    )
-                  })}
-                </>
-              ) : (
-                <>
-                  <TestimonialCard />
-                  <TestimonialCard />
-                  <TestimonialCard />
-                  <TestimonialCard />
-                  <TestimonialCard />
-                </>
-              )}
-            </>
+
+            {!x.isLoading || happyCustomers?.length > 0 ? (
+              <>
+                {happyCustomers.map((item, index) => {
+                  return (
+                    <React.Fragment key={index}>
+                      <TestimonialCard data={item} />
+                    </React.Fragment>
+                  )
+                })}
+              </>
+            ) : (
+              <>
+                <TestimonialCard />
+                <TestimonialCard />
+                <TestimonialCard />
+                <TestimonialCard />
+                <TestimonialCard />
+              </>
+            )}
+
           </Carousel>
         </div>
       </div>
