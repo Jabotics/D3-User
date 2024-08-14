@@ -1,6 +1,6 @@
 export const APIEndPoints = {
   // BackendURL: 'http://localhost:5050',
-  BackendURL: 'http://192.168.29.151:5050',
+  BackendURL: 'http://192.168.29.16:5050',
 
   // CUSTOMER
   customer_login: '/api/customer-login',
