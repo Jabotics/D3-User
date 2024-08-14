@@ -11,28 +11,28 @@ export const Testimonials = () => {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 3,
-      partialVisibilityGutter: 30,
+      items: 4,
+      partialVisibilityGutter: 10,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-      partialVisibilityGutter: 30,
+      items: 4,
+      partialVisibilityGutter: 10,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: 1,
-      partialVisibilityGutter: 30,
+      partialVisibilityGutter: 10,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
-      partialVisibilityGutter: 30,
+      partialVisibilityGutter: 10,
       infinite: true,
     },
   };
 
-  const x = useGetHappyCustomersQuery();
+  useGetHappyCustomersQuery();
   const { happyCustomers } = useAppSelector(
     (state: RootState) => state.happyCustomers
   );
@@ -77,9 +77,9 @@ export const Testimonials = () => {
             dotListClass="carousel-testimonial-dots"
             partialVisible={true}
           >
-            <>
-              {!x.isLoading || happyCustomers?.length > 0 ? (
-                <>
+            {/* <> */}
+              {/* {!x.isLoading || happyCustomers?.length > 0 ? ( */}
+                {/* <div className="flex flex-row gap-2"> */}
                   {happyCustomers.map((item, index) => {
                     return (
                       <React.Fragment key={index}>
@@ -87,8 +87,8 @@ export const Testimonials = () => {
                       </React.Fragment>
                     )
                   })}
-                </>
-              ) : (
+                {/* </div> */}
+              {/* ) : (
                 <>
                   <TestimonialCard />
                   <TestimonialCard />
@@ -96,8 +96,8 @@ export const Testimonials = () => {
                   <TestimonialCard />
                   <TestimonialCard />
                 </>
-              )}
-            </>
+              )} */}
+            {/* </> */}
           </Carousel>
         </div>
       </div>
