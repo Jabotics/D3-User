@@ -468,8 +468,8 @@ const MembershipDetails: React.FC<MembershipDetailsProps> = ({
                   </Dialog>
                 ) : (
                   <Dialog>
-                    <DialogTrigger className="flex-1 w-full">
-                      <div className="h-[65%] w-full bg-gray-900 rounded-xl py-3 px-5 flex gap-1 text-gray-100">
+                    <DialogTrigger className="flex-1 w-full z-10">
+                      <div className="h-full w-full bg-gray-900 rounded-xl py-3 px-5 flex gap-1 text-gray-100">
                         <div className="flex-1 flex flex-col gap-1 items-start justify-center">
                           <div className="flex items-center gap-1">
                             <MdCardMembership

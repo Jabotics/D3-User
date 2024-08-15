@@ -86,9 +86,15 @@ const Details = () => {
       </span>
 
       <div className="flex flex-col mt-5 gap-8 w-full relative">
-        {/* <div className="absolute left-12 top-1/2 -translate-y-1/3 -z-30 w-80 h-32">
+        <div className="absolute right-[20%] top-[40%]  -z-30 w-[25vw] h-32 opacity-45">
           <img src="/images/pattern-5.svg" alt="" className="w-full h-full" />
-        </div> */}
+        </div>
+        <div className="absolute -left-[20vw] bottom-[35vh] -z-30 w-[35vw] h-[45vh] opacity-45">
+          <img src="/images/pattern-6.svg" alt="" className="w-full h-full" />
+        </div>
+        <div className="absolute -right-60 -bottom-20 -z-30 w-[45vw] h-[65vh] opacity-45">
+          <img src="/images/graphic-img-1.svg" alt="" className="w-full h-full" />
+        </div>
         <div className="flex justify-center items-center xl:gap-10 lg:gap-6 gap-5 flex-col lg:flex-row md:items-center w-full h-fit lg:h-[65vh] overflow-hidden">
           <div className="w-full lg:w-2/3 h-full ">
             <LeftPanel groundDetails={groundDetails[0] as IGround} />

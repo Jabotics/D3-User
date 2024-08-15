@@ -6,7 +6,7 @@ import "react-multi-carousel/lib/styles.css";
 
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { useGetGroundQuery } from "@/store/actions/slices/groundSlice";
+import { useSetAllGroundsQuery } from "@/store/actions/slices/groundSlice";
 import { useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
 
@@ -14,8 +14,8 @@ const Slots = ({ relatedGroundsOfId }: { relatedGroundsOfId?: string }) => {
   const navigate = useNavigate();
   const carouselRef = useRef<Carousel>(null);
 
-  useGetGroundQuery({}, { refetchOnMountOrArgChange: true });
-  const { grounds } = useAppSelector((state: RootState) => state.ground);
+  useSetAllGroundsQuery({}, { refetchOnMountOrArgChange: true });
+  const { allGrounds: grounds } = useAppSelector((state: RootState) => state.ground);
 
   const handleNext = () => {
     if (carouselRef.current) {
