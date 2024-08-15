@@ -254,7 +254,7 @@ export const Navbar = () => {
                       <div className="relative group">
                         <div className="absolute left-0 w-[150%] top-[65%] pt-3 hidden transform translate-y-2 transition-all duration-300 ease-out group-hover:block group-hover:translate-y-0 group-hover:delay-300">
                           <div className="w-full flex flex-col gap-5 bg-white border border-gray-300 rounded-md py-5 px-5">
-                            <div className="w-full h-40 booked-slot flex flex-col gap-1 overflow-x-hidden overflow-y-auto">
+                            <div className="w-full max-h-40 booked-slot flex flex-col gap-1 overflow-x-hidden overflow-y-auto">
                               {sports.length > 0 ? (
                                 sports.map((item, index) => (
                                   <div

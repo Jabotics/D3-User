@@ -2,50 +2,45 @@
 import React, { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-interface items {
-  title: string;
-  content: string[];
-}
-
 interface AccordionProps {
-  items: items[];
+  items: string[];
 }
 
 const Accordion: React.FC<AccordionProps> = ({ items }) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [active, setActive] = useState<boolean>(false);
 
-  const handleToggle = (index: number | null) => {
-    setActiveIndex(activeIndex == index ? null : index);
-  };
+  // const handleToggle = (index: number | null) => {
+  //   setActiveIndex(activeIndex == index ? null : index);
+  // };
 
   return (
     <div className="w-full flex flex-col gap-6">
-      {items.map((item, index) => (
-        <div key={index} className="border rounded-xl">
-          <button
-            className="w-full p-3 px-6 flex justify-between items-center text-left transition-all duration-500 ease-in-out"
-            onClick={() => handleToggle(index)}
+      {/* {items.map((item, index) => ( */}
+      <div className="border rounded-xl">
+        <button
+          className="w-full p-3 px-6 flex justify-between items-center text-left transition-all duration-500 ease-in-out"
+          onClick={() => setActive(!active)}
+        >
+          <span className="text-md font-medium">{`Sports Available`}</span>
+          <span className="text-lg text-[#53A53F]">
+            {active ? <FaChevronUp /> : <FaChevronDown />}
+          </span>
+        </button>
+        {active && (
+          <div
+            className={`p-2 px-6 ${
+              active ? "block" : "hidden"
+            } transition-all duration-500 ease-in-out flex gap-2`}
           >
-            <span className="text-md font-medium">{item.title}</span>
-            <span className="text-lg text-[#53A53F]">
-              {activeIndex === index ? <FaChevronUp /> : <FaChevronDown />}
-            </span>
-          </button>
-          {activeIndex === index && (
-            <div
-              className={`p-2 px-6 ${
-                activeIndex === index ? "block" : "hidden"
-              } transition-all duration-500 ease-in-out flex gap-2`}
-            >
-              {item.content.map((contentName: string) => (
-                <div className="p-2 border rounded-3xl w-32 text-center">
-                  <span className="font-light">{contentName}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
+            {items.map((contentName: string, index) => (
+              <div className="p-2 border rounded-3xl w-32 text-center" key={index}>
+                <span className="font-light">{contentName}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      {/* ))} */}
     </div>
   );
 };

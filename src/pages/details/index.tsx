@@ -19,13 +19,6 @@ import { Button } from "@/components/ui/button";
 
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
-const items = [
-  {
-    title: "Sports Available",
-    content: ["Cricket", "Football"],
-  },
-];
-
 const Details = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -59,7 +52,7 @@ const Details = () => {
   }, []);
 
   return (
-    <section className="flex flex-col px-5 lg:px-[95px] xl:px-40 w-full overflow-hidden">
+    <section className="flex flex-col px-5 lg:px-[95px] xl:px-40 w-full overflow-hidden ">
       <span className="h-20 lg:h-5 flex items-center mb-2 mt-4 lg:mb-4 lg:mt-4 gap-1 text-[10px] md:text-xs lg:text-sm">
         {locationArr.map((item, index) => (
           <div key={index}>
@@ -92,7 +85,10 @@ const Details = () => {
         ))}
       </span>
 
-      <div className="flex flex-col mt-5 gap-8 w-full">
+      <div className="flex flex-col mt-5 gap-8 w-full relative">
+        {/* <div className="absolute left-12 top-1/2 -translate-y-1/3 -z-30 w-80 h-32">
+          <img src="/images/pattern-5.svg" alt="" className="w-full h-full" />
+        </div> */}
         <div className="flex justify-center items-center xl:gap-10 lg:gap-6 gap-5 flex-col lg:flex-row md:items-center w-full h-fit lg:h-[65vh] overflow-hidden">
           <div className="w-full lg:w-2/3 h-full ">
             <LeftPanel groundDetails={groundDetails[0] as IGround} />
@@ -115,7 +111,7 @@ const Details = () => {
                         </div>
                       );
                     })
-                  : "No Add ons"}
+                  : null}
                 {groundDetails[0]?.rules?.allowed?.length > 0
                   ? groundDetails[0]?.rules?.allowed?.map((item, index) => {
                       return (
@@ -125,12 +121,23 @@ const Details = () => {
                         </div>
                       );
                     })
-                  : "No Add ons"}
+                  : null}
+
+                {!(
+                  groundDetails[0]?.rules?.not_allowed?.length > 0 ||
+                  groundDetails[0]?.rules?.allowed?.length > 0
+                ) ? (
+                  <span>No Data Available</span>
+                ) : null}
               </span>
             </div>
           </div>
           <div className="w-full">
-            <Accordion items={items} />
+            {groundDetails[0]?.supported_sports ? (
+              <Accordion
+                items={groundDetails[0]?.supported_sports?.map((i) => i.name)}
+              />
+            ) : null}
           </div>
           <div className="w-full h-10 flex flex-row items-center gap-4 mt-2">
             {groundDetails[0]?.coupon_available ? (

@@ -129,12 +129,19 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
   }, [selectedAcademy]);
 
   return (
-    <div className="h-full lg:h-screen flex items-start gap-10">
+    <div className="h-full lg:h-screen flex items-start gap-10 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-72 h-80 rounded-md overflow-hidden -z-10">
+        <img
+          src="/images/pattern-1.svg"
+          alt=""
+          className="w-full h-full object-cover object-left"
+        />
+      </div>
       <div className="h-full flex-1">
         {selectedAcademy ? (
           <div className="w-full h-full overflow-hidden flex flex-col">
             <div className="w-full sm:w-full h-20 flex items-center justify-between">
-              <span className="text-base font-semibold md:font-normal text-gray-800 md:text-gray-950 tracking-wider md:tracking-normal md:text-lg lg:text-3xl ">
+              <span className="text-base font-semibold md:font-normal text-gray-800 md:text-gray-950 tracking-wider md:tracking-normal md:text-lg lg:text-3xl lato">
                 {selectedAcademy.name}
               </span>
               {!userData?.joined_academies?.includes(academyId) ? (
@@ -238,10 +245,10 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
             </div>
             <Separator className="-mt-2 mb-1 lg:mb-0 lg:mt-0 w-80 lg:w-full" />
 
-            <div className="h-fit w-full flex gap-5">
+            <div className="h-3/5 w-full flex gap-5">
               {/* IMAGE */}
               <div className="flex-1 h-full flex items-center justify-start rounded-md">
-                <div className="mt-4 w-full overflow-hidden flex flex-col-reverse sm:flex-row items-start justify-center gap-2">
+                <div className="mt-4 h-full w-full overflow-hidden flex flex-col-reverse sm:flex-row items-start justify-center gap-2">
                   <div className="w-80 sm:w-12 h-12 sm:h-full pb-0 sm:pb-5 overflow-x-auto sm:overflow-x-hidden filter-sc overflow-y-hidden sm:overflow-y-auto flex flex-row sm:flex-col items-center gap-2 mt-2 rounded-md overflow-hidden">
                     {selectedAcademy.images
                       ? selectedAcademy.images.slice(0, 2).map((url, index) => {
@@ -311,7 +318,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                       : null}
                   </div>
                   <div
-                    className="w-80 sm:flex-1 h-[34vh] rounded-md overflow-hidden"
+                    className="w-80 sm:flex-1 h-full rounded-md overflow-hidden"
                     style={{
                       backgroundImage: `url(${selectedImg})`,
                       backgroundSize: "cover",
@@ -389,6 +396,9 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
 
               {/* DESCRIPTION */}
               <section className="w-80 sm:w-1/2 lg:w-full my-5 flex flex-col">
+                <div className="w-full h-5 flex items-center justify-start overflow-hidden">
+                  <img src="/images/pattern-2.svg" alt="" className="h-full " />
+                </div>
                 <div className="flex-1 flex items-start gap-3">
                   <div className="flex flex-col flex-1 h-full">
                     <h1 className="text-sm lg:text-base font-semibold tracking-wide h-10">
@@ -413,7 +423,7 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex-1 w-full mt-3 text-xs">
+                    <div className="flex-1 w-full mt-3 text-sm leading-5 line-clamp-4">
                       {selectedAcademy.description}
                     </div>
                   </div>
@@ -584,11 +594,11 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
               <div className="h-fit w-full flex items-start gap-5 justify-start mt-5">
                 {selectedAcademy.slots.morning.length > 0 ? (
                   <div
-                    className={`w-[40%] cursor-pointer text-center py-3 rounded-lg ${
+                    className={`w-[40%] cursor-pointer text-center py-3 rounded-lg text-xl ${
                       selectedBatch === "morning"
                         ? "bg-[#53a53f] text-gray-200 "
                         : "border border-[#53a53f] "
-                    }`}
+                    } josephine`}
                     onClick={() => {
                       if (selectedBatch === "morning") {
                         setSelectedBatch(null);
@@ -602,11 +612,11 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                 ) : null}
                 {selectedAcademy.slots.evening.length > 0 ? (
                   <div
-                    className={`w-[40%] cursor-pointer text-center py-3 rounded-lg ${
+                    className={`w-[40%] cursor-pointer text-center py-3 rounded-lg text-xl ${
                       selectedBatch === "evening"
                         ? "bg-[#53a53f] text-gray-200 "
                         : "border border-[#53a53f] "
-                    }`}
+                    } josephine`}
                     onClick={() => {
                       if (selectedBatch === "evening") {
                         setSelectedBatch(null);
@@ -635,7 +645,10 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
                       {selectedAcademy?.slots?.[
                         selectedBatch as "morning" | "evening"
                       ]?.map((item, index) => (
-                        <span key={index} className="flex items-center gap-4 text-gray-400 hover:text-[#53a53f] text-lg font-medium">
+                        <span
+                          key={index}
+                          className="flex items-center gap-4 text-gray-400 hover:text-[#53a53f] text-lg font-medium"
+                        >
                           <span className="p-1 border-2 h-5 w-5 flex items-center justify-center border-[#53a53f] rounded-full">
                             <span className="w-full h-full bg-[#53a53f] rounded-full"></span>
                           </span>
@@ -725,7 +738,10 @@ const AcademyDetails: React.FC<AcademyDetailsProps> = ({ academyId }) => {
         </div>
 
         {/* MORE ACADEMIES */}
-        <div className="flex flex-col h-60 gap-3">
+        <div className="flex flex-col h-60">
+          <div className="w-full h-5 flex items-center justify-start overflow-hidden">
+            <img src="/images/pattern-2.svg" alt="" className="h-full " />
+          </div>
           <div className="h-fit flex items-center justify-between font-medium text-lg">
             <span className="flex-1 text-gray-800">More Academies</span>
             <span
