@@ -12,8 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { FaFacebook } from "react-icons/fa";
 import { LuInstagram } from "react-icons/lu";
 
-const AboutPage = () => {
-  console.log('testing');
+const AboutPage = () => {  
   const navigate = useNavigate();
 
   const controls1 = useAnimation();
