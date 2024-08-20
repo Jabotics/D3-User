@@ -14,6 +14,9 @@ export default defineConfig({
     //   },
     // },
   },
+  preview: {
+    port: 5005,
+  },
   plugins: [react()],
   resolve: {
     alias: {
