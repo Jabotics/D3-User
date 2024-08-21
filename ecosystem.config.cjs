@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: `vite-app`,
+      name: `d3-user`,
       script: "serve",
       env: {
         PM2_SERVE_PATH: "./dist",
