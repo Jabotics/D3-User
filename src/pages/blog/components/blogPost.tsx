@@ -8,7 +8,7 @@ import {
 } from "@/store/actions/slices/blogSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { resetLocationArr } from "@/store/actions/slices/groundSlice";
 
 const BlogPostPage = () => {
