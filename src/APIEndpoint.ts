@@ -1,5 +1,5 @@
 export const APIEndPoints = {
-  BackendURL: 'http://15.207.239.105:5050',
+  BackendURL: 'http://15.207.239.105:5050' ,
   // BackendURL: 'http://192.168.29.16:5050',
 
   // CUSTOMER
