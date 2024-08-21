@@ -18,7 +18,7 @@ import "../../assets/styles/slider.css";
 import { useFetchBannersQuery } from "@/store/actions/slices/bannerSlice";
 import { useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 import { useNavigate } from "react-router-dom";
 
 const options: EmblaOptionsType = {};
@@ -104,7 +104,7 @@ const SliderSection = () => {
               <LazyLoadImage
                 key={index}
                 index={index}
-                imgSrc={`${APIEndPoints.BackendURL}/${item.image}`}
+                imgSrc={`${item.image}`}
                 inView={slidesInView.indexOf(index) > -1}
               />
               <div className="embla-slider_container--content">

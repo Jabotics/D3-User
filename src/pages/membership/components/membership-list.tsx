@@ -119,7 +119,7 @@ const MembershipList = ({ isLoading }: { isLoading: boolean }) => {
               <span className="inline-block text-xs xl:text-sm font-medium">
                 Filter by Category
               </span>
-              <Button className="ms-auto bg-[#53A53F] hover:bg-[#53A53F] text-[10px] xl:text-xs w-[100px] border rounded-3xl flex flex-row justify-center h-5 items-center gap-2 px-1 xl:px-2 text-white">
+              <Button className="ms-auto bg-black hover:bg-[#333] uppercase text-[10px] xl:text-xs w-[100px] border rounded-3xl flex flex-row justify-center h-8 tracking-tighter items-center gap-2 px-1 xl:px-2 text-white">
                 Reset <GrPowerReset />
               </Button>
             </div>

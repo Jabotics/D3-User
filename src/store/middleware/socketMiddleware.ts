@@ -43,10 +43,12 @@ export const socketMiddleware: Middleware = (store) => {
 
   // Listen for incoming events
   socket.onAny((event, ...args) => {
+
+    // console.log(event)
     switch (event) {
       case "message": {
         const [data] = args;
-        console.log("a", data);
+        
         store.dispatch(addMessage(data));
         if (data.message.text === "Is Your Query Solved?") {
           store.dispatch(setQueryResponse(false));
@@ -56,7 +58,7 @@ export const socketMiddleware: Middleware = (store) => {
 
       case "chatSolved": {
         const [data] = args;
-        console.log("b", data);
+
         store.dispatch(clearChat({ chatId: data }));
         break;
       }

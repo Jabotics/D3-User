@@ -50,6 +50,26 @@ export const groundApi = createApi({
         };
       },
     }),
+    setAllGrounds: builder.query<IncomingData, object>({
+      query: (params) => {
+        const customParams = { ...params };
+        Object.keys(customParams).forEach((key) => {
+          if (
+            customParams[key as keyof object] === null ||
+            customParams[key as keyof object] === undefined ||
+            customParams[key as keyof object] === "" ||
+            customParams[key as keyof object] === "[]"
+          ) {
+            delete customParams[key as keyof object];
+          }
+        });
+        return {
+          url: APIEndPoints.fetch_ground,
+          method: "GET",
+          params: customParams,
+        };
+      },
+    }),
     setFavorite: builder.mutation<IncomingData, object>({
       query: (body) => {
         const { ...rest } = body;
@@ -70,15 +90,19 @@ interface IParams {
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | undefined;
   params: { [key: string]: string[] };
-
+  
   locationArr: string[];
-
+  
   selectedSportsStore: string[];
   sortByText: string[];
   selectedVenue: string[];
   selectedGroundType: string[];
-
+  
   favorites: string[];
+
+  allGrounds: IGround[];
+  allGroundsStatus: "idle" | "loading" | "succeeded" | "failed";
+  allGroundsError: string | undefined;
 }
 const initialState: IParams = {
   isFilter: true,
@@ -87,15 +111,19 @@ const initialState: IParams = {
   status: "idle",
   error: undefined,
   params: {},
-
+  
   locationArr: ["Home", "Play"],
-
+  
   selectedSportsStore: [],
   sortByText: [],
   selectedVenue: [],
   selectedGroundType: [],
-
+  
   favorites: [],
+
+  allGrounds: [],
+  allGroundsStatus: "idle",
+  allGroundsError: undefined,
 };
 
 export const GroundSlice = createSlice({
@@ -200,11 +228,28 @@ export const GroundSlice = createSlice({
           state.status = "failed";
           state.error = action.error.message;
         }
+      )
+      .addMatcher(groundApi.endpoints.setAllGrounds.matchPending, (state) => {
+        state.allGroundsStatus = "loading";
+      })
+      .addMatcher(
+        groundApi.endpoints.setAllGrounds.matchFulfilled,
+        (state, action) => {
+          state.allGroundsStatus = "succeeded";
+          state.allGrounds = action.payload.data.grounds;
+        }
+      )
+      .addMatcher(
+        groundApi.endpoints.setAllGrounds.matchRejected,
+        (state, action) => {
+          state.allGroundsStatus = "failed";
+          state.allGroundsError = action.error.message;
+        }
       );
   },
 });
 
-export const { useGetGroundQuery, useSetFavoriteMutation } = groundApi;
+export const { useGetGroundQuery, useSetFavoriteMutation, useSetAllGroundsQuery } = groundApi;
 export const {
   setParams,
   setSortByText,

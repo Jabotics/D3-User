@@ -46,7 +46,7 @@ const FilterHead = () => {
         </span>
         <Button
           onClick={handleReset}
-          className="ms-auto bg-[#53A53F] hover:bg-[#53A53F] text-[10px] xl:text-xs w-[100px] border rounded-3xl flex flex-row justify-center h-5 items-center gap-2 px-1 xl:px-2 text-white"
+          className="ms-auto bg-black hover:bg-[#333] text-[10px] xl:text-xs w-[100px] border rounded-3xl flex flex-row justify-center h-8 uppercase tracking-tighter items-center gap-2 px-1 xl:px-2 text-white"
         >
           Reset <GrPowerReset />
         </Button>

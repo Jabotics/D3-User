@@ -24,9 +24,6 @@ export const authApi = createApi({
     baseUrl: APIEndPoints.BackendURL,
     prepareHeaders: (headers, { getState }) => {
       const state = getState() as RootState;
-      // const stateAuth = localStorage.getItem("persist:d3-root")
-      // console.log(Object.keys(JSON.parse(JSON.stringify(stateAuth))))
-      // console.log(state.auth)
       const token = state.auth.token || localStorage.getItem("token") || "";
 
       if (token) {
@@ -93,30 +90,6 @@ export const authSlice = createSlice({
         state.userData = action.payload.userData;
       }
     },
-    // setAuthAcademies: (state, action: PayloadAction<string>) => {
-    //   if (state.userData && state.userData.joined_academies) {
-    //     state.userData.joined_academies?.push(action.payload);
-    //   }
-    // },
-    // setAuthMemberships: (state, action: PayloadAction<string>) => {
-    //   if (state.userData && state.userData.joined_memberships) {
-    //     state.userData.joined_memberships?.push(action.payload);
-    //   }
-    // },
-    // setFavorites: (state, action: PayloadAction<string>) => {
-    //   if (state.userData && state.userData.favorites === undefined)
-    //     state.userData.favorites = [];
-
-    //   if (state.userData && state.userData.favorites) {
-    //     if (state.userData.favorites.includes(action.payload)) {
-    //       state.userData.favorites = state.userData.favorites.filter(
-    //         (item) => item !== action.payload
-    //       );
-    //     } else {
-    //       state.userData.favorites.push(action.payload);
-    //     }
-    //   }
-    // },
     setProfile: (
       state,
       action: PayloadAction<{
@@ -167,9 +140,6 @@ export const { useVerifySessionQuery, useUpdateProfileMutation } = authApi;
 export const {
   login,
   setAuth,
-  // setAuthAcademies,
-  // setAuthMemberships,
-  // setFavorites,
   setProfile,
   logout,
 } = authSlice.actions;
