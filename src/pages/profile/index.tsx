@@ -25,6 +25,10 @@ const Profile = () => {
   }, 
   [dispatch, hasToken, navigate, toFetch.isError])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   if (toFetch.isLoading) {
     return (
       <div className="flex items-center justify-center h-screen mb-10">

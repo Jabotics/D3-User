@@ -6,7 +6,7 @@ import venueImg from "../../../assets/venueImg.jpg";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setSelectedGroundId } from "@/store/actions/slices/slotsSlice";
 import { Button } from "@/components/ui/button";
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 import {
   setLocationArr,
   useSetFavoriteMutation,
@@ -93,7 +93,7 @@ const VenueItem = ({ item }: { item: IGround }) => {
               <img
                 src={
                   item?.images.length > 0
-                    ? `${APIEndPoints.BackendURL}/${item?.images[0]}`
+                    ? `${item?.images[0]}`
                     : `${venueImg}`
                 }
                 alt="venueImg"

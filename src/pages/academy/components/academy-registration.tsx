@@ -155,7 +155,7 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
           "Name is not proper, add a space between first and last name"
         );
       }
-      if (!imgFile) {
+      if (!userData?.profile_img || userData?.profile_img === undefined) {
         throw new Error("Please upload a Profile Picture");
       }
       if (!idProofFile) {
@@ -216,7 +216,15 @@ const AcademyRegistrationPage: React.FC<AcademyDetailsProps> = ({
     if (userData?.mobile) {
       form.setValue("mobile", userData.mobile);
     }
-  }, [form, userData?.mobile]);
+
+    if (userData?.first_name && userData?.last_name) {
+      form.setValue("name", `${userData?.first_name} ${userData?.last_name}`)
+    }
+
+    if (userData?.profile_img) {
+      setImageBlobUrl(userData?.profile_img)
+    }
+  }, [form, userData]);
 
   return (
     <div className="w-full flex flex-col">

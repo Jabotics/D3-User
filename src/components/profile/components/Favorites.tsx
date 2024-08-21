@@ -55,7 +55,7 @@ const Favorites = () => {
   return (
     <>
       <div className="hidden flex-col gap-4 w-full h-[500px] sm:flex">
-        <span className="inline-block text-sm font-base text-gray-500">
+        <span className="inline-block text-sm font-base ">
           My Favorites
         </span>
         <Separator />

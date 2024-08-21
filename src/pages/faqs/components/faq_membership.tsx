@@ -20,7 +20,7 @@ const FaqMembershipComponent = ({
   });
 
   if (isError) {
-    return <div className="p-2">Failed to fetch</div>;
+    return null;
   }
 
   return (

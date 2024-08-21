@@ -29,7 +29,7 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
   return (
     <div className="w-full h-full mt-5 lg:mt-0">
       <div className="flex justify-between">
-        <h2 className="md:text-3xl text-2xl font-medium text-[#53A53F]">
+        <h2 className="md:text-2xl text-xl font-medium text-[#53A53F] lato">
           {groundDetails?.name}
         </h2>
         <div className="flex gap-1 items-center">
@@ -42,7 +42,7 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
         </div>
       </div>
 
-      <div className="mt-2">
+      <div className="mt-2 lato">
         {groundDetails?.dimensions?.width &&
         groundDetails?.dimensions?.length ? (
           <span className="font-semibold text-[#53a53fad] text-base tracking-wide">
@@ -57,11 +57,11 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
       groundDetails?.amenities &&
       groundDetails?.amenities?.length > 0 ? (
         <div className="mt-3 ml-[1px] flex flex-col">
-          <span className="font-normal text-gray-500 ">
+          <span className="font-normal text-gray-500 lato">
             {groundDetails?.name} is a premium synthetic grass product designed
             for sports fields and recreational areas.{" "}
           </span>
-          <span className=" tracking-widest w-full scroll-nobg py-5 flex flex-wrap gap-3">
+          <span className="mt-12 tracking-widest text-sm w-full scroll-nobg py-5 flex flex-wrap gap-3">
             {groundDetails?.amenities?.map((item, index) => {
               return (
                 <div
@@ -108,7 +108,7 @@ const RightPanel = ({ groundDetails }: { groundDetails: IGround }) => {
       </div> */}
 
       {groundDetails?.venue?.address ? (
-        <div className="flex justify-between mt-32 mb-4 mr-1 md:mr-0">
+        <div className="flex justify-between mt-20 mb-4 mr-1 md:mr-0">
           <span className=" flex items-center gap-2">
             <GoLocation className="text-[#53a53f] w-10" size={20} />
             <span className="line-clamp-1">

@@ -1,4 +1,4 @@
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 import { IGround } from "@/interface/data";
 import { useEffect, useState } from "react";
 import { FaRegPlayCircle } from "react-icons/fa";
@@ -75,7 +75,7 @@ const LeftPanel = ({ groundDetails }: { groundDetails: IGround }) => {
                 }}
               >
                 <img
-                  src={`${APIEndPoints.BackendURL}/${image}`}
+                  src={`${image}`}
                   alt="left panel image"
                   className="w-10 h-10 bg-cover bg-center"
                 />
@@ -117,7 +117,7 @@ const LeftPanel = ({ groundDetails }: { groundDetails: IGround }) => {
                   }}
                 >
                   <img
-                    src={`${APIEndPoints.BackendURL}/${image}`}
+                    src={`${image}`}
                     alt=""
                     className="w-full h-full object-cover rounded-md cursor-pointer"
                   />
@@ -128,7 +128,7 @@ const LeftPanel = ({ groundDetails }: { groundDetails: IGround }) => {
       <div
         className="lg:flex-1 h-60 sm:h-80 md:h-96 lg:h-[85%] rounded-2xl bg-black"
         style={{
-          backgroundImage: `url(${APIEndPoints.BackendURL}/${selectedImg})`,
+          backgroundImage: `url(${selectedImg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
