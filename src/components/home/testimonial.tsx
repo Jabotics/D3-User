@@ -16,16 +16,16 @@ export const Testimonials = () => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4,
+      items: 3,
       partialVisibilityGutter: 10,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1,
+      breakpoint: { max: 1024, min: 768 },
+      items: 2,
       partialVisibilityGutter: 10,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 768, min: 0 },
       items: 1,
       partialVisibilityGutter: 10,
       infinite: true,
@@ -68,7 +68,7 @@ export const Testimonials = () => {
             responsive={responsive}
             swipeable={true}
             draggable={true}
-            arrows={true}
+            arrows={false}
             showDots={true}
             infinite={true}
             autoPlay={false}

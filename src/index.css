@@ -90,6 +90,33 @@
   }
 }
 
+@font-face {
+  font-family: 'JosephineR';
+  src: url('/fonts/JosefinSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'LatoB';
+  src: url('/fonts/Lato-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OutfitR';
+  src: url('/fonts/Outfit-Regular.ttf') format('truetype');
+}
+
+.josephine {
+  font-family: 'JosephineR', sans-serif;
+}
+
+.lato {
+  font-family: 'LatoB', sans-serif;
+}
+
+.outfit {
+  font-family: 'OutfitR', sans-serif;
+}
+
 .previous {
   left: 10%;
   z-index: 11;

@@ -236,7 +236,6 @@ export const AcademiesSlice = createSlice({
       state.locationArr = ["Home", "Academy"];
     },
     setSelectedSlots: (state, action: PayloadAction<{ batch: "Morning" | "Evening" | null, slots: string[] } | null>) => {
-      console.log(action.payload)
       if (action.payload === null) {
         state.selectedSlot = null;
         state.registrationFormDetails.shift = null;

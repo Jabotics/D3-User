@@ -2,7 +2,7 @@ import { FaRegHeart } from "react-icons/fa";
 import turfImage from "../../../public/images/truf-image.webp";
 import { Button } from "../ui/button";
 import { IGround } from "@/interface/data";
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 import { useAppDispatch } from "@/store/hooks";
 import { useNavigate } from "react-router-dom";
 import { setSelectedGroundId } from "@/store/actions/slices/slotsSlice";
@@ -24,7 +24,7 @@ export const SlotCard = ({ data }: { data: IGround }) => {
             <img
               src={
                 data.images?.[0]
-                  ? `${APIEndPoints.BackendURL}/${data.images[0]}`
+                  ? `${data.images[0]}`
                   : turfImage
               }
               alt="icon"
