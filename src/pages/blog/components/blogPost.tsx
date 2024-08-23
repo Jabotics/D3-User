@@ -1,6 +1,6 @@
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import BlogLayout from "@/components/blogs";
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 import {
   setLocationArr,
   useFetchBlogsQuery,
@@ -8,7 +8,7 @@ import {
 } from "@/store/actions/slices/blogSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { resetLocationArr } from "@/store/actions/slices/groundSlice";
 
 const BlogPostPage = () => {
@@ -157,7 +157,7 @@ const BlogPostPage = () => {
         <div className="bg-gray-100 h-[65vh] w-full"></div>
       ) : (
         <img
-          src={`${APIEndPoints.BackendURL}/${blogs[0]?.image}`}
+          src={`${blogs[0]?.image}`}
           alt=""
           className="h-auto max-h-[65vh] w-full object-cover object-top"
         />
