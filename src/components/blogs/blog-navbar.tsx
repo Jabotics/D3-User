@@ -4,11 +4,12 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useRef, useState } from "react";
 import { RootState } from "@/store";
 import { MdCall } from "react-icons/md";
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 import { setTitle } from "@/store/actions/slices/profileSlice";
 import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 import { ToggleOptions } from "@/components/toggle-options";
+import { FaRegUser } from "react-icons/fa";
 
 const BlogNavbar = () => {
   const navigate = useNavigate();
@@ -94,40 +95,48 @@ const BlogNavbar = () => {
               <div className="cta flex lg:hidden items-center gap-2">
                 <>
                   {hasToken ? (
-                    <div className="w-full flex items-center justify-center">
-                      <div
-                        className={` w-7 h-7 lg:w-8 lg:h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${
-                          pathName.pathname === "/profile"
-                            ? "border-4 border-[#53a53fbe]"
-                            : "border-[1px] border-gray-300"
-                        }`}
-                        style={{
-                          backgroundImage: `url('${
-                            userData?.profile_img !== undefined &&
-                            userData?.profile_img?.length > 0
-                              ? userData?.profile_img.includes("blob")
-                                ? userData?.profile_img
-                                : `${APIEndPoints.BackendURL}/${userData?.profile_img}`
-                              : "/images/male.png"
-                          }')`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }}
-                        onClick={() => {
-                          dispatch(setTitle("My Booking"));
-                          navigate("/profile");
-                        }}
-                      />
+                    <div
+                      className="w-full flex items-center justify-center"
+                      onClick={() => {
+                        dispatch(setTitle("My Booking"));
+                        navigate("/profile");
+                      }}
+                    >
+                      {userData?.profile_img !== undefined &&
+                      userData?.profile_img?.length > 0 ? (
+                        <div
+                          className={`w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${
+                            pathName.pathname === "/profile"
+                              ? "border-4 border-[#53a53fbe]"
+                              : "border-[1px] border-gray-300"
+                          }`}
+                          style={{
+                            backgroundImage: `url('${userData?.profile_img}')`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                          }}
+                        ></div>
+                      ) : (
+                        <div
+                          className={`w-8 h-8 flex items-center justify-center rounded-full cursor-pointer aspect-auto ${
+                            pathName.pathname === "/profile"
+                              ? "border-2 border-[#53a53fbe]"
+                              : "border-[1px] border-gray-300"
+                          } text-gray-300`}
+                        >
+                          <FaRegUser size={20} />
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <Button
                       variant={"default"}
-                      className=" text-sm h-6 border lg:border-none border-[#ddffd57a] lg:h-7 rounded-3xl bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb]"
+                      className="w-21 text-sm h-6 lg:h-7 rounded-3xl bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb]"
                       onClick={() => {
                         navigate("/login");
                       }}
                     >
-                      <LogIn className="text-white" size={14} />
+                      <LogIn className="mr-2 text-white" size={14} />
                       {isLarge && "Login"}
                     </Button>
                   )}
@@ -138,35 +147,43 @@ const BlogNavbar = () => {
                 <div className="cta hidden lg:flex items-center gap-2">
                   <>
                     {hasToken ? (
-                      <div className="w-full flex items-center justify-center">
-                        <div
-                          className={`w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${
-                            pathName.pathname === "/profile"
-                              ? "border-4 border-[#53a53fbe]"
-                              : "border-[1px] border-gray-300"
-                          }`}
-                          style={{
-                            backgroundImage: `url('${
-                              userData?.profile_img !== undefined &&
-                              userData?.profile_img?.length > 0
-                                ? userData?.profile_img.includes("blob")
-                                  ? userData?.profile_img
-                                  : `${APIEndPoints.BackendURL}/${userData?.profile_img}`
-                                : "/images/male.png"
-                            }')`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                          }}
-                          onClick={() => {
-                            dispatch(setTitle("My Booking"));
-                            navigate("/profile");
-                          }}
-                        />
+                      <div
+                        className="w-full flex items-center justify-center"
+                        onClick={() => {
+                          dispatch(setTitle("My Booking"));
+                          navigate("/profile");
+                        }}
+                      >
+                        {userData?.profile_img !== undefined &&
+                        userData?.profile_img?.length > 0 ? (
+                          <div
+                            className={`w-8 h-8 bg-gray-600 rounded-full cursor-pointer aspect-auto ${
+                              pathName.pathname === "/profile"
+                                ? "border-4 border-[#53a53fbe]"
+                                : "border-[1px] border-gray-300"
+                            }`}
+                            style={{
+                              backgroundImage: `url('${userData?.profile_img}')`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                            }}
+                          ></div>
+                        ) : (
+                          <div
+                            className={`w-8 h-8 flex items-center justify-center rounded-full cursor-pointer aspect-auto ${
+                              pathName.pathname === "/profile"
+                                ? "border-2 border-[#53a53fbe]"
+                                : "border-[1px] border-gray-300"
+                            } text-gray-300`}
+                          >
+                            <FaRegUser size={20} />
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <Button
                         variant={"default"}
-                        className="w-21 text-sm h-6 lg:h-7 rounded-3xl border border-[#9add8a] bg-transparent text-gray-50 hover:bg-[#53a53fcb]"
+                        className="w-21 text-sm h-6 lg:h-7 rounded-3xl bg-[#53a53f] text-gray-50 hover:bg-[#53a53fcb]"
                         onClick={() => {
                           navigate("/login");
                         }}
@@ -179,7 +196,9 @@ const BlogNavbar = () => {
                 </div>
                 <span className="font-medium hidden lg:inline-flex text-[15px] items-end w-fit justify-start gap-2 tracking-tighter whitespace-nowrap mr-4">
                   <MdCall size={20} className="text-[#9add8a]" />
-                  <span className="-mb-[3px] -ml-[3px] text-white">9874-475-988</span>
+                  <span className="-mb-[3px] -ml-[3px] text-white">
+                    9874-475-988
+                  </span>
                 </span>
               </div>
             </div>

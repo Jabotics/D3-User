@@ -10,7 +10,8 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { FaMouse } from "react-icons/fa";
 import { MdContactSupport, MdOutlineReviews } from "react-icons/md";
 import { RiNewspaperLine } from "react-icons/ri";
-import { IoIosArrowForward } from "react-icons/io";
+// import { IoIosArrowForward } from "react-icons/io";
+
 import { RootState } from "@/store";
 
 import {
@@ -271,9 +272,9 @@ export const Navbar = () => {
                                       <span className="no-underline group-hover:underline group-hover:-translate-x-2 transition-transform duration-300">
                                         {item.name}
                                       </span>
-                                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                      {/* <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                         <IoIosArrowForward />
-                                      </span>
+                                      </span> */}
                                     </div>
                                   </React.Fragment>
                                 ))
