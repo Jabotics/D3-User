@@ -189,6 +189,7 @@ export const GroundSlice = createSlice({
       } else {
         state.selectedSportsStore.push(action.payload);
       }
+      // state.selectedSportsStore = [action.payload]
     },
     setLocationArr: (state, action: PayloadAction<string>) => {
       const x = new Set(state.locationArr);

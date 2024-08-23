@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import slider1 from "../../../public/images/slider1.webp";
+import slider1 from "../../../public/images/slider.jpg";
 import { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import {
@@ -24,6 +24,33 @@ import { useNavigate } from "react-router-dom";
 const options: EmblaOptionsType = {};
 const SLIDE_COUNT = 1;
 const slides = Array.from(Array(SLIDE_COUNT).keys());
+
+const SLIDE_CONTENT: {
+  academy: {
+    categoryText: string;
+    title: string;
+    buttonText: string;
+    subtitle?: string;
+  };
+  membership: {
+    categoryText: string;
+    title: string;
+    buttonText: string;
+    subtitle?: string;
+  };
+} = {
+  academy: {
+    categoryText: "Join Academy",
+    title: "Enroll in Our Top Sports Academy",
+    buttonText: "Join Now",
+  },
+  membership: {
+    categoryText: "Become a Member",
+    title: "Unlock Premium Membership Benefits",
+    buttonText: "Sign Up",
+    subtitle: "Get exclusive access and special offers.",
+  },
+};
 
 const SliderSection = () => {
   const navigate = useNavigate();
@@ -80,20 +107,20 @@ const SliderSection = () => {
                 <h4 className="text-xs md:text-[16px] font-medium">
                   PLAY SPORTS
                 </h4>
-                <h1 className=" text-2xl md:text-4xl font-bold">
+                <h1 className="text-lg sm:text-2xl lg:text-4xl font-bold">
                   World's Biggest Sports Community
                 </h1>
                 <Button
                   variant={"lowTheme"}
                   size={"lowTheme"}
-                  className="mt-5 h-7 md:h-10 rounded-full"
+                  className="mt-0 px-2 md:mt-5 md:px-[inherit] h-5 md:h-7 lg:h-10 text-xs lg:text-base rounded-full"
                   onClick={() => {
                     navigate(`/play`);
                   }}
                 >
                   Book Now
                 </Button>
-                <p className="text-[8px] md:text-xs mt-2">
+                <p className="text-[8px] md:text-xs hidden md:block mt-2">
                   No credit card required
                 </p>
               </div>
@@ -101,6 +128,7 @@ const SliderSection = () => {
           ))}
           {banners.map((item, index) => (
             <div className="embla-slider__slide" key={index}>
+              <div className="embla-slider__bgopacity"></div>
               <LazyLoadImage
                 key={index}
                 index={index}
@@ -109,22 +137,27 @@ const SliderSection = () => {
               />
               <div className="embla-slider_container--content">
                 <h4 className="text-xs md:text-[16px] font-medium">
-                  PLAY SPORTS
+                  {SLIDE_CONTENT[
+                    item.type as "academy" | "membership"
+                  ]?.categoryText.toUpperCase()}
                 </h4>
-                <h1 className=" text-2xl md:text-4xl font-bold">
-                  World's Biggest Sports Community
+                <h1 className="text-lg sm:text-2xl lg:text-4xl font-bold">
+                  {SLIDE_CONTENT[item.type as "academy" | "membership"]?.title}
                 </h1>
                 <Button
                   variant={"lowTheme"}
                   size={"lowTheme"}
-                  className="mt-5 h-7 md:h-10 rounded-full"
+                  className="mt-0 px-2 md:mt-5 md:px-[inherit] h-5 md:h-7 lg:h-10 text-xs lg:text-base rounded-full"
                   onClick={() => {
                     navigate(`${item.type}`);
                   }}
                 >
-                  {item.type === "academy" ? "Join Now" : "Book Now"}
+                  {
+                    SLIDE_CONTENT[item.type as "academy" | "membership"]
+                      ?.buttonText
+                  }
                 </Button>
-                <p className="text-[8px] md:text-xs mt-2">
+                <p className="text-[8px] md:text-xs hidden md:block mt-2">
                   No credit card required
                 </p>
               </div>

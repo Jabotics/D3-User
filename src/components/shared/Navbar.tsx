@@ -10,12 +10,7 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { FaMouse } from "react-icons/fa";
 import { MdContactSupport, MdOutlineReviews } from "react-icons/md";
 import { RiNewspaperLine } from "react-icons/ri";
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
+import { IoIosArrowForward } from "react-icons/io";
 import { RootState } from "@/store";
 
 import {
@@ -31,7 +26,7 @@ import {
   setSelectedCity,
   useGetCitiesQuery,
 } from "@/store/actions/slices/citySlice";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { setTitle } from "@/store/actions/slices/profileSlice";
 // import { APIEndPoints } from "@/APIEndpoint";
 
@@ -45,7 +40,6 @@ import {
   setSelectedSports,
   useGetSportQuery,
 } from "@/store/actions/slices/sportSlice";
-import { Checkbox } from "../ui/checkbox";
 
 import { FaRegUser } from "react-icons/fa";
 
@@ -73,7 +67,6 @@ export const Navbar = () => {
     (state: RootState) => state.city
   );
   const [open, setOpen] = useState(selectedCity ? false : true);
-  // const [open, setOpen] = useState(false);
 
   useGetCitiesQuery(
     {
@@ -84,6 +77,27 @@ export const Navbar = () => {
     }
   );
   const selectedCityName = cities.find((i) => i.id === selectedCity)?.name;
+
+  const handleClickSport = (item: { id: string; name: string }) => {
+    dispatch(
+      setSelectedSports({
+        sportId: item.id,
+      })
+    );
+    const updatedIds = selectedSportsStore.includes(item.id)
+      ? selectedSportsStore.filter((id) => id !== item.id)
+      : [...selectedSportsStore, item.id];
+
+    dispatch(
+      setParams({
+        key: "supported_sports",
+        data: updatedIds,
+      })
+    );
+    dispatch(setSelectedSportsStore(item.id));
+
+    navigate("/play");
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -108,7 +122,6 @@ export const Navbar = () => {
     setOpen(false);
   };
 
-  // ${pathName.pathname.split('/')[1] === '/blogs' && 'hidden max-[350px]:col-span-5 lg:col-span-7 xl:col-span-8'}
   return (
     <div className="fixed top-0 left-0 w-full z-30 border-b-2 shadow-md border-[#f3faf1] shadow-[#dbebd7]">
       <div className="w-full border-slate-200 border-solid bg-white py-4">
@@ -133,15 +146,6 @@ export const Navbar = () => {
                     onClick={() => navigate("/")}
                   />
                 ) : (
-                  // <span className="flex items-center">
-                  //   <img
-                  //     src={logo}
-                  //     alt="logo"
-                  //     className="h-8 md:h-9 cursor-pointer"
-                  //     onClick={() => navigate("/")}
-                  //   />
-                  //   <RiArrowDropDownLine size={20} />
-                  // </span>
                   <>
                     <ToggleOptions
                       mobile={showMobile}
@@ -252,62 +256,30 @@ export const Navbar = () => {
 
                     {pathName.pathname !== "/play" && (
                       <div className="relative group">
-                        <div className="absolute left-0 w-[150%] top-[65%] pt-3 hidden transform translate-y-2 transition-all duration-300 ease-out group-hover:block group-hover:translate-y-0 group-hover:delay-300">
-                          <div className="w-full flex flex-col gap-5 bg-white border border-gray-300 rounded-md py-5 px-5">
-                            <div className="w-full max-h-40 booked-slot flex flex-col gap-1 overflow-x-hidden overflow-y-auto">
+                        <div className="absolute left-0 w-[100%] top-[65%] pt-3 hidden transform translate-y-2 transition-all duration-300 ease-out group-hover:block group-hover:translate-y-0 group-hover:delay-300">
+                          <div className="w-full flex flex-col gap-5 bg-white shadow-sm shadow-gray-200 rounded-md p-3">
+                            <div className="relative w-full h-fit booked-slot flex flex-col gap-3 items-start py-1">
                               {sports.length > 0 ? (
                                 sports.map((item, index) => (
-                                  <div
-                                    key={index}
-                                    className="flex flex-row gap-2 items-center"
-                                    onClick={() => {
-                                      dispatch(
-                                        setSelectedSports({
-                                          sportId: item.id,
-                                        })
-                                      );
-                                      const updatedIds =
-                                        selectedSportsStore.includes(item.id)
-                                          ? selectedSportsStore.filter(
-                                              (id) => id !== item.id
-                                            )
-                                          : [...selectedSportsStore, item.id];
-
-                                      dispatch(
-                                        setParams({
-                                          key: "supported_sports",
-                                          data: updatedIds,
-                                        })
-                                      );
-                                      dispatch(setSelectedSportsStore(item.id));
-                                    }}
-                                  >
-                                    <Checkbox
-                                      checked={selectedSportsStore.includes(
-                                        item.id
-                                      )}
-                                      className="border-[#53a53f] data-[state=checked]:bg-[#53a53f]"
-                                    />
-                                    <p className="cursor-pointer">
-                                      <span className="text-[#53a53f]">
+                                  <React.Fragment key={index}>
+                                    <div
+                                      className="text-[#53a53f] group pl-5 flex items-center w-full cursor-pointer"
+                                      onClick={() => {
+                                        handleClickSport(item);
+                                      }}
+                                    >
+                                      <span className="no-underline group-hover:underline group-hover:-translate-x-2 transition-transform duration-300">
                                         {item.name}
                                       </span>
-                                    </p>
-                                  </div>
+                                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <IoIosArrowForward />
+                                      </span>
+                                    </div>
+                                  </React.Fragment>
                                 ))
                               ) : (
                                 <p>No Sports Available</p>
                               )}
-                            </div>
-                            <div
-                              className="bg-[#53a53f] w-full h-10 mt-3 rounded-md text-white flex items-center justify-center cursor-pointer"
-                              onClick={() => {
-                                navigate("/play");
-                              }}
-                            >
-                              {selectedSportsStore.length > 0
-                                ? "Show Results"
-                                : "All Grounds"}
                             </div>
                           </div>
                         </div>
@@ -358,7 +330,7 @@ export const Navbar = () => {
 
                     <div className="relative group">
                       <div className="absolute left-0 w-[200%] top-[65%] pt-3 transition-all duration-500 ease-out hidden translate-y-2 group-hover:block group-hover:translate-y-0 group-hover:delay-300">
-                        <div className="w-full flex flex-col gap-1 bg-white border border-gray-300 rounded-md py-5 px-5">
+                        <div className="w-full flex flex-col gap-1 bg-white rounded-md py-5 px-5">
                           <Link
                             to="/about"
                             target="_blank"

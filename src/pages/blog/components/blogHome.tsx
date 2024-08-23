@@ -1,4 +1,4 @@
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 import BlogLayout from "@/components/blogs";
 import { RootState } from "@/store";
 import {
@@ -55,7 +55,7 @@ const BlogHomePage = () => {
                             }}
                           >
                             <img
-                              src={`${APIEndPoints.BackendURL}/${blog.image}`}
+                              src={`${blog.image}`}
                               alt=""
                               className="w-full h-full object-cover object-center"
                             />

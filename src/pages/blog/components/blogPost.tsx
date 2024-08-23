@@ -1,6 +1,6 @@
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import BlogLayout from "@/components/blogs";
-import { APIEndPoints } from "@/APIEndpoint";
+// import { APIEndPoints } from "@/APIEndpoint";
 import {
   setLocationArr,
   useFetchBlogsQuery,
@@ -154,7 +154,7 @@ const BlogPostPage = () => {
         <div className="bg-gray-100 h-[65vh] w-full"></div>
       ) : (
         <img
-          src={`${APIEndPoints.BackendURL}/${blogs[0]?.image}`}
+          src={`${blogs[0]?.image}`}
           alt=""
           className="h-auto max-h-[65vh] w-full object-cover object-top"
         />

@@ -35,7 +35,7 @@ export const HomePage = () => {
   }, [isChatOpen]);
   return (
     <div className="relative">
-      <div className="w-[100vw] h-[65vh] overflow-hidden">
+      <div className="w-[100vw] h-[50vh] md:h-[60vh] lg:h-[65vh] overflow-hidden">
         <SliderSection />
       </div>
 
